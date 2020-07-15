@@ -39,6 +39,8 @@ class _StepperState extends State<Stepper> with SingleTickerProviderStateMixin {
   bool hasFocus;
   int focussedIndex;
 
+  int openIndex = 0;
+
   StepperDirection stepperDirection;
 
   @override
@@ -70,12 +72,26 @@ class _StepperState extends State<Stepper> with SingleTickerProviderStateMixin {
       body: Container(
         padding: EdgeInsets.all(5.0),
         // height: 50,
-        child: ListView.builder(
-          scrollDirection: stepperDirection == StepperDirection.horizontal
-              ? Axis.horizontal
-              : Axis.vertical,
-          itemBuilder: _buildList,
-          itemCount: 4,
+        child: Column(
+          children: <Widget>[
+            Expanded(
+              child: ListView.builder(
+                scrollDirection: stepperDirection == StepperDirection.horizontal
+                    ? Axis.horizontal
+                    : Axis.vertical,
+                itemBuilder: _buildList,
+                itemCount: 4,
+              ),
+            ),
+            RaisedButton(
+              onPressed: () {
+                setState(() {
+                  openIndex++;
+                });
+              },
+              child: Text('Next'),
+            )
+          ],
         ),
       ),
     );
@@ -93,8 +109,9 @@ class _StepperState extends State<Stepper> with SingleTickerProviderStateMixin {
         }
       },
       hasFocus: focussedIndex == index,
-      showConnector: true,//index < 3,
+      showConnector: index < 3,
       stepperDirection: stepperDirection,
+      open: openIndex == index,
     );
   }
 }
@@ -105,6 +122,7 @@ class Step extends StatefulWidget {
   final Function focusRecieved;
   final bool showConnector;
   final StepperDirection stepperDirection;
+  final bool open;
 
   Step({
     this.value = 1,
@@ -112,6 +130,7 @@ class Step extends StatefulWidget {
     this.hasFocus = false,
     this.showConnector = true,
     this.stepperDirection = StepperDirection.horizontal,
+    this.open = false,
   });
 
   @override
@@ -168,10 +187,14 @@ class _StepState extends State<Step> with TickerProviderStateMixin {
     }
 
     return widget.stepperDirection == StepperDirection.horizontal
-        ? Row(
+        ? Column(
             children: <Widget>[
-              _face(),
-              _connector(),
+              Row(
+                children: <Widget>[
+                  _face(),
+                  _connector(),
+                ],
+              ),
             ],
           )
         : Column(
