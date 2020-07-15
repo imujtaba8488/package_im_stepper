@@ -14,7 +14,64 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Stepper(),
+      home: Homepage(),
+    );
+  }
+}
+
+class Homepage extends StatefulWidget {
+  @override
+  _HomepageState createState() => _HomepageState();
+}
+
+class _HomepageState extends State<Homepage> {
+  int selectedIndex = 0;
+  List<ConnectorPainter> connectorPainters = [];
+  List<IndicatorPainter> indicatorPainters = [];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Stepper'),
+      ),
+      body: Column(
+        children: <Widget>[
+          Stepper(
+            selectedIndex: selectedIndex,
+            connectorPainters: connectorPainters,
+            indicatorPainters: indicatorPainters,
+          ),
+          Expanded(
+            child: Container(),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                RaisedButton(
+                  onPressed: () {
+                    setState(() {
+                      selectedIndex--;
+                    });
+                  },
+                  child: Text('Previous'),
+                ),
+                RaisedButton(
+                  onPressed: () {
+                    setState(() {
+                      selectedIndex++;
+                      connectorPainters[selectedIndex - 1].animate();
+                    });
+                  },
+                  child: Text('Next'),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }
@@ -25,6 +82,12 @@ enum StepperDirection {
 }
 
 class Stepper extends StatefulWidget {
+  final int selectedIndex;
+  final List<ConnectorPainter> connectorPainters;
+  final List<IndicatorPainter> indicatorPainters;
+
+  Stepper({this.selectedIndex, this.connectorPainters, this.indicatorPainters});
+
   @override
   _StepperState createState() => _StepperState();
 }
@@ -36,7 +99,7 @@ class _StepperState extends State<Stepper> with SingleTickerProviderStateMixin {
   AnimationController animationController;
   Animation animation;
 
-  bool hasFocus;
+  bool hasFocus = false;
   int focussedIndex;
 
   int openIndex = 0;
@@ -54,6 +117,8 @@ class _StepperState extends State<Stepper> with SingleTickerProviderStateMixin {
           ..addListener(() {
             setState(() {});
           });
+
+    animation = Tween(begin: 16.0, end: 44.0).animate(animationController);
   }
 
   @override
@@ -65,208 +130,236 @@ class _StepperState extends State<Stepper> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Stepper'),
-      ),
-      body: Container(
-        padding: EdgeInsets.all(5.0),
-        // height: 50,
-        child: Column(
-          children: <Widget>[
-            Expanded(
-              child: ListView.builder(
-                scrollDirection: stepperDirection == StepperDirection.horizontal
-                    ? Axis.horizontal
-                    : Axis.vertical,
-                itemBuilder: _buildList,
-                itemCount: 4,
-              ),
-            ),
-            RaisedButton(
-              onPressed: () {
-                setState(() {
-                  openIndex++;
-                });
-              },
-              child: Text('Next'),
-            )
-          ],
-        ),
+    return Container(
+      padding: const EdgeInsets.all(8.0),
+      height: 100,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemBuilder: _buildList,
+        itemCount: 5,
       ),
     );
   }
 
-  Widget _buildList(BuildContext context, int index) {
-    return Step(
-      value: index + 1,
+  Widget _buildList(context, index) {
+    return Indicator(
+      index: index,
+      showConnector: index < 4,
+      tappedIndex: (value) => print(value),
+      hasFocus: hasFocus && openIndex == index,
       focusRecieved: (value) {
-        if (value) {
-          setState(() {
-            hasFocus = true;
-            focussedIndex = index;
-          });
-        }
+        setState(() {
+          hasFocus = value;
+          openIndex = index;
+        });
       },
-      hasFocus: focussedIndex == index,
-      showConnector: index < 3,
-      stepperDirection: stepperDirection,
-      open: openIndex == index,
+      isSelected: widget.selectedIndex == index,
+      connectorPainters: widget.connectorPainters,
+      indicatorPainters: widget.indicatorPainters,
     );
   }
 }
 
-class Step extends StatefulWidget {
-  final int value;
+class Indicator extends StatefulWidget {
+  final Function tappedIndex;
+  final int index;
+  final bool showConnector;
   final bool hasFocus;
   final Function focusRecieved;
-  final bool showConnector;
-  final StepperDirection stepperDirection;
-  final bool open;
+  final bool isSelected;
+  final List<ConnectorPainter> connectorPainters;
+  final List<IndicatorPainter> indicatorPainters;
 
-  Step({
-    this.value = 1,
-    this.focusRecieved,
+  Indicator({
+    this.tappedIndex,
+    this.index,
+    this.showConnector = false,
     this.hasFocus = false,
-    this.showConnector = true,
-    this.stepperDirection = StepperDirection.horizontal,
-    this.open = false,
+    this.focusRecieved,
+    this.isSelected = false,
+    this.connectorPainters,
+    this.indicatorPainters,
   });
 
   @override
-  _StepState createState() => _StepState();
+  _IndicatorState createState() => _IndicatorState();
 }
 
-class _StepState extends State<Step> with TickerProviderStateMixin {
-  // Add BUZZ ANIMATION !!!
+class _IndicatorState extends State<Indicator>
+    with SingleTickerProviderStateMixin {
   AnimationController animationController;
-  AnimationController connectorAnimationController;
+  Animation indicatorAnimation, opacityAnimation;
 
-  Animation animation;
-  Animation connectorAnimation;
+  StepperDirection stepperDirection;
 
-  double radius = 20;
-
-  bool connectorAnimationForward = true;
+  ConnectorPainter connectorPainter;
+  IndicatorPainter indicatorPainter;
 
   @override
   void initState() {
     super.initState();
 
-    animationController = AnimationController(
-      vsync: this,
-      duration: Duration(milliseconds: 1000),
-    )..addListener(() {
-        setState(() {});
-      });
+    stepperDirection = StepperDirection.horizontal;
 
-    connectorAnimationController = AnimationController(
-      vsync: this,
-      duration: Duration(milliseconds: 1000),
-    )..addListener(() {
-        setState(() {});
-      });
+    animationController =
+        AnimationController(vsync: this, duration: Duration(seconds: 1))
+          ..addListener(() {
+            setState(() {});
+          });
 
-    animation = Tween(begin: 0.0, end: 1.0).animate(animationController);
+    indicatorAnimation =
+        Tween(begin: 0.0, end: 44.0).animate(animationController);
 
-    connectorAnimation =
-        Tween(begin: 0.0, end: 88.0).animate(connectorAnimationController);
+    opacityAnimation = Tween(begin: 0.0, end: 1.0).animate(animationController);
+
+    connectorPainter = ConnectorPainter(
+      controller: animationController,
+      animation: indicatorAnimation,
+    );
+
+    widget.connectorPainters.add(connectorPainter);
   }
 
   @override
   void dispose() {
     super.dispose();
-
     animationController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    if (!widget.hasFocus) {
-      connectorAnimationController.reverse();
-    }
-
-    return widget.stepperDirection == StepperDirection.horizontal
-        ? Column(
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  _face(),
-                  _connector(),
-                ],
-              ),
-            ],
-          )
-        : Column(
-            children: <Widget>[
-              _face(),
-              _connector(),
-            ],
-          );
-  }
-
-  Widget _face() {
-    return InkWell(
-      onTap: () {
-        widget.focusRecieved(true);
-
-        animationController.reset();
-        animationController.forward();
-
-        connectorAnimationController.forward();
-      },
+    return Container(
+      margin: EdgeInsets.all(5.0),
+      padding: EdgeInsets.all(20),
       child: Opacity(
-        opacity: widget.hasFocus ? animation.value : 1.0,
-        child: Container(
-          padding: widget.hasFocus ? EdgeInsets.all(1.0) : EdgeInsets.zero,
-          decoration: BoxDecoration(
-            border: widget.hasFocus
-                ? Border.all(
-                    width: connectorAnimation.isCompleted ? 1.0 : 0.5,
-                    color: connectorAnimation.isCompleted
-                        ? Colors.blue
-                        : Colors.grey,
-                  )
-                : null,
-            shape: BoxShape.circle,
-          ),
-          child: Container(
-            padding: EdgeInsets.all(10.0),
-            decoration: BoxDecoration(
-              color: widget.hasFocus ? Colors.green : Colors.grey,
-              shape: BoxShape.circle,
-            ),
-            child: Center(
-              child: Text(
-                '${widget.value}',
-                style: TextStyle(
-                  color: Colors.black,
-                  // fontSize: 30,
-                ),
-              ),
-            ),
+        opacity: 1.0, //widget.isSelected ? opacityAnimation.value : 1.0,
+        child: CustomPaint(
+          size: Size(25, 25),
+          painter: connectorPainter,
+          foregroundPainter: IndicatorPainter(
+            widget.isSelected,
+            animation: indicatorAnimation,
+            animationController: animationController,
           ),
         ),
       ),
     );
   }
+}
 
-  Widget _connector() {
-    return widget.showConnector
-        ? Container(
-            height: widget.stepperDirection == StepperDirection.horizontal
-                ? 2.0
-                : connectorAnimation.value,
-            width: widget.stepperDirection == StepperDirection.horizontal
-                ? connectorAnimation.isDismissed
-                    ? 5.0
-                    : connectorAnimation.value
-                : 2.0,
-            color: connectorAnimationController.isAnimating ||
-                    connectorAnimation.isCompleted
-                ? Colors.blue
-                : Colors.grey,
-          )
-        : Container();
+class IndicatorPainter extends CustomPainter {
+  bool isSelected;
+  bool showIndicator;
+  IconData icon;
+  Animation animation;
+  AnimationController animationController;
+  int indexSelected;
+
+  Canvas canvas;
+
+  IndicatorPainter(
+    this.isSelected, {
+    this.showIndicator = false,
+    this.icon = Icons.home,
+    this.animation,
+    this.animationController,
+    this.indexSelected,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    this.canvas = canvas;
+
+    canvas.drawCircle(
+      Offset(0.0, 0.0),
+      16,
+      Paint()
+        ..color = isSelected ? Colors.blue : Colors.grey
+        ..strokeWidth = 5,
+    );
+
+    if (isSelected) {
+      canvas.drawCircle(
+        Offset(0.0, 0.0),
+        17,
+        Paint()
+          ..color = Colors.green
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 0.5,
+      );
+    }
+
+    paintIcon(canvas, size, icon: icon);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => true;
+
+  void paintIcon(Canvas canvas, Size size, {IconData icon = Icons.home}) {
+    TextPainter textPainter = TextPainter(textDirection: TextDirection.ltr);
+    textPainter.text = TextSpan(
+      text: String.fromCharCode(icon.codePoint),
+      style: TextStyle(
+        fontSize: 24.0,
+        fontFamily: icon.fontFamily,
+        color: Colors.black,
+      ),
+    );
+    textPainter.layout();
+    textPainter.paint(canvas, Offset(-12, -12));
+  }
+}
+
+class ConnectorPainter extends CustomPainter {
+  AnimationController controller;
+  Animation animation;
+
+  ConnectorPainter({this.controller, this.animation});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    drawDottedLine(
+      canvas: canvas,
+      from: 16.0,
+      to: animation.isDismissed ? 44.0 : animation.value,
+      dotRadius: 1.0,
+      paint: Paint()..color = animation.isDismissed ? Colors.grey : Colors.blue,
+    );
+  }
+
+  void animate() {
+    controller.forward();
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => true;
+
+  void drawDottedLine({
+    @required Canvas canvas,
+    @required double from,
+    @required double to,
+    double dotRadius = 2.0,
+    double dotSpace = 3.0,
+    Paint paint,
+  }) {
+    assert(paint != null);
+    assert(dotSpace != 0.0);
+
+    double start = from;
+    double space = dotSpace;
+
+    // Length of the line is calculated by dividing the supplied lenght [to] by dotRadius * space.
+    int length = to ~/ (dotRadius * space);
+
+    for (int i = 1; i < length; i++) {
+      // New start becomes:
+      start += dotRadius * space;
+
+      canvas.drawCircle(
+        Offset(start, 0.0),
+        dotRadius,
+        paint,
+      );
+    }
   }
 }
