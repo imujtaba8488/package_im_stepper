@@ -20,6 +20,8 @@ class DottedLine extends StatefulWidget {
 
   final Duration animationDuration;
 
+  final LineAxis axis;
+
   DottedLine({
     this.length = 50.0,
     this.color = Colors.grey,
@@ -28,7 +30,15 @@ class DottedLine extends StatefulWidget {
     this.animateForward = false,
     this.animateBackwards = false,
     this.animationDuration = const Duration(milliseconds: 100),
-  });
+    this.axis = LineAxis.horizontal,
+  }) {
+    assert(
+      animateForward == true && animateBackwards != true ||
+          animateForward == false && animateBackwards == true ||
+          animateForward == false && animateBackwards == false,
+      'Either of the two animations can run at a time.',
+    );
+  }
 
   @override
   _DottedLineState createState() => _DottedLineState();
@@ -78,9 +88,10 @@ class _DottedLineState extends State<DottedLine>
     return Container(
       // If this is not appled, top half of the dot gets offscreen, hence, hidden.
       margin: EdgeInsets.only(top: widget.dotRadius),
-      width: widget.length,
+      width: widget.axis == LineAxis.horizontal? widget.length : 0.0,
+      height: widget.axis == LineAxis.vertical? widget.length : 0.0,
       child: CustomPaint(
-        painter: ConnectorPainter(
+        painter: _DottedLinePainter(
           brush: Paint()..color = widget.color ?? Colors.grey,
           length: widget.length,
           dotRadius: widget.dotRadius,
@@ -88,27 +99,30 @@ class _DottedLineState extends State<DottedLine>
           animate: widget.animateForward || widget.animateBackwards,
           animation:
               widget.animateBackwards ? backwardAnimation : forwardAnimation,
+          axis: widget.axis,
         ),
       ),
     );
   }
 }
 
-class ConnectorPainter extends CustomPainter {
+class _DottedLinePainter extends CustomPainter {
   bool animate;
   Animation animation;
   double length;
   double dotRadius;
   double spacing;
   Paint brush;
+  LineAxis axis;
 
-  ConnectorPainter({
+  _DottedLinePainter({
     this.animate = false,
     this.animation,
     this.length = 100,
     this.brush,
     this.dotRadius = 2.0,
     this.spacing = 3.0,
+    this.axis = LineAxis.horizontal,
   }) {
     assert(brush != null);
   }
@@ -122,6 +136,7 @@ class ConnectorPainter extends CustomPainter {
       paint: brush,
       dotRadius: dotRadius,
       dotSpace: spacing,
+      horizontal: axis == LineAxis.horizontal,
     );
   }
 
@@ -157,4 +172,9 @@ class ConnectorPainter extends CustomPainter {
       );
     }
   }
+}
+
+enum LineAxis {
+  horizontal,
+  vertical,
 }

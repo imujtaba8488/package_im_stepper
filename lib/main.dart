@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'dotted_line.dart';
+import 'stepper.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,20 +16,55 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Homepage(),
-    );
-  }
-}
-
-class Homepage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: DottedLine(
-        length: 100,
-        animateForward: true,
-        color: Colors.blue,
+      home: Scaffold(
+        // appBar: AppBar(),
+        body: SafeArea(
+          child: Container(
+            padding: EdgeInsets.all(5),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                MyStepper(
+                  // direction: Axis.vertical,
+                  // enableNextPreviousButtons: false,
+                  onSelection: (value) {
+                    print('value: $value');
+                  },
+                  steps: [
+                    CircleStep(
+                      icon: Icon(Icons.home),
+                    ),
+                    CircleStep(
+                      icon: Icon(Icons.home),
+                    ),
+                    CircleStep(
+                      icon: Icon(Icons.home),
+                    ),
+                    CircleStep(
+                      icon: Icon(Icons.home),
+                    ),
+                    CircleStep(
+                      icon: Icon(Icons.home),
+                    ),
+                    CircleStep(
+                      icon: Icon(Icons.home),
+                    ),
+                    CircleStep(
+                      icon: Icon(Icons.home),
+                    ),
+                    CircleStep(
+                      icon: Icon(Icons.home),
+                    ),
+                    CircleStep(
+                      icon: Icon(Icons.home),
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
