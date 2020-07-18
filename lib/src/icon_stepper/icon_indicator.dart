@@ -1,23 +1,29 @@
 import 'package:flutter/material.dart';
 
-class StepIndicator extends StatefulWidget {
+class IconIndicator extends StatefulWidget {
   final int index;
   final bool isSelected;
   final Icon icon;
   final Function onPressed;
+  final Color activeColor;
+  final Color activeBorderColor;
+  final double radius;
 
-  StepIndicator({
+  IconIndicator({
     @required this.index,
     this.isSelected = false,
     this.icon,
     this.onPressed,
+    this.activeColor,
+    this.activeBorderColor,
+    this.radius = 24.0,
   });
 
   @override
-  _StepIndicatorState createState() => _StepIndicatorState();
+  _IconIndicatorState createState() => _IconIndicatorState();
 }
 
-class _StepIndicatorState extends State<StepIndicator>
+class _IconIndicatorState extends State<IconIndicator>
     with SingleTickerProviderStateMixin {
   AnimationController animationController;
   Animation opacityAnimation, backwardAnimation;
@@ -42,7 +48,7 @@ class _StepIndicatorState extends State<StepIndicator>
   }
 
   @override
-  void didUpdateWidget(StepIndicator oldWidget) {
+  void didUpdateWidget(IconIndicator oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.isSelected && animationController.isDismissed) {
       animationController.forward();
@@ -67,7 +73,7 @@ class _StepIndicatorState extends State<StepIndicator>
         decoration: BoxDecoration(
           border: widget.isSelected
               ? Border.all(
-                  color: Colors.blue,
+                  color: widget.activeBorderColor ?? Colors.blue,
                   width: 0.5,
                 )
               : null,
@@ -76,11 +82,13 @@ class _StepIndicatorState extends State<StepIndicator>
         child: InkWell(
           onTap: widget.onPressed,
           child: Container(
-            height: 48,
-            width: 48,
+            height: widget.radius * 2,
+            width: widget.radius * 2,
             padding: EdgeInsets.all(5.0),
             decoration: BoxDecoration(
-              color: widget.isSelected ? Colors.green : Colors.grey,
+              color: widget.isSelected
+                  ? widget.activeColor ?? Colors.green
+                  : Colors.grey,
               shape: BoxShape.circle,
             ),
             child: Center(
