@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'src/icon_stepper/../../icon_indicator.dart';
+import 'icon_indicator.dart';
 import '../custom_paint/dotted_line.dart';
 
 /// Callback is fired when a step is reached.
 typedef OnStepReached = void Function(int index);
 
 class IconStepper extends StatefulWidget {
-  /// Each icon defines a step. Hence, total number of icon determines the total number of steps.
+  /// Each icon defines a step. Hence, total number of icons determines the total number of steps.
   final List<Icon> icons;
 
   /// Whether to enable or disable the next and previous buttons.
@@ -25,14 +25,17 @@ class IconStepper extends StatefulWidget {
   /// Determines what should happen when a step is reached. This callback provides the __index__ of the step that was reached.
   final OnStepReached onStepReached;
 
-  /// Whether to show the steps horizontally or vertically. __Note: If wrapping within a column, ensure horizontal stepper goes inside a column and vertical goes inside a row.__
+  /// Whether to show the steps horizontally or vertically. __Note: Ensure horizontal stepper goes inside a column and vertical goes inside a row.__
   final Axis direction;
 
+  /// The color of the step when it is not selected.
+  final Color stepColor;
+
   /// The color of a step when it is reached.
-  final Color activeColor;
+  final Color activeStepColor;
 
   /// The border color of a step when it is reached.
-  final Color activeBorderColor;
+  final Color activeStepBorderColor;
 
   /// The color of the line that separates the steps.
   final Color lineColor;
@@ -60,8 +63,9 @@ class IconStepper extends StatefulWidget {
     this.nextButtonIcon,
     this.onStepReached,
     this.direction = Axis.horizontal,
-    this.activeColor,
-    this.activeBorderColor,
+    this.stepColor,
+    this.activeStepColor,
+    this.activeStepBorderColor,
     this.lineColor,
     this.lineLength = 50.0,
     this.lineDotRadius = 1.0,
@@ -84,27 +88,28 @@ class IconStepper extends StatefulWidget {
   _IconStepperState createState() => _IconStepperState();
 }
 
-class _IconStepperState extends State<IconStepper>
-    with SingleTickerProviderStateMixin {
-  ScrollController scrollController;
-  int selectedIndex = 0;
+class _IconStepperState extends State<IconStepper> {
+  ScrollController _scrollController;
+  int _selectedIndex;
 
   @override
   void initState() {
     super.initState();
-    this.scrollController = ScrollController();
-    // widget.onStepReached(selectedIndex);
+
+    _selectedIndex = 0;
+    this._scrollController = ScrollController();
   }
 
   void _afterLayout(_) {
+    // * This owes an explanation.
     for (int i = 0; i < widget.icons.length; i++) {
-      scrollController.animateTo(
+      _scrollController.animateTo(
         i * ((widget.stepRadius * 2.0) + widget.lineLength),
         duration: widget.stepReachedAnimationDuration,
         curve: widget.stepReachedAnimationEffect,
       );
 
-      if (selectedIndex == i) {
+      if (_selectedIndex == i) {
         break;
       }
     }
@@ -142,24 +147,18 @@ class _IconStepperState extends State<IconStepper>
   Widget _stepperBuilder() {
     return SingleChildScrollView(
       scrollDirection: widget.direction,
-      controller: scrollController,
+      controller: _scrollController,
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 8.0),
         padding: const EdgeInsets.all(8.0),
         child: widget.direction == Axis.horizontal
-            ? Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: buildSteps(),
-              )
-            : Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: buildSteps(),
-              ),
+            ? Row(children: _buildSteps())
+            : Column(children: _buildSteps()),
       ),
     );
   }
 
-  List<Widget> buildSteps() {
+  List<Widget> _buildSteps() {
     return List.generate(
       widget.icons.length,
       (index) {
@@ -173,17 +172,18 @@ class _IconStepperState extends State<IconStepper>
                       size: widget.stepRadius,
                       color: widget.icons[index].color,
                     ),
-                    isSelected: selectedIndex == index,
+                    isSelected: _selectedIndex == index,
                     onPressed: widget.enableStepTapping
                         ? () {
                             setState(() {
-                              selectedIndex = index;
-                              widget.onStepReached(selectedIndex);
+                              _selectedIndex = index;
+                              widget.onStepReached(_selectedIndex);
                             });
                           }
                         : null,
-                    activeColor: widget.activeColor,
-                    activeBorderColor: widget.activeBorderColor,
+                    color: widget.stepColor,
+                    activeColor: widget.activeStepColor,
+                    activeBorderColor: widget.activeStepBorderColor,
                     radius: widget.stepRadius,
                   ),
                   index < widget.icons.length - 1
@@ -205,17 +205,18 @@ class _IconStepperState extends State<IconStepper>
                       size: widget.stepRadius,
                       color: widget.icons[index].color,
                     ),
-                    isSelected: selectedIndex == index,
+                    isSelected: _selectedIndex == index,
                     onPressed: widget.enableStepTapping
                         ? () {
                             setState(() {
-                              selectedIndex = index;
-                              widget.onStepReached(selectedIndex);
+                              _selectedIndex = index;
+                              widget.onStepReached(_selectedIndex);
                             });
                           }
                         : null,
-                    activeColor: widget.activeColor,
-                    activeBorderColor: widget.activeBorderColor,
+                    color: widget.stepColor,
+                    activeColor: widget.activeStepColor,
+                    activeBorderColor: widget.activeStepBorderColor,
                     radius: widget.stepRadius,
                   ),
                   index < widget.icons.length - 1
@@ -235,7 +236,7 @@ class _IconStepperState extends State<IconStepper>
 
   Widget _previousButton() {
     return IgnorePointer(
-      ignoring: selectedIndex == 0,
+      ignoring: _selectedIndex == 0,
       child: IconButton(
         visualDensity: VisualDensity.compact,
         icon: widget?.nextButtonIcon ??
@@ -245,13 +246,11 @@ class _IconStepperState extends State<IconStepper>
                   : Icons.arrow_drop_up,
             ),
         onPressed: () {
-          if (selectedIndex > 0) {
+          if (_selectedIndex > 0) {
             setState(() {
-              selectedIndex--;
-              widget.onStepReached(selectedIndex);
+              _selectedIndex--;
+              widget.onStepReached(_selectedIndex);
             });
-          } else {
-            print('No more Next steps.');
           }
         },
       ),
@@ -260,7 +259,7 @@ class _IconStepperState extends State<IconStepper>
 
   Widget _nextButton() {
     return IgnorePointer(
-      ignoring: selectedIndex == widget.icons.length - 1,
+      ignoring: _selectedIndex == widget.icons.length - 1,
       child: IconButton(
         visualDensity: VisualDensity.compact,
         icon: widget?.nextButtonIcon ??
@@ -270,24 +269,14 @@ class _IconStepperState extends State<IconStepper>
                   : Icons.arrow_drop_down,
             ),
         onPressed: () {
-          if (selectedIndex < widget.icons.length - 1) {
+          if (_selectedIndex < widget.icons.length - 1) {
             setState(() {
-              selectedIndex++;
-              widget.onStepReached(selectedIndex);
+              _selectedIndex++;
+              widget.onStepReached(_selectedIndex);
             });
-          } else {
-            print('No more Next steps.');
           }
         },
       ),
     );
   }
-}
-
-class IconStep {
-  final Icon icon;
-
-  IconStep({
-    this.icon,
-  });
 }

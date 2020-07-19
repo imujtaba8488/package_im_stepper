@@ -5,6 +5,7 @@ class IconIndicator extends StatefulWidget {
   final bool isSelected;
   final Icon icon;
   final Function onPressed;
+  final Color color;
   final Color activeColor;
   final Color activeBorderColor;
   final double radius;
@@ -14,6 +15,7 @@ class IconIndicator extends StatefulWidget {
     this.isSelected = false,
     this.icon,
     this.onPressed,
+    this.color,
     this.activeColor,
     this.activeBorderColor,
     this.radius = 24.0,
@@ -88,7 +90,7 @@ class _IconIndicatorState extends State<IconIndicator>
             decoration: BoxDecoration(
               color: widget.isSelected
                   ? widget.activeColor ?? Colors.green
-                  : Colors.grey,
+                  : widget.color ?? Colors.grey,
               shape: BoxShape.circle,
             ),
             child: Center(
