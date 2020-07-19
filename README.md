@@ -15,7 +15,7 @@ surveying its users require to display the step that the user is on while the us
 is filling up the survey form. This is where im_stepper comes into play with easy
 to use stepper widgets that may find its uses in a myriad applications.
 
-* __IconStepper__:
+__IconStepper__:
 A simple to use icon stepper widget, wherein, each icon defines a step. Hence,
 total number of icons define total number of steps possible for the stepper.
 Primarily designed to show steps as icons.
