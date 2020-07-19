@@ -17,6 +17,13 @@ to use stepper widgets that may find its uses in a myriad applications.
 
 ### IconStepper
 
+</details>
+</summary>Click to expand</summary>
+
+whatever
+
+</details>
+
 A simple to use icon stepper widget, wherein, each icon defines a step. Hence,
 total number of icons define total number of steps possible for the stepper.
 Primarily designed to show steps as icons.
