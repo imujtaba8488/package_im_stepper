@@ -17,13 +17,16 @@ surveying its users require to display the step that the user is on while the us
 is filling up the survey form. This is where im_stepper comes into play with easy
 to use stepper widgets that may find its uses in a myriad applications.
 
+Simply import `package:im_stepper/stepper.dart` and choose any of the following
+steppers appropriate for your application:
+
 ### IconStepper
 
 A simple to use icon stepper widget, wherein, each icon defines a step. Hence,
-total number of icons define total number of steps possible for the stepper.
-Primarily designed to show steps as icons.
+total number of icons define total number of steps. Primarily designed to show
+steps as icons.
 
-#### Note
+#### Usage Note
 
 * __Important:__ IconStepper `direction` argument controls whether the stepper is displayed
 horizontally or vertically. A horizontal IconStepper can be wrapped within a Column
@@ -43,4 +46,6 @@ Kindly email me directly for any feedback and hit the like button.
 
 ## Screenshots
 
-![Screenshot](https://github.com/imujtaba8488/package_country_currency_chooser/blob/master/showcase/currency_chooser_01.gif)
+![icon_stepper_01](https://github.com/imujtaba8488/showcase/blob/master/icon_stepper_01.gif)
+![icon_stepper_02](https://github.com/imujtaba8488/showcase/blob/master/icon_stepper_02.gif)
+![icon_stepper_03](https://github.com/imujtaba8488/showcase/blob/master/icon_stepper_03.gif)

@@ -104,7 +104,7 @@ class _IconStepperState extends State<IconStepper> {
     // * This owes an explanation.
     for (int i = 0; i < widget.icons.length; i++) {
       _scrollController.animateTo(
-        i * ((widget.stepRadius * 2.0) + widget.lineLength),
+        i * ((widget.stepRadius * 2) + widget.lineLength),
         duration: widget.stepReachedAnimationDuration,
         curve: widget.stepReachedAnimationEffect,
       );
@@ -221,7 +221,7 @@ class _IconStepperState extends State<IconStepper> {
                   ),
                   index < widget.icons.length - 1
                       ? DottedLine(
-                          length: 50,
+                          length: widget.lineLength ?? 50,
                           color: Colors.blue,
                           dotRadius: 1.0,
                           spacing: 5.0,
