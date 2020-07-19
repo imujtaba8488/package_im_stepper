@@ -15,17 +15,18 @@ surveying its users require to display the step that the user is on while the us
 is filling up the survey form. This is where im_stepper comes into play with easy
 to use stepper widgets that may find its uses in a myriad applications.
 
-__IconStepper__:
+### IconStepper
+
 A simple to use icon stepper widget, wherein, each icon defines a step. Hence,
 total number of icons define total number of steps possible for the stepper.
 Primarily designed to show steps as icons.
 
-:__Important:__ IconStepper `direction` argument controls whether the stepper is displayed
+* __Important:__ IconStepper `direction` argument controls whether the stepper is displayed
 horizontally or vertically. A horizontal IconStepper can be wrapped within a Column
 with no issues, however, if wrapped within a row it _must also be_ wrapped within
 the built-in _Expanded_ widget. Same applies for the vertical IconStepper.
 
-:__Note:__ IconStepper fires the `onStepReached(int index)` callback, which provides
+* __Note:__ IconStepper fires the `onStepReached(int index)` callback, which provides
 the index of the Step that is reached. This callback can be used to control the
 widget that appears when a certain step is reached.
 
