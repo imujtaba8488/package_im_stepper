@@ -50,6 +50,7 @@ class _MyAppState extends State<MyApp> {
                     selectedIndex = value;
                   });
                 },
+                steppingEnabled: true,
                 icons: [
                   Icon(Icons.home),
                   Icon(Icons.person),

@@ -9,14 +9,14 @@
 ## About
 
 A growing collection of widgets primarily used to step-through various
-steps/widgets in your application.
+steps/widgets in an application.
 
 ## Description
 
 A number of applications require to show steps to its users, for example, an app
-surveying its users require to display the step that the user is on while the user
-is filling up the survey form. This is where im_stepper comes into play with easy
-to use stepper widgets that may find its uses in a myriad applications.
+surveying its users require to display the step that the user is on while the
+user is filling up the survey form. This is where im_stepper comes into play
+with easy to use stepper widgets that may find its uses in myriad applications.
 
 Simply import `package:im_stepper/stepper.dart` and choose any of the following
 steppers appropriate for your application:
