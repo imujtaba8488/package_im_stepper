@@ -21,7 +21,7 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text('Icon Stepper Example'),
         ),
-        body: Row(
+        body: Column(
           children: <Widget>[
             Container(
               // margin: EdgeInsets.all(5.0),
@@ -37,11 +37,12 @@ class _MyAppState extends State<MyApp> {
                 // borderRadius: BorderRadius.circular(5.0),
               ),
               child: IconStepper(
-                direction: Axis.vertical,
+                // direction: Axis.vertical,
                 // enableNextPreviousButtons: false,
                 stepColor: Colors.white,
                 activeStepColor: Colors.amber,
                 lineColor: Colors.amberAccent,
+                // steppingEnabled: false,
                 // lineDotRadius: 2,
                 lineLength: 75,
                 onStepReached: (value) {

@@ -41,9 +41,14 @@ widget that appears when a certain step is reached.
 * To customize the color, border, etc. of an IconStepper, simply wrap it inside
 a Container and specify the `decoration` argument.
 
+* To enable validation before the next step is reached, set the `steppingEnabled`
+property to an appropriate value in a `StatefulWidget`.
+
 ## Feedback
 
-Kindly email me directly for any feedback and hit the like button.
+For any feedback please file an issue
+__[here](https://github.com/imujtaba8488/package_im_stepper/issues).__
+Also, don't forget to hit the like button.
 
 ## Screenshots
 
