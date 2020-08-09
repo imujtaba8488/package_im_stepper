@@ -1,17 +1,28 @@
 import 'package:flutter/material.dart';
 
 class IconIndicator extends StatefulWidget {
-  final int index;
+  /// Whether this indicator is selected or not.
   final bool isSelected;
+
+  /// The icon to be placed within this indicator.
   final Icon icon;
+
+  /// Action to be taken when this indictor is pressed.
   final Function onPressed;
+
+  /// Color of this indicator when it is not selected.
   final Color color;
+
+  /// Color of this indicator when it is selected.
   final Color activeColor;
+
+  /// Border color of this indicator when it is selected.
   final Color activeBorderColor;
+
+  /// Radius of this indicator.
   final double radius;
 
   IconIndicator({
-    @required this.index,
     this.isSelected = false,
     this.icon,
     this.onPressed,
@@ -27,49 +38,49 @@ class IconIndicator extends StatefulWidget {
 
 class _IconIndicatorState extends State<IconIndicator>
     with SingleTickerProviderStateMixin {
-  AnimationController animationController;
-  Animation opacityAnimation, backwardAnimation;
+  AnimationController _animationController;
+  Animation _opacityAnimation;
 
   @override
   void initState() {
     super.initState();
 
-    animationController = AnimationController(
+    _animationController = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 1000),
     )..addListener(() {
         setState(() {});
       });
 
-    opacityAnimation = Tween(
+    _opacityAnimation = Tween(
       begin: 0.0,
       end: 1.0,
-    ).animate(animationController);
+    ).animate(_animationController);
 
-    animationController.forward();
+    _animationController.forward();
   }
 
   @override
   void didUpdateWidget(IconIndicator oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.isSelected && animationController.isDismissed) {
-      animationController.forward();
-    } else if (widget.isSelected && animationController.isCompleted) {
-      animationController.reset();
-      animationController.forward();
+    if (widget.isSelected && _animationController.isDismissed) {
+      _animationController.forward();
+    } else if (widget.isSelected && _animationController.isCompleted) {
+      _animationController.reset();
+      _animationController.forward();
     }
   }
 
   @override
   void dispose() {
     super.dispose();
-    animationController.dispose();
+    _animationController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Opacity(
-      opacity: widget.isSelected ? opacityAnimation.value : 1.0,
+      opacity: widget.isSelected ? _opacityAnimation.value : 1.0,
       child: Container(
         padding: widget.isSelected ? EdgeInsets.all(1.0) : EdgeInsets.zero,
         decoration: BoxDecoration(
@@ -94,7 +105,7 @@ class _IconIndicatorState extends State<IconIndicator>
               shape: BoxShape.circle,
             ),
             child: Center(
-              child: widget.icon ?? Text('${widget.index}'),
+              child: widget.icon,
             ),
           ),
         ),

@@ -187,7 +187,6 @@ class _IconStepperState extends State<IconStepper> {
   /// A customized IconStep.
   Widget _iconStepCustomized(int index) {
     return IconIndicator(
-      index: index + 1,
       icon: Icon(
         widget.icons[index].icon,
         size: widget.stepRadius,
