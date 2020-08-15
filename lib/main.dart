@@ -28,11 +28,11 @@ class _MyAppState extends State<MyApp> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ABCStepper(
-                  radius: 20,
+                  stepRadius: 20,
                   spacing: 20,
                   steps: 5,
-                  stepNext: stepNext,
-                  stepPrevious: stepPrevious,
+                  goNext: stepNext,
+                  goPrevious: stepPrevious,
                 ),
               ),
               RaisedButton(

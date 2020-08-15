@@ -3,28 +3,28 @@ import 'package:flutter/material.dart';
 typedef StepReached = void Function(int index);
 
 class ABCStepper extends StatefulWidget {
-  final double radius;
+  final double stepRadius;
   final double spacing;
   final int steps;
-  final bool stepNext;
-  final bool stepPrevious;
+  final bool goNext;
+  final bool goPrevious;
   final StepReached stepReachedIndex;
 
   ABCStepper({
     this.steps = 3,
-    this.radius = 24.0,
+    this.stepRadius = 24.0,
     this.spacing = 24.0,
-    this.stepNext = false,
-    this.stepPrevious = false,
+    this.goNext = false,
+    this.goPrevious = false,
     this.stepReachedIndex,
   }) {
     assert(
-      radius >= 10.0,
-      'Radius must be greater than or equal to 0.0. Radius was: $radius',
+      stepRadius >= 10.0,
+      'Radius must be greater than or equal to 0.0. Radius was: $stepRadius',
     );
     assert(
-      spacing >= radius,
-      'Spacing must be greater than or equal to radius. Spacing was $spacing and radius is $radius ',
+      spacing >= stepRadius,
+      'Spacing must be greater than or equal to radius. Spacing was $spacing and radius is $stepRadius ',
     );
   }
 
@@ -41,7 +41,7 @@ class _ABCStepperState extends State<ABCStepper>
   bool translateForward = true;
 
   int selected = 0;
-  Size shapeSize;
+  Size stepSize;
 
   ScrollController _scrollController;
 
@@ -49,7 +49,7 @@ class _ABCStepperState extends State<ABCStepper>
   void initState() {
     super.initState();
 
-    shapeSize = Size(widget.spacing, widget.radius);
+    stepSize = Size(widget.spacing, widget.stepRadius);
 
     _scrollController = ScrollController();
 
@@ -62,12 +62,12 @@ class _ABCStepperState extends State<ABCStepper>
 
     forwardTranslation = Tween(
       begin: 0.0,
-      end: shapeSize.width / 2.0,
+      end: stepSize.width / 2.0,
     ).animate(_animationController);
 
     backwardTranslation = Tween(
-      begin: shapeSize.width,
-      end: shapeSize.width / 2,
+      begin: stepSize.width,
+      end: stepSize.width / 2,
     ).animate(_animationController);
 
     _animationController.forward();
@@ -77,7 +77,7 @@ class _ABCStepperState extends State<ABCStepper>
   void didUpdateWidget(ABCStepper oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (widget.stepNext && selected < widget.steps - 1) {
+    if (widget.goNext && selected < widget.steps - 1) {
       selected++;
       translateForward = true;
 
@@ -87,7 +87,7 @@ class _ABCStepperState extends State<ABCStepper>
       if (widget.stepReachedIndex != null) {
         widget.stepReachedIndex(selected);
       }
-    } else if (widget.stepPrevious && selected > 0) {
+    } else if (widget.goPrevious && selected > 0) {
       selected--;
       translateForward = false;
 
@@ -128,12 +128,11 @@ class _ABCStepperState extends State<ABCStepper>
   List<Widget> _buildSteps() {
     return List.generate(widget.steps, (index) {
       return CustomPaint(
-        foregroundPainter: Painter(
-          selected: selected == index,
-          translation:
-              translateForward ? forwardTranslation : backwardTranslation,
+        foregroundPainter: ABCStepperPainter(
+          selected == index,
+          translateForward ? forwardTranslation : backwardTranslation,
         ),
-        size: shapeSize,
+        size: stepSize,
       );
     });
   }
@@ -152,14 +151,14 @@ class _ABCStepperState extends State<ABCStepper>
   }
 }
 
-class Painter extends CustomPainter {
-  bool selected;
-  Animation translation;
+class ABCStepperPainter extends CustomPainter {
+  final bool _selected;
+  final Animation _translation;
 
-  Painter({
-    this.selected = false,
-    this.translation,
-  });
+  ABCStepperPainter(
+    this._selected,
+    this._translation,
+  );
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -174,24 +173,15 @@ class Painter extends CustomPainter {
         ..strokeWidth = 1,
     );
 
-    if (selected) {
+    if (_selected) {
       canvas.drawCircle(
-        Offset(translation.value, size.height / 2.0),
+        Offset(_translation.value, size.height / 2.0),
         size.height / 4.0,
         Paint()
           ..color = Colors.green
           ..style = PaintingStyle.fill
           ..strokeWidth = 1,
       );
-
-      // canvas.drawCircle(
-      //   Offset(transateAnimation.value, size.height / 2.0),
-      //   size.height / 4.0,
-      //   Paint()
-      //     ..color = Colors.green
-      //     ..style = PaintingStyle.fill
-      //     ..strokeWidth = 1,
-      // );
     }
   }
 
