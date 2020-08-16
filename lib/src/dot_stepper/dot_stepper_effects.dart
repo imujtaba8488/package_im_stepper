@@ -55,3 +55,19 @@ class DotFillEffect {
     ).animate(animationController);
   }
 }
+
+class MagnifiedDotFillEffect {
+  Size stepSize;
+  AnimationController animationController;
+  Animation size;
+
+  MagnifiedDotFillEffect({
+    this.stepSize,
+    this.animationController,
+  }) {
+    size = Tween(
+      begin: stepSize.width / 2.0,
+      end: stepSize.width / 4.0,
+    ).animate(animationController);
+  }
+}

@@ -32,9 +32,11 @@ class _MyAppState extends State<MyApp> {
                   goNext: stepNext,
                   goPrevious: stepPrevious,
                   // direction: Axis.vertical,
-                  fillStep: false,
-                  steps: 10,
-                  indicatorEffect: IndicatorEffect.slide,
+                  // fillStep: false,
+                  indicatorColor: Colors.black,
+
+                  stepCount: 10,
+                  indicatorEffect: IndicatorEffect.worm,
                 ),
               ),
               RaisedButton(

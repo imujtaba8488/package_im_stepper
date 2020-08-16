@@ -60,6 +60,10 @@ class ABCStepperPainter extends CustomPainter {
           _drawDotFill(canvas, size);
           break;
 
+        case IndicatorEffect.magnifiedDotFill:
+          _drawMagnifiedDotFill(canvas, size);
+          break;
+
         default:
           _drawSliding(canvas, size);
           break;
@@ -98,28 +102,51 @@ class ABCStepperPainter extends CustomPainter {
       _translateForward,
     );
 
-    Rect rect = Rect.fromCenter(
-      center: Offset(
-        _axis == Axis.horizontal
-            ? wormEffect.translation.value
-            : size.width / 2.0,
-        _axis == Axis.horizontal
-            ? size.height / 2.0
-            : wormEffect.translation.value,
-      ),
-      height:
-          _axis == Axis.horizontal ? size.height / 2.0 : wormEffect.size.value,
-      width:
-          _axis == Axis.horizontal ? wormEffect.size.value : size.width / 2.0,
-    );
+    // Rect rect = Rect.fromCenter(
+    //   center: Offset(
+    //     _axis == Axis.horizontal
+    //         ? wormEffect.translation.value
+    //         : size.width / 2.0,
+    //     _axis == Axis.horizontal
+    //         ? size.height / 2.0
+    //         : wormEffect.translation.value,
+    //   ),
+    //   height:
+    //       _axis == Axis.horizontal ? size.height / 2.0 : wormEffect.size.value,
+    //   width:
+    //       _axis == Axis.horizontal ? wormEffect.size.value : size.width / 2.0,
+    // );
 
-    RRect rRect = RRect.fromRectAndRadius(
-      rect,
-      Radius.circular(size.width),
-    );
+    // RRect rRect = RRect.fromRectAndRadius(
+    //   rect,
+    //   Radius.circular(size.width),
+    // );
+
+    // canvas.drawRRect(
+    //   rRect,
+    //   Paint()..color = _indicatorColor,
+    // );
 
     canvas.drawRRect(
-      rRect,
+      RRect.fromRectAndRadius(
+        Rect.fromCenter(
+          center: Offset(
+            _axis == Axis.horizontal
+                ? wormEffect.translation.value
+                : size.width / 2.0,
+            _axis == Axis.horizontal
+                ? size.height / 2.0
+                : wormEffect.translation.value,
+          ),
+          height: _axis == Axis.horizontal
+              ? size.height / 2.0
+              : wormEffect.size.value,
+          width: _axis == Axis.horizontal
+              ? wormEffect.size.value
+              : size.width / 2.0,
+        ),
+        Radius.circular(size.width),
+      ),
       Paint()..color = _indicatorColor,
     );
   }
@@ -134,6 +161,22 @@ class ABCStepperPainter extends CustomPainter {
     canvas.drawCircle(
       Offset(size.width / 2.0, size.height / 2.0),
       dotFillEffect.size.value,
+      Paint()
+        ..color = _indicatorColor
+        ..style = PaintingStyle.fill
+        ..strokeWidth = 1,
+    );
+  }
+
+  void _drawMagnifiedDotFill(Canvas canvas, Size size) {
+    MagnifiedDotFillEffect magnifiedDotFill = MagnifiedDotFillEffect(
+      stepSize: size,
+      animationController: _animationController,
+    );
+
+    canvas.drawCircle(
+      Offset(size.width / 2.0, size.height / 2.0),
+      magnifiedDotFill.size.value,
       Paint()
         ..color = _indicatorColor
         ..style = PaintingStyle.fill

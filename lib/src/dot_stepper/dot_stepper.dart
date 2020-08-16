@@ -6,7 +6,7 @@ typedef StepReached = void Function(int index);
 
 class DotStepper extends StatefulWidget {
   final double stepRadius;
-  final int steps;
+  final int stepCount;
   final bool goNext;
   final bool goPrevious;
   final StepReached stepReachedIndex;
@@ -17,7 +17,7 @@ class DotStepper extends StatefulWidget {
   final IndicatorEffect indicatorEffect;
 
   DotStepper({
-    this.steps = 3,
+    this.stepCount = 3,
     this.stepRadius = 24.0,
     this.goNext = false,
     this.goPrevious = false,
@@ -41,13 +41,10 @@ class DotStepper extends StatefulWidget {
 class _DotStepperState extends State<DotStepper>
     with SingleTickerProviderStateMixin {
   AnimationController _animationController;
-  Animation forwardTranslation;
-  Animation backwardTranslation;
 
   bool translateForward = true;
 
   int selected = 0;
-  Size stepSize;
 
   ScrollController _scrollController;
 
@@ -55,26 +52,14 @@ class _DotStepperState extends State<DotStepper>
   void initState() {
     super.initState();
 
-    stepSize = Size(widget.stepRadius, widget.stepRadius);
-
     _scrollController = ScrollController();
 
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 1),
+      duration: Duration(seconds: 2),
     )..addListener(() {
         setState(() {});
       });
-
-    forwardTranslation = Tween(
-      begin: 0.0,
-      end: stepSize.width / 2.0,
-    ).animate(_animationController);
-
-    backwardTranslation = Tween(
-      begin: stepSize.width,
-      end: stepSize.width / 2,
-    ).animate(_animationController);
 
     _animationController.forward();
   }
@@ -83,7 +68,7 @@ class _DotStepperState extends State<DotStepper>
   void didUpdateWidget(DotStepper oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (widget.goNext && selected < widget.steps - 1) {
+    if (widget.goNext && selected < widget.stepCount - 1) {
       selected++;
       translateForward = true;
 
@@ -132,7 +117,7 @@ class _DotStepperState extends State<DotStepper>
   }
 
   List<Widget> _buildSteps() {
-    return List.generate(widget.steps, (index) {
+    return List.generate(widget.stepCount, (index) {
       return CustomPaint(
         foregroundPainter: ABCStepperPainter(
           isSelected: selected == index,
@@ -144,16 +129,16 @@ class _DotStepperState extends State<DotStepper>
           animationController: _animationController,
           translateForward: translateForward,
         ),
-        size: stepSize,
+        size: Size(widget.stepRadius, widget.stepRadius),
       );
     });
   }
 
   void _scrollToStep() {
     // * This owes an explanation.
-    for (int i = 0; i < widget.steps; i++) {
+    for (int i = 0; i < widget.stepCount; i++) {
       _scrollController.animateTo(
-        i * stepSize.width,
+        i * widget.stepRadius,
         duration: Duration(milliseconds: 400),
         curve: Curves.easeIn,
       );
@@ -168,4 +153,5 @@ enum IndicatorEffect {
   slide,
   jumping,
   dotFill,
+  magnifiedDotFill,
 }
