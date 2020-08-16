@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:im_stepper/src/abc_stepper.dart';
+
+import 'src/dot_stepper/dot_stepper.dart';
 
 void main() {
   runApp(MyApp());
@@ -27,12 +28,13 @@ class _MyAppState extends State<MyApp> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: ABCStepper(
-                  stepRadius: 20,
-                  spacing: 20,
-                  steps: 5,
+                child: DotStepper(
                   goNext: stepNext,
                   goPrevious: stepPrevious,
+                  // direction: Axis.vertical,
+                  fillStep: false,
+                  steps: 10,
+                  indicatorEffect: IndicatorEffect.slide,
                 ),
               ),
               RaisedButton(

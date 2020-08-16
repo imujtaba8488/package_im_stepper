@@ -1,38 +1,44 @@
 import 'package:flutter/material.dart';
 
+import 'dot_stepper_painter.dart';
+
 typedef StepReached = void Function(int index);
 
-class ABCStepper extends StatefulWidget {
+class DotStepper extends StatefulWidget {
   final double stepRadius;
-  final double spacing;
   final int steps;
   final bool goNext;
   final bool goPrevious;
   final StepReached stepReachedIndex;
+  final Axis direction;
+  final Color stepColor;
+  final Color indicatorColor;
+  final bool fillStep;
+  final IndicatorEffect indicatorEffect;
 
-  ABCStepper({
+  DotStepper({
     this.steps = 3,
     this.stepRadius = 24.0,
-    this.spacing = 24.0,
     this.goNext = false,
     this.goPrevious = false,
     this.stepReachedIndex,
+    this.direction = Axis.horizontal,
+    this.stepColor = Colors.grey,
+    this.indicatorColor = Colors.green,
+    this.fillStep = true,
+    this.indicatorEffect = IndicatorEffect.slide,
   }) {
     assert(
       stepRadius >= 10.0,
-      'Radius must be greater than or equal to 0.0. Radius was: $stepRadius',
-    );
-    assert(
-      spacing >= stepRadius,
-      'Spacing must be greater than or equal to radius. Spacing was $spacing and radius is $stepRadius ',
+      'Radius must be greater than or equal to 10.0. Current radius: $stepRadius',
     );
   }
 
   @override
-  _ABCStepperState createState() => _ABCStepperState();
+  _DotStepperState createState() => _DotStepperState();
 }
 
-class _ABCStepperState extends State<ABCStepper>
+class _DotStepperState extends State<DotStepper>
     with SingleTickerProviderStateMixin {
   AnimationController _animationController;
   Animation forwardTranslation;
@@ -49,13 +55,13 @@ class _ABCStepperState extends State<ABCStepper>
   void initState() {
     super.initState();
 
-    stepSize = Size(widget.spacing, widget.stepRadius);
+    stepSize = Size(widget.stepRadius, widget.stepRadius);
 
     _scrollController = ScrollController();
 
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 500),
+      duration: Duration(seconds: 1),
     )..addListener(() {
         setState(() {});
       });
@@ -74,7 +80,7 @@ class _ABCStepperState extends State<ABCStepper>
   }
 
   @override
-  void didUpdateWidget(ABCStepper oldWidget) {
+  void didUpdateWidget(DotStepper oldWidget) {
     super.didUpdateWidget(oldWidget);
 
     if (widget.goNext && selected < widget.steps - 1) {
@@ -118,9 +124,9 @@ class _ABCStepperState extends State<ABCStepper>
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         controller: _scrollController,
-        child: Row(
-          children: _buildSteps(),
-        ),
+        child: widget.direction == Axis.horizontal
+            ? Row(children: _buildSteps())
+            : Column(children: _buildSteps()),
       ),
     );
   }
@@ -129,8 +135,14 @@ class _ABCStepperState extends State<ABCStepper>
     return List.generate(widget.steps, (index) {
       return CustomPaint(
         foregroundPainter: ABCStepperPainter(
-          selected == index,
-          translateForward ? forwardTranslation : backwardTranslation,
+          isSelected: selected == index,
+          axis: widget.direction,
+          stepColor: widget.stepColor,
+          indicatorColor: widget.indicatorColor,
+          fillStep: widget.fillStep,
+          indicatorEffect: widget.indicatorEffect,
+          animationController: _animationController,
+          translateForward: translateForward,
         ),
         size: stepSize,
       );
@@ -141,7 +153,7 @@ class _ABCStepperState extends State<ABCStepper>
     // * This owes an explanation.
     for (int i = 0; i < widget.steps; i++) {
       _scrollController.animateTo(
-        i * widget.spacing,
+        i * stepSize.width,
         duration: Duration(milliseconds: 400),
         curve: Curves.easeIn,
       );
@@ -151,40 +163,9 @@ class _ABCStepperState extends State<ABCStepper>
   }
 }
 
-class ABCStepperPainter extends CustomPainter {
-  final bool _selected;
-  final Animation _translation;
-
-  ABCStepperPainter(
-    this._selected,
-    this._translation,
-  );
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    Offset center = Offset(size.width / 2.0, size.height / 2.0);
-
-    canvas.drawCircle(
-      center,
-      size.height / 3.0,
-      Paint()
-        ..color = Colors.blueGrey
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = 1,
-    );
-
-    if (_selected) {
-      canvas.drawCircle(
-        Offset(_translation.value, size.height / 2.0),
-        size.height / 4.0,
-        Paint()
-          ..color = Colors.green
-          ..style = PaintingStyle.fill
-          ..strokeWidth = 1,
-      );
-    }
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) => true;
+enum IndicatorEffect {
+  worm,
+  slide,
+  jumping,
+  dotFill,
 }
