@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'dot_stepper_painter.dart';
+import 'dot_stepper_effects.dart';
 
 typedef StepReached = void Function(int index);
 
@@ -44,7 +45,7 @@ class _DotStepperState extends State<DotStepper>
 
   bool translateForward = true;
 
-  int selected = 0;
+  int selected = 1;
 
   ScrollController _scrollController;
 
@@ -56,7 +57,7 @@ class _DotStepperState extends State<DotStepper>
 
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 2),
+      duration: Duration(seconds: 1),
     )..addListener(() {
         setState(() {});
       });
@@ -68,7 +69,7 @@ class _DotStepperState extends State<DotStepper>
   void didUpdateWidget(DotStepper oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (widget.goNext && selected < widget.stepCount - 1) {
+    if (widget.goNext && selected < widget.stepCount) {
       selected++;
       translateForward = true;
 
@@ -78,11 +79,12 @@ class _DotStepperState extends State<DotStepper>
       if (widget.stepReachedIndex != null) {
         widget.stepReachedIndex(selected);
       }
-    } else if (widget.goPrevious && selected > 0) {
+    } else if (widget.goPrevious && selected > 1) {
       selected--;
       translateForward = false;
 
       _scrollToStep();
+
       _runAnimations();
 
       if (widget.stepReachedIndex != null) {
@@ -109,36 +111,33 @@ class _DotStepperState extends State<DotStepper>
       child: SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         controller: _scrollController,
-        child: widget.direction == Axis.horizontal
-            ? Row(children: _buildSteps())
-            : Column(children: _buildSteps()),
+        child: CustomPaint(
+          foregroundPainter: DotStepperPainter(
+            stepCount: widget.stepCount,
+            selectedIndex: selected,
+            axis: widget.direction,
+            stepColor: widget.stepColor,
+            indicatorColor: widget.indicatorColor,
+            fillStep: widget.fillStep,
+            indicatorEffect: widget.indicatorEffect,
+            animationController: _animationController,
+            translateForward: translateForward,
+            effect: Worm()
+          ),
+          size: Size(
+            widget.stepRadius * (widget.stepCount + 1),
+            widget.stepRadius,
+          ),
+        ),
       ),
     );
-  }
-
-  List<Widget> _buildSteps() {
-    return List.generate(widget.stepCount, (index) {
-      return CustomPaint(
-        foregroundPainter: ABCStepperPainter(
-          isSelected: selected == index,
-          axis: widget.direction,
-          stepColor: widget.stepColor,
-          indicatorColor: widget.indicatorColor,
-          fillStep: widget.fillStep,
-          indicatorEffect: widget.indicatorEffect,
-          animationController: _animationController,
-          translateForward: translateForward,
-        ),
-        size: Size(widget.stepRadius, widget.stepRadius),
-      );
-    });
   }
 
   void _scrollToStep() {
     // * This owes an explanation.
     for (int i = 0; i < widget.stepCount; i++) {
       _scrollController.animateTo(
-        i * widget.stepRadius,
+        i * (widget.stepRadius / 2.0),
         duration: Duration(milliseconds: 400),
         curve: Curves.easeIn,
       );

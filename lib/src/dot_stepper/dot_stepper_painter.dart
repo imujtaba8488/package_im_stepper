@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:im_stepper/src/dot_stepper/dot_stepper_effects.dart';
 
-import 'dot_stepper_effects.dart';
 import 'dot_stepper.dart';
 
-class ABCStepperPainter extends CustomPainter {
-  final bool _isSelected;
+class DotStepperPainter extends CustomPainter {
+  final int _stepCount;
+  final int _selectedIndex;
   final AnimationController _animationController;
   final Axis _axis;
   final Color _stepColor;
@@ -12,9 +13,13 @@ class ABCStepperPainter extends CustomPainter {
   final bool _fillStep;
   final IndicatorEffect _indicatorEffect;
   final bool _translateForward;
+  final DotStepperEffect _effect;
 
-  ABCStepperPainter({
-    bool isSelected,
+  double _stepRadius = 0.0;
+
+  DotStepperPainter({
+    int stepCount,
+    int selectedIndex,
     AnimationController animationController,
     Axis axis,
     Color stepColor,
@@ -22,166 +27,49 @@ class ABCStepperPainter extends CustomPainter {
     bool fillStep = true,
     IndicatorEffect indicatorEffect = IndicatorEffect.slide,
     bool translateForward,
-  })  : _isSelected = isSelected,
+    @required DotStepperEffect effect,
+  })  : this._stepCount = stepCount,
+        this._selectedIndex = selectedIndex,
         this._animationController = animationController,
-        _axis = axis,
-        _stepColor = stepColor,
-        _indicatorColor = indicatorColor,
+        this._axis = axis,
+        this._stepColor = stepColor,
+        this._indicatorColor = indicatorColor,
         this._fillStep = fillStep,
         this._indicatorEffect = indicatorEffect,
-        this._translateForward = translateForward;
+        this._translateForward = translateForward,
+        this._effect = effect;
 
   @override
   void paint(Canvas canvas, Size size) {
-    Offset center = Offset(size.width / 2.0, size.height / 2.0);
-    _drawStep(canvas, size, center);
-    _drawIndicator(canvas, size, center);
+    _stepRadius = size.height;
+
+    _drawSteps(canvas);
+    _drawIndicator(canvas);
   }
 
-  void _drawStep(Canvas canvas, Size size, Offset center) {
-    canvas.drawCircle(
-      center,
-      size.height / 3.0,
-      Paint()
-        ..color = _stepColor
-        ..style = _fillStep ? PaintingStyle.fill : PaintingStyle.stroke
-        ..strokeWidth = 1,
-    );
-  }
+  void _drawSteps(Canvas canvas) {
+    Offset center = Offset(_stepRadius, _stepRadius / 2.0);
 
-  void _drawIndicator(Canvas canvas, Size size, Offset center) {
-    if (_isSelected) {
-      switch (_indicatorEffect) {
-        case IndicatorEffect.worm:
-          _drawWorm(canvas, size);
-          break;
+    for (int i = 0; i < _stepCount; i++) {
+      canvas.drawCircle(
+        center,
+        _stepRadius / 4.0,
+        Paint()
+          ..color = _stepColor
+          ..style = _fillStep ? PaintingStyle.fill : PaintingStyle.stroke
+          ..strokeWidth = 1,
+      );
 
-        case IndicatorEffect.dotFill:
-          _drawDotFill(canvas, size);
-          break;
-
-        case IndicatorEffect.magnifiedDotFill:
-          _drawMagnifiedDotFill(canvas, size);
-          break;
-
-        default:
-          _drawSliding(canvas, size);
-          break;
-      }
+      center = center.translate(_stepRadius, 0.0);
     }
   }
 
-  void _drawSliding(Canvas canvas, Size size) {
-    SlidingEffect slidingEffect = SlidingEffect(
-      stepSize: size,
-      animationController: _animationController,
-      translateForward: _translateForward,
-    );
-
-    canvas.drawCircle(
-      Offset(
-        _axis == Axis.horizontal
-            ? slidingEffect.translation.value
-            : size.width / 2.0,
-        _axis == Axis.horizontal
-            ? size.height / 2.0
-            : slidingEffect.translation.value,
-      ),
-      size.height / 3.0,
-      Paint()
-        ..color = _indicatorColor
-        ..style = PaintingStyle.fill
-        ..strokeWidth = 1,
-    );
-  }
-
-  void _drawWorm(Canvas canvas, Size size) {
-    WormEffect wormEffect = WormEffect(
-      size,
-      _animationController,
-      _translateForward,
-    );
-
-    // Rect rect = Rect.fromCenter(
-    //   center: Offset(
-    //     _axis == Axis.horizontal
-    //         ? wormEffect.translation.value
-    //         : size.width / 2.0,
-    //     _axis == Axis.horizontal
-    //         ? size.height / 2.0
-    //         : wormEffect.translation.value,
-    //   ),
-    //   height:
-    //       _axis == Axis.horizontal ? size.height / 2.0 : wormEffect.size.value,
-    //   width:
-    //       _axis == Axis.horizontal ? wormEffect.size.value : size.width / 2.0,
-    // );
-
-    // RRect rRect = RRect.fromRectAndRadius(
-    //   rect,
-    //   Radius.circular(size.width),
-    // );
-
-    // canvas.drawRRect(
-    //   rRect,
-    //   Paint()..color = _indicatorColor,
-    // );
-
-    canvas.drawRRect(
-      RRect.fromRectAndRadius(
-        Rect.fromCenter(
-          center: Offset(
-            _axis == Axis.horizontal
-                ? wormEffect.translation.value
-                : size.width / 2.0,
-            _axis == Axis.horizontal
-                ? size.height / 2.0
-                : wormEffect.translation.value,
-          ),
-          height: _axis == Axis.horizontal
-              ? size.height / 2.0
-              : wormEffect.size.value,
-          width: _axis == Axis.horizontal
-              ? wormEffect.size.value
-              : size.width / 2.0,
-        ),
-        Radius.circular(size.width),
-      ),
-      Paint()..color = _indicatorColor,
-    );
-  }
-
-  void _drawDotFill(Canvas canvas, Size size) {
-    DotFillEffect dotFillEffect = DotFillEffect(
-      size,
-      _animationController,
-      _translateForward,
-    );
-
-    canvas.drawCircle(
-      Offset(size.width / 2.0, size.height / 2.0),
-      dotFillEffect.size.value,
-      Paint()
-        ..color = _indicatorColor
-        ..style = PaintingStyle.fill
-        ..strokeWidth = 1,
-    );
-  }
-
-  void _drawMagnifiedDotFill(Canvas canvas, Size size) {
-    MagnifiedDotFillEffect magnifiedDotFill = MagnifiedDotFillEffect(
-      stepSize: size,
-      animationController: _animationController,
-    );
-
-    canvas.drawCircle(
-      Offset(size.width / 2.0, size.height / 2.0),
-      magnifiedDotFill.size.value,
-      Paint()
-        ..color = _indicatorColor
-        ..style = PaintingStyle.fill
-        ..strokeWidth = 1,
-    );
+  void _drawIndicator(Canvas canvas) {
+    _effect.selectedIndex = _selectedIndex;
+    _effect.stepRadius = _stepRadius;
+    _effect.translateForward = _translateForward;
+    _effect.animationController = _animationController;
+    _effect.draw(canvas);
   }
 
   @override

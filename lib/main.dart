@@ -35,8 +35,10 @@ class _MyAppState extends State<MyApp> {
                   // fillStep: false,
                   indicatorColor: Colors.black,
 
-                  stepCount: 10,
+                  stepCount: 5,
                   indicatorEffect: IndicatorEffect.worm,
+                  // stepRadius: 48,
+                  
                 ),
               ),
               RaisedButton(

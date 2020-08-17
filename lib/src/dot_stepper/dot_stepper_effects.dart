@@ -1,73 +1,76 @@
 import 'package:flutter/material.dart';
 
-class SlidingEffect {
-  Size stepSize;
+abstract class DotStepperEffect {
   AnimationController animationController;
+  double stepRadius;
   bool translateForward;
-  Animation translation;
+  int selectedIndex;
 
-  SlidingEffect({
-    this.stepSize,
-    this.animationController,
-    this.translateForward,
-  }) {
-    translation = Tween(
-      begin: translateForward ? 0.0 : stepSize.width,
-      end: stepSize.width / 2.0,
+  void draw(Canvas canvas);
+}
+
+class Slide extends DotStepperEffect {
+  @override
+  void draw(Canvas canvas) {
+    Animation forward = Tween(
+      begin: selectedIndex > 1 ? stepRadius * (selectedIndex - 1) : stepRadius,
+      end: stepRadius * selectedIndex,
     ).animate(animationController);
+
+    Animation backward = Tween(
+      begin: (selectedIndex + 1) * stepRadius,
+      end: selectedIndex * stepRadius,
+    ).animate(animationController);
+
+    canvas.drawCircle(
+      Offset(
+        translateForward ? forward.value : backward.value,
+        stepRadius / 2.0,
+      ),
+      stepRadius / 4.0,
+      Paint()
+        ..color = Colors.blueGrey
+        ..style = PaintingStyle.fill
+        ..strokeWidth = 1,
+    );
   }
 }
 
-class WormEffect {
-  Size stepSize;
-  AnimationController animationController;
-  Animation translation;
-  Animation size;
-  bool translateForward;
-
-  WormEffect(this.stepSize, this.animationController, this.translateForward) {
-    translation = Tween(
-      begin: translateForward ? 0.0 : stepSize.width,
-      end: stepSize.width / 2.0,
+class Worm extends DotStepperEffect {
+  @override
+  void draw(Canvas canvas) {
+    Animation forward = Tween(
+      begin: selectedIndex > 1 ? stepRadius * (selectedIndex - 1) : stepRadius,
+      end: stepRadius * selectedIndex,
     ).animate(animationController);
 
-    size = Tween(
-      begin: stepSize.width,
-      end: stepSize.width / 2.0,
+    Animation backward = Tween(
+      begin: (selectedIndex + 1) * stepRadius,
+      end: selectedIndex * stepRadius,
     ).animate(animationController);
-  }
-}
 
-class DotFillEffect {
-  Size stepSize;
-  AnimationController animationController;
-  Animation size;
-  bool translateForward;
-
-  DotFillEffect(
-    this.stepSize,
-    this.animationController,
-    this.translateForward,
-  ) {
-    size = Tween(
-      begin: 0.0,
-      end: stepSize.width / 4.0,
+    Animation stretch = Tween(
+      begin: stepRadius,
+      end: stepRadius / 2,
     ).animate(animationController);
-  }
-}
 
-class MagnifiedDotFillEffect {
-  Size stepSize;
-  AnimationController animationController;
-  Animation size;
+    Rect rect = Rect.fromCenter(
+      center: Offset(
+        translateForward ? forward.value : backward.value,
+        stepRadius / 2.0,
+      ),
+      height: stepRadius / 2,
+      width: stretch.value,
+    );
 
-  MagnifiedDotFillEffect({
-    this.stepSize,
-    this.animationController,
-  }) {
-    size = Tween(
-      begin: stepSize.width / 2.0,
-      end: stepSize.width / 4.0,
-    ).animate(animationController);
+    RRect rRect = RRect.fromRectAndRadius(
+      rect,
+      Radius.circular(stepRadius / 2.0),
+    );
+
+    canvas.drawRRect(
+      rRect,
+      Paint()..color = Colors.blueGrey,
+    );
   }
 }
