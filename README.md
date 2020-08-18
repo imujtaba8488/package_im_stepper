@@ -49,12 +49,21 @@ property to an appropriate value in a `StatefulWidget`.
 A simple and smooth dot stepper widget with built-in animations. Each dot in a
 DotStepper represents a step.
 
+ **Effect** | **Screenshot**
+------------|----------------
+ Trail      |[Trail](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_trail.gif)
+ Slide      |[Slide](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_slide.gif)
+ Magnify    |[Magnify](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_magnify.gif)
+ Worm       |[Worm](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_worm.gif)
+ Flat       |[Flat](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_flat.gif)
+ Bullet     |[Bullet](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_bullet.gif)
+ Jump       |[Jump](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_jump.gif)
+
 ### DotStepper - Usage Note
 
 * __Important:__ It is important that a call to `goNext` and `goPrevious` is
-is controlled by two variables in a `StatefulWidget` and these two variables
-must be set properly in order for the DotStepper to work. __Please look at the
-example for a proper usage.__
+controlled by two variables in a `StatefulWidget` with a call to `setState` in 
+order for the DotStepper to work. __Please look at the Example.__
 
 ## Feedback
 
