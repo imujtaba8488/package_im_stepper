@@ -51,13 +51,13 @@ DotStepper represents a step.
 
  **Effect** | **Screenshot**
 ------------|----------------
- Trail      |[Trail](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_trail.gif)
- Slide      |[Slide](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_slide.gif)
- Magnify    |[Magnify](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_magnify.gif)
- Worm       |[Worm](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_worm.gif)
- Flat       |[Flat](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_flat.gif)
- Bullet     |[Bullet](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_bullet.gif)
- Jump       |[Jump](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_jump.gif)
+ Trail      |![Trail](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_trail.gif)
+ Slide      |![Slide](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_slide.gif)
+ Magnify    |![Magnify](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_magnify.gif)
+ Worm       |![Worm](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_worm.gif)
+ Flat       |![Flat](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_flat.gif)
+ Bullet     |![Bullet](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_bullet.gif)
+ Jump       |![Jump](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_jump.gif)
 
 ### DotStepper - Usage Note
 
