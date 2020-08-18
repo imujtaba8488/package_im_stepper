@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+
 import 'package:im_stepper/stepper.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(IconStepperDemo());
 }
 
-class MyApp extends StatefulWidget {
+//-----------------------ICON STEPPER----------------------------------------//
+class IconStepperDemo extends StatefulWidget {
   // This widget is the root of your application.
   @override
-  _MyAppState createState() => _MyAppState();
+  _IconStepperDemo createState() => _IconStepperDemo();
 }
 
-class _MyAppState extends State<MyApp> {
+class _IconStepperDemo extends State<IconStepperDemo> {
   int selectedIndex = 0;
 
   @override
@@ -126,5 +128,67 @@ class _MyAppState extends State<MyApp> {
       default:
         return 'Unknown';
     }
+  }
+}
+
+//-----------------------DOT STEPPER----------------------------------------//
+class DotStepperDemo extends StatefulWidget {
+  @override
+  _DotStepperDemoState createState() => _DotStepperDemoState();
+}
+
+class _DotStepperDemoState extends State<DotStepper> {
+  bool stepNext = false;
+  bool stepPrevious = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Icon Stepper Example'),
+        ),
+        body: SafeArea(
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        // ***DON'T FORGET***
+                        stepNext = false;
+                        stepPrevious = true;
+                      });
+                    },
+                    icon: Icon(Icons.chevron_left),
+                  ),
+                  DotStepper(
+                    goNext: stepNext,
+                    goPrevious: stepPrevious,
+                    dotCount: 5,
+                    indicatorEffect: IndicatorEffect.jump,
+                    // indicatorType: IndicatorType.contain,
+                    // direction: Axis.vertical,
+                    // dotRadius: 150,
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        // ***DON'T FORGET***
+                        stepPrevious = false;
+                        stepNext = true;
+                      });
+                    },
+                    icon: Icon(Icons.chevron_right),
+                  )
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

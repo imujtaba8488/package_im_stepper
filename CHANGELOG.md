@@ -1,10 +1,11 @@
 # ChangeLog
 
-## 0.1.2
+## 0.1.2+1
 
 ### Tuesday, 18th August, 2020
 
 * Added DotStepper.
+* Added example for DotStepper
 
 ## 0.1.1 [Enhancement and BugFix]
 
