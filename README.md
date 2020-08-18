@@ -27,9 +27,10 @@ A simple to use icon stepper widget, wherein, each icon defines a step. Hence,
 total number of icons define total number of steps. Primarily designed to show
 steps as icons.
 
+![IconStepper](https://github.com/imujtaba8488/showcase/blob/master/icon_stepper_05.gif)
 ![IconStepper](https://github.com/imujtaba8488/showcase/blob/master/icon_stepper_04.gif)
 
-### IconSteeper - Usage Note
+### IconStepper - Usage Note
 
 * __Important:__ IconStepper `direction` argument controls whether the stepper is displayed
 horizontally or vertically. A horizontal IconStepper can be wrapped within a Column
