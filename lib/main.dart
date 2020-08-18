@@ -33,11 +33,12 @@ class _MyAppState extends State<MyApp> {
                   goPrevious: stepPrevious,
                   // direction: Axis.vertical,
                   // fillStep: false,
-                  indicatorColor: Colors.black,
+                  indicatorColor: Colors.purple,
 
                   stepCount: 5,
-                  indicatorEffect: IndicatorEffect.worm,
-                  // stepRadius: 48,
+                  indicatorEffect: IndicatorEffect.jumping,
+                  
+                  // stepRadius: 100,
                   
                 ),
               ),

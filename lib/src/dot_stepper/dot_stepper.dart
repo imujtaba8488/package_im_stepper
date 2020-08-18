@@ -57,7 +57,7 @@ class _DotStepperState extends State<DotStepper>
 
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 1),
+      duration: Duration(milliseconds: 300),
     )..addListener(() {
         setState(() {});
       });
@@ -122,7 +122,7 @@ class _DotStepperState extends State<DotStepper>
             indicatorEffect: widget.indicatorEffect,
             animationController: _animationController,
             translateForward: translateForward,
-            effect: Worm()
+            effect: _applyEffect(widget.indicatorEffect),
           ),
           size: Size(
             widget.stepRadius * (widget.stepCount + 1),
@@ -145,12 +145,27 @@ class _DotStepperState extends State<DotStepper>
       if (selected == i) break;
     }
   }
+
+  DotStepperEffect _applyEffect(IndicatorEffect indicatorEffect) {
+    switch (indicatorEffect) {
+      case IndicatorEffect.worm:
+        return Worm();
+
+      case IndicatorEffect.jumping:
+        return Jump();
+
+      case IndicatorEffect.bullet:
+        return Bullet();
+
+      default:
+        return Slide();
+    }
+  }
 }
 
 enum IndicatorEffect {
   worm,
   slide,
   jumping,
-  dotFill,
-  magnifiedDotFill,
+  bullet,
 }

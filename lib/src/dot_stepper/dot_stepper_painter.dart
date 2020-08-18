@@ -11,7 +11,6 @@ class DotStepperPainter extends CustomPainter {
   final Color _stepColor;
   final Color _indicatorColor;
   final bool _fillStep;
-  final IndicatorEffect _indicatorEffect;
   final bool _translateForward;
   final DotStepperEffect _effect;
 
@@ -35,7 +34,6 @@ class DotStepperPainter extends CustomPainter {
         this._stepColor = stepColor,
         this._indicatorColor = indicatorColor,
         this._fillStep = fillStep,
-        this._indicatorEffect = indicatorEffect,
         this._translateForward = translateForward,
         this._effect = effect;
 
@@ -69,6 +67,7 @@ class DotStepperPainter extends CustomPainter {
     _effect.stepRadius = _stepRadius;
     _effect.translateForward = _translateForward;
     _effect.animationController = _animationController;
+    _effect.stepColor = _indicatorColor;
     _effect.draw(canvas);
   }
 
