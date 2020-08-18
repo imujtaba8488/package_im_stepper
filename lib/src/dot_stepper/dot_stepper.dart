@@ -3,35 +3,59 @@ import 'package:flutter/material.dart';
 import 'dot_stepper_painter.dart';
 import 'dot_stepper_effects.dart';
 
-typedef StepReached = void Function(int index);
+/// Callback fired when a dot is reached.
+typedef DotReached = void Function(int index);
 
 class DotStepper extends StatefulWidget {
-  final double stepRadius;
-  final int stepCount;
+  /// Total number of dots. Each dot represents a step.
+  final int dotCount;
+
+  /// The radius of each dot in the DotStepper.
+  final double dotRadius;
+
+  /// Whether to go to the next dot or not.
   final bool goNext;
+
+  /// Whether to go to the previous dot or not.
   final bool goPrevious;
-  final StepReached stepReachedIndex;
+
+  /// Returns the index of the currently selected dot i.e. the index of the step currently reached.
+  final DotReached dotReachedIndex;
+
+  /// The direction of the in which to show the DotStepper.
   final Axis direction;
-  final Color stepColor;
+
+  /// The color of the dots.
+  final Color dotColor;
+
+  // The color of the indicator dot.
   final Color indicatorColor;
+
+  /// Whether to fill the dots with color or show them as outlined.
   final bool fillStep;
+
+  /// The effect to apply to the indicator.
   final IndicatorEffect indicatorEffect;
 
+  /// The type of the indicator.
+  final IndicatorType indicatorType;
+
   DotStepper({
-    this.stepCount = 3,
-    this.stepRadius = 24.0,
+    this.dotCount = 3,
+    this.dotRadius = 24.0,
     this.goNext = false,
     this.goPrevious = false,
-    this.stepReachedIndex,
+    this.dotReachedIndex,
     this.direction = Axis.horizontal,
-    this.stepColor = Colors.grey,
-    this.indicatorColor = Colors.green,
+    this.dotColor = Colors.grey,
+    this.indicatorColor = Colors.black,
     this.fillStep = true,
     this.indicatorEffect = IndicatorEffect.slide,
+    this.indicatorType = IndicatorType.fill,
   }) {
     assert(
-      stepRadius >= 10.0,
-      'Radius must be greater than or equal to 10.0. Current radius: $stepRadius',
+      dotRadius >= 10.0,
+      'Radius must be greater than or equal to 10.0. Current radius: $dotRadius',
     );
   }
 
@@ -43,8 +67,10 @@ class _DotStepperState extends State<DotStepper>
     with SingleTickerProviderStateMixin {
   AnimationController _animationController;
 
-  bool translateForward = true;
+  // Whether the stepping is moving in the forward director or backward direction.
+  bool isSteppingForward = true;
 
+  // The currently selected dot. ** Must be set to 1 and not to 0. **
   int selected = 1;
 
   ScrollController _scrollController;
@@ -69,30 +95,31 @@ class _DotStepperState extends State<DotStepper>
   void didUpdateWidget(DotStepper oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (widget.goNext && selected < widget.stepCount) {
+    if (widget.goNext && selected < widget.dotCount) {
       selected++;
-      translateForward = true;
+      isSteppingForward = true;
 
-      _scrollToStep();
+      _scrollToDot();
       _runAnimations();
 
-      if (widget.stepReachedIndex != null) {
-        widget.stepReachedIndex(selected);
+      if (widget.dotReachedIndex != null) {
+        widget.dotReachedIndex(selected);
       }
     } else if (widget.goPrevious && selected > 1) {
       selected--;
-      translateForward = false;
+      isSteppingForward = false;
 
-      _scrollToStep();
+      _scrollToDot();
 
       _runAnimations();
 
-      if (widget.stepReachedIndex != null) {
-        widget.stepReachedIndex(selected);
+      if (widget.dotReachedIndex != null) {
+        widget.dotReachedIndex(selected);
       }
     }
   }
 
+  /// Resets and runs the animations.
   void _runAnimations() {
     _animationController.reset();
     _animationController.forward();
@@ -109,49 +136,50 @@ class _DotStepperState extends State<DotStepper>
   Widget build(BuildContext context) {
     return Align(
       child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
+        scrollDirection: widget.direction,
         controller: _scrollController,
         child: CustomPaint(
-          foregroundPainter: DotStepperPainter(
-            stepCount: widget.stepCount,
+          painter: DotStepperPainter(
+            dotCount: widget.dotCount,
             selectedIndex: selected,
             axis: widget.direction,
-            stepColor: widget.stepColor,
+            dotColor: widget.dotColor,
             indicatorColor: widget.indicatorColor,
-            fillStep: widget.fillStep,
-            indicatorEffect: widget.indicatorEffect,
+            fillDot: widget.fillStep,
             animationController: _animationController,
-            translateForward: translateForward,
+            isSteppingForward: isSteppingForward,
+            indicatorType: widget.indicatorType,
             effect: _applyEffect(widget.indicatorEffect),
           ),
           size: Size(
-            widget.stepRadius * (widget.stepCount + 1),
-            widget.stepRadius,
+            widget.direction == Axis.horizontal
+                ? widget.dotRadius * (widget.dotCount + 1)
+                : widget.dotRadius,
+            widget.direction == Axis.horizontal
+                ? widget.dotRadius
+                : widget.dotRadius * (widget.dotCount + 1),
           ),
         ),
       ),
     );
   }
 
-  void _scrollToStep() {
-    // * This owes an explanation.
-    for (int i = 0; i < widget.stepCount; i++) {
-      _scrollController.animateTo(
-        i * (widget.stepRadius / 2.0),
-        duration: Duration(milliseconds: 400),
-        curve: Curves.easeIn,
-      );
-
-      if (selected == i) break;
-    }
+  /// Scrolls to the next selected dot.
+  void _scrollToDot() {
+    _scrollController.animateTo(
+      (widget.dotRadius * selected) - widget.dotRadius,
+      duration: Duration(milliseconds: 400),
+      curve: Curves.easeIn,
+    );
   }
 
+  /// Applies the effect to the indicator based on the type of indicator effect.
   DotStepperEffect _applyEffect(IndicatorEffect indicatorEffect) {
     switch (indicatorEffect) {
       case IndicatorEffect.worm:
         return Worm();
 
-      case IndicatorEffect.jumping:
+      case IndicatorEffect.jump:
         return Jump();
 
       case IndicatorEffect.bullet:
@@ -163,9 +191,16 @@ class _DotStepperState extends State<DotStepper>
   }
 }
 
+/// Defines the list of built-in indicator effects.
 enum IndicatorEffect {
   worm,
   slide,
-  jumping,
+  jump,
   bullet,
+}
+
+/// Defines the type of indicator. Filled occupies the entire fixed dot, while as 'contain' appears inside the fixed dot.
+enum IndicatorType {
+  fill,
+  contain,
 }

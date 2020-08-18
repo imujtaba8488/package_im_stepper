@@ -1,26 +1,56 @@
 import 'package:flutter/material.dart';
 
 abstract class DotStepperEffect {
-  AnimationController animationController;
-  double stepRadius;
-  bool translateForward;
+  /// The radius of a single dot.
+  double dotRadius;
+
+  /// The amount of spacing between the dots.
+  double spacing;
+
+  /// The index of the dot currently selected.
   int selectedIndex;
+
+  /// Whether the stepping is proceeding in forward or backward direction.
+  bool isSteppingForward;
+
+  /// Color of the selected dot.
   Color stepColor;
+
+  /// Whether to dots are shown horizontally or vertically.
+  Axis axis;
+
+  /// Animation controller controlling all the animations.
+  AnimationController animationController;
 
   void draw(Canvas canvas);
 
-  Animation get forward {
+  Animation get _translateForward {
     return Tween(
-      begin: selectedIndex > 1 ? stepRadius * (selectedIndex - 1) : stepRadius,
-      end: stepRadius * selectedIndex,
+      begin: selectedIndex > 1 ? spacing * (selectedIndex - 1) : spacing,
+      end: spacing * selectedIndex,
     ).animate(animationController);
   }
 
-  Animation get backward {
+  Animation get _translateBackward {
     return Tween(
-      begin: (selectedIndex + 1) * stepRadius,
-      end: selectedIndex * stepRadius,
+      begin: (selectedIndex + 1) * spacing,
+      end: selectedIndex * spacing,
     ).animate(animationController);
+  }
+
+  Offset get center {
+    return Offset(
+      axis == Axis.horizontal
+          ? isSteppingForward
+              ? _translateForward.value
+              : _translateBackward.value
+          : spacing / 2.0,
+      axis == Axis.horizontal
+          ? spacing / 2.0
+          : isSteppingForward
+              ? _translateForward.value
+              : _translateBackward.value,
+    );
   }
 }
 
@@ -28,11 +58,8 @@ class Slide extends DotStepperEffect {
   @override
   void draw(Canvas canvas) {
     canvas.drawCircle(
-      Offset(
-        translateForward ? forward.value : backward.value,
-        stepRadius / 2.0,
-      ),
-      stepRadius / 4.0,
+      center,
+      dotRadius,
       Paint()
         ..color = stepColor
         ..style = PaintingStyle.fill
@@ -45,22 +72,40 @@ class Worm extends DotStepperEffect {
   @override
   void draw(Canvas canvas) {
     Animation stretch = Tween(
-      begin: stepRadius,
-      end: stepRadius / 2.0,
+      begin: spacing * 1.5,
+      end: dotRadius * 2,
+    ).animate(animationController);
+
+    Animation centerExcessForward = Tween(
+      begin: dotRadius * 2,
+      end: 0.0,
+    ).animate(animationController);
+
+    Animation centerExcessBackward = Tween(
+      begin: -(dotRadius * 2),
+      end: 0.0,
     ).animate(animationController);
 
     Rect rect = Rect.fromCenter(
-      center: Offset(
-        translateForward ? forward.value : backward.value,
-        stepRadius / 2.0,
+      center: center.translate(
+        axis == Axis.horizontal
+            ? isSteppingForward
+                ? centerExcessForward.value
+                : centerExcessBackward.value
+            : 0.0,
+        axis == Axis.horizontal
+            ? 0.0
+            : isSteppingForward
+                ? centerExcessForward.value
+                : centerExcessBackward.value,
       ),
-      height: stepRadius / 2.0,
-      width: stretch.value,
+      height: axis == Axis.horizontal ? dotRadius * 2.0 : stretch.value,
+      width: axis == Axis.horizontal ? stretch.value : dotRadius * 2.0,
     );
 
     RRect rRect = RRect.fromRectAndRadius(
       rect,
-      Radius.circular(stepRadius / 2.0),
+      Radius.circular(dotRadius),
     );
 
     canvas.drawRRect(
@@ -75,8 +120,8 @@ class Jump extends DotStepperEffect {
   void draw(Canvas canvas) {
     // Animate from actual size to twice the size.
     Animation jumpUp = Tween(
-      begin: stepRadius / 4.0,
-      end: stepRadius / 2,
+      begin: dotRadius,
+      end: dotRadius * 2,
     ).animate(CurvedAnimation(
       parent: animationController,
       curve: Interval(
@@ -88,7 +133,7 @@ class Jump extends DotStepperEffect {
     // Animate from twice the size to actual size.
     Animation jumpDown = Tween(
       begin: jumpUp.value,
-      end: stepRadius / 4.0,
+      end: dotRadius,
     ).animate(CurvedAnimation(
       parent: animationController,
       curve: Interval(
@@ -98,10 +143,7 @@ class Jump extends DotStepperEffect {
     ));
 
     canvas.drawCircle(
-      Offset(
-        translateForward ? forward.value : backward.value,
-        stepRadius / 2.0,
-      ),
+      center,
       jumpDown.value,
       Paint()..color = stepColor,
     );
@@ -112,7 +154,7 @@ class Bullet extends DotStepperEffect {
   @override
   void draw(Canvas canvas) {
     Animation start = Tween(
-      begin: stepRadius / 4.0,
+      begin: dotRadius,
       end: 0.5,
     ).animate(
       CurvedAnimation(
@@ -123,7 +165,7 @@ class Bullet extends DotStepperEffect {
 
     Animation bullet = Tween(
       begin: start.value,
-      end: stepRadius / 4.0,
+      end: dotRadius,
     ).animate(
       CurvedAnimation(
         parent: animationController,
@@ -132,10 +174,7 @@ class Bullet extends DotStepperEffect {
     );
 
     canvas.drawCircle(
-      Offset(
-        translateForward ? forward.value : backward.value,
-        stepRadius / 2.0,
-      ),
+      center,
       bullet.value,
       Paint()..color = stepColor,
     );

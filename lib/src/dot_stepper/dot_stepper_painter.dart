@@ -1,74 +1,105 @@
 import 'package:flutter/material.dart';
-import 'package:im_stepper/src/dot_stepper/dot_stepper_effects.dart';
 
 import 'dot_stepper.dart';
+import 'dot_stepper_effects.dart';
 
 class DotStepperPainter extends CustomPainter {
-  final int _stepCount;
-  final int _selectedIndex;
-  final AnimationController _animationController;
-  final Axis _axis;
-  final Color _stepColor;
-  final Color _indicatorColor;
-  final bool _fillStep;
-  final bool _translateForward;
-  final DotStepperEffect _effect;
+  /// Total number of dots.
+  final int dotCount;
 
-  double _stepRadius = 0.0;
+  /// The index of the step that is currently selected.
+  final int selectedIndex;
+
+  /// Whether the stepping is moving forward or backward.
+  final bool isSteppingForward;
+
+  /// Color of dot.
+  final Color dotColor;
+
+  /// Color of the indicator.
+  final Color indicatorColor;
+
+  /// Whether to fill the dot with color or display it as outlined.
+  final bool fillDot;
+
+  /// The effect to apply to the indicator.
+  final DotStepperEffect effect;
+
+  /// The type of the indicator i.e. whether filled or contained
+  final IndicatorType indicatorType;
+
+  /// The axis along which to show the dots i.e. horizontal or vertical.
+  final Axis axis;
+
+  /// Controls the indicator animations.
+  final AnimationController animationController;
 
   DotStepperPainter({
-    int stepCount,
-    int selectedIndex,
-    AnimationController animationController,
-    Axis axis,
-    Color stepColor,
-    Color indicatorColor,
-    bool fillStep = true,
-    IndicatorEffect indicatorEffect = IndicatorEffect.slide,
-    bool translateForward,
-    @required DotStepperEffect effect,
-  })  : this._stepCount = stepCount,
-        this._selectedIndex = selectedIndex,
-        this._animationController = animationController,
-        this._axis = axis,
-        this._stepColor = stepColor,
-        this._indicatorColor = indicatorColor,
-        this._fillStep = fillStep,
-        this._translateForward = translateForward,
-        this._effect = effect;
+    this.dotCount = 3,
+    this.selectedIndex,
+    this.isSteppingForward,
+    this.dotColor = Colors.blueGrey,
+    this.indicatorColor = Colors.deepPurple,
+    this.fillDot = true,
+    this.effect,
+    this.indicatorType = IndicatorType.contain,
+    this.axis = Axis.horizontal,
+    this.animationController,
+  });
 
   @override
   void paint(Canvas canvas, Size size) {
-    _stepRadius = size.height;
+    // Radius of a single dot.
+    double dotRadius =
+        axis == Axis.horizontal ? size.height / 4.0 : size.width / 4.0;
 
-    _drawSteps(canvas);
-    _drawIndicator(canvas);
+    // Spacing between dots.
+    double spacing = axis == Axis.horizontal ? size.height : size.width;
+
+    _drawFixedDots(canvas, dotRadius, spacing);
+    _drawIndicator(canvas, dotRadius, spacing);
   }
 
-  void _drawSteps(Canvas canvas) {
-    Offset center = Offset(_stepRadius, _stepRadius / 2.0);
+  /// Draws the fixed dots.
+  void _drawFixedDots(Canvas canvas, double dotRadius, double spacing) {
+    // Center determines where each dot will be painted. This changes by an amount of spacing each time through the loop.
+    Offset center = Offset(
+      axis == Axis.horizontal ? spacing : spacing / 2.0,
+      axis == Axis.horizontal ? spacing / 2.0 : spacing,
+    );
 
-    for (int i = 0; i < _stepCount; i++) {
+    for (int index = 0; index < dotCount; index++) {
       canvas.drawCircle(
         center,
-        _stepRadius / 4.0,
+        dotRadius,
         Paint()
-          ..color = _stepColor
-          ..style = _fillStep ? PaintingStyle.fill : PaintingStyle.stroke
+          ..color = dotColor
+          ..style = fillDot ? PaintingStyle.fill : PaintingStyle.stroke
           ..strokeWidth = 1,
       );
 
-      center = center.translate(_stepRadius, 0.0);
+      /// Move the dot by an amount of spacing.
+      center = center.translate(
+        axis == Axis.horizontal ? spacing : 0.0,
+        axis == Axis.horizontal ? 0.0 : spacing,
+      );
     }
   }
 
-  void _drawIndicator(Canvas canvas) {
-    _effect.selectedIndex = _selectedIndex;
-    _effect.stepRadius = _stepRadius;
-    _effect.translateForward = _translateForward;
-    _effect.animationController = _animationController;
-    _effect.stepColor = _indicatorColor;
-    _effect.draw(canvas);
+  /// Sets the indicator effect properties and draws in the indicator.
+  void _drawIndicator(Canvas canvas, double dotRadius, double spacing) {
+    // Set indicator effect properties.
+    effect.dotRadius =
+        indicatorType == IndicatorType.fill ? dotRadius : dotRadius / 1.5;
+    effect.spacing = spacing;
+    effect.selectedIndex = selectedIndex;
+    effect.isSteppingForward = isSteppingForward;
+    effect.stepColor = indicatorColor;
+    effect.axis = axis;
+    effect.animationController = animationController;
+
+    // draw the indicator.
+    effect.draw(canvas);
   }
 
   @override

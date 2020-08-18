@@ -24,22 +24,17 @@ class _MyAppState extends State<MyApp> {
           title: Text('Icon Stepper Example'),
         ),
         body: SafeArea(
-          child: Column(
+          child: Row(
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(0.0),
                 child: DotStepper(
                   goNext: stepNext,
                   goPrevious: stepPrevious,
+                  dotCount: 5,
+                  indicatorEffect: IndicatorEffect.worm,
                   // direction: Axis.vertical,
-                  // fillStep: false,
-                  indicatorColor: Colors.purple,
-
-                  stepCount: 5,
-                  indicatorEffect: IndicatorEffect.jumping,
-                  
-                  // stepRadius: 100,
-                  
+                  // dotRadius: 150,
                 ),
               ),
               RaisedButton(
