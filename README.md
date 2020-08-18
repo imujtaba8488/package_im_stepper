@@ -28,7 +28,6 @@ total number of icons define total number of steps. Primarily designed to show
 steps as icons.
 
 ![IconStepper](https://github.com/imujtaba8488/showcase/blob/master/icon_stepper_05.gif)
-![IconStepper](https://github.com/imujtaba8488/showcase/blob/master/icon_stepper_04.gif)
 
 ### IconStepper - Usage Note
 
@@ -72,4 +71,5 @@ order for the DotStepper to work. __Please look at the Example.__
 
 For any feedback please file an issue
 __[here](https://github.com/imujtaba8488/package_im_stepper/issues).__
-Please __support__ by hitting __LIKE__ button.
+
+Please __Like__ to __support__!
