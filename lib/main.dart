@@ -24,7 +24,7 @@ class _MyAppState extends State<MyApp> {
           title: Text('Icon Stepper Example'),
         ),
         body: SafeArea(
-          child: Row(
+          child: Column(
             children: [
               Padding(
                 padding: const EdgeInsets.all(0.0),
@@ -32,7 +32,7 @@ class _MyAppState extends State<MyApp> {
                   goNext: stepNext,
                   goPrevious: stepPrevious,
                   dotCount: 5,
-                  indicatorEffect: IndicatorEffect.worm,
+                  indicatorEffect: IndicatorEffect.trail,
                   // direction: Axis.vertical,
                   // dotRadius: 150,
                 ),

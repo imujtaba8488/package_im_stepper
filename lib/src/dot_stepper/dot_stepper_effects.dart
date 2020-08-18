@@ -14,7 +14,7 @@ abstract class DotStepperEffect {
   bool isSteppingForward;
 
   /// Color of the selected dot.
-  Color stepColor;
+  Color dotColor;
 
   /// Whether to dots are shown horizontally or vertically.
   Axis axis;
@@ -40,6 +40,13 @@ abstract class DotStepperEffect {
 
   Offset get center {
     return Offset(
+      axis == Axis.horizontal ? spacing * selectedIndex : spacing / 2.0,
+      axis == Axis.horizontal ? spacing / 2.0 : spacing * selectedIndex,
+    );
+  }
+
+  Offset get centerTranslated {
+    return Offset(
       axis == Axis.horizontal
           ? isSteppingForward
               ? _translateForward.value
@@ -52,18 +59,17 @@ abstract class DotStepperEffect {
               : _translateBackward.value,
     );
   }
+
+  Paint get paint => Paint()..color = dotColor;
 }
 
 class Slide extends DotStepperEffect {
   @override
   void draw(Canvas canvas) {
     canvas.drawCircle(
-      center,
+      centerTranslated,
       dotRadius,
-      Paint()
-        ..color = stepColor
-        ..style = PaintingStyle.fill
-        ..strokeWidth = 1,
+      paint,
     );
   }
 }
@@ -87,7 +93,7 @@ class Worm extends DotStepperEffect {
     ).animate(animationController);
 
     Rect rect = Rect.fromCenter(
-      center: center.translate(
+      center: centerTranslated.translate(
         axis == Axis.horizontal
             ? isSteppingForward
                 ? centerExcessForward.value
@@ -110,7 +116,7 @@ class Worm extends DotStepperEffect {
 
     canvas.drawRRect(
       rRect,
-      Paint()..color = stepColor,
+      paint,
     );
   }
 }
@@ -143,9 +149,9 @@ class Jump extends DotStepperEffect {
     ));
 
     canvas.drawCircle(
-      center,
+      centerTranslated,
       jumpDown.value,
-      Paint()..color = stepColor,
+      paint,
     );
   }
 }
@@ -174,9 +180,61 @@ class Bullet extends DotStepperEffect {
     );
 
     canvas.drawCircle(
-      center,
+      centerTranslated,
       bullet.value,
-      Paint()..color = stepColor,
+      paint,
+    );
+  }
+}
+
+class Magnify extends DotStepperEffect {
+  @override
+  void draw(Canvas canvas) {
+    Animation magnify = Tween<double>(
+      begin: 0.0,
+      end: dotRadius * 1.5,
+    ).animate(animationController);
+
+    canvas.drawCircle(
+      center,
+      magnify.value,
+      paint,
+    );
+  }
+}
+
+class Flat extends DotStepperEffect {
+  @override
+  void draw(Canvas canvas) {
+    canvas.drawCircle(
+      center,
+      dotRadius,
+      paint,
+    );
+  }
+}
+
+class Trail extends DotStepperEffect {
+  @override
+  void draw(Canvas canvas) {
+    Animation fade = Tween(
+      begin: dotRadius,
+      end: 0.0,
+    ).animate(animationController);
+
+    canvas.drawCircle(
+      centerTranslated.translate(
+        isSteppingForward ? -dotRadius * 1.5 : dotRadius * 1.5,
+        0.0,
+      ),
+      fade.value,
+      paint,
+    );
+
+    canvas.drawCircle(
+      centerTranslated,
+      dotRadius,
+      paint,
     );
   }
 }

@@ -185,6 +185,15 @@ class _DotStepperState extends State<DotStepper>
       case IndicatorEffect.bullet:
         return Bullet();
 
+      case IndicatorEffect.magnify:
+        return Magnify();
+
+      case IndicatorEffect.flat:
+        return Flat();
+
+      case IndicatorEffect.trail:
+        return Trail();
+
       default:
         return Slide();
     }
@@ -197,6 +206,9 @@ enum IndicatorEffect {
   slide,
   jump,
   bullet,
+  magnify,
+  flat,
+  trail,
 }
 
 /// Defines the type of indicator. Filled occupies the entire fixed dot, while as 'contain' appears inside the fixed dot.

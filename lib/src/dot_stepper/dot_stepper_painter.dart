@@ -94,7 +94,7 @@ class DotStepperPainter extends CustomPainter {
     effect.spacing = spacing;
     effect.selectedIndex = selectedIndex;
     effect.isSteppingForward = isSteppingForward;
-    effect.stepColor = indicatorColor;
+    effect.dotColor = indicatorColor;
     effect.axis = axis;
     effect.animationController = animationController;
 
