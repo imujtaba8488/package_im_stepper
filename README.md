@@ -27,6 +27,8 @@ A simple to use icon stepper widget, wherein, each icon defines a step. Hence,
 total number of icons define total number of steps. Primarily designed to show
 steps as icons.
 
+![IconStepper](https://github.com/imujtaba8488/showcase/blob/master/icon_stepper_04.gif)
+
 ### IconSteeper - Usage Note
 
 * __Important:__ IconStepper `direction` argument controls whether the stepper is displayed
@@ -69,10 +71,4 @@ order for the DotStepper to work. __Please look at the Example.__
 
 For any feedback please file an issue
 __[here](https://github.com/imujtaba8488/package_im_stepper/issues).__
-Please __support__ by hitting __like__ button.
-
-## Screenshots
-
-![icon_stepper_01](https://github.com/imujtaba8488/showcase/blob/master/icon_stepper_01.gif)
-![icon_stepper_02](https://github.com/imujtaba8488/showcase/blob/master/icon_stepper_02.gif)
-![icon_stepper_03](https://github.com/imujtaba8488/showcase/blob/master/icon_stepper_03.gif)
+Please __support__ by hitting __LIKE__ button.
