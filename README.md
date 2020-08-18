@@ -21,13 +21,13 @@ with easy to use stepper widgets that may find its uses in myriad applications.
 Simply import `package:im_stepper/stepper.dart` and choose any of the following
 steppers appropriate for your application:
 
-### IconStepper
+## IconStepper
 
 A simple to use icon stepper widget, wherein, each icon defines a step. Hence,
 total number of icons define total number of steps. Primarily designed to show
 steps as icons.
 
-#### Usage Note
+### IconSteeper - Usage Note
 
 * __Important:__ IconStepper `direction` argument controls whether the stepper is displayed
 horizontally or vertically. A horizontal IconStepper can be wrapped within a Column
@@ -44,11 +44,23 @@ a Container and specify the `decoration` argument.
 * To enable validation before the next step is reached, set the `steppingEnabled`
 property to an appropriate value in a `StatefulWidget`.
 
+## DotStepper
+
+A simple and smooth dot stepper widget with built-in animations. Each dot in a
+DotStepper represents a step.
+
+### DotStepper - Usage Note
+
+* __Important:__ It is important that a call to `goNext` and `goPrevious` is
+is controlled by two variables in a `StatefulWidget` and these two variables
+must be set properly in order for the DotStepper to work. __Please look at the
+example for a proper usage.__
+
 ## Feedback
 
 For any feedback please file an issue
 __[here](https://github.com/imujtaba8488/package_im_stepper/issues).__
-Also, don't forget to hit the like button.
+Please __support__ by hitting __like__ button.
 
 ## Screenshots
 

@@ -26,34 +26,37 @@ class _MyAppState extends State<MyApp> {
         body: SafeArea(
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(0.0),
-                child: DotStepper(
-                  goNext: stepNext,
-                  goPrevious: stepPrevious,
-                  dotCount: 5,
-                  indicatorEffect: IndicatorEffect.trail,
-                  // direction: Axis.vertical,
-                  // dotRadius: 150,
-                ),
-              ),
-              RaisedButton(
-                onPressed: () {
-                  setState(() {
-                    stepNext = false;
-                    stepPrevious = true;
-                  });
-                },
-                child: Text('Previous'),
-              ),
-              RaisedButton(
-                onPressed: () {
-                  setState(() {
-                    stepPrevious = false;
-                    stepNext = true;
-                  });
-                },
-                child: Text('Next'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        stepNext = false;
+                        stepPrevious = true;
+                      });
+                    },
+                    icon: Icon(Icons.chevron_left),
+                  ),
+                  DotStepper(
+                    goNext: stepNext,
+                    goPrevious: stepPrevious,
+                    dotCount: 5,
+                    indicatorEffect: IndicatorEffect.slide,
+                    // indicatorType: IndicatorType.contain,
+                    // direction: Axis.vertical,
+                    // dotRadius: 150,
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        stepPrevious = false;
+                        stepNext = true;
+                      });
+                    },
+                    icon: Icon(Icons.chevron_right),
+                  )
+                ],
               )
             ],
           ),
