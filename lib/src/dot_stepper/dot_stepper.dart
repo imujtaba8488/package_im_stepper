@@ -150,6 +150,7 @@ class _DotStepperState extends State<DotStepper>
             isSteppingForward: isSteppingForward,
             indicatorType: widget.indicatorType,
             effect: _applyEffect(widget.indicatorEffect),
+            dotType: DotType.square,
           ),
           size: Size(
             widget.direction == Axis.horizontal
@@ -215,4 +216,11 @@ enum IndicatorEffect {
 enum IndicatorType {
   fill,
   contain,
+}
+
+enum DotType {
+  circle,
+  square,
+  rounded_rectange,
+  line,
 }

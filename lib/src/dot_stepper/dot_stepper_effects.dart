@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:im_stepper/stepper.dart';
 
 abstract class DotStepperEffect {
   /// The radius of a single dot.
@@ -21,6 +22,8 @@ abstract class DotStepperEffect {
 
   /// Animation controller controlling all the animations.
   AnimationController animationController;
+
+  DotType dotType;
 
   void draw(Canvas canvas);
 
@@ -66,11 +69,42 @@ abstract class DotStepperEffect {
 class Slide extends DotStepperEffect {
   @override
   void draw(Canvas canvas) {
-    canvas.drawCircle(
-      centerTranslated,
-      dotRadius,
-      paint,
-    );
+    if (dotType == DotType.circle) {
+      canvas.drawCircle(
+        centerTranslated,
+        dotRadius,
+        paint,
+      );
+    } else if (dotType == DotType.square) {
+      canvas.drawRect(
+        Rect.fromCenter(
+          center: centerTranslated,
+          width: dotRadius,
+          height: dotRadius,
+        ),
+        paint,
+      );
+    } else if (dotType == DotType.rounded_rectange) {
+      canvas.drawRRect(
+        RRect.fromRectAndRadius(
+          Rect.fromCenter(
+            center: centerTranslated,
+            width: dotRadius * 2,
+            height: dotRadius,
+          ),
+          Radius.circular(5.0),
+        ),
+        paint,
+      );
+    } else if (dotType == DotType.line) {
+      canvas.drawLine(
+        Offset(centerTranslated.dx, centerTranslated.dy),
+        Offset(centerTranslated.dx + dotRadius, centerTranslated.dy),
+        Paint()
+          ..color = dotColor
+          ..strokeWidth = 2.0,
+      );
+    }
   }
 }
 
@@ -148,11 +182,48 @@ class Jump extends DotStepperEffect {
       ),
     ));
 
-    canvas.drawCircle(
-      centerTranslated,
-      jumpDown.value,
-      paint,
-    );
+    // canvas.drawCircle(
+    //   centerTranslated,
+    //   jumpDown.value,
+    //   paint,
+    // );
+
+    if (dotType == DotType.circle) {
+      canvas.drawCircle(
+        centerTranslated,
+        jumpDown.value,
+        paint,
+      );
+    } else if (dotType == DotType.square) {
+      canvas.drawRect(
+        Rect.fromCenter(
+          center: centerTranslated,
+          width: jumpDown.value,
+          height: jumpDown.value,
+        ),
+        paint,
+      );
+    } else if (dotType == DotType.rounded_rectange) {
+      canvas.drawRRect(
+        RRect.fromRectAndRadius(
+          Rect.fromCenter(
+            center: centerTranslated,
+            width: dotRadius * 2,
+            height: jumpDown.value,
+          ),
+          Radius.circular(5.0),
+        ),
+        paint,
+      );
+    } else if (dotType == DotType.line) {
+      canvas.drawLine(
+        Offset(centerTranslated.dx, centerTranslated.dy),
+        Offset(centerTranslated.dx + dotRadius, centerTranslated.dy),
+        Paint()
+          ..color = dotColor
+          ..strokeWidth = jumpDown.value,
+      );
+    }
   }
 }
 

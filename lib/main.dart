@@ -45,7 +45,7 @@ class _MyAppState extends State<MyApp> {
                     indicatorEffect: IndicatorEffect.jump,
                     // indicatorType: IndicatorType.contain,
                     // direction: Axis.vertical,
-                    // dotRadius: 150,
+                    dotRadius: 40,
                   ),
                   IconButton(
                     onPressed: () {
