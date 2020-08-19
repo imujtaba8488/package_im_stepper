@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'dot_stepper_effects.dart';
+import '../dot_stepper.dart';
 
 class Bullet extends DotStepperEffect {
   @override
@@ -25,10 +26,45 @@ class Bullet extends DotStepperEffect {
       ),
     );
 
-    canvas.drawCircle(
-      centerTranslated,
-      bullet.value,
-      paint,
-    );
+    // canvas.drawCircle(
+    //   centerTranslated,
+    //   bullet.value,
+    //   paint,
+    // );
+
+    if (dotShape == DotShape.circle) {
+      canvas.drawCircle(
+        centerTranslated,
+        bullet.value,
+        paint,
+      );
+    } else if (dotShape == DotShape.square) {
+      canvas.drawRect(
+        Rect.fromCenter(
+          center: centerTranslated,
+          width: bullet.value,
+          height: bullet.value,
+        ),
+        paint,
+      );
+    } else if (dotShape == DotShape.rounded_rectange) {
+      canvas.drawRRect(
+        RRect.fromRectAndRadius(
+          Rect.fromCenter(
+            center: centerTranslated,
+            width: dotRadius * 2,
+            height: bullet.value,
+          ),
+          Radius.circular(5),
+        ),
+        paint,
+      );
+    } else if (dotShape == DotShape.line) {
+      canvas.drawLine(
+        Offset(centerTranslated.dx, centerTranslated.dy),
+        Offset(centerTranslated.dx + dotRadius, centerTranslated.dy),
+        paint .. strokeWidth = bullet.value / 3.0,
+      );
+    }
   }
 }
