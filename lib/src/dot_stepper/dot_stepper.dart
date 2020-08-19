@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
 import 'dot_stepper_painter.dart';
-import 'dot_stepper_effects.dart';
+import 'effects/dot_stepper_effects.dart';
+import 'effects/slide_effect.dart';
+import 'effects/bullet_effect.dart';
+import 'effects/flat_effect.dart';
+import 'effects/magnify_effect.dart';
+import 'effects/worm_effect.dart';
+import 'effects/jump_effect.dart';
+import 'effects/trail_effect.dart';
 
 /// Callback fired when a dot is reached.
 typedef DotReached = void Function(int index);
@@ -40,6 +47,8 @@ class DotStepper extends StatefulWidget {
   /// The type of the indicator.
   final IndicatorType indicatorType;
 
+  final DotShape dotShape;
+
   DotStepper({
     this.dotCount = 3,
     this.dotRadius = 24.0,
@@ -52,6 +61,7 @@ class DotStepper extends StatefulWidget {
     this.fillStep = true,
     this.indicatorEffect = IndicatorEffect.slide,
     this.indicatorType = IndicatorType.fill,
+    this.dotShape = DotShape.circle,
   }) {
     assert(
       dotRadius >= 10.0,
@@ -150,6 +160,7 @@ class _DotStepperState extends State<DotStepper>
             isSteppingForward: isSteppingForward,
             indicatorType: widget.indicatorType,
             effect: _applyEffect(widget.indicatorEffect),
+            dotShape: widget.dotShape,
           ),
           size: Size(
             widget.direction == Axis.horizontal
@@ -215,4 +226,11 @@ enum IndicatorEffect {
 enum IndicatorType {
   fill,
   contain,
+}
+
+enum DotShape {
+  circle,
+  square,
+  rounded_rectange,
+  line,
 }

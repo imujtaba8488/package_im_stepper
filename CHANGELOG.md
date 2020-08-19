@@ -1,5 +1,11 @@
 # ChangeLog
 
+## 0.1.2+2
+
+### Wednesday, 19th August, 2020
+
+* Added Dot Shapes to DotStepper.
+
 ## 0.1.2+1
 
 ### Tuesday, 18th August, 2020

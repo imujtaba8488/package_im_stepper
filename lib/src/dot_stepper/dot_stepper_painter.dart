@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'dot_stepper.dart';
-import 'dot_stepper_effects.dart';
+import 'effects/dot_stepper_effects.dart';
 
 class DotStepperPainter extends CustomPainter {
   /// Total number of dots.
@@ -34,6 +34,8 @@ class DotStepperPainter extends CustomPainter {
   /// Controls the indicator animations.
   final AnimationController animationController;
 
+  final DotShape dotShape;
+
   DotStepperPainter({
     this.dotCount = 3,
     this.selectedIndex,
@@ -45,6 +47,7 @@ class DotStepperPainter extends CustomPainter {
     this.indicatorType = IndicatorType.contain,
     this.axis = Axis.horizontal,
     this.animationController,
+    this.dotShape = DotShape.circle,
   });
 
   @override
@@ -69,14 +72,39 @@ class DotStepperPainter extends CustomPainter {
     );
 
     for (int index = 0; index < dotCount; index++) {
-      canvas.drawCircle(
-        center,
-        dotRadius,
-        Paint()
-          ..color = dotColor
-          ..style = fillDot ? PaintingStyle.fill : PaintingStyle.stroke
-          ..strokeWidth = 1,
-      );
+      if (dotShape == DotShape.circle) {
+        canvas.drawCircle(
+          center,
+          dotRadius,
+          Paint()
+            ..color = dotColor
+            ..style = fillDot ? PaintingStyle.fill : PaintingStyle.stroke
+            ..strokeWidth = 1,
+        );
+      } else if (dotShape == DotShape.square) {
+        canvas.drawRect(
+          Rect.fromCenter(center: center, width: dotRadius, height: dotRadius),
+          Paint()..color = dotColor,
+        );
+      } else if (dotShape == DotShape.rounded_rectange) {
+        canvas.drawRRect(
+          RRect.fromRectAndRadius(
+            Rect.fromCenter(
+              center: center,
+              width: dotRadius * 2,
+              height: dotRadius,
+            ),
+            Radius.circular(5.0),
+          ),
+          Paint()..color = dotColor,
+        );
+      } else if (dotShape == DotShape.line) {
+        canvas.drawLine(
+          Offset(center.dx, center.dy),
+          Offset(center.dx + dotRadius, center.dy),
+          Paint()..color = dotColor .. strokeWidth = 2.0,
+        );
+      }
 
       /// Move the dot by an amount of spacing.
       center = center.translate(
@@ -97,6 +125,7 @@ class DotStepperPainter extends CustomPainter {
     effect.dotColor = indicatorColor;
     effect.axis = axis;
     effect.animationController = animationController;
+    effect.dotShape = dotShape;
 
     // draw the indicator.
     effect.draw(canvas);

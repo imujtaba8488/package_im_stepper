@@ -51,7 +51,18 @@ property to an appropriate value in a `StatefulWidget`.
 A simple and smooth dot stepper widget with built-in animations. Each dot in a
 DotStepper represents a step.
 
- **Effect** | **Screenshot**
+### Available Shapes
+
+ **Shapes**        | **Demo**
+-------------------|------------
+ Circle            |![Circle](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_circle_shape.png)
+ Square            |![Square](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_square_shape.png)
+ Rounded Rectangle |![RR](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_rounded_rectange_shape.png)
+ Line              |![Line](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_line_shape.png)
+
+### Available Effects
+
+ **Effect** | **Demo**
 ------------|----------------
  Trail      |![Trail](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_trail.gif)
  Slide      |![Slide](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_slide.gif)
