@@ -26,12 +26,6 @@ class Bullet extends DotStepperEffect {
       ),
     );
 
-    // canvas.drawCircle(
-    //   centerTranslated,
-    //   bullet.value,
-    //   paint,
-    // );
-
     if (dotShape == DotShape.circle) {
       canvas.drawCircle(
         centerTranslated,
@@ -63,7 +57,7 @@ class Bullet extends DotStepperEffect {
       canvas.drawLine(
         Offset(centerTranslated.dx, centerTranslated.dy),
         Offset(centerTranslated.dx + dotRadius, centerTranslated.dy),
-        paint .. strokeWidth = bullet.value / 3.0,
+        paint..strokeWidth = bullet.value / 3.0,
       );
     }
   }
