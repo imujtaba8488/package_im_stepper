@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'dot_stepper.dart';
-import 'dot_stepper_effects.dart';
+import 'effects/dot_stepper_effects.dart';
 
 class DotStepperPainter extends CustomPainter {
   /// Total number of dots.
@@ -34,7 +34,7 @@ class DotStepperPainter extends CustomPainter {
   /// Controls the indicator animations.
   final AnimationController animationController;
 
-  final DotType dotType;
+  final DotShape dotShape;
 
   DotStepperPainter({
     this.dotCount = 3,
@@ -47,7 +47,7 @@ class DotStepperPainter extends CustomPainter {
     this.indicatorType = IndicatorType.contain,
     this.axis = Axis.horizontal,
     this.animationController,
-    this.dotType = DotType.circle,
+    this.dotShape = DotShape.circle,
   });
 
   @override
@@ -72,7 +72,7 @@ class DotStepperPainter extends CustomPainter {
     );
 
     for (int index = 0; index < dotCount; index++) {
-      if (dotType == DotType.circle) {
+      if (dotShape == DotShape.circle) {
         canvas.drawCircle(
           center,
           dotRadius,
@@ -81,12 +81,12 @@ class DotStepperPainter extends CustomPainter {
             ..style = fillDot ? PaintingStyle.fill : PaintingStyle.stroke
             ..strokeWidth = 1,
         );
-      } else if (dotType == DotType.square) {
+      } else if (dotShape == DotShape.square) {
         canvas.drawRect(
           Rect.fromCenter(center: center, width: dotRadius, height: dotRadius),
           Paint()..color = dotColor,
         );
-      } else if (dotType == DotType.rounded_rectange) {
+      } else if (dotShape == DotShape.rounded_rectange) {
         canvas.drawRRect(
           RRect.fromRectAndRadius(
             Rect.fromCenter(
@@ -98,7 +98,7 @@ class DotStepperPainter extends CustomPainter {
           ),
           Paint()..color = dotColor,
         );
-      } else if (dotType == DotType.line) {
+      } else if (dotShape == DotShape.line) {
         canvas.drawLine(
           Offset(center.dx, center.dy),
           Offset(center.dx + dotRadius, center.dy),
@@ -125,7 +125,7 @@ class DotStepperPainter extends CustomPainter {
     effect.dotColor = indicatorColor;
     effect.axis = axis;
     effect.animationController = animationController;
-    effect.dotType = dotType;
+    effect.dotShape = dotShape;
 
     // draw the indicator.
     effect.draw(canvas);
