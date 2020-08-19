@@ -7,7 +7,7 @@
 * Added DotStepper.
 * Added example for DotStepper
 
-## 0.1.1 [Enhancement and BugFix]
+## 0.1.1
 
 ### Wednesday, 5th August, 2020
 
