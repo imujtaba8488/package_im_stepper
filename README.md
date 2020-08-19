@@ -55,10 +55,10 @@ DotStepper represents a step.
 
  **Shapes**        | **Demo**
 -------------------|------------
- Circle            |![Circle](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_circle_shape.png)
- Square            |![Square](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_square_shape.png)
- Rounded Rectangle |![RR](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_rounded_rectange_shape.png)
- Line              |![Line](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_line_shape.png)
+ Circle            |![Circle](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_circle.png)
+ Square            |![Square](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_square.png)
+ Rounded Rectangle |![RR](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_rounded_rectangle.png)
+ Line              |![Line](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_line.png)
 
 ### Available Effects
 

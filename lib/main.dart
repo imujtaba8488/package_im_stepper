@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
                     icon: Icon(Icons.chevron_left),
                   ),
                   DotStepper(
-                    dotShape: DotShape.rounded_rectange,
+                    dotShape: DotShape.line,
                     goNext: stepNext,
                     goPrevious: stepPrevious,
                     dotCount: 5,
