@@ -53,7 +53,7 @@ class Jump extends DotStepperEffect {
             width: dotRadius * 2,
             height: jumpDown.value,
           ),
-          Radius.circular(5.0),
+          Radius.circular(5),
         ),
         paint,
       );
@@ -61,9 +61,7 @@ class Jump extends DotStepperEffect {
       canvas.drawLine(
         Offset(centerTranslated.dx, centerTranslated.dy),
         Offset(centerTranslated.dx + dotRadius, centerTranslated.dy),
-        Paint()
-          ..color = dotColor
-          ..strokeWidth = jumpDown.value,
+        paint .. strokeWidth = jumpDown.value / 3.0,
       );
     }
   }
