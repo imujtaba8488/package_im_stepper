@@ -39,11 +39,11 @@ class _MyAppState extends State<MyApp> {
                     icon: Icon(Icons.chevron_left),
                   ),
                   DotStepper(
-                    dotShape: DotShape.line,
+                    dotShape: DotShape.rounded_rectange,
                     goNext: stepNext,
                     goPrevious: stepPrevious,
                     dotCount: 5,
-                    indicatorEffect: IndicatorEffect.flat,
+                    indicatorEffect: IndicatorEffect.magnify,
                     // indicatorType: IndicatorType.contain,
                     // direction: Axis.vertical,
                     dotRadius: 40,

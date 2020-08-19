@@ -13,14 +13,14 @@ class Magnify extends DotStepperEffect {
 
     if (dotShape == DotShape.circle) {
       canvas.drawCircle(
-        centerTranslated,
+        center,
         magnify.value,
         paint,
       );
     } else if (dotShape == DotShape.square) {
       canvas.drawRect(
         Rect.fromCenter(
-          center: centerTranslated,
+          center: center,
           width: magnify.value,
           height: magnify.value,
         ),
@@ -30,18 +30,18 @@ class Magnify extends DotStepperEffect {
       canvas.drawRRect(
         RRect.fromRectAndRadius(
           Rect.fromCenter(
-            center: centerTranslated,
-            width: dotRadius * 2,
+            center: center,
+            width: dotRadius * 3.0,
             height: magnify.value,
           ),
-          Radius.circular(5),
+          Radius.circular(8),
         ),
         paint,
       );
     } else if (dotShape == DotShape.line) {
       canvas.drawLine(
-        Offset(centerTranslated.dx, centerTranslated.dy),
-        Offset(centerTranslated.dx + dotRadius, centerTranslated.dy),
+        Offset(center.dx, center.dy),
+        Offset(center.dx + dotRadius, center.dy),
         paint .. strokeWidth = magnify.value / 3.0,
       );
     }
