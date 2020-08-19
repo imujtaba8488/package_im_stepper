@@ -43,7 +43,7 @@ class _MyAppState extends State<MyApp> {
                     goNext: stepNext,
                     goPrevious: stepPrevious,
                     dotCount: 5,
-                    indicatorEffect: IndicatorEffect.trail,
+                    indicatorEffect: IndicatorEffect.worm,
                     // indicatorType: IndicatorType.contain,
                     // direction: Axis.vertical,
                     dotRadius: 40,
