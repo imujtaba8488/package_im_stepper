@@ -8,7 +8,6 @@ void main() {
 
 //-----------------------ICON STEPPER----------------------------------------//
 class IconStepperDemo extends StatefulWidget {
-  // This widget is the root of your application.
   @override
   _IconStepperDemo createState() => _IconStepperDemo();
 }

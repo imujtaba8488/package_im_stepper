@@ -29,7 +29,7 @@ class DotStepper extends StatefulWidget {
   /// Returns the index of the currently selected dot i.e. the index of the step currently reached.
   final DotReached dotReachedIndex;
 
-  /// The direction of the in which to show the DotStepper.
+  /// The direction in which to show the DotStepper.
   final Axis direction;
 
   /// The color of the dots.

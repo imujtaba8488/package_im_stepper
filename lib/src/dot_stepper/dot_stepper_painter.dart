@@ -102,7 +102,9 @@ class DotStepperPainter extends CustomPainter {
         canvas.drawLine(
           Offset(center.dx, center.dy),
           Offset(center.dx + dotRadius, center.dy),
-          Paint()..color = dotColor .. strokeWidth = 2.0,
+          Paint()
+            ..color = dotColor
+            ..strokeWidth = 2.0,
         );
       }
 

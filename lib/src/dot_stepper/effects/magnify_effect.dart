@@ -42,7 +42,7 @@ class Magnify extends DotStepperEffect {
       canvas.drawLine(
         Offset(center.dx, center.dy),
         Offset(center.dx + dotRadius, center.dy),
-        paint .. strokeWidth = magnify.value / 3.0,
+        paint..strokeWidth = magnify.value / 3.0,
       );
     }
   }

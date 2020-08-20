@@ -31,7 +31,7 @@ class _MyAppState extends State<MyApp> {
                   IconButton(
                     onPressed: () {
                       setState(() {
-                        // ***DON'T FORGET***
+                        // DON'T FORGET
                         stepNext = false;
                         stepPrevious = true;
                       });
@@ -51,7 +51,7 @@ class _MyAppState extends State<MyApp> {
                   IconButton(
                     onPressed: () {
                       setState(() {
-                        // ***DON'T FORGET***
+                        // DON'T FORGET
                         stepPrevious = false;
                         stepNext = true;
                       });
