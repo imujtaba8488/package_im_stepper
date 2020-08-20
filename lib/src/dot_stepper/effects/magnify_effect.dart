@@ -26,7 +26,7 @@ class Magnify extends DotStepperEffect {
         ),
         paint,
       );
-    } else if (dotShape == DotShape.rounded_rectange) {
+    } else if (dotShape == DotShape.rounded_rectangle) {
       canvas.drawRRect(
         RRect.fromRectAndRadius(
           Rect.fromCenter(

@@ -26,7 +26,7 @@ class DottedLine extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // If this is not appled, top half of the dot gets offscreen, hence, hidden.
+      // If this is not applied, top half of the dot gets offscreen, hence, hidden.
       margin: EdgeInsets.only(top: dotRadius),
       width: axis == Axis.horizontal ? length : 0.0,
       height: axis == Axis.vertical ? length : 0.0,
@@ -65,7 +65,7 @@ class _DottedLinePainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     double start = 0.0;
 
-    // Length of the line is calculated by dividing the supplied lenght [to] by dotRadius * space.
+    // Length of the line is calculated by dividing the supplied length [to] by dotRadius * space.
     int calculatedLength = length ~/ (dotRadius * spacing);
 
     for (int i = 1; i < calculatedLength; i++) {
@@ -73,8 +73,10 @@ class _DottedLinePainter extends CustomPainter {
       start += dotRadius * spacing;
 
       canvas.drawCircle(
-        Offset(axis == Axis.horizontal ? start : 0.0,
-            axis == Axis.horizontal ? 0.0 : start),
+        Offset(
+          axis == Axis.horizontal ? start : 0.0,
+          axis == Axis.horizontal ? 0.0 : start,
+        ),
         dotRadius,
         brush,
       );

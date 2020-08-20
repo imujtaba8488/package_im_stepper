@@ -86,7 +86,7 @@ class DotStepperPainter extends CustomPainter {
           Rect.fromCenter(center: center, width: dotRadius, height: dotRadius),
           Paint()..color = dotColor,
         );
-      } else if (dotShape == DotShape.rounded_rectange) {
+      } else if (dotShape == DotShape.rounded_rectangle) {
         canvas.drawRRect(
           RRect.fromRectAndRadius(
             Rect.fromCenter(

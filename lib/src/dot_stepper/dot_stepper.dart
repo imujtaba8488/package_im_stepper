@@ -231,6 +231,6 @@ enum IndicatorType {
 enum DotShape {
   circle,
   square,
-  rounded_rectange,
+  rounded_rectangle,
   line,
 }

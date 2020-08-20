@@ -80,7 +80,7 @@ class Worm extends DotStepperEffect {
         rRect,
         paint,
       );
-    } else if (dotShape == DotShape.rounded_rectange) {
+    } else if (dotShape == DotShape.rounded_rectangle) {
       Rect rect = Rect.fromCenter(
         center: centerTranslated.translate(
           axis == Axis.horizontal
