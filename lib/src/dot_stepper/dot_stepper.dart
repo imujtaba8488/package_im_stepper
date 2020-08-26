@@ -9,6 +9,7 @@ import 'effects/magnify_effect.dart';
 import 'effects/worm_effect.dart';
 import 'effects/jump_effect.dart';
 import 'effects/trail_effect.dart';
+import 'effects/jump_over_effect.dart';
 
 /// Callback fired when a dot is reached.
 typedef DotReached = void Function(int index);
@@ -77,7 +78,7 @@ class _DotStepperState extends State<DotStepper>
     with SingleTickerProviderStateMixin {
   AnimationController _animationController;
 
-  // Whether the stepping is moving in the forward director or backward direction.
+  // Whether the stepping is moving in the forward direction or backward direction.
   bool isSteppingForward = true;
 
   // The currently selected dot. ** Must be set to 1 and not to 0. **
@@ -205,6 +206,12 @@ class _DotStepperState extends State<DotStepper>
       case IndicatorEffect.trail:
         return Trail();
 
+      case IndicatorEffect.jump_from_above:
+        return JumpOver();
+
+      case IndicatorEffect.jump_from_below:
+        return JumpOver(jumpFromAbove: false);
+
       default:
         return Slide();
     }
@@ -220,6 +227,8 @@ enum IndicatorEffect {
   magnify,
   flat,
   trail,
+  jump_from_above,
+  jump_from_below,
 }
 
 /// Defines the type of indicator. Filled occupies the entire fixed dot, while as 'contain' appears inside the fixed dot.

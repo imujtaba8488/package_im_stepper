@@ -75,7 +75,7 @@ DotStepper represents a step.
 ### DotStepper - Usage Note
 
 * __Important:__ It is important that a call to `goNext` and `goPrevious` is
-controlled by two variables in a `StatefulWidget` with a call to `setState` in 
+controlled by two variables in a `StatefulWidget` with a call to `setState` in
 order for the DotStepper to work. __Please look at the Example.__
 
 ## Feedback

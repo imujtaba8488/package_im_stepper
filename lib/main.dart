@@ -39,14 +39,14 @@ class _MyAppState extends State<MyApp> {
                     icon: Icon(Icons.chevron_left),
                   ),
                   DotStepper(
-                    dotShape: DotShape.line,
+                    // dotShape: DotShape.line,
                     goNext: stepNext,
                     goPrevious: stepPrevious,
                     dotCount: 5,
-                    indicatorEffect: IndicatorEffect.worm,
+                    indicatorEffect: IndicatorEffect.jump_from_below,
                     // indicatorType: IndicatorType.contain,
                     // direction: Axis.vertical,
-                    // dotRadius: 40,
+                    dotRadius: 40,
                   ),
                   IconButton(
                     onPressed: () {
