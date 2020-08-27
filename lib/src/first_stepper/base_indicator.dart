@@ -22,6 +22,7 @@ class CircleIndicator extends StatefulWidget {
   /// Radius of this indicator.
   final double radius;
 
+  /// The amount of padding around each side of the child.
   final double insets;
 
   CircleIndicator({
