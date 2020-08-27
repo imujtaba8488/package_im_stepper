@@ -6,7 +6,7 @@ import '../custom_paint/dotted_line.dart';
 /// Callback is fired when a step is reached.
 typedef OnStepReached = void Function(int index);
 
-class CircleStepper extends StatefulWidget {
+class BaseStepper extends StatefulWidget {
   /// Each child defines a step. Hence, total number of icons determines the total number of steps.
   final List<Widget> children;
 
@@ -58,7 +58,13 @@ class CircleStepper extends StatefulWidget {
   /// Whether the stepping is enabled or disabled.
   final bool steppingEnabled;
 
-  CircleStepper({
+  /// Amount of margin around the child.
+  final double insets;
+
+  /// The width of the active step border.
+  final double activeStepBorderWidth;
+
+  BaseStepper({
     this.children,
     this.enableNextPreviousButtons = true,
     this.enableStepTapping = true,
@@ -76,6 +82,8 @@ class CircleStepper extends StatefulWidget {
     this.stepReachedAnimationEffect = Curves.bounceOut,
     this.stepReachedAnimationDuration = const Duration(seconds: 1),
     this.steppingEnabled = true,
+    this.insets = 5.0,
+    this.activeStepBorderWidth = 0.5,
   }) {
     assert(
       lineDotRadius <= 10 && lineDotRadius > 0,
@@ -89,10 +97,10 @@ class CircleStepper extends StatefulWidget {
   }
 
   @override
-  _CircleStepperState createState() => _CircleStepperState();
+  _BaseStepperState createState() => _BaseStepperState();
 }
 
-class _CircleStepperState extends State<CircleStepper> {
+class _BaseStepperState extends State<BaseStepper> {
   ScrollController _scrollController;
   int _selectedIndex;
 
@@ -102,6 +110,12 @@ class _CircleStepperState extends State<CircleStepper> {
 
     _selectedIndex = 0;
     this._scrollController = ScrollController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
   }
 
   /// Controls the step scrolling.
@@ -171,13 +185,13 @@ class _CircleStepperState extends State<CircleStepper> {
             ? Row(
                 children: <Widget>[
                   _customizedIndicator(index),
-                  _dottedLineCustomized(index, Axis.horizontal),
+                  _customizedDottedLine(index, Axis.horizontal),
                 ],
               )
             : Column(
                 children: <Widget>[
                   _customizedIndicator(index),
-                  _dottedLineCustomized(index, Axis.vertical),
+                  _customizedDottedLine(index, Axis.vertical),
                 ],
               );
       },
@@ -186,7 +200,7 @@ class _CircleStepperState extends State<CircleStepper> {
 
   /// A customized IconStep.
   Widget _customizedIndicator(int index) {
-    return CircleIndicator(
+    return BaseIndicator(
       child: widget.children[index],
       isSelected: _selectedIndex == index,
       onPressed: widget.enableStepTapping
@@ -206,11 +220,13 @@ class _CircleStepperState extends State<CircleStepper> {
       activeColor: widget.activeStepColor,
       activeBorderColor: widget.activeStepBorderColor,
       radius: widget.stepRadius,
+      padding: widget.insets,
+      activeBorderWidth: widget.activeStepBorderWidth,
     );
   }
 
   /// A customized DottedLine.
-  Widget _dottedLineCustomized(int index, Axis axis) {
+  Widget _customizedDottedLine(int index, Axis axis) {
     return index < widget.children.length - 1
         ? DottedLine(
             length: widget.lineLength ?? 50,

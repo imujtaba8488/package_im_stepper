@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:im_stepper/src/first_stepper/opacity_animated.dart';
 
 import 'package:im_stepper/stepper.dart';
 
@@ -22,15 +23,29 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text('Icon Stepper Example'),
         ),
-        body: IconStepper(
-          // stepRadius: 72.0,
-          icons: [
-            Icon(Icons.home, size: 72,),
-            Icon(Icons.home),
-            Icon(Icons.home),
-            Icon(Icons.hot_tub),
+        body: ImageStepper(
+          stepRadius: 48.0,
+          // fitImage: false,
+          images: [
+            AssetImage('assets/me.jpg'),
+            AssetImage('assets/me.jpg'),
+            AssetImage('assets/me.jpg'),
+            AssetImage('assets/me.jpg'),
+            AssetImage('assets/me.jpg'),
+            AssetImage('assets/me.jpg'),
+            AssetImage('assets/me.jpg'),
           ],
         ),
+        // body: IconStepper(
+        //   icons: [
+        //     Icon(Icons.hd),
+        //     Icon(Icons.hd),
+        //     Icon(Icons.hd),
+        //     Icon(Icons.hd),
+        //     Icon(Icons.hd),
+        //     Icon(Icons.hd),
+        //   ],
+        // ),
       ),
     );
   }

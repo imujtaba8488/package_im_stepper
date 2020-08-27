@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-class CircleIndicator extends StatefulWidget {
+import 'opacity_animated.dart';
+
+class BaseIndicator extends StatelessWidget {
   /// Whether this indicator is selected or not.
   final bool isSelected;
 
@@ -23,9 +25,14 @@ class CircleIndicator extends StatefulWidget {
   final double radius;
 
   /// The amount of padding around each side of the child.
-  final double insets;
+  final double padding;
 
-  CircleIndicator({
+  /// The amount of margin around each side of the indicator.
+  final double margin;
+
+  final activeBorderWidth;
+
+  BaseIndicator({
     this.isSelected = false,
     this.child,
     this.onPressed,
@@ -33,87 +40,54 @@ class CircleIndicator extends StatefulWidget {
     this.activeColor,
     this.activeBorderColor,
     this.radius = 24.0,
-    this.insets = 5.0,
+    this.padding = 5.0,
+    this.margin = 1.0,
+    this.activeBorderWidth = 0.5,
   });
 
   @override
-  _CircleIndicatorState createState() => _CircleIndicatorState();
-}
-
-class _CircleIndicatorState extends State<CircleIndicator>
-    with SingleTickerProviderStateMixin {
-  AnimationController _animationController;
-  Animation _opacityAnimation;
-
-  @override
-  void initState() {
-    super.initState();
-
-    _animationController = AnimationController(
-      vsync: this,
-      duration: Duration(milliseconds: 1000),
-    )..addListener(() {
-        setState(() {});
-      });
-
-    _opacityAnimation = Tween(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(_animationController);
-
-    _animationController.forward();
-  }
-
-  @override
-  void didUpdateWidget(CircleIndicator oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (widget.isSelected && _animationController.isDismissed) {
-      _animationController.forward();
-    } else if (widget.isSelected && _animationController.isCompleted) {
-      _animationController.reset();
-      _animationController.forward();
-    }
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _animationController.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Opacity(
-      opacity: widget.isSelected ? _opacityAnimation.value : 1.0,
+    return OpacityAnimated(
+      animationDisabled: !isSelected,
       child: Container(
-        padding: widget.isSelected ? EdgeInsets.all(1.0) : EdgeInsets.zero,
+        padding: isSelected ? EdgeInsets.all(margin) : EdgeInsets.zero,
         decoration: BoxDecoration(
-          border: widget.isSelected
+          border: isSelected
               ? Border.all(
-                  color: widget.activeBorderColor ?? Colors.blue,
-                  width: 1.5,
+                  color: activeBorderColor ?? Colors.blue,
+                  width: activeBorderWidth,
                 )
               : null,
           shape: BoxShape.circle,
         ),
         child: InkWell(
-          onTap: widget.onPressed,
-          child: Container(
-            height: widget.radius * 2,
-            width: widget.radius * 2,
-            padding: EdgeInsets.all(widget.insets),
-            decoration: BoxDecoration(
-              color: widget.isSelected
-                  ? widget.activeColor ?? Colors.green
-                  : widget.color ?? Colors.grey,
-              shape: BoxShape.circle,
-            ),
-            child: Center(
-              child: widget.child,
+          onTap: onPressed,
+          child: OpacityAnimated(
+            animationDisabled: !isSelected,
+            child: Container(
+              height: radius * 2,
+              width: radius * 2,
+              padding: EdgeInsets.all(padding),
+              decoration: BoxDecoration(
+                color: isSelected
+                    ? activeColor ?? Colors.green
+                    : color ?? Colors.grey,
+                shape: BoxShape.circle,
+              ),
+              child: Center(
+                child: child,
+              ),
             ),
           ),
         ),
       ),
     );
   }
+}
+
+class StepDecoration {
+  Color activeColor;
+  Color inactiveColor;
+  Color activeBorderColor;
+  Color activeBorderWidth;
 }

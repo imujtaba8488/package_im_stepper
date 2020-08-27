@@ -4,7 +4,7 @@ import 'base_stepper.dart';
 
 class ImageStepper extends StatelessWidget {
   /// Each image defines a step. Hence, total number of images determines the total number of steps.
-  final List<Image> images;
+  final List<ImageProvider<dynamic>> images;
 
   /// Whether to enable or disable the next and previous buttons.
   final bool enableNextPreviousButtons;
@@ -32,6 +32,12 @@ class ImageStepper extends StatelessWidget {
 
   /// The border color of a step when it is reached.
   final Color activeStepBorderColor;
+
+  /// The border width of the active step.
+  final double activeStepBorderWidth;
+
+  /// Whether to fit the image completely inside the step.
+  final bool fitImage;
 
   /// The color of the line that separates the steps.
   final Color lineColor;
@@ -65,6 +71,8 @@ class ImageStepper extends StatelessWidget {
     this.stepColor,
     this.activeStepColor,
     this.activeStepBorderColor,
+    this.activeStepBorderWidth = 0.5,
+    this.fitImage = true,
     this.lineColor,
     this.lineLength = 50.0,
     this.lineDotRadius = 1.0,
@@ -76,7 +84,7 @@ class ImageStepper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CircleStepper(
+    return BaseStepper(
       children: _imagesWrappedInCircleAvatar(),
       enableNextPreviousButtons: enableNextPreviousButtons,
       enableStepTapping: enableStepTapping,
@@ -87,6 +95,7 @@ class ImageStepper extends StatelessWidget {
       stepColor: stepColor,
       activeStepColor: activeStepColor,
       activeStepBorderColor: activeStepBorderColor,
+      activeStepBorderWidth: activeStepBorderWidth,
       lineColor: lineColor,
       lineLength: lineLength,
       lineDotRadius: lineDotRadius,
@@ -94,6 +103,7 @@ class ImageStepper extends StatelessWidget {
       stepReachedAnimationEffect: stepReachedAnimationEffect,
       stepReachedAnimationDuration: stepReachedAnimationDuration,
       steppingEnabled: steppingEnabled,
+      insets: fitImage ? 0.0 : 5.0,
     );
   }
 
@@ -101,7 +111,7 @@ class ImageStepper extends StatelessWidget {
     return List.generate(images.length, (index) {
       return CircleAvatar(
         radius: stepRadius,
-        backgroundImage: images[index].image,
+        backgroundImage: images[index],
       );
     });
   }
