@@ -7,13 +7,13 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
+  // This widget is the root of your application.
   @override
   _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  bool stepNext = false;
-  bool stepPrevious = false;
+  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -22,48 +22,47 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text('Icon Stepper Example'),
         ),
-        body: SafeArea(
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      setState(() {
-                        // ***DON'T FORGET***
-                        stepNext = false;
-                        stepPrevious = true;
-                      });
-                    },
-                    icon: Icon(Icons.chevron_left),
-                  ),
-                  DotStepper(
-                    dotShape: DotShape.rounded_rectange,
-                    goNext: stepNext,
-                    goPrevious: stepPrevious,
-                    dotCount: 5,
-                    indicatorEffect: IndicatorEffect.worm,
-                    // indicatorType: IndicatorType.contain,
-                    // direction: Axis.vertical,
-                    // dotRadius: 40,
-                  ),
-                  IconButton(
-                    onPressed: () {
-                      setState(() {
-                        // ***DON'T FORGET***
-                        stepPrevious = false;
-                        stepNext = true;
-                      });
-                    },
-                    icon: Icon(Icons.chevron_right),
-                  )
-                ],
-              )
-            ],
-          ),
+        body: IconStepper(
+          // stepRadius: 72.0,
+          icons: [
+            Icon(Icons.home, size: 72,),
+            Icon(Icons.home),
+            Icon(Icons.home),
+            Icon(Icons.hot_tub),
+          ],
         ),
       ),
     );
+  }
+
+  String header() {
+    switch (selectedIndex) {
+      case 0:
+        return 'Educational Background';
+
+      case 1:
+        return 'Professional Background';
+
+      case 2:
+        return 'Awards';
+
+      case 3:
+        return 'Sports';
+
+      case 4:
+        return 'Specially abled';
+
+      case 5:
+        return 'Personal Details';
+
+      case 6:
+        return 'Social Details';
+
+      case 7:
+        return 'Review';
+
+      default:
+        return 'Unknown';
+    }
   }
 }

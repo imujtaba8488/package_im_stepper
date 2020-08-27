@@ -36,7 +36,7 @@ class _MyAppState extends State<MyApp> {
                 ],
                 // borderRadius: BorderRadius.circular(5.0),
               ),
-              child: IconStepper(
+              child: CircleStepper(
                 direction: Axis.vertical,
                 // enableNextPreviousButtons: false,
                 stepColor: Colors.white,
@@ -51,7 +51,7 @@ class _MyAppState extends State<MyApp> {
                   });
                 },
                 steppingEnabled: true,
-                icons: [
+                children: [
                   Icon(Icons.home),
                   Icon(Icons.person),
                   Icon(Icons.account_balance),
