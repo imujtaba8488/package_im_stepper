@@ -23,11 +23,11 @@ steppers appropriate for your application:-
 
 ## Table of Contents
 
-* [IconStepper](#iconstepper)
-
-* [ImageStepper](#imagestepper)
-
-* [DotStepper](#dotstepper)
+| **Steppers**                  | **Version Available** |
+|-------------------------------|-----------------------|
+| [IconStepper](#iconstepper)   | 0.1.2+3               |
+| [ImageStepper](#imagestepper) | 0.1.2+1               |
+| [DotStepper](#dotstepper)     | 0.1.0                 |
 
 * [Feedback](#feedback)
 

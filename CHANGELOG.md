@@ -1,5 +1,17 @@
 # ChangeLog
 
+## 0.1.2+3
+
+### Friday, 28th August, 2020
+
+* Added __ImageStepper__ widget. Thanks @[Liliana99](https://github.com/imujtaba8488/package_im_stepper/issues/2)
+
+* Refactored and optimized the code.
+
+* Updated the documentation.
+
+* Updated the examples.
+
 ## 0.1.2+2
 
 ### Wednesday, 19th August, 2020
