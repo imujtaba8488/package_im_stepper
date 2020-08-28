@@ -19,7 +19,17 @@ user is filling up the survey form. This is where im_stepper comes into play
 with easy to use stepper widgets that may find its uses in myriad applications.
 
 Simply import `package:im_stepper/stepper.dart` and choose any of the following
-steppers appropriate for your application:
+steppers appropriate for your application:-
+
+## Table of Contents
+
+* [IconStepper](#iconstepper)
+
+* [ImageStepper](#imagestepper)
+
+* [DotStepper](#dotstepper)
+
+* [Feedback](#feedback)
 
 ## IconStepper
 
@@ -45,6 +55,18 @@ a Container and specify the `decoration` argument.
 
 * To enable validation before the next step is reached, set the `steppingEnabled`
 property to an appropriate value in a `StatefulWidget`.
+
+## ImageStepper
+
+A simple to use image stepper widget, wherein, each image defines a step. Hence,
+total number of icons define total number of steps. Primarily designed to show
+steps as icons.
+
+![IconStepper]()
+
+### ImageStepper - Usage Note
+
+* [Usage Note](#iconstepper-usage-note) - See IconStepper Usage Note.
 
 ## DotStepper
 

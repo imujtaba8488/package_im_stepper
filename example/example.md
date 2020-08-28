@@ -1,8 +1,10 @@
-# Examples
+# Examples - Table of Contents
 
 - [IconStepper](#iconstepper)
-- [ImageStepper](#imagestepper)
+
 - [DotStepper](#dotstepper)
+
+- [ImageStepper](#imagestepper)
 
 ## IconStepper
 
@@ -15,7 +17,6 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
-  // This widget is the root of your application.
   @override
   _MyAppState createState() => _MyAppState();
 }
