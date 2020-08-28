@@ -58,8 +58,11 @@ class BaseStepper extends StatefulWidget {
   /// Whether the stepping is enabled or disabled.
   final bool steppingEnabled;
 
-  /// Amount of margin around the child.
-  final double insets;
+  /// Amount of padding on each side of the child widget.
+  final double padding;
+
+  /// Amount of margin on each side of the step.
+  final double margin;
 
   /// The width of the active step border.
   final double activeStepBorderWidth;
@@ -82,7 +85,8 @@ class BaseStepper extends StatefulWidget {
     this.stepReachedAnimationEffect = Curves.bounceOut,
     this.stepReachedAnimationDuration = const Duration(seconds: 1),
     this.steppingEnabled = true,
-    this.insets = 5.0,
+    this.padding = 5.0,
+    this.margin = 1.0,
     this.activeStepBorderWidth = 0.5,
   }) {
     assert(
@@ -220,7 +224,8 @@ class _BaseStepperState extends State<BaseStepper> {
       activeColor: widget.activeStepColor,
       activeBorderColor: widget.activeStepBorderColor,
       radius: widget.stepRadius,
-      padding: widget.insets,
+      padding: widget.padding,
+      margin: widget.margin,
       activeBorderWidth: widget.activeStepBorderWidth,
     );
   }

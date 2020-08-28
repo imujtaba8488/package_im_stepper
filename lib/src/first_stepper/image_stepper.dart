@@ -27,6 +27,9 @@ class ImageStepper extends StatelessWidget {
   /// The color of the step when it is not reached.
   final Color stepColor;
 
+  /// The amount of padding inside a step.
+  final double stepPadding;
+
   /// The color of a step when it is reached.
   final Color activeStepColor;
 
@@ -36,8 +39,8 @@ class ImageStepper extends StatelessWidget {
   /// The border width of the active step.
   final double activeStepBorderWidth;
 
-  /// Whether to fit the image completely inside the step.
-  final bool fitImage;
+  /// Determines how far away the border should be drawn from the step when it is reached.
+  final double activeStepBorderPadding;
 
   /// The color of the line that separates the steps.
   final Color lineColor;
@@ -69,10 +72,11 @@ class ImageStepper extends StatelessWidget {
     this.onStepReached,
     this.direction = Axis.horizontal,
     this.stepColor,
+    this.stepPadding = 0.0,
     this.activeStepColor,
     this.activeStepBorderColor,
     this.activeStepBorderWidth = 0.5,
-    this.fitImage = true,
+    this.activeStepBorderPadding = 1.0,
     this.lineColor,
     this.lineLength = 50.0,
     this.lineDotRadius = 1.0,
@@ -103,10 +107,12 @@ class ImageStepper extends StatelessWidget {
       stepReachedAnimationEffect: stepReachedAnimationEffect,
       stepReachedAnimationDuration: stepReachedAnimationDuration,
       steppingEnabled: steppingEnabled,
-      insets: fitImage ? 0.0 : 5.0,
+      margin: activeStepBorderPadding,
+      padding: stepPadding,
     );
   }
 
+  /// Wraps the images within a CircleAvatar for displaying images in a circle.
   List<CircleAvatar> _imagesWrappedInCircleAvatar() {
     return List.generate(images.length, (index) {
       return CircleAvatar(

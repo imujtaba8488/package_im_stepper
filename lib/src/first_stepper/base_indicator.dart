@@ -21,6 +21,9 @@ class BaseIndicator extends StatelessWidget {
   /// Border color of this indicator when it is selected.
   final Color activeBorderColor;
 
+  /// The border width of this indicator when it is selected.
+  final activeBorderWidth;
+
   /// Radius of this indicator.
   final double radius;
 
@@ -29,8 +32,6 @@ class BaseIndicator extends StatelessWidget {
 
   /// The amount of margin around each side of the indicator.
   final double margin;
-
-  final activeBorderWidth;
 
   BaseIndicator({
     this.isSelected = false,
@@ -83,11 +84,4 @@ class BaseIndicator extends StatelessWidget {
       ),
     );
   }
-}
-
-class StepDecoration {
-  Color activeColor;
-  Color inactiveColor;
-  Color activeBorderColor;
-  Color activeBorderWidth;
 }

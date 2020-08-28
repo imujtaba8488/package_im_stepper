@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:im_stepper/src/first_stepper/opacity_animated.dart';
+
 
 import 'package:im_stepper/stepper.dart';
 
@@ -24,8 +24,9 @@ class _MyAppState extends State<MyApp> {
           title: Text('Icon Stepper Example'),
         ),
         body: ImageStepper(
-          stepRadius: 48.0,
-          // fitImage: false,
+          // direction: Axis.vertical,
+          // stepRadius: 48.0,
+          activeStepBorderPadding: 20.0,
           images: [
             AssetImage('assets/me.jpg'),
             AssetImage('assets/me.jpg'),

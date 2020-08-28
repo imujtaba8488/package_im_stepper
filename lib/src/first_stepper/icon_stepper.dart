@@ -27,11 +27,20 @@ class IconStepper extends StatelessWidget {
   /// The color of the step when it is not reached.
   final Color stepColor;
 
+  /// The amount of padding inside a step.
+  final double stepPadding;
+
   /// The color of a step when it is reached.
   final Color activeStepColor;
 
   /// The border color of a step when it is reached.
   final Color activeStepBorderColor;
+
+  /// The border width of the active step.
+  final double activeStepBorderWidth;
+
+  /// Determines how far away the border should be drawn from the step when it is reached.
+  final double activeStepBorderPadding;
 
   /// The color of the line that separates the steps.
   final Color lineColor;
@@ -63,8 +72,11 @@ class IconStepper extends StatelessWidget {
     this.onStepReached,
     this.direction = Axis.horizontal,
     this.stepColor,
+    this.stepPadding = 1.0,
     this.activeStepColor,
     this.activeStepBorderColor,
+    this.activeStepBorderWidth = 0.5,
+    this.activeStepBorderPadding = 5.0,
     this.lineColor,
     this.lineLength = 50.0,
     this.lineDotRadius = 1.0,
@@ -77,7 +89,7 @@ class IconStepper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseStepper(
-      children: _iconsSizedToFitTheStep(),
+      children: _iconsWithSizeOverridden(),
       enableNextPreviousButtons: enableNextPreviousButtons,
       enableStepTapping: enableStepTapping,
       previousButtonIcon: previousButtonIcon,
@@ -87,6 +99,7 @@ class IconStepper extends StatelessWidget {
       stepColor: stepColor,
       activeStepColor: activeStepColor,
       activeStepBorderColor: activeStepBorderColor,
+      activeStepBorderWidth: activeStepBorderWidth,
       lineColor: lineColor,
       lineLength: lineLength,
       lineDotRadius: lineDotRadius,
@@ -94,10 +107,13 @@ class IconStepper extends StatelessWidget {
       stepReachedAnimationEffect: stepReachedAnimationEffect,
       stepReachedAnimationDuration: stepReachedAnimationDuration,
       steppingEnabled: steppingEnabled,
+      margin: activeStepBorderPadding,
+      padding: stepPadding,
     );
   }
 
-  List<Icon> _iconsSizedToFitTheStep() {
+  // Overrides the size of the icons to almost fit the step.
+  List<Icon> _iconsWithSizeOverridden() {
     return List.generate(icons.length, (index) {
       return Icon(
         icons[index].icon,

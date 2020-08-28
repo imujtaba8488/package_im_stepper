@@ -5,7 +5,7 @@ class OpacityAnimated extends StatefulWidget {
   final double begin;
   final double end;
   final Duration duration;
-  final animationDisabled;
+  final bool animationDisabled;
 
   OpacityAnimated({
     @required this.child,
