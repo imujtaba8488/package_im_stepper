@@ -23,18 +23,23 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text('Icon Stepper Example'),
         ),
-        body: ImageStepper(
-          // direction: Axis.vertical,
-          // stepRadius: 48.0,
-          activeStepBorderPadding: 20.0,
-          images: [
-            AssetImage('assets/me.jpg'),
-            AssetImage('assets/me.jpg'),
-            AssetImage('assets/me.jpg'),
-            AssetImage('assets/me.jpg'),
-            AssetImage('assets/me.jpg'),
-            AssetImage('assets/me.jpg'),
-            AssetImage('assets/me.jpg'),
+        body: Column(
+          children: [
+            ImageStepper(
+              // direction: Axis.vertical,
+              // stepRadius: 48.0,
+              activeStepBorderPadding: 5.0,
+              activeStepBorderWidth: 2.0,
+              images: [
+                AssetImage('assets/me.jpg'),
+                AssetImage('assets/me.jpg'),
+                AssetImage('assets/me.jpg'),
+                AssetImage('assets/me.jpg'),
+                AssetImage('assets/me.jpg'),
+                AssetImage('assets/me.jpg'),
+                AssetImage('assets/me.jpg'),
+              ],
+            ),
           ],
         ),
       ),
