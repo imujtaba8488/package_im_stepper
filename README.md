@@ -62,7 +62,7 @@ A simple to use image stepper widget, wherein, each image defines a step. Hence,
 total number of icons define total number of steps. Primarily designed to show
 steps as icons.
 
-![IconStepper]()
+![ImageStepper](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/image_stepper_02.gif)
 
 ### ImageStepper - Usage Note
 
