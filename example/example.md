@@ -1,6 +1,6 @@
 # DotStepper
 
-`import 'package:flutter/material.dart';
+```import 'package:flutter/material.dart';
 
 import 'package:im_stepper/stepper.dart';
 
@@ -67,4 +67,4 @@ class _MyAppState extends State<MyApp> {
       ),
     );
   }
-}`
+}```
