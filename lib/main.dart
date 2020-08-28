@@ -37,16 +37,6 @@ class _MyAppState extends State<MyApp> {
             AssetImage('assets/me.jpg'),
           ],
         ),
-        // body: IconStepper(
-        //   icons: [
-        //     Icon(Icons.hd),
-        //     Icon(Icons.hd),
-        //     Icon(Icons.hd),
-        //     Icon(Icons.hd),
-        //     Icon(Icons.hd),
-        //     Icon(Icons.hd),
-        //   ],
-        // ),
       ),
     );
   }
