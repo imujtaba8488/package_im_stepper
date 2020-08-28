@@ -25,19 +25,17 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Column(
           children: [
-            ImageStepper(
+            IconStepper(
               // direction: Axis.vertical,
               // stepRadius: 48.0,
               activeStepBorderPadding: 5.0,
               activeStepBorderWidth: 2.0,
-              images: [
-                AssetImage('assets/me.jpg'),
-                AssetImage('assets/me.jpg'),
-                AssetImage('assets/me.jpg'),
-                AssetImage('assets/me.jpg'),
-                AssetImage('assets/me.jpg'),
-                AssetImage('assets/me.jpg'),
-                AssetImage('assets/me.jpg'),
+              icons: [
+                Icon(Icons.home),
+                Icon(Icons.home),
+                Icon(Icons.home),
+                Icon(Icons.home),
+                Icon(Icons.home),
               ],
             ),
           ],
