@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-import 'icon_indicator.dart';
+import 'base_indicator.dart';
 import '../custom_paint/dotted_line.dart';
 
 /// Callback is fired when a step is reached.
 typedef OnStepReached = void Function(int index);
 
-class IconStepper extends StatefulWidget {
-  /// Each icon defines a step. Hence, total number of icons determines the total number of steps.
-  final List<Icon> icons;
+class BaseStepper extends StatefulWidget {
+  /// Each child defines a step. Hence, total number of icons determines the total number of steps.
+  final List<Widget> children;
 
   /// Whether to enable or disable the next and previous buttons.
   final bool enableNextPreviousButtons;
@@ -58,8 +58,17 @@ class IconStepper extends StatefulWidget {
   /// Whether the stepping is enabled or disabled.
   final bool steppingEnabled;
 
-  IconStepper({
-    this.icons,
+  /// Amount of padding on each side of the child widget.
+  final double padding;
+
+  /// Amount of margin on each side of the step.
+  final double margin;
+
+  /// The width of the active step border.
+  final double activeStepBorderWidth;
+
+  BaseStepper({
+    this.children,
     this.enableNextPreviousButtons = true,
     this.enableStepTapping = true,
     this.previousButtonIcon,
@@ -76,6 +85,9 @@ class IconStepper extends StatefulWidget {
     this.stepReachedAnimationEffect = Curves.bounceOut,
     this.stepReachedAnimationDuration = const Duration(seconds: 1),
     this.steppingEnabled = true,
+    this.padding = 5.0,
+    this.margin = 1.0,
+    this.activeStepBorderWidth = 0.5,
   }) {
     assert(
       lineDotRadius <= 10 && lineDotRadius > 0,
@@ -89,10 +101,10 @@ class IconStepper extends StatefulWidget {
   }
 
   @override
-  _IconStepperState createState() => _IconStepperState();
+  _BaseStepperState createState() => _BaseStepperState();
 }
 
-class _IconStepperState extends State<IconStepper> {
+class _BaseStepperState extends State<BaseStepper> {
   ScrollController _scrollController;
   int _selectedIndex;
 
@@ -104,10 +116,16 @@ class _IconStepperState extends State<IconStepper> {
     this._scrollController = ScrollController();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
+  }
+
   /// Controls the step scrolling.
   void _afterLayout(_) {
     // * This owes an explanation.
-    for (int i = 0; i < widget.icons.length; i++) {
+    for (int i = 0; i < widget.children.length; i++) {
       _scrollController.animateTo(
         i * ((widget.stepRadius * 2) + widget.lineLength),
         duration: widget.stepReachedAnimationDuration,
@@ -165,19 +183,19 @@ class _IconStepperState extends State<IconStepper> {
   /// Builds the stepper steps.
   List<Widget> _buildSteps() {
     return List.generate(
-      widget.icons.length,
+      widget.children.length,
       (index) {
         return widget.direction == Axis.horizontal
             ? Row(
                 children: <Widget>[
-                  _iconStepCustomized(index),
-                  _dottedLineCustomized(index, Axis.horizontal),
+                  _customizedIndicator(index),
+                  _customizedDottedLine(index, Axis.horizontal),
                 ],
               )
             : Column(
                 children: <Widget>[
-                  _iconStepCustomized(index),
-                  _dottedLineCustomized(index, Axis.vertical),
+                  _customizedIndicator(index),
+                  _customizedDottedLine(index, Axis.vertical),
                 ],
               );
       },
@@ -185,20 +203,19 @@ class _IconStepperState extends State<IconStepper> {
   }
 
   /// A customized IconStep.
-  Widget _iconStepCustomized(int index) {
-    return IconIndicator(
-      icon: Icon(
-        widget.icons[index].icon,
-        size: widget.stepRadius,
-        color: widget.icons[index].color,
-      ),
+  Widget _customizedIndicator(int index) {
+    return BaseIndicator(
+      child: widget.children[index],
       isSelected: _selectedIndex == index,
       onPressed: widget.enableStepTapping
           ? () {
               if (widget.steppingEnabled) {
                 setState(() {
                   _selectedIndex = index;
-                  widget.onStepReached(_selectedIndex);
+
+                  if (widget.onStepReached != null) {
+                    widget.onStepReached(_selectedIndex);
+                  }
                 });
               }
             }
@@ -207,12 +224,15 @@ class _IconStepperState extends State<IconStepper> {
       activeColor: widget.activeStepColor,
       activeBorderColor: widget.activeStepBorderColor,
       radius: widget.stepRadius,
+      padding: widget.padding,
+      margin: widget.margin,
+      activeBorderWidth: widget.activeStepBorderWidth,
     );
   }
 
   /// A customized DottedLine.
-  Widget _dottedLineCustomized(int index, Axis axis) {
-    return index < widget.icons.length - 1
+  Widget _customizedDottedLine(int index, Axis axis) {
+    return index < widget.children.length - 1
         ? DottedLine(
             length: widget.lineLength ?? 50,
             color: widget.lineColor ?? Colors.blue,
@@ -239,7 +259,10 @@ class _IconStepperState extends State<IconStepper> {
           if (_selectedIndex > 0) {
             setState(() {
               _selectedIndex--;
-              widget.onStepReached(_selectedIndex);
+
+              if (widget.onStepReached != null) {
+                widget.onStepReached(_selectedIndex);
+              }
             });
           }
         },
@@ -250,7 +273,7 @@ class _IconStepperState extends State<IconStepper> {
   /// The next button.
   Widget _nextButton() {
     return IgnorePointer(
-      ignoring: _selectedIndex == widget.icons.length - 1,
+      ignoring: _selectedIndex == widget.children.length - 1,
       child: IconButton(
         visualDensity: VisualDensity.compact,
         icon: widget?.nextButtonIcon ??
@@ -260,11 +283,14 @@ class _IconStepperState extends State<IconStepper> {
                   : Icons.arrow_drop_down,
             ),
         onPressed: () {
-          if (_selectedIndex < widget.icons.length - 1 &&
+          if (_selectedIndex < widget.children.length - 1 &&
               widget.steppingEnabled) {
             setState(() {
               _selectedIndex++;
-              widget.onStepReached(_selectedIndex);
+
+              if (widget.onStepReached != null) {
+                widget.onStepReached(_selectedIndex);
+              }
             });
           }
         },

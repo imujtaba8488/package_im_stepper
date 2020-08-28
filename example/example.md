@@ -1,3 +1,14 @@
+# Examples - Table of Contents
+
+- [IconStepper](#iconstepper)
+
+- [DotStepper](#dotstepper)
+
+- [ImageStepper](#imagestepper)
+
+## IconStepper
+
+```dart
 import 'package:flutter/material.dart';
 
 import 'package:im_stepper/stepper.dart';
@@ -6,8 +17,7 @@ void main() {
   runApp(IconStepperDemo());
 }
 
-//-----------------------ICON STEPPER----------------------------------------//
-class IconStepperDemo extends StatefulWidget {
+class MyApp extends StatefulWidget {
   @override
   _IconStepperDemo createState() => _IconStepperDemo();
 }
@@ -129,14 +139,25 @@ class _IconStepperDemo extends State<IconStepperDemo> {
     }
   }
 }
+```
 
-//-----------------------DOT STEPPER----------------------------------------//
-class DotStepperDemo extends StatefulWidget {
-  @override
-  _DotStepperDemoState createState() => _DotStepperDemoState();
+## DotStepper
+
+```Dart
+import 'package:flutter/material.dart';
+
+import 'package:im_stepper/stepper.dart';
+
+void main() {
+  runApp(MyApp());
 }
 
-class _DotStepperDemoState extends State<DotStepper> {
+class MyApp extends StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
   bool stepNext = false;
   bool stepPrevious = false;
 
@@ -191,3 +212,52 @@ class _DotStepperDemoState extends State<DotStepper> {
     );
   }
 }
+```
+
+## ImageStepper
+
+```Dart
+import 'package:flutter/material.dart';
+
+
+import 'package:im_stepper/stepper.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatefulWidget {
+  // This widget is the root of your application.
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  int selectedIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Icon Stepper Example'),
+        ),
+        body: ImageStepper(
+          // direction: Axis.vertical,
+          // stepRadius: 48.0,
+          activeStepBorderPadding: 20.0,
+          images: [
+            AssetImage('assets/me.jpg'),
+            AssetImage('assets/me.jpg'),
+            AssetImage('assets/me.jpg'),
+            AssetImage('assets/me.jpg'),
+            AssetImage('assets/me.jpg'),
+            AssetImage('assets/me.jpg'),
+            AssetImage('assets/me.jpg'),
+          ],
+        ),
+      ),
+    );
+  }
+}
+```
