@@ -23,11 +23,11 @@ steppers appropriate for your application:-
 
 ## Table of Contents
 
-| **Steppers**                  | **Version Available** |
-|-------------------------------|-----------------------|
-| [IconStepper](#iconstepper)   | 0.1.2+3               |
-| [ImageStepper](#imagestepper) | 0.1.2+1               |
-| [DotStepper](#dotstepper)     | 0.1.0                 |
+* [IconStepper](#iconstepper)
+
+* [ImageStepper](#imagestepper)
+
+* [DotStepper](#dotstepper)
 
 * [Feedback](#feedback)
 
@@ -39,7 +39,7 @@ steps as icons.
 
 ![IconStepper](https://github.com/imujtaba8488/showcase/blob/master/icon_stepper_05.gif)
 
-### IconStepper - Usage Note
+## IconStepper - Usage Note
 
 * __Important:__ IconStepper `direction` argument controls whether the stepper is displayed
 horizontally or vertically. A horizontal IconStepper can be wrapped within a Column
@@ -59,12 +59,12 @@ property to an appropriate value in a `StatefulWidget`.
 ## ImageStepper
 
 A simple to use image stepper widget, wherein, each image defines a step. Hence,
-total number of icons define total number of steps. Primarily designed to show
-steps as icons.
+total number of images define total number of steps. Primarily designed to show
+steps as images.
 
 ![ImageStepper](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/image_stepper_02.gif)
 
-### ImageStepper - Usage Note
+## ImageStepper - Usage Note
 
 * [Usage Note](#iconstepper---usage-note) - See IconStepper Usage Note.
 
@@ -73,7 +73,7 @@ steps as icons.
 A simple and smooth dot stepper widget with built-in animations. Each dot in a
 DotStepper represents a step.
 
-### Available Shapes
+## Available Shapes
 
  **Shapes**        | **Demo**
 -------------------|------------
@@ -82,7 +82,7 @@ DotStepper represents a step.
  Rounded Rectangle |![RR](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_rounded_rectangle.png)
  Line              |![Line](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_line.png)
 
-### Available Effects
+## Available Effects
 
  **Effect** | **Demo**
 ------------|----------------
@@ -94,7 +94,7 @@ DotStepper represents a step.
  Bullet     |![Bullet](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_bullet.gif)
  Jump       |![Jump](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_jump.gif)
 
-### DotStepper - Usage Note
+## DotStepper - Usage Note
 
 * __Important:__ It is important that a call to `goNext` and `goPrevious` is
 controlled by two variables in a `StatefulWidget` with a call to `setState` in
