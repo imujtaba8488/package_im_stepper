@@ -1,14 +1,15 @@
 # Examples
 
-* [Icon Stepper Example] ## IconStepper
+* [Icon Stepper Example] (## IconStepper)
 
-* [Image Stepper Example ] ## ImageStepper
+* [Image Stepper Example ] (## ImageStepper)
 
-* [Dot Stepper Example] ## DotStepper
+* [Dot Stepper Example] (## DotStepper)
 
 ## IconStepper
 
-```import 'package:flutter/material.dart';
+```dart
+import 'package:flutter/material.dart';
 import 'package:im_stepper/stepper.dart';
 
 void main() {
@@ -138,10 +139,12 @@ class _MyAppState extends State<MyApp> {
     }
   }
 }
+```
 
 ## DotStepper
 
-```import 'package:flutter/material.dart';
+```Dart
+import 'package:flutter/material.dart';
 
 import 'package:im_stepper/stepper.dart';
 
@@ -209,10 +212,12 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+```
 
 ## ImageStepper
 
-```import 'package:flutter/material.dart';
+```Dart
+import 'package:flutter/material.dart';
 
 
 import 'package:im_stepper/stepper.dart';
@@ -255,3 +260,4 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+```
