@@ -66,7 +66,7 @@ steps as icons.
 
 ### ImageStepper - Usage Note
 
-* [Usage Note](#iconstepper-usage-note) - See IconStepper Usage Note.
+* [Usage Note](#iconstepper---usage-note) - See IconStepper Usage Note.
 
 ## DotStepper
 
