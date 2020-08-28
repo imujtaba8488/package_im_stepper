@@ -1,10 +1,8 @@
 # Examples
 
-- [IconStepper](##icon-stepper) - IconStepper Example
-
-- [ImageStepper](##image-stepper) - ImageStepper Example
-
-- [DotStepper](##dot-stepper) - DotStepper Example
+- [IconStepper](#iconstepper)
+- [ImageStepper](#imagestepper)
+- [DotStepper](#dotstepper)
 
 ## IconStepper
 
