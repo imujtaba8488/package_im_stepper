@@ -9,7 +9,7 @@
 ## About
 
 A growing collection of widgets primarily used to step-through various
-steps/widgets in an application.
+steps/widgets or used as page indicators in an application.
 
 ## Description
 
@@ -41,7 +41,7 @@ steps as icons.
 
 ![IconStepper](https://github.com/imujtaba8488/showcase/blob/master/icon_stepper_05.gif)
 
-## IconStepper - Usage Note
+### IconStepper - Usage Note
 
 * __Important:__ IconStepper `direction` argument controls whether the stepper is displayed
 horizontally or vertically. A horizontal IconStepper can be wrapped within a Column
@@ -66,7 +66,7 @@ steps as images.
 
 ![ImageStepper](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/image_stepper_02.gif)
 
-## ImageStepper - Usage Note
+### ImageStepper - Usage Note
 
 * [Usage Note](#iconstepper---usage-note) - See IconStepper Usage Note.
 
@@ -96,7 +96,7 @@ DotStepper represents a step.
  Bullet     |![Bullet](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_bullet.gif)
  Jump       |![Jump](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_jump.gif)
 
-## DotStepper - Usage Note
+### DotStepper - Usage Note
 
 * __Important:__ It is important that a call to `goNext` and `goPrevious` is
 controlled by two variables in a `StatefulWidget` with a call to `setState` in
@@ -120,3 +120,5 @@ For any feedback please file an issue
 __[here](https://github.com/imujtaba8488/package_im_stepper/issues).__
 
 Please __Like__ to __support__!
+
+**[Back To Top](#iconstepper)**
