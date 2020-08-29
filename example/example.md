@@ -6,6 +6,8 @@
 
 - [ImageStepper](#imagestepper)
 
+- [NumberStepper](#numberstepper)
+
 ## IconStepper
 
 ```dart
@@ -255,6 +257,45 @@ class _MyAppState extends State<MyApp> {
             AssetImage('assets/me.jpg'),
             AssetImage('assets/me.jpg'),
           ],
+        ),
+      ),
+    );
+  }
+}
+```
+
+## NumberStepper
+
+```dart
+import 'package:flutter/material.dart';
+
+import 'package:im_stepper/stepper.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatefulWidget {
+  // This widget is the root of your application.
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  int selectedIndex = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('Icon Stepper Example'),
+        ),
+        body: NumberStepper(
+          // stepRadius: 48.0,
+          numbers: [1, 2, 3, 4, 5, 6],
+          direction: Axis.vertical,
+          numberStyle: TextStyle(color: Colors.white),
         ),
       ),
     );

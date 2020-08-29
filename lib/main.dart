@@ -21,12 +21,11 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: Text('Icon Stepper Example'),
         ),
-        body: ImageStepper(
-          images: [
-            AssetImage('assets/me.jpg'),
-            AssetImage('assets/me.jpg'),
-            AssetImage('assets/me.jpg'),
-          ],
+        body: NumberStepper(
+          stepRadius: 12.0,
+          numbers: [1, 2, 3, 4, 5, 6],
+          // direction: Axis.vertical,
+          numberStyle: TextStyle(color: Colors.white),
         ),
       ),
     );
