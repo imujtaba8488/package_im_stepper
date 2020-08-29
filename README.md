@@ -104,9 +104,9 @@ order for the DotStepper to work. __Please look at the Example.__
 
 ## NumberStepper
 
-A simple to use image stepper widget, wherein, each image defines a step. Hence,
-total number of icons define total number of steps. Primarily designed to show
-steps as icons.
+A simple to use number stepper widget, wherein, each number defines a step. Hence,
+total count of numbers define total number of steps. Primarily designed to show
+steps as numbers.
 
 ![ImageStepper](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/number_stepper_01.gif)
 
