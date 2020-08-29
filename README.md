@@ -119,7 +119,6 @@ steps as icons.
 For any feedback please file an issue
 __[here](https://github.com/imujtaba8488/package_im_stepper/issues).__
 
-:::image type="content" source="https://github.com/imujtaba8488/showcase/blob/master/thumbs_up.png" alt-text="test":::
-Please __Like__ to __support__!
+[Like](https://github.com/imujtaba8488/showcase/blob/master/thumbs_up.png) Please __Like__ to __support__!
 
 **[Back To Top](#about)**
