@@ -29,6 +29,8 @@ steppers appropriate for your application:-
 
 * [DotStepper](#dotstepper)
 
+* [NumberStepper](#numberstepper)
+
 * [Feedback](#feedback)
 
 ## IconStepper
@@ -99,6 +101,18 @@ DotStepper represents a step.
 * __Important:__ It is important that a call to `goNext` and `goPrevious` is
 controlled by two variables in a `StatefulWidget` with a call to `setState` in
 order for the DotStepper to work. __Please look at the Example.__
+
+## NumberStepper
+
+A simple to use image stepper widget, wherein, each image defines a step. Hence,
+total number of icons define total number of steps. Primarily designed to show
+steps as icons.
+
+![ImageStepper](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/number_stepper_01.gif)
+
+### NumberStepper - Usage Note
+
+* [Usage Note](#iconstepper---usage-note) - See IconStepper Usage Note.
 
 ## Feedback
 
