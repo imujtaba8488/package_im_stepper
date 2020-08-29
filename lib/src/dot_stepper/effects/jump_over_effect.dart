@@ -13,7 +13,7 @@ class JumpOver extends DotStepperEffect {
   void draw(Canvas canvas) {
     Animation jumpUp = Tween(
       begin: 0.0,
-      end: jumpFromAbove ? -dotRadius * 4.0: dotRadius * 4.0,
+      end: jumpFromAbove ? -dotRadius * 4.0 : dotRadius * 4.0,
     ).animate(animationController);
 
     Animation jumpDown = Tween(
