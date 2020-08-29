@@ -1,5 +1,11 @@
 # ChangeLog
 
+## 0.1.2+4
+
+### Saturday, 29th August, 2020
+
+* Added NumberStepper.
+
 ## 0.1.2+3
 
 ### Friday, 28th August, 2020

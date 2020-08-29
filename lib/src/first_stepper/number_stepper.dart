@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'base_stepper.dart';
 
 class NumberStepper extends StatelessWidget {
-  /// Each image defines a step. Hence, total number of images determines the total number of steps.
+  /// Each number defines a step. Hence, total count of numbers determines the total number of steps.
   final List<int> numbers;
 
   /// Whether to enable or disable the next and previous buttons.
@@ -116,7 +116,7 @@ class NumberStepper extends StatelessWidget {
     );
   }
 
-  /// Wraps the images within a CircleAvatar for displaying images in a circle.
+  /// Wraps the integer numbers in Text widget. User style is also applied except the `fontSize` which is calculated automatically.
   List<Widget> _numbersWrappedInText() {
     return List.generate(numbers.length, (index) {
       return FittedBox(
