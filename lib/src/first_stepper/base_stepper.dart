@@ -67,10 +67,48 @@ class BaseStepper extends StatefulWidget {
   /// The width of the active step border.
   final double activeStepBorderWidth;
 
+  /// Whether to go to the next step or not.
   final bool goNext;
 
+  /// Whether to go to the previous step or not.
   final bool goPrevious;
 
+  /// Whether to disable scrolling or not.
+  final scrollingDisabled;
+
+  /// Used when the stepper is controlled externally using the `goNext` and `goPrevious` properties. In which case, two variables must be maintained in a StatefulWidget to set the values of `gotNext` and `goPrevious` in a call to `setState()`, and if the stepping is moving foward `gotNext` must be set to true and `goPrevious` must be set to `false`. If moving backward `goPrevious` must be set to `true` and `goNext` must be set to `false`.
+  ///
+  /// For more information, see example [here](https://pub.dev/packages/im_stepper/example).
+  BaseStepper.externallyControlled({
+    this.children,
+    this.direction = Axis.horizontal,
+    this.stepColor,
+    this.activeStepColor,
+    this.activeStepBorderColor,
+    this.lineColor,
+    this.lineLength = 50.0,
+    this.lineDotRadius = 1.0,
+    this.stepRadius = 24.0,
+    this.stepReachedAnimationEffect = Curves.bounceOut,
+    this.stepReachedAnimationDuration = const Duration(seconds: 1),
+    this.steppingEnabled = true,
+    this.padding = 5.0,
+    this.margin = 1.0,
+    this.activeStepBorderWidth = 0.5,
+    this.goNext,
+    this.goPrevious,
+    this.scrollingDisabled = false,
+  })  : this.enableNextPreviousButtons = false,
+        this.enableStepTapping = false,
+        this.onStepReached = null,
+        this.nextButtonIcon = null,
+        this.previousButtonIcon = null {
+    _assertions();
+  }
+
+  /// Used when the stepping is controller either by using the built-in next/previous buttons or by tapping. If stepping needs to be controlled externally then using the `BaseStepper.externallyControlled` constructor is a more optimized approach.
+  ///
+  /// However, if situation demands using this constructor, but externally controlling the stepper is still required, then `enableNextPreviousButtons`, `enableStepTapping` must be disabled and `previousButtonIcon`, `nextButtonIcon`, and `onStepReached` must be `null`.
   BaseStepper({
     this.children,
     this.enableNextPreviousButtons = true,
@@ -92,9 +130,15 @@ class BaseStepper extends StatefulWidget {
     this.padding = 5.0,
     this.margin = 1.0,
     this.activeStepBorderWidth = 0.5,
-    this.goNext = false,
-    this.goPrevious = false,
+    this.goNext,
+    this.goPrevious,
+    this.scrollingDisabled = false,
   }) {
+    _assertions();
+  }
+
+  /// What must be valid at the time of creating a BaseStepper.
+  void _assertions() {
     assert(
       lineDotRadius <= 10 && lineDotRadius > 0,
       'lineDotRadius must be less than or equal to 10 and greater than 0',
@@ -103,6 +147,22 @@ class BaseStepper extends StatefulWidget {
     assert(
       stepRadius > 0,
       'iconIndicatorRadius must be greater than 0',
+    );
+
+    assert(
+      goNext != null && goPrevious != null && onStepReached == null ||
+          goNext == null && goPrevious == null && onStepReached != null ||
+          goNext == null && goPrevious == null && onStepReached == null,
+      'onStepReached cannot be invoked when goNext and goPrevious are used to control the stepper externally. In this case you should maintain the index separately in your widget.',
+    );
+
+    assert(
+      goNext != null &&
+              goPrevious != null &&
+              enableNextPreviousButtons == false &&
+              enableStepTapping == false ||
+          goNext == null && goPrevious == null,
+      'When goNext and goPrevious are used for externally tapping, the next/previous buttons and the stepTapping should be disabled',
     );
   }
 
@@ -114,20 +174,28 @@ class _BaseStepperState extends State<BaseStepper> {
   ScrollController _scrollController;
   int _selectedIndex;
 
+  // Whether the user is controlling the stepping externally using the goNext and goPrevious arguments.
+  bool _externalSteppingEnabled;
+
   @override
   void initState() {
     super.initState();
 
     _selectedIndex = 0;
+    _externalSteppingEnabled =
+        widget.goNext != null && widget.goPrevious != null;
     this._scrollController = ScrollController();
   }
 
   @override
   void didUpdateWidget(BaseStepper oldWidget) {
-    if (widget.goNext) {
-      goToNextStep();
-    } else if (widget.goPrevious) {
-      goToPreviousStep();
+    // Only kick-in in the user is controller the stepping externally.
+    if (_externalSteppingEnabled) {
+      if (widget.goNext) {
+        _goToNextStep();
+      } else if (widget.goPrevious) {
+        _goToPreviousStep();
+      }
     }
     super.didUpdateWidget(oldWidget);
   }
@@ -186,6 +254,7 @@ class _BaseStepperState extends State<BaseStepper> {
     return SingleChildScrollView(
       scrollDirection: widget.direction,
       controller: _scrollController,
+      physics: widget.scrollingDisabled ? NeverScrollableScrollPhysics() : null,
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 8.0),
         padding: const EdgeInsets.all(8.0),
@@ -271,7 +340,7 @@ class _BaseStepperState extends State<BaseStepper> {
                   ? Icons.arrow_left
                   : Icons.arrow_drop_up,
             ),
-        onPressed: goToPreviousStep,
+        onPressed: _goToPreviousStep,
       ),
     );
   }
@@ -288,12 +357,13 @@ class _BaseStepperState extends State<BaseStepper> {
                   ? Icons.arrow_right
                   : Icons.arrow_drop_down,
             ),
-        onPressed: goToNextStep,
+        onPressed: _goToNextStep,
       ),
     );
   }
 
-  void goToNextStep() {
+  /// Contains the logic for going to the next step.
+  void _goToNextStep() {
     if (_selectedIndex < widget.children.length - 1 && widget.steppingEnabled) {
       setState(() {
         _selectedIndex++;
@@ -305,7 +375,8 @@ class _BaseStepperState extends State<BaseStepper> {
     }
   }
 
-  void goToPreviousStep() {
+  /// Controls the logic for going to the previous step.
+  void _goToPreviousStep() {
     if (_selectedIndex > 0) {
       setState(() {
         _selectedIndex--;

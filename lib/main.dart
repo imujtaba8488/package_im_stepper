@@ -39,19 +39,19 @@ class _IconStepperDemo extends State<IconStepperDemo> {
                 ],
                 // borderRadius: BorderRadius.circular(5.0),
               ),
-              child: IconStepper(
+              child: IconStepper.externallyControlled(
                 goNext: next,
                 goPrevious: previous,
-                enableNextPreviousButtons: false,
-                enableStepTapping: false,
                 direction: Axis.horizontal,
                 stepColor: Colors.white,
                 activeStepColor: Colors.amber,
                 lineColor: Colors.amberAccent,
                 lineLength: 75,
-                onStepReached: (value) {
-                  selectedIndex = value;
-                },
+                // onStepReached: (value) {
+                //   setState(() {
+                //     selectedIndex = value;
+                //   });
+                // },
                 steppingEnabled: true,
                 icons: [
                   Icon(Icons.home),

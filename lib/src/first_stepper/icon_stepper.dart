@@ -63,9 +63,41 @@ class IconStepper extends StatelessWidget {
   /// Whether the stepping is enabled or disabled.
   final bool steppingEnabled;
 
+  /// Whether to go to the next step or not.
   final bool goNext;
 
+  /// Whether to go the 
   final bool goPrevious;
+
+  final bool scrollingDisabled;
+
+  final bool _isExternallyControlled;
+
+  IconStepper.externallyControlled({
+    this.icons,
+    this.direction = Axis.horizontal,
+    this.stepColor,
+    this.stepPadding = 1.0,
+    this.activeStepColor,
+    this.activeStepBorderColor,
+    this.activeStepBorderWidth = 0.5,
+    this.activeStepBorderPadding = 5.0,
+    this.lineColor,
+    this.lineLength = 50.0,
+    this.lineDotRadius = 1.0,
+    this.stepRadius = 24.0,
+    this.stepReachedAnimationEffect = Curves.bounceOut,
+    this.stepReachedAnimationDuration = const Duration(seconds: 1),
+    this.steppingEnabled = true,
+    this.goNext,
+    this.goPrevious,
+    this.scrollingDisabled = false,
+  })  : this.enableNextPreviousButtons = false,
+        this.enableStepTapping = false,
+        this.previousButtonIcon = null,
+        this.nextButtonIcon = null,
+        this.onStepReached = null,
+        this._isExternallyControlled = true;
 
   IconStepper({
     this.icons,
@@ -88,36 +120,59 @@ class IconStepper extends StatelessWidget {
     this.stepReachedAnimationEffect = Curves.bounceOut,
     this.stepReachedAnimationDuration = const Duration(seconds: 1),
     this.steppingEnabled = true,
-    this.goNext = false,
-    this.goPrevious = false,
-  });
+    this.goNext,
+    this.goPrevious,
+    this.scrollingDisabled = false,
+  }) : this._isExternallyControlled = false;
 
   @override
   Widget build(BuildContext context) {
-    return BaseStepper(
-      children: _iconsWithSizeOverridden(),
-      enableNextPreviousButtons: enableNextPreviousButtons,
-      enableStepTapping: enableStepTapping,
-      previousButtonIcon: previousButtonIcon,
-      nextButtonIcon: nextButtonIcon,
-      onStepReached: onStepReached,
-      direction: direction,
-      stepColor: stepColor,
-      activeStepColor: activeStepColor,
-      activeStepBorderColor: activeStepBorderColor,
-      activeStepBorderWidth: activeStepBorderWidth,
-      lineColor: lineColor,
-      lineLength: lineLength,
-      lineDotRadius: lineDotRadius,
-      stepRadius: stepRadius,
-      stepReachedAnimationEffect: stepReachedAnimationEffect,
-      stepReachedAnimationDuration: stepReachedAnimationDuration,
-      steppingEnabled: steppingEnabled,
-      margin: activeStepBorderPadding,
-      padding: stepPadding,
-      goNext: goNext,
-      goPrevious: goPrevious,
-    );
+    return _isExternallyControlled
+        ? BaseStepper.externallyControlled(
+            children: _iconsWithSizeOverridden(),
+            direction: direction,
+            stepColor: stepColor,
+            activeStepColor: activeStepColor,
+            activeStepBorderColor: activeStepBorderColor,
+            activeStepBorderWidth: activeStepBorderWidth,
+            lineColor: lineColor,
+            lineLength: lineLength,
+            lineDotRadius: lineDotRadius,
+            stepRadius: stepRadius,
+            stepReachedAnimationEffect: stepReachedAnimationEffect,
+            stepReachedAnimationDuration: stepReachedAnimationDuration,
+            steppingEnabled: steppingEnabled,
+            margin: activeStepBorderPadding,
+            padding: stepPadding,
+            goNext: goNext,
+            goPrevious: goPrevious,
+            scrollingDisabled: scrollingDisabled,
+          )
+        : BaseStepper(
+            children: _iconsWithSizeOverridden(),
+            enableNextPreviousButtons: enableNextPreviousButtons,
+            enableStepTapping: enableStepTapping,
+            previousButtonIcon: previousButtonIcon,
+            nextButtonIcon: nextButtonIcon,
+            onStepReached: onStepReached,
+            direction: direction,
+            stepColor: stepColor,
+            activeStepColor: activeStepColor,
+            activeStepBorderColor: activeStepBorderColor,
+            activeStepBorderWidth: activeStepBorderWidth,
+            lineColor: lineColor,
+            lineLength: lineLength,
+            lineDotRadius: lineDotRadius,
+            stepRadius: stepRadius,
+            stepReachedAnimationEffect: stepReachedAnimationEffect,
+            stepReachedAnimationDuration: stepReachedAnimationDuration,
+            steppingEnabled: steppingEnabled,
+            margin: activeStepBorderPadding,
+            padding: stepPadding,
+            goNext: goNext,
+            goPrevious: goPrevious,
+            scrollingDisabled: scrollingDisabled,
+          );
   }
 
   // Overrides the size of the icons to almost fit the step.
