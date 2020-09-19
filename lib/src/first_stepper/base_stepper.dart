@@ -67,6 +67,10 @@ class BaseStepper extends StatefulWidget {
   /// The width of the active step border.
   final double activeStepBorderWidth;
 
+  final bool goNext;
+
+  final bool goPrevious;
+
   BaseStepper({
     this.children,
     this.enableNextPreviousButtons = true,
@@ -88,6 +92,8 @@ class BaseStepper extends StatefulWidget {
     this.padding = 5.0,
     this.margin = 1.0,
     this.activeStepBorderWidth = 0.5,
+    this.goNext = false,
+    this.goPrevious = false,
   }) {
     assert(
       lineDotRadius <= 10 && lineDotRadius > 0,
@@ -114,6 +120,16 @@ class _BaseStepperState extends State<BaseStepper> {
 
     _selectedIndex = 0;
     this._scrollController = ScrollController();
+  }
+
+  @override
+  void didUpdateWidget(BaseStepper oldWidget) {
+    if (widget.goNext) {
+      goToNextStep();
+    } else if (widget.goPrevious) {
+      goToPreviousStep();
+    }
+    super.didUpdateWidget(oldWidget);
   }
 
   @override
@@ -255,17 +271,7 @@ class _BaseStepperState extends State<BaseStepper> {
                   ? Icons.arrow_left
                   : Icons.arrow_drop_up,
             ),
-        onPressed: () {
-          if (_selectedIndex > 0) {
-            setState(() {
-              _selectedIndex--;
-
-              if (widget.onStepReached != null) {
-                widget.onStepReached(_selectedIndex);
-              }
-            });
-          }
-        },
+        onPressed: goToPreviousStep,
       ),
     );
   }
@@ -282,19 +288,32 @@ class _BaseStepperState extends State<BaseStepper> {
                   ? Icons.arrow_right
                   : Icons.arrow_drop_down,
             ),
-        onPressed: () {
-          if (_selectedIndex < widget.children.length - 1 &&
-              widget.steppingEnabled) {
-            setState(() {
-              _selectedIndex++;
-
-              if (widget.onStepReached != null) {
-                widget.onStepReached(_selectedIndex);
-              }
-            });
-          }
-        },
+        onPressed: goToNextStep,
       ),
     );
+  }
+
+  void goToNextStep() {
+    if (_selectedIndex < widget.children.length - 1 && widget.steppingEnabled) {
+      setState(() {
+        _selectedIndex++;
+
+        if (widget.onStepReached != null) {
+          widget.onStepReached(_selectedIndex);
+        }
+      });
+    }
+  }
+
+  void goToPreviousStep() {
+    if (_selectedIndex > 0) {
+      setState(() {
+        _selectedIndex--;
+
+        if (widget.onStepReached != null) {
+          widget.onStepReached(_selectedIndex);
+        }
+      });
+    }
   }
 }

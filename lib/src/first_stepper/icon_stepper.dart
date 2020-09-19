@@ -63,6 +63,10 @@ class IconStepper extends StatelessWidget {
   /// Whether the stepping is enabled or disabled.
   final bool steppingEnabled;
 
+  final bool goNext;
+
+  final bool goPrevious;
+
   IconStepper({
     this.icons,
     this.enableNextPreviousButtons = true,
@@ -84,6 +88,8 @@ class IconStepper extends StatelessWidget {
     this.stepReachedAnimationEffect = Curves.bounceOut,
     this.stepReachedAnimationDuration = const Duration(seconds: 1),
     this.steppingEnabled = true,
+    this.goNext = false,
+    this.goPrevious = false,
   });
 
   @override
@@ -109,6 +115,8 @@ class IconStepper extends StatelessWidget {
       steppingEnabled: steppingEnabled,
       margin: activeStepBorderPadding,
       padding: stepPadding,
+      goNext: goNext,
+      goPrevious: goPrevious,
     );
   }
 
