@@ -1,5 +1,19 @@
 # ChangeLog
 
+## 0.1.2+5
+
+### Sunday, 20th September, 2020
+
+* IconStepper, ImageStepper, and NumberStepper can now be controlled from external buttons, by using the relevant constructor marked as `FooStepper.externallyControlled`. @ github issues [#3](https://github.com/imujtaba8488/package_im_stepper/issues/3) and [#4](https://github.com/imujtaba8488/package_im_stepper/issues/4)
+
+* Added the option to disable scrolling the stepper, if required.
+
+* Refactored the code.
+
+* Updated example to include using an externally controller stepper.
+
+* Documentation improvements.
+
 ## 0.1.2+4
 
 ### Saturday, 29th August, 2020

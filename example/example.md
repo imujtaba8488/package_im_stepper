@@ -147,7 +147,7 @@ class _IconStepperDemo extends State<IconStepperDemo> {
 
 ## IconStepper-Externally Controlled
 
-When the IconStepper requires to be controlled from external buttons rather than the built-in next/previous buttons or the stepTapping itself, then `IconStepper.externallyControlled` constructor must be used. __Note__ same applied to ImageStepper and NumberStepper.
+When the IconStepper requires to be controlled from external buttons rather than the built-in next/previous buttons or the stepTapping itself, then `IconStepper.externallyControlled` constructor must be used. __Note__ same applies to ImageStepper and NumberStepper.
 
 ```dart
  import 'package:flutter/material.dart';

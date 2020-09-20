@@ -58,6 +58,8 @@ a Container and specify the `decoration` argument.
 * To enable validation before the next step is reached, set the `steppingEnabled`
 property to an appropriate value in a `StatefulWidget`.
 
+* Github issues [#3](https://github.com/imujtaba8488/package_im_stepper/issues/3) and [#4](https://github.com/imujtaba8488/package_im_stepper/issues/3) stand resolved. To control the IconStepper, ImageStepper, or the NumberStepper by using buttons etc from outside the stepper, use the `Foo.externallyControlled()` constructor and call `goNext` and `goPrevious` controlled by two variables in a `StatefulWidget` within a `setState` call. For further information see example [here](https://pub.dev/packages/im_stepper/example)
+
 ## ImageStepper
 
 A simple to use image stepper widget, wherein, each image defines a step. Hence,
