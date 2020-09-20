@@ -122,5 +122,3 @@ For any feedback please file an issue
 __[here](https://github.com/imujtaba8488/package_im_stepper/issues).__
 
 ![Like](https://github.com/imujtaba8488/showcase/blob/master/thumbs_up.png) Please __Like__ to __support__!
-
-**[Back To Top](#about)**
