@@ -12,10 +12,12 @@ class IconStepperDemo extends StatefulWidget {
 }
 
 class _IconStepperDemo extends State<IconStepperDemo> {
-  int selectedIndex = 0;
+  // MUST BE MAINTAINED, SEPARATELY.
+  int currentIndex = 0;
 
-  bool next = false;
-  bool previous = false;
+  // THESE MUST BE USED TO CONTROL THE STEPPER FROM EXTERNALLY.
+  bool goNext = false;
+  bool goPrevious = false;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,6 @@ class _IconStepperDemo extends State<IconStepperDemo> {
         body: Column(
           children: <Widget>[
             Container(
-              // margin: EdgeInsets.all(5.0),
               decoration: BoxDecoration(
                 color: Colors.blueGrey,
                 boxShadow: [
@@ -40,18 +41,13 @@ class _IconStepperDemo extends State<IconStepperDemo> {
                 // borderRadius: BorderRadius.circular(5.0),
               ),
               child: IconStepper.externallyControlled(
-                goNext: next,
-                goPrevious: previous,
+                goNext: goNext,
+                goPrevious: goPrevious,
                 direction: Axis.horizontal,
                 stepColor: Colors.white,
                 activeStepColor: Colors.amber,
                 lineColor: Colors.amberAccent,
                 lineLength: 75,
-                // onStepReached: (value) {
-                //   setState(() {
-                //     selectedIndex = value;
-                //   });
-                // },
                 steppingEnabled: true,
                 icons: [
                   Icon(Icons.home),
@@ -74,7 +70,7 @@ class _IconStepperDemo extends State<IconStepperDemo> {
                 margin: EdgeInsets.all(5.0),
                 child: FittedBox(
                   child: Center(
-                    child: Text('${selectedIndex + 1}'),
+                    child: Text('${currentIndex + 1}'),
                   ),
                 ),
               ),
@@ -84,18 +80,28 @@ class _IconStepperDemo extends State<IconStepperDemo> {
               children: [
                 RaisedButton(
                   onPressed: () {
+                    // MUST TO CONTROL STEPPER FROM EXTERNAL BUTTONS.
                     setState(() {
-                      next = false;
-                      previous = true;
+                      goNext = false;
+                      goPrevious = true;
+
+                      if (currentIndex > 0) {
+                        currentIndex--;
+                      }
                     });
                   },
                   child: Text('Previous'),
                 ),
                 RaisedButton(
                   onPressed: () {
+                    // MUST TO CONTROL STEPPER FROM EXTERNAL BUTTONS.
                     setState(() {
-                      next = true;
-                      previous = false;
+                      goNext = true;
+                      goPrevious = false;
+
+                      if (currentIndex < 3) {
+                        currentIndex++;
+                      }
                     });
                   },
                   child: Text('Next'),
@@ -109,7 +115,7 @@ class _IconStepperDemo extends State<IconStepperDemo> {
   }
 
   String header() {
-    switch (selectedIndex) {
+    switch (currentIndex) {
       case 0:
         return 'Educational Background';
 
@@ -121,18 +127,6 @@ class _IconStepperDemo extends State<IconStepperDemo> {
 
       case 3:
         return 'Sports';
-
-      case 4:
-        return 'Specially abled';
-
-      case 5:
-        return 'Personal Details';
-
-      case 6:
-        return 'Social Details';
-
-      case 7:
-        return 'Review';
 
       default:
         return 'Unknown';

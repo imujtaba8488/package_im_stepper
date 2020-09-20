@@ -95,20 +95,25 @@ class BaseStepper extends StatefulWidget {
     this.padding = 5.0,
     this.margin = 1.0,
     this.activeStepBorderWidth = 0.5,
-    this.goNext,
-    this.goPrevious,
+    this.goNext = false,
+    this.goPrevious = false,
     this.scrollingDisabled = false,
   })  : this.enableNextPreviousButtons = false,
         this.enableStepTapping = false,
         this.onStepReached = null,
         this.nextButtonIcon = null,
         this.previousButtonIcon = null {
-    _assertions();
+    _defaultAssertions();
+
+    assert(
+      goNext == true && goPrevious == false ||
+          goPrevious == true && goNext == false ||
+          goNext == false && goPrevious == false,
+      'Both goNext and goPrevious cannot be true at the same time',
+    );
   }
 
   /// Used when the stepping is controller either by using the built-in next/previous buttons or by tapping. If stepping needs to be controlled externally then using the `BaseStepper.externallyControlled` constructor is a more optimized approach.
-  ///
-  /// However, if situation demands using this constructor, but externally controlling the stepper is still required, then `enableNextPreviousButtons`, `enableStepTapping` must be disabled and `previousButtonIcon`, `nextButtonIcon`, and `onStepReached` must be `null`.
   BaseStepper({
     this.children,
     this.enableNextPreviousButtons = true,
@@ -130,15 +135,14 @@ class BaseStepper extends StatefulWidget {
     this.padding = 5.0,
     this.margin = 1.0,
     this.activeStepBorderWidth = 0.5,
-    this.goNext,
-    this.goPrevious,
     this.scrollingDisabled = false,
-  }) {
-    _assertions();
+  })  : this.goNext = false,
+        this.goPrevious = false {
+    _defaultAssertions();
   }
 
-  /// What must be valid at the time of creating a BaseStepper.
-  void _assertions() {
+  /// What must be valid in any case at the time of creating a BaseStepper.
+  void _defaultAssertions() {
     assert(
       lineDotRadius <= 10 && lineDotRadius > 0,
       'lineDotRadius must be less than or equal to 10 and greater than 0',
@@ -147,22 +151,6 @@ class BaseStepper extends StatefulWidget {
     assert(
       stepRadius > 0,
       'iconIndicatorRadius must be greater than 0',
-    );
-
-    assert(
-      goNext != null && goPrevious != null && onStepReached == null ||
-          goNext == null && goPrevious == null && onStepReached != null ||
-          goNext == null && goPrevious == null && onStepReached == null,
-      'onStepReached cannot be invoked when goNext and goPrevious are used to control the stepper externally. In this case you should maintain the index separately in your widget.',
-    );
-
-    assert(
-      goNext != null &&
-              goPrevious != null &&
-              enableNextPreviousButtons == false &&
-              enableStepTapping == false ||
-          goNext == null && goPrevious == null,
-      'When goNext and goPrevious are used for externally tapping, the next/previous buttons and the stepTapping should be disabled',
     );
   }
 
@@ -174,23 +162,17 @@ class _BaseStepperState extends State<BaseStepper> {
   ScrollController _scrollController;
   int _selectedIndex;
 
-  // Whether the user is controlling the stepping externally using the goNext and goPrevious arguments.
-  bool _externalSteppingEnabled;
-
   @override
   void initState() {
     super.initState();
-
     _selectedIndex = 0;
-    _externalSteppingEnabled =
-        widget.goNext != null && widget.goPrevious != null;
     this._scrollController = ScrollController();
   }
 
   @override
   void didUpdateWidget(BaseStepper oldWidget) {
-    // Only kick-in in the user is controller the stepping externally.
-    if (_externalSteppingEnabled) {
+    // Only kick-in if the Stepper is controlled from externally, Hence, either the value of goNext or the value of goPrevious will be true.
+    if (widget.goNext || widget.goPrevious) {
       if (widget.goNext) {
         _goToNextStep();
       } else if (widget.goPrevious) {
