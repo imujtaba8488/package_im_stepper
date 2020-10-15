@@ -10,11 +10,11 @@
 
 Here's a collection of articles, examples, posts, etc. about im_stepper. If you find another one please let me know.
 
-* Medium Article with IconStepper Example: [Beautiful Page Indicators and Steppers with the im_stepper package](https://imujtaba8488.medium.com/beautiful-page-indicators-and-steppers-with-the-im-stepper-package-8c091cf5364e)
+* Medium Article with IconStepper Example: [Beautiful Page Indicators and Steppers with the im_stepper package](https://imujtaba8488.medium.com/beautiful-page-indicators-and-steppers-with-the-im-stepper-package-8c091cf5364e).
 
 ## Recent Changes
 
-Here's a list of some important changes. Find complete list of changes see changelog [here](https://pub.dev/packages/im_stepper/changelog)
+Here's a list of some important changes in version: 0.1.2+6. For a complete list of changes see changelog [here](https://pub.dev/packages/im_stepper/changelog).
 
 * BugFix - ticker disposed with active ticker. [count: 2]
 
