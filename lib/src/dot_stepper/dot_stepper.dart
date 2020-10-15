@@ -138,9 +138,9 @@ class _DotStepperState extends State<DotStepper>
 
   @override
   void dispose() {
-    super.dispose();
     _animationController.dispose();
     _scrollController.dispose();
+    super.dispose();
   }
 
   @override

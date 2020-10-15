@@ -1,5 +1,13 @@
 # ChangeLog
 
+## 0.1.2+6
+
+### Thursday, 15th October, 2020
+
+* __BugFix:__ FlutterError (_OpacityAnimatedState#aa454(ticker active) was disposed with an active Ticker, [pull request](https://github.com/imujtaba8488/package_im_stepper/pull/6) by [mattbreeland](https://github.com/mattbreeland)
+
+---
+
 ## 0.1.2+5
 
 ### Sunday, 20th September, 2020
@@ -14,11 +22,15 @@
 
 * Documentation improvements.
 
+---
+
 ## 0.1.2+4
 
 ### Saturday, 29th August, 2020
 
 * Added NumberStepper.
+
+---
 
 ## 0.1.2+3
 
@@ -32,11 +44,15 @@
 
 * Updated the examples.
 
+---
+
 ## 0.1.2+2
 
 ### Wednesday, 19th August, 2020
 
 * Added Dot Shapes to DotStepper.
+
+---
 
 ## 0.1.2+1
 
@@ -44,6 +60,8 @@
 
 * Added DotStepper.
 * Added example for DotStepper
+
+---
 
 ## 0.1.1
 
@@ -56,6 +74,8 @@ vertical mode.
 before the next step is reached. Thanks @ Mohamed Elyamani
 
 * Refactored & optimized the code.
+
+---
 
 ## 0.1.0
 

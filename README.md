@@ -6,6 +6,14 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/imujtaba8488/package_im_stepper)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/imujtaba8488/package_im_stepper)
 
+## Publications
+
+* Medium Post: [Beautiful Page Indicators and Steppers with the im_stepper package](https://imujtaba8488.medium.com/beautiful-page-indicators-and-steppers-with-the-im-stepper-package-8c091cf5364e)
+
+## Recent Changes
+
+* BugFix - ticker disposed with active ticker. [More Info](https://pub.dev/packages/im_stepper/changelog)
+
 ## About
 
 A growing collection of widgets primarily used to step-through various
@@ -122,3 +130,9 @@ For any feedback please file an issue
 __[here](https://github.com/imujtaba8488/package_im_stepper/issues).__
 
 ![Like](https://github.com/imujtaba8488/showcase/blob/master/thumbs_up.png) Please __Like__ to __support__!
+
+## Support me
+
+* [Become a Patron](https://www.patreon.com/imujtaba8488)
+
+* [Buy me a Coffee](https://www.buymeacoffee.com/imujtaba8488)
