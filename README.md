@@ -8,7 +8,9 @@
 
 ## Publications
 
-* Medium Post: [Beautiful Page Indicators and Steppers with the im_stepper package](https://imujtaba8488.medium.com/beautiful-page-indicators-and-steppers-with-the-im-stepper-package-8c091cf5364e)
+You can find more articles, examples, posts, below:
+
+* Medium Article with IconStepper Example: [Beautiful Page Indicators and Steppers with the im_stepper package](https://imujtaba8488.medium.com/beautiful-page-indicators-and-steppers-with-the-im-stepper-package-8c091cf5364e)
 
 ## Recent Changes
 
@@ -40,6 +42,8 @@ steppers appropriate for your application:-
 * [NumberStepper](#numberstepper)
 
 * [Feedback](#feedback)
+
+* [Please Support](#please-support)
 
 ## IconStepper
 
@@ -131,7 +135,7 @@ __[here](https://github.com/imujtaba8488/package_im_stepper/issues).__
 
 ![Like](https://github.com/imujtaba8488/showcase/blob/master/thumbs_up.png) Please __Like__ to __support__!
 
-## Support me
+## Please Support
 
 * [Become a Patron](https://www.patreon.com/imujtaba8488)
 
