@@ -10,7 +10,7 @@
 
 Here's a collection of articles, examples, posts, etc. about im_stepper. If you find another one please let me know.
 
-* Medium Article with IconStepper Example: [Beautiful Page Indicators and Steppers with the im_stepper package](https://imujtaba8488.medium.com/beautiful-page-indicators-and-steppers-with-the-im-stepper-package-8c091cf5364e).
+* Medium Article with `IconStepper` Example: [Beautiful Page Indicators and Steppers with the im_stepper package](https://imujtaba8488.medium.com/beautiful-page-indicators-and-steppers-with-the-im-stepper-package-8c091cf5364e).
 
 ## Recent Changes
 
