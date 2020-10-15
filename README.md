@@ -8,13 +8,15 @@
 
 ## Publications
 
-Here's a collection of articles, examples, posts, etc. about im_stepper. If you find an another one please let me know.
+Here's a collection of articles, examples, posts, etc. about im_stepper. If you find another one please let me know.
 
 * Medium Article with IconStepper Example: [Beautiful Page Indicators and Steppers with the im_stepper package](https://imujtaba8488.medium.com/beautiful-page-indicators-and-steppers-with-the-im-stepper-package-8c091cf5364e)
 
 ## Recent Changes
 
-* BugFix - ticker disposed with active ticker. [More Info!](https://pub.dev/packages/im_stepper/changelog)
+Here's a list of some important changes. Find complete list of changes see changelog [here](https://pub.dev/packages/im_stepper/changelog)
+
+* BugFix - ticker disposed with active ticker. [count: 2]
 
 ## About
 
