@@ -24,6 +24,10 @@ Here's a list of some important changes in version: 0.1.2+7. For a complete list
 
 * Added the 'initial' option.
 
+## Next in Line
+
+* Null Safety migration.
+
 ## About
 
 A growing collection of stepper and page indicator widgets.
