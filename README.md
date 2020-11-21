@@ -12,13 +12,17 @@ Here's a collection of articles, examples, posts, etc., about im_stepper. If you
 
 * Medium Article with `IconStepper` Example: [Beautiful Page Indicators and Steppers with the im_stepper package](https://imujtaba8488.medium.com/beautiful-page-indicators-and-steppers-with-the-im-stepper-package-8c091cf5364e).
 
-* Please take this short survey [survey](https://forms.gle/rQqpARMTAcCCNE9V8) if you are interested in reading containing examples of using the im_stepper package effectively in your Flutter apps.
+* Please take this short __[survey](https://forms.gle/rQqpARMTAcCCNE9V8)__ if you are interested in reading a short book containing examples of using the im_stepper package effectively in your Flutter apps.
 
 ## Recent Changes
 
-Here's a list of some important changes in version: 0.1.2+6. For a complete list of changes see changelog [here](https://pub.dev/packages/im_stepper/changelog).
+Here's a list of some important changes in version: 0.1.2+7. For a complete list of changes see changelog [here](https://pub.dev/packages/im_stepper/changelog).
 
-* BugFix - ticker disposed with active ticker. [count: 2]
+* BugFix
+
+* Added the `jumpTo' option.
+
+* Added the 'initial' option.
 
 ## About
 
