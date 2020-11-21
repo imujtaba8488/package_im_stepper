@@ -8,9 +8,11 @@
 
 ## Publications
 
-Here's a collection of articles, examples, posts, etc. about im_stepper. If you find another one please let me know.
+Here's a collection of articles, examples, posts, etc., about im_stepper. If you find another one please let me know.
 
 * Medium Article with `IconStepper` Example: [Beautiful Page Indicators and Steppers with the im_stepper package](https://imujtaba8488.medium.com/beautiful-page-indicators-and-steppers-with-the-im-stepper-package-8c091cf5364e).
+
+* Please take this short survey [survey](https://forms.gle/rQqpARMTAcCCNE9V8) if you are interested in reading containing examples of using the im_stepper package effectively in your Flutter apps.
 
 ## Recent Changes
 
@@ -20,18 +22,17 @@ Here's a list of some important changes in version: 0.1.2+6. For a complete list
 
 ## About
 
-A growing collection of widgets primarily used to step-through various
-steps/widgets or used as page indicators in an application.
+A growing collection of stepper and page indicator widgets.
 
 ## Description
 
-A number of applications require to show steps to its users, for example, an app
-surveying its users require to display the step that the user is on while the
-user is filling up the survey form. This is where im_stepper comes into play
-with easy to use stepper widgets that may find its uses in myriad applications.
+The stepper widgets help you to show or collect information from users using organized steps. On the other hand, the page indicator widgets allow you to visually notify users about their current position as they scroll through a group of pages.
 
-Simply import `package:im_stepper/stepper.dart` and choose any of the following
-steppers appropriate for your application:-
+## General Guidelines
+
+* Simply import `package:im_stepper/stepper.dart`.
+
+* To control the IconStepper, ImageStepper, or the NumberStepper by using buttons etc., from outside the stepper use the `Foo.externallyControlled()` constructor and call `goNext` and `goPrevious` controlled by two variables in a `StatefulWidget` within a `setState` call. For further information see example [here](https://pub.dev/packages/im_stepper/example)
 
 ## Table of Contents
 
@@ -49,47 +50,35 @@ steppers appropriate for your application:-
 
 ## IconStepper
 
-A simple to use icon stepper widget, wherein, each icon defines a step. Hence,
-total number of icons define total number of steps. Primarily designed to show
-steps as icons.
+Simple to use icon stepper widget, wherein each icon defines a step. Hence, the total number of icons represents the total number of available steps.
 
 ![IconStepper](https://github.com/imujtaba8488/showcase/blob/master/icon_stepper_05.gif)
 
 ### IconStepper - Usage Note
 
-* __Important:__ IconStepper `direction` argument controls whether the stepper is displayed
-horizontally or vertically. A horizontal IconStepper can be wrapped within a Column
-with no issues, however, if wrapped within a row it _must also be_ wrapped within
-the built-in _Expanded_ widget. Same applies for the vertical IconStepper.
+* __Important:__ The `direction` argument controls whether the stepper is displayed horizontally or vertically. A horizontal IconStepper can be wrapped within a Column with no issues. However, if wrapped within a row, it _must also be_ wrapped within the built-in _Expanded_ widget. The same applies to the vertical IconStepper.
 
-* IconStepper fires the `onStepReached(int index)` callback, which provides
-the index of the Step that is reached. This callback can be used to control the
-widget that appears when a certain step is reached.
+* IconStepper fires the `onStepReached(int index)` callback, which provides the index of the Step that is reached. This callback can be used to control the widget that appears when a specific step is reached.
 
-* To customize the color, border, etc. of an IconStepper, simply wrap it inside
-a Container and specify the `decoration` argument.
+* To customize the color, border, etc., of an IconStepper, wrap it inside a `Container` and specify it's `decoration` argument.
 
-* To enable validation before the next step is reached, set the `steppingEnabled`
-property to an appropriate value in a `StatefulWidget`.
-
-* Github issues [#3](https://github.com/imujtaba8488/package_im_stepper/issues/3) and [#4](https://github.com/imujtaba8488/package_im_stepper/issues/3) stand resolved. To control the IconStepper, ImageStepper, or the NumberStepper by using buttons etc from outside the stepper, use the `Foo.externallyControlled()` constructor and call `goNext` and `goPrevious` controlled by two variables in a `StatefulWidget` within a `setState` call. For further information see example [here](https://pub.dev/packages/im_stepper/example)
+* To enable validation before the next step is reached, set the `steppingEnabled` property to an appropriate value in a `StatefulWidget`.
 
 ## ImageStepper
 
-A simple to use image stepper widget, wherein, each image defines a step. Hence,
-total number of images define total number of steps. Primarily designed to show
-steps as images.
+Simple to use image stepper widget, wherein each image defines a step. Hence, the total number of images defines the total number of steps. [Usage Note](#iconstepper---usage-note) - See IconStepper Usage Note.
 
 ![ImageStepper](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/image_stepper_02.gif)
 
-### ImageStepper - Usage Note
+## NumberStepper
 
-* [Usage Note](#iconstepper---usage-note) - See IconStepper Usage Note.
+A simple to use number stepper widget, wherein each number defines a step. Hence, the total count of numbers defines the total number of steps. [Usage Note](#iconstepper---usage-note) - See IconStepper Usage Note.
+
+![ImageStepper](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/number_stepper_01.gif)
 
 ## DotStepper
 
-A simple and smooth dot stepper widget with built-in animations. Each dot in a
-DotStepper represents a step.
+A simple and smooth dot stepper widget with built-in animations. Each dot in a DotStepper represents a step.
 
 ## Available Shapes
 
@@ -118,26 +107,13 @@ DotStepper represents a step.
 controlled by two variables in a `StatefulWidget` with a call to `setState` in
 order for the DotStepper to work. __Please look at the Example.__
 
-## NumberStepper
-
-A simple to use number stepper widget, wherein, each number defines a step. Hence,
-total count of numbers define total number of steps. Primarily designed to show
-steps as numbers.
-
-![ImageStepper](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/number_stepper_01.gif)
-
-### NumberStepper - Usage Note
-
-* [Usage Note](#iconstepper---usage-note) - See IconStepper Usage Note.
-
 ## Feedback
 
-For any feedback please file an issue
-__[here](https://github.com/imujtaba8488/package_im_stepper/issues).__
-
-![Like](https://github.com/imujtaba8488/showcase/blob/master/thumbs_up.png) Please __Like__ to __support__!
+For any feedback please file an issue __[here](https://github.com/imujtaba8488/package_im_stepper/issues).__
 
 ## Please Support
+
+* ![Like](https://github.com/imujtaba8488/showcase/blob/master/thumbs_up.png) Please __Like__ to __support__!
 
 * [Become a Patron](https://www.patreon.com/imujtaba8488)
 
