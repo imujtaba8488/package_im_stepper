@@ -32,6 +32,24 @@ A growing collection of stepper and page indicator widgets.
 
 The stepper widgets help you to show or collect information from users using organized steps. On the other hand, the page indicator widgets allow you to visually notify users about their current position as they scroll through a group of pages.
 
+## Table of Contents
+
+* [General Guidelines](#general-guidelines)
+
+* [IconStepper](#iconstepper)
+
+* [ImageStepper](#imagestepper)
+
+* [DotStepper](#dotstepper)
+
+* [NumberStepper](#numberstepper)
+
+* [Feedback](#feedback)
+
+* [Please Support](#please-support)
+
+* [Follow Me](#follow-me)
+
 ## General Guidelines
 
 * Simply import `package:im_stepper/stepper.dart`.
@@ -45,20 +63,6 @@ The stepper widgets help you to show or collect information from users using org
 * __Validation:__ To enable validation before the next step is reached, set the `steppingEnabled` property to an appropriate value in a `StatefulWidget`.
 
 * To control the Icon, Image, or the Number from external buttons, etc., use the `Foo.externallyControlled()` constructor and call `goNext` and `goPrevious` controlled by two variables in a `StatefulWidget` within a `setState` call. For further information see example [here](https://pub.dev/packages/im_stepper/example)
-
-## Table of Contents
-
-* [IconStepper](#iconstepper)
-
-* [ImageStepper](#imagestepper)
-
-* [DotStepper](#dotstepper)
-
-* [NumberStepper](#numberstepper)
-
-* [Feedback](#feedback)
-
-* [Please Support](#please-support)
 
 ## IconStepper
 
@@ -105,7 +109,11 @@ A family of fully customizable, beautiful page indicator widgets with awesome bu
 
 ## Feedback
 
-File an issue __[here](https://github.com/imujtaba8488/package_im_stepper/issues).__
+* Please file an issue __[here](https://github.com/imujtaba8488/package_im_stepper/issues).__
+
+* For a feature request, please submit your idea here__()__.
+
+* For more information please send me email.
 
 ## Please Support
 
@@ -114,3 +122,17 @@ File an issue __[here](https://github.com/imujtaba8488/package_im_stepper/issues
 * [Become a Patron](https://www.patreon.com/imujtaba8488)
 
 * [Buy me a Coffee](https://www.buymeacoffee.com/imujtaba8488)
+
+## Follow me
+
+* [](https://icons8.com/icon/114433/medium-monogram)[GitHub](https://github.com/imujtaba8488)
+
+* [LinkedIn](https://www.linkedin.com/in/imujtaba8488/)
+
+* [Medium](https://imujtaba8488.medium.com)
+
+* [Twitter](https://twitter.com/imujtaba8488)
+
+* [Instagram](https://www.instagram.com/imujtaba8488/)
+
+* [Facebook](https://www.facebook.com/imujtaba8488/)
