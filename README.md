@@ -24,10 +24,6 @@ Here's a list of some important changes in version: 0.1.2+7. For a complete list
 
 * Added the 'initial' option.
 
-## Next in Line
-
-* Null Safety migration.
-
 ## About
 
 A growing collection of stepper and page indicator widgets.
@@ -40,7 +36,15 @@ The stepper widgets help you to show or collect information from users using org
 
 * Simply import `package:im_stepper/stepper.dart`.
 
-* To control the IconStepper, ImageStepper, or the NumberStepper by using buttons etc., from outside the stepper use the `Foo.externallyControlled()` constructor and call `goNext` and `goPrevious` controlled by two variables in a `StatefulWidget` within a `setState` call. For further information see example [here](https://pub.dev/packages/im_stepper/example)
+* __Important:__ The `direction` argument controls whether the stepper is displayed horizontally or vertically. A horizontal IconStepper can be wrapped within a Column with no issues. However, if wrapped within a row, it _must also be_ wrapped within the built-in _Expanded_ widget. The same applies to the vertical IconStepper.
+
+* Icon, Image, and Number Steppers fire the `onStepReached(int index)` callback, which provides the index of the Step that is reached. This callback can be used to control the widget that appears when a specific step is reached.
+
+* To customize the color, border, etc., wrap a stepper widget inside a `Container` and specify it's `decoration` argument.
+
+* __Validation:__ To enable validation before the next step is reached, set the `steppingEnabled` property to an appropriate value in a `StatefulWidget`.
+
+* To control the Icon, Image, or the Number from external buttons, etc., use the `Foo.externallyControlled()` constructor and call `goNext` and `goPrevious` controlled by two variables in a `StatefulWidget` within a `setState` call. For further information see example [here](https://pub.dev/packages/im_stepper/example)
 
 ## Table of Contents
 
@@ -62,16 +66,6 @@ Simple to use icon stepper widget, wherein each icon defines a step. Hence, the 
 
 ![IconStepper](https://github.com/imujtaba8488/showcase/blob/master/icon_stepper_05.gif)
 
-### IconStepper - Usage Note
-
-* __Important:__ The `direction` argument controls whether the stepper is displayed horizontally or vertically. A horizontal IconStepper can be wrapped within a Column with no issues. However, if wrapped within a row, it _must also be_ wrapped within the built-in _Expanded_ widget. The same applies to the vertical IconStepper.
-
-* IconStepper fires the `onStepReached(int index)` callback, which provides the index of the Step that is reached. This callback can be used to control the widget that appears when a specific step is reached.
-
-* To customize the color, border, etc., of an IconStepper, wrap it inside a `Container` and specify it's `decoration` argument.
-
-* To enable validation before the next step is reached, set the `steppingEnabled` property to an appropriate value in a `StatefulWidget`.
-
 ## ImageStepper
 
 Simple to use image stepper widget, wherein each image defines a step. Hence, the total number of images defines the total number of steps. [Usage Note](#iconstepper---usage-note) - See IconStepper Usage Note.
@@ -86,7 +80,7 @@ A simple to use number stepper widget, wherein each number defines a step. Hence
 
 ## DotStepper
 
-A simple and smooth dot stepper widget with built-in animations. Each dot in a DotStepper represents a step.
+A family of fully customizable, beautiful page indicator widgets with awesome built-in animations. Each dot in a DotStepper represents a step. [Usage Note](#general-guidelines) - See General Guidelines and examples.
 
 ## Available Shapes
 
@@ -109,15 +103,9 @@ A simple and smooth dot stepper widget with built-in animations. Each dot in a D
  Bullet     |![Bullet](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_bullet.gif)
  Jump       |![Jump](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_jump.gif)
 
-### DotStepper - Usage Note
-
-* __Important:__ It is important that a call to `goNext` and `goPrevious` is
-controlled by two variables in a `StatefulWidget` with a call to `setState` in
-order for the DotStepper to work. __Please look at the Example.__
-
 ## Feedback
 
-For any feedback please file an issue __[here](https://github.com/imujtaba8488/package_im_stepper/issues).__
+File an issue __[here](https://github.com/imujtaba8488/package_im_stepper/issues).__
 
 ## Please Support
 
