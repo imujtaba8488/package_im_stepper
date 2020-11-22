@@ -86,7 +86,7 @@ A simple to use number stepper widget, wherein each number defines a step. Hence
 
 A family of fully customizable, beautiful page indicator widgets with awesome built-in animations. Each dot in a DotStepper represents a step. [Usage Note](#general-guidelines) - See General Guidelines and examples.
 
-## Available Shapes
+## Shapes
 
  **Shapes**        | **Demo**
 -------------------|------------
@@ -95,7 +95,7 @@ A family of fully customizable, beautiful page indicator widgets with awesome bu
  Rounded Rectangle |![RR](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_rounded_rectangle.png)
  Line              |![Line](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_line.png)
 
-## Available Effects
+## Effects
 
  **Effect** | **Demo**
 ------------|----------------
@@ -111,9 +111,9 @@ A family of fully customizable, beautiful page indicator widgets with awesome bu
 
 * Please file an issue __[here](https://github.com/imujtaba8488/package_im_stepper/issues).__
 
-* For a feature request, please submit your idea __[here](https://forms.gle/e3PcHgeTgfx3sb1W9)__.
+* For an enhancement request, please submit your idea __[here](https://forms.gle/e3PcHgeTgfx3sb1W9)__.
 
-* For more information please send me email.
+* For more information please send me email or follow me below.
 
 ## Please Support
 
