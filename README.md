@@ -12,7 +12,7 @@ Here's a collection of articles, examples, posts, etc., about im_stepper. If you
 
 * Medium Article with `IconStepper` Example: [Beautiful Page Indicators and Steppers with the im_stepper package](https://imujtaba8488.medium.com/beautiful-page-indicators-and-steppers-with-the-im-stepper-package-8c091cf5364e).
 
-* Please take this short __[survey](https://forms.gle/rQqpARMTAcCCNE9V8)__ if you are interested in reading a short book containing examples of using the im_stepper package effectively in your Flutter apps.
+* Interested in reading a book or watching a Video on effectively using the im_stepper in your Flutter Apps? __[Vote here!](https://forms.gle/rQqpARMTAcCCNE9V8)__
 
 ## Recent Changes
 
@@ -111,7 +111,7 @@ A family of fully customizable, beautiful page indicator widgets with awesome bu
 
 * Please file an issue __[here](https://github.com/imujtaba8488/package_im_stepper/issues).__
 
-* For a feature request, please submit your idea here__()__.
+* For a feature request, please submit your idea __[here](https://forms.gle/e3PcHgeTgfx3sb1W9)__.
 
 * For more information please send me email.
 
