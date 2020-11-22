@@ -62,7 +62,7 @@ The stepper widgets help you to show or collect information from users using org
 
 * __Validation:__ To enable validation before the next step is reached, set the `steppingEnabled` property to an appropriate value in a `StatefulWidget`.
 
-* To control the Icon, Image, or the Number from external buttons, etc., use the `Foo.externallyControlled()` constructor and call `goNext` and `goPrevious` controlled by two variables in a `StatefulWidget` within a `setState` call. For further information see example [here](https://pub.dev/packages/im_stepper/example)
+* To control the Icon, Image, or the Number from external buttons, etc., use the `Foo.externallyControlled()` constructor and call `goNext` and `goPrevious` controlled by two variables in a `StatefulWidget` within a `setState` call. For further information see example [here](https://pub.dev/packages/im_stepper/example).
 
 ## IconStepper
 
