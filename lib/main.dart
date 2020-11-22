@@ -12,12 +12,12 @@ class IconStepperDemo extends StatefulWidget {
 }
 
 class _IconStepperDemo extends State<IconStepperDemo> {
-  // MUST BE MAINTAINED, SEPARATELY.
-  int currentIndex = 0;
-
   // THESE MUST BE USED TO CONTROL THE STEPPER FROM EXTERNALLY.
   bool goNext = false;
   bool goPrevious = false;
+
+  // MUST BE MAINTAINED, SEPARATELY.
+  int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +41,7 @@ class _IconStepperDemo extends State<IconStepperDemo> {
                 // borderRadius: BorderRadius.circular(5.0),
               ),
               child: IconStepper.externallyControlled(
+                jumpTo: currentIndex,
                 goNext: goNext,
                 goPrevious: goPrevious,
                 direction: Axis.horizontal,
@@ -50,6 +51,18 @@ class _IconStepperDemo extends State<IconStepperDemo> {
                 lineLength: 75,
                 steppingEnabled: true,
                 icons: [
+                  Icon(Icons.home),
+                  Icon(Icons.person),
+                  Icon(Icons.account_balance),
+                  Icon(Icons.access_time),
+                  Icon(Icons.home),
+                  Icon(Icons.person),
+                  Icon(Icons.account_balance),
+                  Icon(Icons.access_time),
+                  Icon(Icons.home),
+                  Icon(Icons.person),
+                  Icon(Icons.account_balance),
+                  Icon(Icons.access_time),
                   Icon(Icons.home),
                   Icon(Icons.person),
                   Icon(Icons.account_balance),
@@ -96,10 +109,14 @@ class _IconStepperDemo extends State<IconStepperDemo> {
                   onPressed: () {
                     // MUST TO CONTROL STEPPER FROM EXTERNAL BUTTONS.
                     setState(() {
+                      // jumpTo = 2;
+                      // currentIndex = jumpTo;
                       goNext = true;
                       goPrevious = false;
 
                       if (currentIndex < 3) {
+                        currentIndex += 10;
+                      } else {
                         currentIndex++;
                       }
                     });

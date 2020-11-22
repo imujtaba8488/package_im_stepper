@@ -73,6 +73,11 @@ class IconStepper extends StatelessWidget {
   /// Whether the scrolling is disabled or not.
   final bool scrollingDisabled;
 
+  /// Jumps to a specified step. The specified step must be a valid step otherwise results in 'Step out of range' error.
+  /// 
+  /// __Developer Note:__ Doesn't update on Hot Reload. Use Hot Restart or setState() to update.
+  final int jumpTo;
+
   /// Controls which `BaseStepper` constructor to call.
   final bool _isExternallyControlled;
 
@@ -98,6 +103,7 @@ class IconStepper extends StatelessWidget {
     this.goNext = false,
     this.goPrevious = false,
     this.scrollingDisabled = false,
+    this.jumpTo = 0,
   })  : this.enableNextPreviousButtons = false,
         this.enableStepTapping = false,
         this.previousButtonIcon = null,
@@ -128,6 +134,7 @@ class IconStepper extends StatelessWidget {
     this.stepReachedAnimationDuration = const Duration(seconds: 1),
     this.steppingEnabled = true,
     this.scrollingDisabled = false,
+    this.jumpTo = 0,
   })  : this._isExternallyControlled = false,
         this.goNext = false,
         this.goPrevious = false;
@@ -154,6 +161,7 @@ class IconStepper extends StatelessWidget {
             goNext: goNext,
             goPrevious: goPrevious,
             scrollingDisabled: scrollingDisabled,
+            jumpTo: jumpTo,
           )
         : BaseStepper(
             children: _iconsWithSizeOverridden(),
@@ -177,6 +185,7 @@ class IconStepper extends StatelessWidget {
             margin: activeStepBorderPadding,
             padding: stepPadding,
             scrollingDisabled: scrollingDisabled,
+            jumpTo: jumpTo,
           );
   }
 

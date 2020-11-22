@@ -76,8 +76,8 @@ class BaseStepper extends StatefulWidget {
   /// Whether to disable scrolling or not.
   final scrollingDisabled;
 
-  /// Sets the initial step to the specified step.
-  final initialStep;
+  /// Jumps to the specified step.
+  final jumpTo;
 
   /// Used when the stepper is controlled externally using the `goNext` and `goPrevious` properties. In which case, two variables must be maintained in a StatefulWidget to set the values of `gotNext` and `goPrevious` in a call to `setState()`, and if the stepping is moving foward `gotNext` must be set to true and `goPrevious` must be set to `false`. If moving backward `goPrevious` must be set to `true` and `goNext` must be set to `false`.
   ///
@@ -101,7 +101,7 @@ class BaseStepper extends StatefulWidget {
       this.goNext = false,
       this.goPrevious = false,
       this.scrollingDisabled = false,
-      this.initialStep = 0})
+      this.jumpTo = 0})
       : this.enableNextPreviousButtons = false,
         this.enableStepTapping = false,
         this.onStepReached = null,
@@ -118,30 +118,30 @@ class BaseStepper extends StatefulWidget {
   }
 
   /// Used when the stepping is controller either by using the built-in next/previous buttons or by tapping. If stepping needs to be controlled externally then using the `BaseStepper.externallyControlled` constructor is a more optimized approach.
-  BaseStepper(
-      {this.children,
-      this.enableNextPreviousButtons = true,
-      this.enableStepTapping = true,
-      this.previousButtonIcon,
-      this.nextButtonIcon,
-      this.onStepReached,
-      this.direction = Axis.horizontal,
-      this.stepColor,
-      this.activeStepColor,
-      this.activeStepBorderColor,
-      this.lineColor,
-      this.lineLength = 50.0,
-      this.lineDotRadius = 1.0,
-      this.stepRadius = 24.0,
-      this.stepReachedAnimationEffect = Curves.bounceOut,
-      this.stepReachedAnimationDuration = const Duration(seconds: 1),
-      this.steppingEnabled = true,
-      this.padding = 5.0,
-      this.margin = 1.0,
-      this.activeStepBorderWidth = 0.5,
-      this.scrollingDisabled = false,
-      this.initialStep})
-      : this.goNext = false,
+  BaseStepper({
+    this.children,
+    this.enableNextPreviousButtons = true,
+    this.enableStepTapping = true,
+    this.previousButtonIcon,
+    this.nextButtonIcon,
+    this.onStepReached,
+    this.direction = Axis.horizontal,
+    this.stepColor,
+    this.activeStepColor,
+    this.activeStepBorderColor,
+    this.lineColor,
+    this.lineLength = 50.0,
+    this.lineDotRadius = 1.0,
+    this.stepRadius = 24.0,
+    this.stepReachedAnimationEffect = Curves.bounceOut,
+    this.stepReachedAnimationDuration = const Duration(seconds: 1),
+    this.steppingEnabled = true,
+    this.padding = 5.0,
+    this.margin = 1.0,
+    this.activeStepBorderWidth = 0.5,
+    this.scrollingDisabled = false,
+    this.jumpTo,
+  })  : this.goNext = false,
         this.goPrevious = false {
     _defaultAssertions();
   }
@@ -159,8 +159,8 @@ class BaseStepper extends StatefulWidget {
     );
 
     assert(
-      initialStep >= 0 && initialStep < children.length,
-      'Error: Initial step out of range',
+      jumpTo >= 0 && jumpTo < children.length,
+      'Error: Step out of range',
     );
   }
 
@@ -175,13 +175,13 @@ class _BaseStepperState extends State<BaseStepper> {
   @override
   void initState() {
     super.initState();
-    _selectedIndex = widget.initialStep;
+    _selectedIndex = widget.jumpTo;
     this._scrollController = ScrollController();
   }
 
   @override
   void didUpdateWidget(BaseStepper oldWidget) {
-    // Only kick-in if the Stepper is controlled from externally, Hence, either the value of goNext or the value of goPrevious will be true.
+    // Only kick-in if the Stepper is controlled externally. Hence, either the value of goNext or the value of goPrevious will be true.
     if (widget.goNext || widget.goPrevious) {
       if (widget.goNext) {
         _goToNextStep();
@@ -189,6 +189,7 @@ class _BaseStepperState extends State<BaseStepper> {
         _goToPreviousStep();
       }
     }
+
     super.didUpdateWidget(oldWidget);
   }
 
