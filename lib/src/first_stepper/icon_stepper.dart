@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'base_stepper.dart';
 
+/// In general, the stepper widgets help you to show or collect information from users using organized steps. The IconStepper is a simple to use icon stepper widget, wherein each icon defines a step. Hence, the total number of icons represents the total number of available steps.
 class IconStepper extends StatelessWidget {
   /// Each icon defines a step. Hence, total number of icons determines the total number of steps.
   final List<Icon> icons;
