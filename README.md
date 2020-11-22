@@ -12,7 +12,7 @@ Here's a collection of articles, examples, posts, etc., about im_stepper. If you
 
 * Medium Article with `IconStepper` Example: [Beautiful Page Indicators and Steppers with the im_stepper package](https://imujtaba8488.medium.com/beautiful-page-indicators-and-steppers-with-the-im-stepper-package-8c091cf5364e).
 
-* Interested in reading a book or watching a Video on effectively using the im_stepper in your Flutter Apps? __[Vote here!](https://forms.gle/rQqpARMTAcCCNE9V8)__
+* Interested in reading a book or watching a video on effectively using the im_stepper package in your Flutter Apps? __[Vote here!](https://forms.gle/rQqpARMTAcCCNE9V8)__
 
 ## Recent Changes
 
