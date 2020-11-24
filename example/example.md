@@ -127,7 +127,7 @@ class _IconStepperDemo extends State<IconStepperDemo> {
         return 'Sports';
 
       case 4:
-        return 'Specially abled';
+        return 'Specially-abled';
 
       case 5:
         return 'Personal Details';

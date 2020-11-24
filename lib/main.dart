@@ -12,7 +12,10 @@ class IconStepperDemo extends StatefulWidget {
 }
 
 class _IconStepperDemo extends State<IconStepperDemo> {
+  // The step that is currently active. Can be set to any valid value.
   int activeStep = 2;
+
+  // The total number of steps available. This will update automatically from the totalSteps function of the IconStepper widget.
   int totalSteps = 0;
 
   @override
@@ -25,16 +28,6 @@ class _IconStepperDemo extends State<IconStepperDemo> {
         body: Column(
           children: <Widget>[
             IconStepper(
-              activeStep: activeStep,
-              totalSteps: (steps) {
-                totalSteps = steps;
-              },
-              enableNextPreviousButtons: true,
-              onStepReached: (index) {
-                setState(() {
-                  activeStep = index;
-                });
-              },
               icons: [
                 Icon(Icons.home),
                 Icon(Icons.person),
@@ -42,25 +35,18 @@ class _IconStepperDemo extends State<IconStepperDemo> {
                 Icon(Icons.access_time),
                 Icon(Icons.home),
               ],
+              previousButtonIcon: Icon(Icons.g_translate),
+              activeStep: activeStep,
+              totalSteps: (steps) => totalSteps = steps,
+              enableNextPreviousButtons: true,
+              onStepReached: (index) {
+                setState(() {
+                  activeStep = index;
+                });
+              },
             ),
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(width: 0.1),
-              ),
-              padding: EdgeInsets.all(8.0),
-              alignment: Alignment.centerLeft,
-              child: Text(header()),
-            ),
-            Expanded(
-              child: Container(
-                margin: EdgeInsets.all(5.0),
-                child: FittedBox(
-                  child: Center(
-                    child: Text('${activeStep + 1}'),
-                  ),
-                ),
-              ),
-            ),
+            _header(),
+            _content(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -85,14 +71,27 @@ class _IconStepperDemo extends State<IconStepperDemo> {
                   child: Text('Next'),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),
     );
   }
 
-  String header() {
+  /// Returns the header widget.
+  Widget _header() {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(width: 0.1),
+      ),
+      padding: EdgeInsets.all(8.0),
+      alignment: Alignment.centerLeft,
+      child: Text(headerText()),
+    );
+  }
+
+  /// Returns the header text.
+  String headerText() {
     switch (activeStep) {
       case 0:
         return 'Educational Background';
@@ -109,5 +108,19 @@ class _IconStepperDemo extends State<IconStepperDemo> {
       default:
         return 'Unknown';
     }
+  }
+
+  /// Returns the content widget.
+  Widget _content() {
+    return Expanded(
+      child: Container(
+        margin: EdgeInsets.all(5.0),
+        child: FittedBox(
+          child: Center(
+            child: Text('${activeStep + 1}'),
+          ),
+        ),
+      ),
+    );
   }
 }

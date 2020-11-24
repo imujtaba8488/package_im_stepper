@@ -134,7 +134,7 @@ class BaseStepper extends StatefulWidget {
     );
   }
 
-  /// Used when the stepping is controller either by using the built-in next/previous buttons or by tapping. If stepping needs to be controlled externally then using the `BaseStepper.externallyControlled` constructor is a more optimized approach.
+  /// Used to create a Stepper. //! update documentation later.
   BaseStepper({
     this.children,
     this.enableNextPreviousButtons = true,
@@ -165,6 +165,7 @@ class BaseStepper extends StatefulWidget {
   }
 
   /// What must be valid in any case at the time of creating a BaseStepper.
+  // ! This shall be moved inside the default constructor after version 0.1.3.
   void _defaultAssertions() {
     assert(
       lineDotRadius <= 10 && lineDotRadius > 0,
@@ -192,14 +193,14 @@ class _BaseStepperState extends State<BaseStepper> {
 
   @override
   void initState() {
-    super.initState();
     _selectedIndex = widget.activeStep;
     this._scrollController = ScrollController();
+    super.initState();
   }
 
   @override
   void didUpdateWidget(BaseStepper oldWidget) {
-    //! This must be removed in the version 1.0.9
+    //! This must be removed in the version 0.1.3.
     if (widget.goNext || widget.goPrevious) {
       if (widget.goNext) {
         _goToNextStep();
@@ -208,11 +209,11 @@ class _BaseStepperState extends State<BaseStepper> {
       }
     }
 
-    // Only kick-in if the Stepper is controlled externally. Hence, either the value of goNext or the value of goPrevious will be true.
+    // Verify that the active step falls within a valid range.
     if (widget.activeStep >= 0 && widget.activeStep < widget.children.length) {
       _selectedIndex = widget.activeStep;
     } else {
-      print('End of steps');
+      print('No more steps.');
     }
 
     super.didUpdateWidget(oldWidget);
@@ -220,13 +221,13 @@ class _BaseStepperState extends State<BaseStepper> {
 
   @override
   void dispose() {
-    super.dispose();
     _scrollController.dispose();
+    super.dispose();
   }
 
   /// Controls the step scrolling.
   void _afterLayout(_) {
-    // * This owes an explanation.
+    // ! Provide detailed explanation.
     for (int i = 0; i < widget.children.length; i++) {
       _scrollController.animateTo(
         i * ((widget.stepRadius * 2) + widget.lineLength),
@@ -240,10 +241,12 @@ class _BaseStepperState extends State<BaseStepper> {
 
   @override
   Widget build(BuildContext context) {
+    // Returns total number of available steps.
     if (widget.totalSteps != null) {
       widget.totalSteps(widget.children.length - 1);
     }
 
+    // Controls scrolling behavior.
     WidgetsBinding.instance.addPostFrameCallback(_afterLayout);
 
     return widget.direction == Axis.horizontal
@@ -356,7 +359,7 @@ class _BaseStepperState extends State<BaseStepper> {
       ignoring: _selectedIndex == 0,
       child: IconButton(
         visualDensity: VisualDensity.compact,
-        icon: widget?.nextButtonIcon ??
+        icon: widget?.previousButtonIcon ??
             Icon(
               widget.direction == Axis.horizontal
                   ? Icons.arrow_left
