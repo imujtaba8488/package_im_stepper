@@ -72,12 +72,21 @@ class ImageStepper extends StatelessWidget {
   /// Whether the scrolling is disabled or not.
   final bool scrollingDisabled;
 
+  /// The currently active step.
+  final int activeStep;
+
+  /// Callback returns the total number of available steps.
+  final Function totalSteps;
+
   /// Controls which `BaseStepper` constructor to call.
   final bool _isExternallyControlled;
 
   /// Used when the stepper is controlled externally using the `goNext` and `goPrevious` properties. In which case, two variables must be maintained in a StatefulWidget to set the values of `gotNext` and `goPrevious` in a call to `setState()`, and if the stepping is moving foward `gotNext` must be set to true and `goPrevious` must be set to `false`. If moving backward `goPrevious` must be set to `true` and `goNext` must be set to `false`.
   ///
   /// For more information, see example [here](https://pub.dev/packages/im_stepper/example).
+  @Deprecated(
+    'Scheduled to be removed in version 0.1.3. Please consider using the activeStep instead. For more information, see examples on https://pub.dev/packages/im_stepper/example',
+  )
   ImageStepper.externallyControlled({
     this.images,
     this.direction = Axis.horizontal,
@@ -94,9 +103,17 @@ class ImageStepper extends StatelessWidget {
     this.stepReachedAnimationEffect = Curves.bounceOut,
     this.stepReachedAnimationDuration = const Duration(seconds: 1),
     this.steppingEnabled = true,
-    this.goNext,
-    this.goPrevious,
+    @Deprecated(
+      'Scheduled to be removed in version 0.1.3. Please consider using the activeStep instead. For more information, see examples on https://pub.dev/packages/im_stepper/example',
+    )
+        this.goNext,
+    @Deprecated(
+      'Scheduled to be removed in version 0.1.3. Please consider using the activeStep instead. For more information, see examples on https://pub.dev/packages/im_stepper/example',
+    )
+        this.goPrevious,
     this.scrollingDisabled = false,
+    this.activeStep = 0,
+    this.totalSteps,
   })  : this.enableNextPreviousButtons = false,
         this.enableStepTapping = false,
         this.previousButtonIcon = null,
@@ -129,6 +146,8 @@ class ImageStepper extends StatelessWidget {
     this.stepReachedAnimationDuration = const Duration(seconds: 1),
     this.steppingEnabled = true,
     this.scrollingDisabled = false,
+    this.activeStep,
+    this.totalSteps,
   })  : this._isExternallyControlled = false,
         this.goNext = false,
         this.goPrevious = false;
@@ -155,6 +174,8 @@ class ImageStepper extends StatelessWidget {
             scrollingDisabled: scrollingDisabled,
             goNext: goNext,
             goPrevious: goPrevious,
+            activeStep: activeStep,
+            totalSteps: totalSteps,
           )
         : BaseStepper(
             children: _imagesWrappedInCircleAvatar(),
@@ -178,6 +199,8 @@ class ImageStepper extends StatelessWidget {
             margin: activeStepBorderPadding,
             padding: stepPadding,
             scrollingDisabled: scrollingDisabled,
+            activeStep: activeStep,
+            totalSteps: totalSteps,
           );
   }
 

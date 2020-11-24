@@ -73,11 +73,10 @@ class IconStepper extends StatelessWidget {
   /// Whether the scrolling is disabled or not.
   final bool scrollingDisabled;
 
-  /// Jumps to a specified step. The specified step must be a valid step otherwise results in 'Step out of range' error.
-  ///
-  /// __Developer Note:__ Doesn't update on Hot Reload. Use Hot Restart or setState() to update.
+  /// The currently active step.
   final int activeStep;
 
+  /// Callback returns the total number of available steps.
   final Function totalSteps;
 
   /// Controls which `BaseStepper` constructor to call.
