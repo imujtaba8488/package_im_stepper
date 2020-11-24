@@ -6,6 +6,9 @@ import '../custom_paint/dotted_line.dart';
 /// Callback is fired when a step is reached.
 typedef OnStepReached = void Function(int index);
 
+/// Callback fired to inform the user about the total number of steps available.
+typedef TotalSteps = void Function(int totalSteps);
+
 class BaseStepper extends StatefulWidget {
   /// Each child defines a step. Hence, total number of icons determines the total number of steps.
   final List<Widget> children;
@@ -76,33 +79,47 @@ class BaseStepper extends StatefulWidget {
   /// Whether to disable scrolling or not.
   final scrollingDisabled;
 
-  /// Jumps to the specified step.
-  final jumpTo;
+  /// The step that is currently active.
+  final activeStep;
+
+  /// This callback provides the total numbers of available steps.
+  final TotalSteps totalSteps;
 
   /// Used when the stepper is controlled externally using the `goNext` and `goPrevious` properties. In which case, two variables must be maintained in a StatefulWidget to set the values of `gotNext` and `goPrevious` in a call to `setState()`, and if the stepping is moving foward `gotNext` must be set to true and `goPrevious` must be set to `false`. If moving backward `goPrevious` must be set to `true` and `goNext` must be set to `false`.
   ///
   /// For more information, see example [here](https://pub.dev/packages/im_stepper/example).
-  BaseStepper.externallyControlled(
-      {this.children,
-      this.direction = Axis.horizontal,
-      this.stepColor,
-      this.activeStepColor,
-      this.activeStepBorderColor,
-      this.lineColor,
-      this.lineLength = 50.0,
-      this.lineDotRadius = 1.0,
-      this.stepRadius = 24.0,
-      this.stepReachedAnimationEffect = Curves.bounceOut,
-      this.stepReachedAnimationDuration = const Duration(seconds: 1),
-      this.steppingEnabled = true,
-      this.padding = 5.0,
-      this.margin = 1.0,
-      this.activeStepBorderWidth = 0.5,
-      this.goNext = false,
-      this.goPrevious = false,
-      this.scrollingDisabled = false,
-      this.jumpTo = 0})
-      : this.enableNextPreviousButtons = false,
+  ///
+  @Deprecated(
+    'Scheduled to be removed in version 0.1.3. Please consider using the activeStep instead. For more information, see examples on https://pub.dev/packages/im_stepper/example',
+  )
+  BaseStepper.externallyControlled({
+    this.children,
+    this.direction = Axis.horizontal,
+    this.stepColor,
+    this.activeStepColor,
+    this.activeStepBorderColor,
+    this.lineColor,
+    this.lineLength = 50.0,
+    this.lineDotRadius = 1.0,
+    this.stepRadius = 24.0,
+    this.stepReachedAnimationEffect = Curves.bounceOut,
+    this.stepReachedAnimationDuration = const Duration(seconds: 1),
+    this.steppingEnabled = true,
+    this.padding = 5.0,
+    this.margin = 1.0,
+    this.activeStepBorderWidth = 0.5,
+    @Deprecated(
+      'Scheduled to be removed in version 0.1.3. Please consider using the activeStep instead. For more information, see examples on https://pub.dev/packages/im_stepper/example',
+    )
+        this.goNext = false,
+    @Deprecated(
+      'Scheduled to be removed in version 0.1.3. Please consider using the activeStep instead. For more information, see examples on https://pub.dev/packages/im_stepper/example',
+    )
+        this.goPrevious = false,
+    this.scrollingDisabled = false,
+    this.activeStep = 0,
+    this.totalSteps,
+  })  : this.enableNextPreviousButtons = false,
         this.enableStepTapping = false,
         this.onStepReached = null,
         this.nextButtonIcon = null,
@@ -140,7 +157,8 @@ class BaseStepper extends StatefulWidget {
     this.margin = 1.0,
     this.activeStepBorderWidth = 0.5,
     this.scrollingDisabled = false,
-    this.jumpTo,
+    this.activeStep,
+    this.totalSteps,
   })  : this.goNext = false,
         this.goPrevious = false {
     _defaultAssertions();
@@ -158,10 +176,10 @@ class BaseStepper extends StatefulWidget {
       'iconIndicatorRadius must be greater than 0',
     );
 
-    assert(
-      jumpTo >= 0 && jumpTo < children.length,
-      'Error: Step out of range',
-    );
+    // assert(
+    //   jumpTo >= 0 && jumpTo <= children.length,
+    //   'Error: Step out of range',
+    // );
   }
 
   @override
@@ -175,19 +193,26 @@ class _BaseStepperState extends State<BaseStepper> {
   @override
   void initState() {
     super.initState();
-    _selectedIndex = widget.jumpTo;
+    _selectedIndex = widget.activeStep;
     this._scrollController = ScrollController();
   }
 
   @override
   void didUpdateWidget(BaseStepper oldWidget) {
-    // Only kick-in if the Stepper is controlled externally. Hence, either the value of goNext or the value of goPrevious will be true.
+    //! This must be removed in the version 1.0.9
     if (widget.goNext || widget.goPrevious) {
       if (widget.goNext) {
         _goToNextStep();
       } else if (widget.goPrevious) {
         _goToPreviousStep();
       }
+    }
+
+    // Only kick-in if the Stepper is controlled externally. Hence, either the value of goNext or the value of goPrevious will be true.
+    if (widget.activeStep >= 0 && widget.activeStep < widget.children.length) {
+      _selectedIndex = widget.activeStep;
+    } else {
+      print('End of steps');
     }
 
     super.didUpdateWidget(oldWidget);
@@ -215,6 +240,10 @@ class _BaseStepperState extends State<BaseStepper> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.totalSteps != null) {
+      widget.totalSteps(widget.children.length - 1);
+    }
+
     WidgetsBinding.instance.addPostFrameCallback(_afterLayout);
 
     return widget.direction == Axis.horizontal

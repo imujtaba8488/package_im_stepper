@@ -12,12 +12,8 @@ class IconStepperDemo extends StatefulWidget {
 }
 
 class _IconStepperDemo extends State<IconStepperDemo> {
-  // THESE MUST BE USED TO CONTROL THE STEPPER FROM EXTERNALLY.
-  bool goNext = false;
-  bool goPrevious = false;
-
-  // MUST BE MAINTAINED, SEPARATELY.
-  int currentIndex = 0;
+  int activeStep = 2;
+  int totalSteps = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -28,47 +24,24 @@ class _IconStepperDemo extends State<IconStepperDemo> {
         ),
         body: Column(
           children: <Widget>[
-            Container(
-              decoration: BoxDecoration(
-                color: Colors.blueGrey,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey,
-                    spreadRadius: 1.0,
-                    blurRadius: 2.0,
-                  )
-                ],
-                // borderRadius: BorderRadius.circular(5.0),
-              ),
-              child: IconStepper.externallyControlled(
-                jumpTo: currentIndex,
-                goNext: goNext,
-                goPrevious: goPrevious,
-                direction: Axis.horizontal,
-                stepColor: Colors.white,
-                activeStepColor: Colors.amber,
-                lineColor: Colors.amberAccent,
-                lineLength: 75,
-                steppingEnabled: true,
-                icons: [
-                  Icon(Icons.home),
-                  Icon(Icons.person),
-                  Icon(Icons.account_balance),
-                  Icon(Icons.access_time),
-                  Icon(Icons.home),
-                  Icon(Icons.person),
-                  Icon(Icons.account_balance),
-                  Icon(Icons.access_time),
-                  Icon(Icons.home),
-                  Icon(Icons.person),
-                  Icon(Icons.account_balance),
-                  Icon(Icons.access_time),
-                  Icon(Icons.home),
-                  Icon(Icons.person),
-                  Icon(Icons.account_balance),
-                  Icon(Icons.access_time),
-                ],
-              ),
+            IconStepper(
+              activeStep: activeStep,
+              totalSteps: (steps) {
+                totalSteps = steps;
+              },
+              enableNextPreviousButtons: true,
+              onStepReached: (index) {
+                setState(() {
+                  activeStep = index;
+                });
+              },
+              icons: [
+                Icon(Icons.home),
+                Icon(Icons.person),
+                Icon(Icons.account_balance),
+                Icon(Icons.access_time),
+                Icon(Icons.home),
+              ],
             ),
             Container(
               decoration: BoxDecoration(
@@ -83,7 +56,7 @@ class _IconStepperDemo extends State<IconStepperDemo> {
                 margin: EdgeInsets.all(5.0),
                 child: FittedBox(
                   child: Center(
-                    child: Text('${currentIndex + 1}'),
+                    child: Text('${activeStep + 1}'),
                   ),
                 ),
               ),
@@ -93,33 +66,21 @@ class _IconStepperDemo extends State<IconStepperDemo> {
               children: [
                 RaisedButton(
                   onPressed: () {
-                    // MUST TO CONTROL STEPPER FROM EXTERNAL BUTTONS.
-                    setState(() {
-                      goNext = false;
-                      goPrevious = true;
-
-                      if (currentIndex > 0) {
-                        currentIndex--;
-                      }
-                    });
+                    if (activeStep > 0) {
+                      setState(() {
+                        activeStep--;
+                      });
+                    }
                   },
                   child: Text('Previous'),
                 ),
                 RaisedButton(
                   onPressed: () {
-                    // MUST TO CONTROL STEPPER FROM EXTERNAL BUTTONS.
-                    setState(() {
-                      // jumpTo = 2;
-                      // currentIndex = jumpTo;
-                      goNext = true;
-                      goPrevious = false;
-
-                      if (currentIndex < 3) {
-                        currentIndex += 10;
-                      } else {
-                        currentIndex++;
-                      }
-                    });
+                    if (activeStep < totalSteps) {
+                      setState(() {
+                        activeStep++;
+                      });
+                    }
                   },
                   child: Text('Next'),
                 ),
@@ -132,7 +93,7 @@ class _IconStepperDemo extends State<IconStepperDemo> {
   }
 
   String header() {
-    switch (currentIndex) {
+    switch (activeStep) {
       case 0:
         return 'Educational Background';
 

@@ -74,16 +74,23 @@ class IconStepper extends StatelessWidget {
   final bool scrollingDisabled;
 
   /// Jumps to a specified step. The specified step must be a valid step otherwise results in 'Step out of range' error.
-  /// 
+  ///
   /// __Developer Note:__ Doesn't update on Hot Reload. Use Hot Restart or setState() to update.
-  final int jumpTo;
+  final int activeStep;
+
+  final Function totalSteps;
 
   /// Controls which `BaseStepper` constructor to call.
   final bool _isExternallyControlled;
 
+  @Deprecated('Scheduled to be removed in v')
+
   /// Used when the stepper is controlled externally using the `goNext` and `goPrevious` properties. In which case, two variables must be maintained in a StatefulWidget to set the values of `gotNext` and `goPrevious` in a call to `setState()`, and if the stepping is moving foward `gotNext` must be set to true and `goPrevious` must be set to `false`. If moving backward `goPrevious` must be set to `true` and `goNext` must be set to `false`.
   ///
   /// For more information, see example [here](https://pub.dev/packages/im_stepper/example).
+  @Deprecated(
+    'Scheduled to be removed in version 0.1.3. Please consider using the activeStep instead. For more information, see examples on https://pub.dev/packages/im_stepper/example',
+  )
   IconStepper.externallyControlled({
     this.icons,
     this.direction = Axis.horizontal,
@@ -103,7 +110,8 @@ class IconStepper extends StatelessWidget {
     this.goNext = false,
     this.goPrevious = false,
     this.scrollingDisabled = false,
-    this.jumpTo = 0,
+    this.activeStep = 0,
+    this.totalSteps,
   })  : this.enableNextPreviousButtons = false,
         this.enableStepTapping = false,
         this.previousButtonIcon = null,
@@ -134,7 +142,8 @@ class IconStepper extends StatelessWidget {
     this.stepReachedAnimationDuration = const Duration(seconds: 1),
     this.steppingEnabled = true,
     this.scrollingDisabled = false,
-    this.jumpTo = 0,
+    this.activeStep = 0,
+    this.totalSteps,
   })  : this._isExternallyControlled = false,
         this.goNext = false,
         this.goPrevious = false;
@@ -161,7 +170,8 @@ class IconStepper extends StatelessWidget {
             goNext: goNext,
             goPrevious: goPrevious,
             scrollingDisabled: scrollingDisabled,
-            jumpTo: jumpTo,
+            activeStep: activeStep,
+            totalSteps: totalSteps,
           )
         : BaseStepper(
             children: _iconsWithSizeOverridden(),
@@ -185,7 +195,8 @@ class IconStepper extends StatelessWidget {
             margin: activeStepBorderPadding,
             padding: stepPadding,
             scrollingDisabled: scrollingDisabled,
-            jumpTo: jumpTo,
+            activeStep: activeStep,
+            totalSteps: totalSteps,
           );
   }
 
