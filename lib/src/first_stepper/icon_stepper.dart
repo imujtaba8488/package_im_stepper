@@ -107,8 +107,14 @@ class IconStepper extends StatelessWidget {
     this.stepReachedAnimationEffect = Curves.bounceOut,
     this.stepReachedAnimationDuration = const Duration(seconds: 1),
     this.steppingEnabled = true,
-    this.goNext = false,
-    this.goPrevious = false,
+    @Deprecated(
+      'Scheduled to be removed in version 0.1.3. Please consider using the activeStep instead. For more information, see examples on https://pub.dev/packages/im_stepper/example',
+    )
+        this.goNext = false,
+    @Deprecated(
+      'Scheduled to be removed in version 0.1.3. Please consider using the activeStep instead. For more information, see examples on https://pub.dev/packages/im_stepper/example',
+    )
+        this.goPrevious = false,
     this.scrollingDisabled = false,
     this.activeStep = 0,
     this.totalSteps,
