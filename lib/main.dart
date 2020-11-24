@@ -40,6 +40,7 @@ class _IconStepperDemo extends State<IconStepperDemo> {
               totalSteps: (steps) => totalSteps = steps,
               enableNextPreviousButtons: true,
               onStepReached: (index) {
+                // Here the activeStep must be set to index.
                 setState(() {
                   activeStep = index;
                 });
@@ -52,6 +53,7 @@ class _IconStepperDemo extends State<IconStepperDemo> {
               children: [
                 RaisedButton(
                   onPressed: () {
+                    // Decrement activeStep.
                     if (activeStep > 0) {
                       setState(() {
                         activeStep--;
@@ -62,6 +64,7 @@ class _IconStepperDemo extends State<IconStepperDemo> {
                 ),
                 RaisedButton(
                   onPressed: () {
+                    // Increment activeStep.
                     if (activeStep < totalSteps) {
                       setState(() {
                         activeStep++;

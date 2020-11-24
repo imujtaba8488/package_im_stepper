@@ -2,8 +2,6 @@
 
 - [IconStepper](#iconstepper)
 
-- [IconStepper Externally Controlled](#iconstepper-externally-controlled)
-
 - [DotStepper](#dotstepper)
 
 - [ImageStepper](#imagestepper)
@@ -12,22 +10,34 @@
 
 ## IconStepper
 
+Controlled in three possible ways:-
+
+- Using build-in next / previous buttons.
+
+- Using external next / previous buttons.
+
+- Using tapping.
+
 ```dart
 import 'package:flutter/material.dart';
 
-import 'package:im_stepper/stepper.dart';
+import 'stepper.dart';
 
 void main() {
   runApp(IconStepperDemo());
 }
 
-class MyApp extends StatefulWidget {
+class IconStepperDemo extends StatefulWidget {
   @override
   _IconStepperDemo createState() => _IconStepperDemo();
 }
 
 class _IconStepperDemo extends State<IconStepperDemo> {
-  int selectedIndex = 0;
+  // The step that is currently active. Can be set to any valid value.
+  int activeStep = 2;
+
+  // The total number of steps available. This will update automatically from the totalSteps function of the IconStepper widget.
+  int totalSteps = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -36,75 +46,55 @@ class _IconStepperDemo extends State<IconStepperDemo> {
         appBar: AppBar(
           title: Text('Icon Stepper Example'),
         ),
-        body: Row(
+        body: Column(
           children: <Widget>[
-            Container(
-              // margin: EdgeInsets.all(5.0),
-              decoration: BoxDecoration(
-                color: Colors.blueGrey,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey,
-                    spreadRadius: 1.0,
-                    blurRadius: 2.0,
-                  )
-                ],
-                // borderRadius: BorderRadius.circular(5.0),
-              ),
-              child: IconStepper(
-                direction: Axis.vertical,
-                // enableNextPreviousButtons: false,
-                stepColor: Colors.white,
-                activeStepColor: Colors.amber,
-                lineColor: Colors.amberAccent,
-                // lineDotRadius: 2,
-                lineLength: 75,
-                onStepReached: (value) {
-                  setState(() {
-                    print('value: $value');
-                    selectedIndex = value;
-                  });
-                },
-                steppingEnabled: true,
-                icons: [
-                  Icon(Icons.home),
-                  Icon(Icons.person),
-                  Icon(Icons.account_balance),
-                  Icon(Icons.access_time),
-                  Icon(Icons.dashboard),
-                  Icon(Icons.cached),
-                  Icon(Icons.unarchive),
-                  Icon(Icons.backspace),
-                  Icon(Icons.backup),
-                  Icon(Icons.battery_unknown),
-                  Icon(Icons.cake),
-                  Icon(Icons.call),
-                  Icon(Icons.call_end),
-                  Icon(Icons.block),
-                  Icon(Icons.mail),
-                  Icon(Icons.face),
-                  Icon(Icons.fast_forward),
-                  Icon(Icons.gamepad),
-                ],
-              ),
+            IconStepper(
+              icons: [
+                Icon(Icons.home),
+                Icon(Icons.person),
+                Icon(Icons.account_balance),
+                Icon(Icons.access_time),
+                Icon(Icons.home),
+              ],
+              previousButtonIcon: Icon(Icons.g_translate),
+              activeStep: activeStep,
+              totalSteps: (steps) => totalSteps = steps,
+              enableNextPreviousButtons: true,
+              onStepReached: (index) {
+                // Here the activeStep must be set to index.
+                setState(() {
+                  activeStep = index;
+                });
+              },
             ),
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(width: 0.1),
-              ),
-              padding: EdgeInsets.all(8.0),
-              alignment: Alignment.centerLeft,
-              child: Text(header()),
-            ),
-            Expanded(
-              child: Container(
-                margin: EdgeInsets.all(5.0),
-                child: FittedBox(
-                  child: Center(
-                    child: Text('${selectedIndex + 1}'),
-                  ),
+            _header(),
+            _content(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                RaisedButton(
+                  onPressed: () {
+                    // Decrement activeStep.
+                    if (activeStep > 0) {
+                      setState(() {
+                        activeStep--;
+                      });
+                    }
+                  },
+                  child: Text('Previous'),
                 ),
-              ),
+                RaisedButton(
+                  onPressed: () {
+                    // Increment activeStep.
+                    if (activeStep < totalSteps) {
+                      setState(() {
+                        activeStep++;
+                      });
+                    }
+                  },
+                  child: Text('Next'),
+                ),
+              ],
             ),
           ],
         ),
@@ -112,8 +102,21 @@ class _IconStepperDemo extends State<IconStepperDemo> {
     );
   }
 
-  String header() {
-    switch (selectedIndex) {
+  /// Returns the header widget.
+  Widget _header() {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(width: 0.1),
+      ),
+      padding: EdgeInsets.all(8.0),
+      alignment: Alignment.centerLeft,
+      child: Text(headerText()),
+    );
+  }
+
+  /// Returns the header text.
+  String headerText() {
+    switch (activeStep) {
       case 0:
         return 'Educational Background';
 
@@ -126,21 +129,23 @@ class _IconStepperDemo extends State<IconStepperDemo> {
       case 3:
         return 'Sports';
 
-      case 4:
-        return 'Specially-abled';
-
-      case 5:
-        return 'Personal Details';
-
-      case 6:
-        return 'Social Details';
-
-      case 7:
-        return 'Review';
-
       default:
         return 'Unknown';
     }
+  }
+
+  /// Returns the content widget.
+  Widget _content() {
+    return Expanded(
+      child: Container(
+        margin: EdgeInsets.all(5.0),
+        child: FittedBox(
+          child: Center(
+            child: Text('${activeStep + 1}'),
+          ),
+        ),
+      ),
+    );
   }
 }
 ```
