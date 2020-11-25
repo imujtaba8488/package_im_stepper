@@ -177,10 +177,10 @@ class BaseStepper extends StatefulWidget {
       'iconIndicatorRadius must be greater than 0',
     );
 
-    // assert(
-    //   jumpTo >= 0 && jumpTo <= children.length,
-    //   'Error: Step out of range',
-    // );
+    assert(
+      activeStep >= 0 && activeStep <= children.length,
+      'Error: Active Step out of range',
+    );
   }
 
   @override

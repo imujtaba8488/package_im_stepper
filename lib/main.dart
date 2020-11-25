@@ -12,10 +12,11 @@ class IconStepperDemo extends StatefulWidget {
 }
 
 class _IconStepperDemo extends State<IconStepperDemo> {
-  // The step that is currently active. Can be set to any valid value.
+  // THESE TWO VARIABLES ARE IMPORTANT.
+  // Controls the currently active step. Can be set to any valid value i.e., a value that falls between 0 and the total number of available steps. Hence, can also be used to set the initial/starting step.
   int activeStep = 2;
 
-  // The total number of steps available. This will update automatically from the totalSteps function of the IconStepper widget.
+  // Maybe required in conditionals. Automatically set from totalSteps Function.
   int totalSteps = 0;
 
   @override
@@ -23,24 +24,24 @@ class _IconStepperDemo extends State<IconStepperDemo> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Icon Stepper Example'),
+          title: Text('ImageStepper Example'),
         ),
         body: Column(
           children: <Widget>[
-            IconStepper(
-              icons: [
-                Icon(Icons.home),
-                Icon(Icons.person),
-                Icon(Icons.account_balance),
-                Icon(Icons.access_time),
-                Icon(Icons.home),
+            NumberStepper(
+              numbers: [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6
               ],
-              previousButtonIcon: Icon(Icons.g_translate),
               activeStep: activeStep,
               totalSteps: (steps) => totalSteps = steps,
               enableNextPreviousButtons: true,
               onStepReached: (index) {
-                // Here the activeStep must be set to index.
+                // activeStep must be set to index.
                 setState(() {
                   activeStep = index;
                 });
@@ -53,7 +54,7 @@ class _IconStepperDemo extends State<IconStepperDemo> {
               children: [
                 RaisedButton(
                   onPressed: () {
-                    // Decrement activeStep.
+                    // Decrement activeStep, when previous button is tapped.
                     if (activeStep > 0) {
                       setState(() {
                         activeStep--;
@@ -64,7 +65,7 @@ class _IconStepperDemo extends State<IconStepperDemo> {
                 ),
                 RaisedButton(
                   onPressed: () {
-                    // Increment activeStep.
+                    // Increment activeStep, when next button is tapped.
                     if (activeStep < totalSteps) {
                       setState(() {
                         activeStep++;

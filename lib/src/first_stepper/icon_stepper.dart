@@ -76,7 +76,7 @@ class IconStepper extends StatelessWidget {
   /// The currently active step.
   final int activeStep;
 
-  /// Callback returns the total number of available steps.
+  /// Callback provides the total number of available steps.
   final Function totalSteps;
 
   /// Controls which `BaseStepper` constructor to call.
