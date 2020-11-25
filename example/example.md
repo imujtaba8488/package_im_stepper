@@ -467,7 +467,7 @@ class _IconStepperDemo extends State<IconStepperDemo> {
                 RaisedButton(
                   onPressed: () {
                     // Decrement activeStep, when previous button is tapped.
-                    // __IMPORTANT__: Make sure the condition checks for greater than 1 and not for greater than 0.
+                    // IMPORTANT: Make sure the condition checks for greater than 1 and not for greater than 0.
                     if (activeStep > 1) {
                       setState(() {
                         activeStep--;

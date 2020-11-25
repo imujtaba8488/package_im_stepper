@@ -33,7 +33,7 @@ class Slide extends DotStepperEffect {
         ),
         paint,
       );
-    } else if (dotShape == DotShape.line) {
+    } else if (dotShape == DotShape.dash) {
       canvas.drawLine(
         Offset(centerTranslated.dx, centerTranslated.dy),
         Offset(centerTranslated.dx + dotRadius, centerTranslated.dy),

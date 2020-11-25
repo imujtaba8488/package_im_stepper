@@ -70,7 +70,10 @@ class DotStepper extends StatefulWidget {
       'Scheduled to be removed in version 0.1.3. Please consider using the activeStep instead. For more information, see examples on https://pub.dev/packages/im_stepper/example',
     )
         this.goPrevious = false,
-    this.dotReachedIndex,
+    @Deprecated(
+      'Scheduled to be removed in version 0.1.3. Please consider using the activeStep instead. For more information, see examples on https://pub.dev/packages/im_stepper/example',
+    )
+        this.dotReachedIndex,
     this.direction = Axis.horizontal,
     this.dotColor = Colors.grey,
     this.indicatorColor = Colors.black,
@@ -283,9 +286,10 @@ enum IndicatorType {
   contain,
 }
 
+/// Defines the shape of the dot.
 enum DotShape {
   circle,
   square,
   rounded_rectangle,
-  line,
+  dash,
 }

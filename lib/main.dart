@@ -30,9 +30,11 @@ class _IconStepperDemo extends State<IconStepperDemo> {
           children: [
             DotStepper(
               dotCount: 5,
+              dotShape: DotShape.dash,
+              dotRadius: 50,
               activeStep: activeStep,
               totalSteps: (steps) => totalSteps = steps,
-              indicatorEffect: IndicatorEffect.jump,
+              indicatorEffect: IndicatorEffect.jump_from_below,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

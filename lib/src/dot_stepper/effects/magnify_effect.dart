@@ -38,7 +38,7 @@ class Magnify extends DotStepperEffect {
         ),
         paint,
       );
-    } else if (dotShape == DotShape.line) {
+    } else if (dotShape == DotShape.dash) {
       canvas.drawLine(
         Offset(center.dx, center.dy),
         Offset(center.dx + dotRadius, center.dy),

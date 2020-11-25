@@ -107,7 +107,7 @@ class Worm extends DotStepperEffect {
         rRect,
         paint,
       );
-    } else if (dotShape == DotShape.line) {
+    } else if (dotShape == DotShape.dash) {
       Animation lineStretch = Tween(
         begin: spacing * 1.5,
         end: dotRadius * 2.0,
