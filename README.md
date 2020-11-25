@@ -18,7 +18,7 @@ Here's a collection of articles, examples, posts, etc., about im_stepper. If you
 
 Here's a list of some important changes in version: 0.1.2+7. For a complete list of changes see changelog [here](https://pub.dev/packages/im_stepper/changelog).
 
-* __IMPORTANT MESSAGE:__ `goNext`, `goPrevious`, and `Foo.externallyControlled` properties and constructors will be removed from Icon, Image, Number, and Dot Steppers in version __0.1.3__. The `dotReachedIndex` property in `DotStepper` will be also be removed in version __0.1.3__. Please consider updating your code! see examples __[here](https://pub.dev/packages/im_stepper/example)__.
+* __IMPORTANT MESSAGE:__ `goNext`, `goPrevious`, and `Foo.externallyControlled` properties and constructors have been deprecated and will be removed from Icon, Image, Number, and Dot Steppers in version __0.1.3__. The `dotReachedIndex` property in `DotStepper` has been deprecated and will be also removed in version __0.1.3__. Please consider updating your code! see examples __[here](https://pub.dev/packages/im_stepper/example)__.
 
 * Introducing the `activeStep` property, a __simpler__ way to control the steppers either from built-in buttons, by tapping, or from external buttons.
 
@@ -54,13 +54,11 @@ The stepper widgets help you to show or collect information from users using org
 
 * __Important:__ The `direction` argument controls whether the stepper is displayed horizontally or vertically. A horizontal IconStepper can be wrapped within a Column with no issues. However, if wrapped within a row, it _must also be_ wrapped within the built-in _Expanded_ widget. The same applies to the vertical IconStepper.
 
-* Icon, Image, and Number Steppers fire the `onStepReached(int index)` callback, which provides the index of the Step that is reached. This callback can be used to control the widget that appears when a specific step is reached.
-
-* To customize the color, border, etc., wrap a stepper widget inside a `Container` and specify it's `decoration` argument.
-
 * __Validation:__ To enable validation before the next step is reached, set the `steppingEnabled` property to an appropriate value in a `StatefulWidget`.
 
-* To control the Icon, Image, or the Number from external buttons, etc., use the `Foo.externallyControlled()` constructor and call `goNext` and `goPrevious` controlled by two variables in a `StatefulWidget` within a `setState` call. For further information see example [here](https://pub.dev/packages/im_stepper/example).
+* __Controlling Steppers:__ todo: provide description of activeStep, minSteps and maxSteps.
+
+* To customize the color, border, etc., wrap a stepper widget inside a `Container` and specify it's `decoration` argument.
 
 ## IconStepper
 
