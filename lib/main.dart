@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'stepper.dart';
 
+// This is how the verson 0.1.2+6 looked.
 void main() {
   runApp(IconStepperDemo());
 }
