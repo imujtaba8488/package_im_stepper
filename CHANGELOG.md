@@ -1,5 +1,21 @@
 # ChangeLog
 
+## 0.1.2+7
+
+### Friday, 27th November, 2020
+
+* __Breaking Change:__ The DotShape property __line__ renamed to __dash__.
+
+* `goNext`, `goPrevious`, and `Foo.externallyControlled` properties and constructors deprecated and __will be removed in version 0.1.3__ from Icon, Image, Number, and Dot Steppers. Instead, introduced the `activeStep` property, a __simpler__ approach to control the steppers either from built-in buttons, by tapping, or from external buttons. @github issues: [#5](https://github.com/imujtaba8488/package_im_stepper/issues/5), [#9](https://github.com/imujtaba8488/package_im_stepper/issues/9).
+
+* The `activeStep` can also be used to either set the initial step or jump to any step. @github issues: [#7](https://github.com/imujtaba8488/package_im_stepper/issues/7)
+
+* Deprecated the `dotReachedIndex` property in the DotStepper. This function is now redundant as the same can be tracked using the `activeStep` property.
+
+* Two new function properties introduced in DotStepper; `minSteps` and `maxSteps`. These maybe required in conditionals to control stepping forward and backward using the `activeStep`.
+
+* __BugFix:__ Previous button icon not working @github issue: [#8](https://github.com/imujtaba8488/package_im_stepper/issues/8)
+
 ## 0.1.2+6
 
 ### Thursday, 15th October, 2020

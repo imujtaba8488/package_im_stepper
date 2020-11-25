@@ -14,7 +14,7 @@ import 'effects/jump_over_effect.dart';
 /// Callback fired when a dot is reached.
 typedef DotReached = void Function(int index);
 
-typedef TotalSteps = void Function(int totalSteps);
+typedef StepCount = void Function(int minOrMax);
 
 class DotStepper extends StatefulWidget {
   /// Total number of dots. Each dot represents a step.
@@ -47,8 +47,10 @@ class DotStepper extends StatefulWidget {
   /// The step that is currently active.
   final int activeStep;
 
+  final StepCount minSteps;
+
   /// The total number of available steps.
-  final TotalSteps totalSteps;
+  final StepCount maxSteps;
 
   /// The effect to apply to the indicator.
   final IndicatorEffect indicatorEffect;
@@ -71,7 +73,7 @@ class DotStepper extends StatefulWidget {
     )
         this.goPrevious = false,
     @Deprecated(
-      'Scheduled to be removed in version 0.1.3. Please consider using the activeStep instead. For more information, see examples on https://pub.dev/packages/im_stepper/example',
+      'Scheduled to be removed in version 0.1.3. After the removal of goNext and goPrevious in v-0.1.3, this function will be redundant, as the same can be tracked using the activeStep. For more information, see examples on https://pub.dev/packages/im_stepper/example',
     )
         this.dotReachedIndex,
     this.direction = Axis.horizontal,
@@ -81,10 +83,18 @@ class DotStepper extends StatefulWidget {
     this.indicatorEffect = IndicatorEffect.slide,
     this.indicatorType = IndicatorType.fill,
     this.dotShape = DotShape.circle,
-    this.activeStep = 0,
     @required
-        this.totalSteps,
+        this.activeStep,
+    @required
+        this.minSteps,
+    @required
+        this.maxSteps,
   }) {
+    assert(
+      dotCount > 1,
+      'It does not make sense to have a dot stepper with less than 2 dots!',
+    );
+
     assert(
       dotRadius >= 10.0,
       'Radius must be greater than or equal to 10.0. Current radius: $dotRadius',
@@ -92,7 +102,7 @@ class DotStepper extends StatefulWidget {
 
     assert(
       activeStep > 0 && activeStep <= dotCount,
-      'Error: Active Step out of range. activeStep must be greater than 0 and less than the total number of dots.',
+      'activeStep out of range! activeStep must be greater than 0 and less than the total number of dots.',
     );
   }
 
@@ -167,12 +177,6 @@ class _DotStepperState extends State<DotStepper>
 
       _scrollToDot();
       _runAnimations();
-
-      if (widget.dotReachedIndex != null) {
-        widget.dotReachedIndex(_selected);
-      }
-    } else {
-      print('No more steps.');
     }
 
     super.didUpdateWidget(oldWidget);
@@ -193,7 +197,10 @@ class _DotStepperState extends State<DotStepper>
 
   @override
   Widget build(BuildContext context) {
-    widget.totalSteps(widget.dotCount);
+    // Return the min and max step count.
+    widget.minSteps(1);
+    widget.maxSteps(widget.dotCount);
+
     return Align(
       child: SingleChildScrollView(
         scrollDirection: widget.direction,
