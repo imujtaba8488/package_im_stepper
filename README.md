@@ -18,11 +18,9 @@ Here's a collection of articles, examples, posts, etc., about im_stepper. If you
 
 Here's a list of some important changes in version: 0.1.2+7. For a complete list of changes see changelog [here](https://pub.dev/packages/im_stepper/changelog).
 
-* BugFix
+* `goNext`, `goPrevious`, and `Foo.externallyControlled` properties and constructors deprecated and __will be removed in version 0.1.3__. Instead, introduced the `activeStep` property, a simpler approach to control the steppers either from built-in buttons, by tapping, or from external buttons. @github issues: [#5](https://github.com/imujtaba8488/package_im_stepper/issues/5), [#9](https://github.com/imujtaba8488/package_im_stepper/issues/9). The `activeStep` can also be used to either set the initial step or jump to any step. @github issues: [#7](https://github.com/imujtaba8488/package_im_stepper/issues/7)
 
-* Added the `jumpTo' option.
-
-* Added the 'initial' option.
+* BugFix: Previous button icon not working @github issue: [#8](https://github.com/imujtaba8488/package_im_stepper/issues/8)
 
 ## About
 
