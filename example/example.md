@@ -427,70 +427,74 @@ class _IconStepperDemo extends State<IconStepperDemo> {
 ```Dart
 import 'package:flutter/material.dart';
 
-import 'package:im_stepper/stepper.dart';
+import 'stepper.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(IconStepperDemo());
 }
 
-class MyApp extends StatefulWidget {
+class IconStepperDemo extends StatefulWidget {
   @override
-  _MyAppState createState() => _MyAppState();
+  _IconStepperDemo createState() => _IconStepperDemo();
 }
 
-class _MyAppState extends State<MyApp> {
-  bool stepNext = false;
-  bool stepPrevious = false;
+class _IconStepperDemo extends State<IconStepperDemo> {
+  // THESE TWO VARIABLES ARE IMPORTANT.
+  // Controls the currently active step. Can be set to any valid value i.e., a value that falls between 0 and the total number of available steps. Hence, can also be used to set the initial/starting step.
+  int activeStep = 1;
+
+  // Maybe required in conditionals. Automatically set from totalSteps Function.
+  int totalSteps = 0;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Icon Stepper Example'),
+          title: Text('ImageStepper Example'),
         ),
-        body: SafeArea(
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    onPressed: () {
+        body: Column(
+          children: [
+            DotStepper(
+              dotCount: 5,
+              activeStep: activeStep,
+              totalSteps: (steps) => totalSteps = steps,
+              indicatorEffect: IndicatorEffect.jump,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                RaisedButton(
+                  onPressed: () {
+                    // Decrement activeStep, when previous button is tapped.
+                    // __IMPORTANT__: Make sure the condition checks for greater than 1 and not for greater than 0.
+                    if (activeStep > 1) {
                       setState(() {
-                        // ***DON'T FORGET***
-                        stepNext = false;
-                        stepPrevious = true;
+                        activeStep--;
                       });
-                    },
-                    icon: Icon(Icons.chevron_left),
-                  ),
-                  DotStepper(
-                    goNext: stepNext,
-                    goPrevious: stepPrevious,
-                    dotCount: 5,
-                    indicatorEffect: IndicatorEffect.jump,
-                    // indicatorType: IndicatorType.contain,
-                    // direction: Axis.vertical,
-                    // dotRadius: 150,
-                  ),
-                  IconButton(
-                    onPressed: () {
+                    }
+                  },
+                  child: Text('Previous'),
+                ),
+                RaisedButton(
+                  onPressed: () {
+                    // Increment activeStep, when next button is tapped.
+                    if (activeStep < totalSteps) {
                       setState(() {
-                        // ***DON'T FORGET***
-                        stepPrevious = false;
-                        stepNext = true;
+                        activeStep++;
                       });
-                    },
-                    icon: Icon(Icons.chevron_right),
-                  )
-                ],
-              )
-            ],
-          ),
+                    }
+                  },
+                  child: Text('Next'),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
   }
 }
+
+
 ```

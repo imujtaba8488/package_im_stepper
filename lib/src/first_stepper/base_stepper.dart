@@ -10,7 +10,7 @@ typedef OnStepReached = void Function(int index);
 typedef TotalSteps = void Function(int totalSteps);
 
 class BaseStepper extends StatefulWidget {
-  /// Each child defines a step. Hence, total number of icons determines the total number of steps.
+  /// Each child defines a step. Hence, total number of children determines the total number of steps.
   final List<Widget> children;
 
   /// Whether to enable or disable the next and previous buttons.
@@ -25,7 +25,7 @@ class BaseStepper extends StatefulWidget {
   /// Icon to be used for the next button.
   final Icon nextButtonIcon;
 
-  /// Determines what should happen when a step is reached. This callback provides the __index__ of the step that was reached.
+  /// This callback provides the __index__ of the step that is reached.
   final OnStepReached onStepReached;
 
   /// Whether to show the steps horizontally or vertically. __Note: Ensure horizontal stepper goes inside a column and vertical goes inside a row.__

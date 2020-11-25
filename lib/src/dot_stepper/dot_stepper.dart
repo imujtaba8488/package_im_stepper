@@ -14,6 +14,8 @@ import 'effects/jump_over_effect.dart';
 /// Callback fired when a dot is reached.
 typedef DotReached = void Function(int index);
 
+typedef TotalSteps = void Function(int totalSteps);
+
 class DotStepper extends StatefulWidget {
   /// Total number of dots. Each dot represents a step.
   final int dotCount;
@@ -42,19 +44,32 @@ class DotStepper extends StatefulWidget {
   /// Whether to fill the dots with color or show them as outlined.
   final bool fillStep;
 
+  /// The step that is currently active.
+  final int activeStep;
+
+  /// The total number of available steps.
+  final TotalSteps totalSteps;
+
   /// The effect to apply to the indicator.
   final IndicatorEffect indicatorEffect;
 
   /// The type of the indicator.
   final IndicatorType indicatorType;
 
+  /// The shape of the dot. Can be circle, square, rounded_rectangle,or line.
   final DotShape dotShape;
 
   DotStepper({
     this.dotCount = 3,
     this.dotRadius = 24.0,
-    this.goNext = false,
-    this.goPrevious = false,
+    @Deprecated(
+      'Scheduled to be removed in version 0.1.3. Please consider using the activeStep instead. For more information, see examples on https://pub.dev/packages/im_stepper/example',
+    )
+        this.goNext = false,
+    @Deprecated(
+      'Scheduled to be removed in version 0.1.3. Please consider using the activeStep instead. For more information, see examples on https://pub.dev/packages/im_stepper/example',
+    )
+        this.goPrevious = false,
     this.dotReachedIndex,
     this.direction = Axis.horizontal,
     this.dotColor = Colors.grey,
@@ -63,10 +78,18 @@ class DotStepper extends StatefulWidget {
     this.indicatorEffect = IndicatorEffect.slide,
     this.indicatorType = IndicatorType.fill,
     this.dotShape = DotShape.circle,
+    this.activeStep = 0,
+    @required
+        this.totalSteps,
   }) {
     assert(
       dotRadius >= 10.0,
       'Radius must be greater than or equal to 10.0. Current radius: $dotRadius',
+    );
+
+    assert(
+      activeStep > 0 && activeStep <= dotCount,
+      'Error: Active Step out of range. activeStep must be greater than 0 and less than the total number of dots.',
     );
   }
 
@@ -82,13 +105,13 @@ class _DotStepperState extends State<DotStepper>
   bool isSteppingForward = true;
 
   // The currently selected dot. ** Must be set to 1 and not to 0. **
-  int selected = 1;
+  int _selected;
 
   ScrollController _scrollController;
 
   @override
   void initState() {
-    super.initState();
+    _selected = widget.activeStep;
 
     _scrollController = ScrollController();
 
@@ -100,24 +123,25 @@ class _DotStepperState extends State<DotStepper>
       });
 
     _animationController.forward();
+
+    super.initState();
   }
 
   @override
   void didUpdateWidget(DotStepper oldWidget) {
-    super.didUpdateWidget(oldWidget);
-
-    if (widget.goNext && selected < widget.dotCount) {
-      selected++;
+    //! This Must be removed in v 0.1.3.
+    if (widget.goNext && _selected < widget.dotCount) {
+      _selected++;
       isSteppingForward = true;
 
       _scrollToDot();
       _runAnimations();
 
       if (widget.dotReachedIndex != null) {
-        widget.dotReachedIndex(selected);
+        widget.dotReachedIndex(_selected);
       }
-    } else if (widget.goPrevious && selected > 1) {
-      selected--;
+    } else if (widget.goPrevious && _selected > 1) {
+      _selected--;
       isSteppingForward = false;
 
       _scrollToDot();
@@ -125,9 +149,30 @@ class _DotStepperState extends State<DotStepper>
       _runAnimations();
 
       if (widget.dotReachedIndex != null) {
-        widget.dotReachedIndex(selected);
+        widget.dotReachedIndex(_selected);
       }
     }
+
+    // Verify that the active step falls within a valid range.
+    if (widget.activeStep > 0 && widget.activeStep < widget.dotCount + 1) {
+      _selected = widget.activeStep;
+
+      // Compare activeStep with oldWidget.activeStep. if the former is greater than the later, then stepping is moving forward, else stepping is moving backwards.
+      widget.activeStep > oldWidget.activeStep
+          ? isSteppingForward = true
+          : isSteppingForward = false;
+
+      _scrollToDot();
+      _runAnimations();
+
+      if (widget.dotReachedIndex != null) {
+        widget.dotReachedIndex(_selected);
+      }
+    } else {
+      print('No more steps.');
+    }
+
+    super.didUpdateWidget(oldWidget);
   }
 
   /// Resets and runs the animations.
@@ -145,6 +190,7 @@ class _DotStepperState extends State<DotStepper>
 
   @override
   Widget build(BuildContext context) {
+    widget.totalSteps(widget.dotCount);
     return Align(
       child: SingleChildScrollView(
         scrollDirection: widget.direction,
@@ -152,7 +198,7 @@ class _DotStepperState extends State<DotStepper>
         child: CustomPaint(
           painter: DotStepperPainter(
             dotCount: widget.dotCount,
-            selectedIndex: selected,
+            selectedIndex: _selected,
             axis: widget.direction,
             dotColor: widget.dotColor,
             indicatorColor: widget.indicatorColor,
@@ -179,7 +225,7 @@ class _DotStepperState extends State<DotStepper>
   /// Scrolls to the next selected dot.
   void _scrollToDot() {
     _scrollController.animateTo(
-      (widget.dotRadius * selected) - widget.dotRadius,
+      (widget.dotRadius * _selected) - widget.dotRadius,
       duration: Duration(milliseconds: 400),
       curve: Curves.easeIn,
     );
