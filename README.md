@@ -18,9 +18,9 @@ Here's a collection of articles, examples, posts, etc., about im_stepper. If you
 
 Here's a list of some important changes in version: 0.1.2+7. For a complete list of changes see changelog [here](https://pub.dev/packages/im_stepper/changelog).
 
-* `goNext`, `goPrevious`, and `Foo.externallyControlled` properties and constructors deprecated and __will be removed in version 0.1.3__. Instead, introduced the `activeStep` property, a simpler approach to control the steppers either from built-in buttons, by tapping, or from external buttons. @github issues: [#5](https://github.com/imujtaba8488/package_im_stepper/issues/5), [#9](https://github.com/imujtaba8488/package_im_stepper/issues/9). The `activeStep` can also be used to either set the initial step or jump to any step. @github issues: [#7](https://github.com/imujtaba8488/package_im_stepper/issues/7)
+* __IMPORTANT MESSAGE:__ `goNext`, `goPrevious`, and `Foo.externallyControlled` properties and constructors will be removed from Icon, Image, Number, and Dot Steppers in version __0.1.3__. The `dotReachedIndex` property in `DotStepper` will be also be removed in version __0.1.3__. Please consider updating your code! see examples __[here](https://pub.dev/packages/im_stepper/example)__.
 
-* BugFix: Previous button icon not working @github issue: [#8](https://github.com/imujtaba8488/package_im_stepper/issues/8)
+* Introducing the `activeStep` property, a __simpler__ way to control the steppers either from built-in buttons, by tapping, or from external buttons.
 
 ## About
 
