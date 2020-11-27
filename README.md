@@ -20,11 +20,9 @@ Here's a list of some important changes in version: 0.1.2+7. For a complete list
 
 * __IMPORTANT MESSAGE:__ `goNext`, `goPrevious`, and `Foo.externallyControlled` properties and constructors have been deprecated and will be removed from Icon, Image, Number, and Dot Steppers in version __0.1.3__. The `dotReachedIndex` property in `DotStepper` has been deprecated and will be also removed in version __0.1.3__. Please consider updating your code! see examples __[here](https://pub.dev/packages/im_stepper/example)__.
 
-[![](https://api.gh-polls.com/poll/01ER2HSQMW9DJQ30KKMTGRA6NW/Flutter)](https://api.gh-polls.com/poll/01ER2HSQMW9DJQ30KKMTGRA6NW/Flutter/vote)
-[![](https://api.gh-polls.com/poll/01ER2HSQMW9DJQ30KKMTGRA6NW/Dart)](https://api.gh-polls.com/poll/01ER2HSQMW9DJQ30KKMTGRA6NW/Dart/vote)
-[![](https://api.gh-polls.com/poll/01ER2HSQMW9DJQ30KKMTGRA6NW/Java)](https://api.gh-polls.com/poll/01ER2HSQMW9DJQ30KKMTGRA6NW/Java/vote)
-
 * Introducing the `activeStep` property, a __simpler__ way to control the steppers either from built-in buttons, by tapping, or from external buttons.
+
+* __Note for existing users:__ Do you prefer the new way of controlling steppers, or the older way was better? Please vote [here]()! This message will be removed in version 0.1.3.
 
 ## About
 
@@ -33,6 +31,8 @@ A growing collection of stepper and page indicator widgets.
 ## Description
 
 The stepper widgets help you to show or collect information from users using organized steps. On the other hand, the page indicator widgets allow you to visually notify users about their current position as they scroll through a group of pages.
+
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfTtJ0yyWRK93WzA135mSLlDIv2nTOGE99r0nLIoOA1moEybg/viewform?embedded=true" width="640" height="729" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
 
 ## Table of Contents
 
