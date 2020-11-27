@@ -46,9 +46,9 @@ The stepper widgets help you to show or collect information from users using org
 
 * [Feedback](#feedback)
 
-* [Please Support](#please-support)
-
 * [Follow Me](#follow-me)
+
+* [Please Support](#please-support)
 
 ## General Guidelines
 
@@ -72,29 +72,27 @@ The stepper widgets help you to show or collect information from users using org
 
 ## IconStepper
 
-Simple to use icon stepper widget, wherein each icon defines a step. Hence, the total number of icons represents the total number of available steps. [See Example](https://pub.dev/packages/im_stepper/example)
+Simple to use icon stepper widget, wherein each icon defines a step. Hence, the total number of icons represents the total number of available steps. [See Example](https://pub.dev/packages/im_stepper/example).
 
 ![IconStepper](https://github.com/imujtaba8488/showcase/blob/master/icon_stepper_05.gif)
 
 ## ImageStepper
 
-Simple to use image stepper widget, wherein each image defines a step. Hence, the total number of images defines the total number of steps. [See Example](https://pub.dev/packages/im_stepper/example)
+Simple to use image stepper widget, wherein each image defines a step. Hence, the total number of images defines the total number of steps. [See Example](https://pub.dev/packages/im_stepper/example).
 
 ![ImageStepper](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/image_stepper_02.gif)
 
 ## NumberStepper
 
-A simple to use number stepper widget, wherein each number defines a step. Hence, the total count of numbers defines the total number of steps. [See Example](https://pub.dev/packages/im_stepper/example)
+A simple to use number stepper widget, wherein each number defines a step. Hence, the total count of numbers defines the total number of steps. [See Example](https://pub.dev/packages/im_stepper/example).
 
 ![ImageStepper](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/number_stepper_01.gif)
 
 ## DotStepper
 
-A family of fully customizable, beautiful page indicator widgets with awesome built-in animations. Each dot in a DotStepper represents a step. [See Example](https://pub.dev/packages/im_stepper/example)
+A family of fully customizable, beautiful page indicator widgets with awesome built-in animations. Each dot in a DotStepper represents a step. [See Example](https://pub.dev/packages/im_stepper/example).
 
-### Important Note
-
-    * __`activeStep` must start from 1 and not from 0.__
+> Important Note: __`activeStep` must start from 1 and not from 0.__
 
 ## Shapes
 
@@ -125,6 +123,10 @@ A family of fully customizable, beautiful page indicator widgets with awesome bu
 
 * For more information please send me an email or follow me below.
 
+## Follow me
+
+<a href="https://github.com/imujtaba8488"><img src="" width="64"></a><a href="https://www.linkedin.com/in/imujtaba8488/"><img src="" width="64"></a><a href="https://imujtaba8488.medium.com"><img src="" width="64"></a><a href="https://twitter.com/imujtaba8488"><img src="" width="64"></a><a href="https://www.instagram.com/imujtaba8488/"><img src="" width="64"></a><a href="https://www.facebook.com/imujtaba8488/"><img src="" width="64"></a>
+
 ## Please Support
 
 * ![Like](https://github.com/imujtaba8488/showcase/blob/master/thumbs_up.png) Please __Like__ to __support__!
@@ -132,7 +134,3 @@ A family of fully customizable, beautiful page indicator widgets with awesome bu
 * [Become a Patron](https://www.patreon.com/imujtaba8488)
 
 * [Buy me a Coffee](https://www.buymeacoffee.com/imujtaba8488)
-
-## Follow me
-
-<a href="https://github.com/imujtaba8488"><img src="" width="64"></a><a href="https://www.linkedin.com/in/imujtaba8488/"><img src="" width="64"></a><a href="https://imujtaba8488.medium.com"><img src="" width="64"></a><a href="https://twitter.com/imujtaba8488"><img src="" width="64"></a><a href="https://www.instagram.com/imujtaba8488/"><img src="" width="64"></a><a href="https://www.facebook.com/imujtaba8488/"><img src="" width="64"></a>
