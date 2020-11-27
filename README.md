@@ -135,6 +135,8 @@ A family of fully customizable, beautiful page indicator widgets with awesome bu
 
 ## Follow me
 
+* <a href="https://github.com/imujtaba8488"><img src="https://user-images.githubusercontent.com/35039342/55471524-8e24cb00-5627-11e9-9389-58f3d4419153.png" width="64"></a>
+
 * [GitHub](https://github.com/imujtaba8488)
 
 * [LinkedIn](https://www.linkedin.com/in/imujtaba8488/)
