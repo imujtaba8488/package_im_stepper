@@ -22,7 +22,7 @@ Here's a list of some important changes in version: 0.1.2+7. For a complete list
 
 * Introducing the `activeStep` property, a __simpler__ way to control the steppers either from built-in buttons, by tapping, or from external buttons.
 
-* __Note for existing users:__ Do you prefer the new way of controlling steppers, or the older way was better? Please vote [here]()! This message will be removed in version 0.1.3.
+* __Message for existing users:__ Do you prefer the new way of controlling steppers, or the older way was better? Please vote [here](https://forms.gle/zsr7NBviR6bqaGRi6)! This message will be removed in version 0.1.3.
 
 ## About
 
@@ -31,8 +31,6 @@ A growing collection of stepper and page indicator widgets.
 ## Description
 
 The stepper widgets help you to show or collect information from users using organized steps. On the other hand, the page indicator widgets allow you to visually notify users about their current position as they scroll through a group of pages.
-
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfTtJ0yyWRK93WzA135mSLlDIv2nTOGE99r0nLIoOA1moEybg/viewform?embedded=true" width="640" height="729" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
 
 ## Table of Contents
 
@@ -60,7 +58,15 @@ The stepper widgets help you to show or collect information from users using org
 
 * __Validation:__ To enable validation before the next step is reached, set the `steppingEnabled` property to an appropriate value in a `StatefulWidget`.
 
-* __Controlling Steppers:__ todo: provide description of activeStep, minSteps and maxSteps.
+* __Controlling Steppers:__ All steppers are controlled using the `activeStep` property. You can control a stepper by:-
+
+  * using the built-in next and previous buttons.
+
+  * tapping on an individual steps in case of Icon, Image, and Number steppers. Please note that the tapping behavior doesn't apply to the `DotStepper`.
+
+  * using external buttons or events.
+
+
 
 * To customize the color, border, etc., wrap a stepper widget inside a `Container` and specify it's `decoration` argument.
 
