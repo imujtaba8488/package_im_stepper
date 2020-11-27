@@ -66,68 +66,7 @@ The stepper widgets help you to show or collect information from users using org
 
   * using external buttons or events.
 
-    * Generally, you create three variables in your `StatefulWidget`, namely; `activeStep`, `minSteps`, and `maxSteps`. The `activeStep` must be incremented and decremented within a setState() method, and assigned to the `activeStep` property of the respective stepper. `minSteps` and `maxSteps` are used to limit the increment and decrement value of the `activeStep` variable. These can either be controlled manually or automatically set from the `minSteps` and `maxSteps` functions of the respective steppers. Please consider the following code snippet or see examples __[here](https://pub.dev/packages/im_stepper/example)__:-
-
-```Dart
-class _IconStepperDemo extends State<IconStepperDemo> {
-  // THESE TWO VARIABLES ARE IMPORTANT.
-  // Controls the currently active step. Can be set to any valid value i.e., a value that falls between 1 and the total number of available steps. Hence, can also be used to set the initial/starting step.
-  int activeStep = 1;
-
-  // Maybe required in conditionals. Automatically set from minSteps and maxSteps functions, respectively.
-  int minSteps = 0;
-  int maxSteps = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('ImageStepper Example'),
-        ),
-        body: Column(
-          children: [
-            DotStepper(
-              dotCount: 5,
-              activeStep: activeStep,
-              minSteps: (minOrMax) => minSteps = minOrMax,
-              maxSteps: (minOrMax) => maxSteps = minOrMax,
-              indicatorEffect: IndicatorEffect.jump_from_below,
-            ),
-            Row(
-              children: [
-                RaisedButton(
-                  onPressed: () {
-                    // Decrement activeStep, when previous button is tapped.
-                    // IMPORTANT: Make sure the condition checks for greater than 1 and not for greater than 0.
-                    if (activeStep > minSteps) {
-                      setState(() {
-                        activeStep--;
-                      });
-                    }
-                  },
-                  child: Text('Previous'),
-                ),
-                RaisedButton(
-                  onPressed: () {
-                    // Increment activeStep, when next button is tapped.
-                    if (activeStep < maxSteps) {
-                      setState(() {
-                        activeStep++;
-                      });
-                    }
-                  },
-                  child: Text('Next'),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-```
+    * See examples __[here](https://pub.dev/packages/im_stepper/example)__.
 
 * To customize the color, border, etc., wrap a stepper widget inside a `Container` and specify it's `decoration` argument.
 
@@ -153,6 +92,10 @@ A simple to use number stepper widget, wherein each number defines a step. Hence
 
 A family of fully customizable, beautiful page indicator widgets with awesome built-in animations. Each dot in a DotStepper represents a step. [Usage Note](#general-guidelines) - See General Guidelines and examples.
 
+## Important Note
+
+* __`activeStep` must start from 1 and not from 0.__
+
 ## Shapes
 
  **Shapes**        | **Demo**
@@ -164,21 +107,21 @@ A family of fully customizable, beautiful page indicator widgets with awesome bu
 
 ## Effects
 
- **Effect** | **Demo**
-------------|----------------
- Trail      |![Trail](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_trail.gif)
- Slide      |![Slide](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_slide.gif)
- Magnify    |![Magnify](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_magnify.gif)
- Worm       |![Worm](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_worm.gif)
- Flat       |![Flat](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_flat.gif)
- Bullet     |![Bullet](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_bullet.gif)
- Jump       |![Jump](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_jump.gif)
+ **Effect**      | **Demo**
+-----------------|----------------
+ Trail           |![Trail](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_trail.gif)
+ Slide           |![Slide](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_slide.gif)
+ Magnify         |![Magnify](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_magnify.gif)
+ Worm            |![Worm](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_worm.gif)
+ Flat            |![Flat](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_flat.gif)
+ Bullet          |![Bullet](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_bullet.gif)
+ Jump            |![Jump](https://github.com/imujtaba8488/showcase/blob/master/dot_stepper_jump.gif)
+ Jump From Above |
+ Jump From Below |
 
 ## Feedback
 
 * Please file an issue __[here](https://github.com/imujtaba8488/package_im_stepper/issues).__
-
-* For an enhancement request, please submit your idea __[here](https://forms.gle/e3PcHgeTgfx3sb1W9)__.
 
 * For more information please send me email or follow me below.
 
@@ -192,7 +135,7 @@ A family of fully customizable, beautiful page indicator widgets with awesome bu
 
 ## Follow me
 
-* [](https://icons8.com/icon/114433/medium-monogram)[GitHub](https://github.com/imujtaba8488)
+* [GitHub](https://github.com/imujtaba8488)
 
 * [LinkedIn](https://www.linkedin.com/in/imujtaba8488/)
 
