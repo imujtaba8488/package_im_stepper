@@ -62,11 +62,14 @@ The stepper widgets help you to show or collect information from users using org
 
   * using the built-in next and previous buttons.
 
-  * tapping on an individual steps in case of Icon, Image, and Number steppers. Please note that the tapping behavior doesn't apply to the `DotStepper`.
+  * tapping individual steps in case of Icon, Image, and Number steppers. Please note that the tapping behavior doesn't apply to the `DotStepper`.
 
   * using external buttons or events.
 
+Generally, you create three variables in your `StatefulWidget`, namely; `activeStep`, `minSteps`, and `maxSteps`. The `activeStep` must be incremented and decremented within a setState() method, and assigned to the `activeStep` property of the respective stepper. `minSteps` and `maxSteps` are used to limit the increment and decrement value of the `activeStep` variable. These can either be controlled manually or automatically set from the `minSteps` and `maxSteps` functions of the respective steppers. Please consider the following code snippet or see examples __[here](https://pub.dev/packages/im_stepper/example)__:-
 
+
+  
 
 * To customize the color, border, etc., wrap a stepper widget inside a `Container` and specify it's `decoration` argument.
 
