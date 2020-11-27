@@ -495,6 +495,4 @@ class _IconStepperDemo extends State<IconStepperDemo> {
     );
   }
 }
-
-
 ```
