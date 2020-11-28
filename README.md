@@ -129,7 +129,7 @@ A family of fully customizable, beautiful page indicator widgets with awesome bu
 
 ## Please Support
 
-* ![Like](https://github.com/imujtaba8488/showcase/blob/master/thumbs_up.png) Please __Like__ to __support__!
+* ![Like](https://github.com/imujtaba8488/showcase/blob/master/icons/thumbs_up.png) Please __Like__ to __support__!
 
 * [Become a Patron](https://www.patreon.com/imujtaba8488)
 

@@ -12,7 +12,7 @@
 
 Simple to use icon stepper widget, wherein each icon defines a step. Hence, the total number of icons represents the total number of available steps. The example below builds the following `IconStepper`:
 
-[IconStepper](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/examples/icon_stepper.gif)
+![IconStepper](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/examples/icon_stepper.gif)
 
 ### Three ways to control the steppers:-
 
@@ -237,7 +237,7 @@ ImageStepper(
 
 `DotStepper` contains a family of fully customizable, beautiful __page indicator__ widgets with awesome built-in animations. Each dot in a `DotStepper` represents a step. The example below builds the following DotStepper:
 
-[DotStepper](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/examples/dot_stepper.gif)
+![DotStepper](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/examples/dot_stepper.gif)
 
 In the above `DotStepper,` we have a total of __5__ steps (represented by the 5 dots). The next and previous buttons are used to control stepping forward and backward, respectively. Each step's content can be fully customized, and in this example, it just displays the index of the `activeStep`.
 
