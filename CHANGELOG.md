@@ -12,7 +12,7 @@
 
 * Deprecated the `dotReachedIndex` property in the DotStepper. This function is now redundant as the same can be tracked using the `activeStep` property.
 
-* Two new function properties introduced in DotStepper; `minSteps` and `maxSteps`. These maybe required in conditionals to control stepping forward and backward using the `activeStep`.
+* Two new function properties introduced in DotStepper; `lowerBound` and `upperBound`. These maybe required in conditionals to control stepping forward and backward using the `activeStep`.
 
 * __BugFix:__ Previous button icon not working @github issue: [#8](https://github.com/imujtaba8488/package_im_stepper/issues/8)
 
