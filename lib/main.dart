@@ -12,63 +12,76 @@ class IconStepperDemo extends StatefulWidget {
 }
 
 class _IconStepperDemo extends State<IconStepperDemo> {
-  // THESE TWO VARIABLES ARE IMPORTANT.
-  // Controls the currently active step. Can be set to any valid value i.e., a value that falls between 1 and the total number of available steps. Hence, can also be used to set the initial/starting step.
-  int activeStep = 1;
+  // THE FOLLOWING THREE VARIABLES ARE REQUIRED TO CONTROL THE STEPPER.
+  // Controls the currently active step. Can be set to any valid value i.e., a value that ranges from lowerBound to upperBound. Note: Steps are counted from 1 and NOT from 0.
+  int activeStep = 5;         // Initial step set to 5.
 
-  // Maybe required in conditionals. Automatically set from minSteps and maxSteps functions, respectively.
-  int minSteps = 0;
-  int maxSteps = 0;
+  // Must be used to control the lower and upper bound of the activeStep variable. Please see next and previous buttons below the build() method!
+  int lowerBound = 0;
+  int upperBound = 0;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text('ImageStepper Example'),
+          title: Text('DotStepper Example'),
         ),
-        body: Column(
-          children: [
-            DotStepper(
-              dotCount: 2,
-              dotShape: DotShape.dash,
-              dotRadius: 50,
-              activeStep: activeStep,
-              minSteps: (minOrMax) => minSteps = minOrMax,
-              maxSteps: (minOrMax) => maxSteps = minOrMax,
-              indicatorEffect: IndicatorEffect.jump_from_below,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                RaisedButton(
-                  onPressed: () {
-                    // Decrement activeStep, when previous button is tapped.
-                    // IMPORTANT: Make sure the condition checks for greater than 1 and not for greater than 0.
-                    if (activeStep > minSteps) {
-                      setState(() {
-                        activeStep--;
-                      });
-                    }
-                  },
-                  child: Text('Previous'),
-                ),
-                RaisedButton(
-                  onPressed: () {
-                    // Increment activeStep, when next button is tapped.
-                    if (activeStep < maxSteps) {
-                      setState(() {
-                        activeStep++;
-                      });
-                    }
-                  },
-                  child: Text('Next'),
-                ),
-              ],
-            ),
-          ],
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  previousButton(),
+                  Expanded(
+                    child: DotStepper(
+                      dotCount: 5,
+
+                      /// REQUIRED PROPERTIES.
+                      activeStep: activeStep,
+                      lowerBound: (bound) => lowerBound = bound,
+                      upperBound: (bound) => upperBound = bound,
+                    ),
+                  ),
+                  nextButton(),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
+    );
+  }
+
+  /// Returns the next button.
+  Widget nextButton() {
+    return ElevatedButton(
+      onPressed: () {
+        // Increment activeStep, when the next button is tapped. However, check for bounds.
+        if (activeStep < upperBound) {
+          setState(() {
+            activeStep++;
+          });
+        }
+      },
+      child: Text('Next'),
+    );
+  }
+
+  /// Returns the previous button.
+  Widget previousButton() {
+    return ElevatedButton(
+      onPressed: () {
+        // Decrement activeStep, when the previous button is tapped. However, check for bounds.
+        if (activeStep > lowerBound) {
+          setState(() {
+            activeStep--;
+          });
+        }
+      },
+      child: Text('Prev'),
     );
   }
 }

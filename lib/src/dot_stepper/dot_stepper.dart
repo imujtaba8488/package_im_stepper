@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
 import 'dot_stepper_painter.dart';
-import 'effects/dot_stepper_effects.dart';
-import 'effects/slide_effect.dart';
 import 'effects/bullet_effect.dart';
+import 'effects/dot_stepper_effects.dart';
 import 'effects/flat_effect.dart';
-import 'effects/magnify_effect.dart';
-import 'effects/worm_effect.dart';
 import 'effects/jump_effect.dart';
-import 'effects/trail_effect.dart';
 import 'effects/jump_over_effect.dart';
+import 'effects/magnify_effect.dart';
+import 'effects/slide_effect.dart';
+import 'effects/trail_effect.dart';
+import 'effects/worm_effect.dart';
 
 /// Callback fired when a dot is reached.
 typedef DotReached = void Function(int index);
 
-typedef StepCount = void Function(int minOrMax);
+typedef Bound = void Function(int bound);
 
 class DotStepper extends StatefulWidget {
   /// Total number of dots. Each dot represents a step.
@@ -44,13 +44,14 @@ class DotStepper extends StatefulWidget {
   /// Whether to fill the dots with color or show them as outlined.
   final bool fillStep;
 
-  /// The step that is currently active.
+  /// The currently active step. Must range from lowerBound to upperBound.
   final int activeStep;
 
-  final StepCount minSteps;
+  /// Provides the lowerBound value.
+  final Bound lowerBound;
 
-  /// The total number of available steps.
-  final StepCount maxSteps;
+  /// Provides the upperBound value.
+  final Bound upperBound;
 
   /// The effect to apply to the indicator.
   final IndicatorEffect indicatorEffect;
@@ -86,9 +87,9 @@ class DotStepper extends StatefulWidget {
     @required
         this.activeStep,
     @required
-        this.minSteps,
+        this.lowerBound,
     @required
-        this.maxSteps,
+        this.upperBound,
   }) {
     assert(
       dotCount > 1,
@@ -102,7 +103,7 @@ class DotStepper extends StatefulWidget {
 
     assert(
       activeStep > 0 && activeStep <= dotCount,
-      'activeStep out of range! activeStep must be greater than 0 and less than the total number of dots.',
+      'activeStep out of range! activeStep must range from lowerBound to upperBound',
     );
   }
 
@@ -114,7 +115,7 @@ class _DotStepperState extends State<DotStepper>
     with SingleTickerProviderStateMixin {
   AnimationController _animationController;
 
-  // Whether the stepping is moving in the forward direction or backward direction.
+  // Is stepping moving forward or backward?
   bool isSteppingForward = true;
 
   // The currently selected dot. ** Must be set to 1 and not to 0. **
@@ -170,7 +171,7 @@ class _DotStepperState extends State<DotStepper>
     if (widget.activeStep > 0 && widget.activeStep < widget.dotCount + 1) {
       _selected = widget.activeStep;
 
-      // Compare activeStep with oldWidget.activeStep. if the former is greater than the later, then stepping is moving forward, else stepping is moving backwards.
+      // Compare activeStep with oldWidget.activeStep. If the former is greater than the latter, then stepping is moving forward, else stepping is moving backwards.
       widget.activeStep > oldWidget.activeStep
           ? isSteppingForward = true
           : isSteppingForward = false;
@@ -197,9 +198,9 @@ class _DotStepperState extends State<DotStepper>
 
   @override
   Widget build(BuildContext context) {
-    // Return the min and max step count.
-    widget.minSteps(1);
-    widget.maxSteps(widget.dotCount);
+    // Return lower and upper bounds.
+    widget.lowerBound(1);
+    widget.upperBound(widget.dotCount);
 
     return Align(
       child: SingleChildScrollView(
@@ -287,13 +288,13 @@ enum IndicatorEffect {
   jump_from_below,
 }
 
-/// Defines the type of indicator. Filled occupies the entire fixed dot, while as 'contain' appears inside the fixed dot.
+/// Determines the type of hte indicator. Filled occupies the entire fixed dot, while as 'contain' appears inside the fixed dot.
 enum IndicatorType {
   fill,
   contain,
 }
 
-/// Defines the shape of the dot.
+/// Determines the shape of the dot.
 enum DotShape {
   circle,
   square,
