@@ -12,13 +12,13 @@
 
 Simple to use icon stepper widget, wherein each icon defines a step. Hence, the total number of icons represents the total number of available steps. The example below builds the following `IconStepper`:
 
-[IconStepper](#todo)
+[IconStepper](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/examples/icon_stepper.gif)
 
-### 3 ways to control:-
+### Three ways to control the steppers:-
 
 - Using build-in next / previous buttons.
 
-- Using external next / previous buttons.
+- Using external next / previous buttons or events.
 
 - Using tapping.
 
@@ -28,7 +28,7 @@ In the above `IconStepper,` we have a total of __7__ steps (represented by 7 ico
 
 In the following code snippet, we must define two variables: `activeStep` and `upperBound` to control the stepper. The `activeStep` is assigned to the `activeStep` property of the stepper. The `upperBound` _variable_ __receives__ its value from the `upperBound` _function_ of the stepper.
 
-Following the `build()` method, we define the next and previous buttons which control the stepper in one way. The next and previous buttons increment and decrement the `activeStep` variable, respectively. However, the incrementing and decrementing is constrained by the `upperBound` and the `if` statement for lowerBound, which is a __must__ for the stepper to function properly from external Buttons.
+Following the `build()` method, we define the next and previous buttons which control the stepper externally. The next and previous buttons increment and decrement the `activeStep` variable, respectively. However, the incrementing and decrementing is constrained by the `upperBound` and the `if` statement for lowerBound, which is a __must__ for the stepper to function properly from external Buttons.
 
 Another way to control the stepper is by enabling the built-in buttons. When the built-in buttons are tapped, they fire the `onStepReached(index)` callback, which provides the `index` of the step reached. This is where you can add logic for what to display when a specific step is reached.
 
@@ -237,7 +237,7 @@ ImageStepper(
 
 `DotStepper` contains a family of fully customizable, beautiful __page indicator__ widgets with awesome built-in animations. Each dot in a `DotStepper` represents a step. The example below builds the following DotStepper:
 
-[DotStepper](#todo)
+[DotStepper](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/examples/dot_stepper.gif)
 
 In the above `DotStepper,` we have a total of __5__ steps (represented by the 5 dots). The next and previous buttons are used to control stepping forward and backward, respectively. Each step's content can be fully customized, and in this example, it just displays the index of the `activeStep`.
 
