@@ -14,7 +14,7 @@ class IconStepperDemo extends StatefulWidget {
 class _IconStepperDemo extends State<IconStepperDemo> {
   // THE FOLLOWING THREE VARIABLES ARE REQUIRED TO CONTROL THE STEPPER.
   // Controls the currently active step. Can be set to any valid value i.e., a value that ranges from lowerBound to upperBound. Note: Steps are counted from 1 and NOT from 0.
-  int activeStep = 5;         // Initial step set to 5.
+  int activeStep = 5; // Initial step set to 5.
 
   // Must be used to control the lower and upper bound of the activeStep variable. Please see next and previous buttons below the build() method!
   int lowerBound = 0;
@@ -48,6 +48,13 @@ class _IconStepperDemo extends State<IconStepperDemo> {
                   nextButton(),
                 ],
               ),
+              Expanded(
+                child: FittedBox(
+                  child: Center(
+                    child: Text('$activeStep'),
+                  ),
+                ),
+              )
             ],
           ),
         ),
@@ -59,7 +66,7 @@ class _IconStepperDemo extends State<IconStepperDemo> {
   Widget nextButton() {
     return ElevatedButton(
       onPressed: () {
-        // Increment activeStep, when the next button is tapped. However, check for bounds.
+        // Increment activeStep, when the next button is tapped. However, check for upper bound.
         if (activeStep < upperBound) {
           setState(() {
             activeStep++;
@@ -74,7 +81,7 @@ class _IconStepperDemo extends State<IconStepperDemo> {
   Widget previousButton() {
     return ElevatedButton(
       onPressed: () {
-        // Decrement activeStep, when the previous button is tapped. However, check for bounds.
+        // Decrement activeStep, when the previous button is tapped. However, check for lower bound.
         if (activeStep > lowerBound) {
           setState(() {
             activeStep--;
