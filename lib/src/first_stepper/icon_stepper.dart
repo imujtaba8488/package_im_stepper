@@ -76,8 +76,8 @@ class IconStepper extends StatelessWidget {
   /// The currently active step.
   final int activeStep;
 
-  /// Callback provides the total number of available steps.
-  final Function totalSteps;
+  /// Callback, provides the upper bound value.
+  final Function upperBound;
 
   /// Controls which `BaseStepper` constructor to call.
   final bool _isExternallyControlled;
@@ -116,7 +116,8 @@ class IconStepper extends StatelessWidget {
         this.goPrevious = false,
     this.scrollingDisabled = false,
     this.activeStep = 0,
-    this.totalSteps,
+    @required
+        this.upperBound,
   })  : this.enableNextPreviousButtons = false,
         this.enableStepTapping = false,
         this.previousButtonIcon = null,
@@ -148,7 +149,7 @@ class IconStepper extends StatelessWidget {
     this.steppingEnabled = true,
     this.scrollingDisabled = false,
     this.activeStep = 0,
-    this.totalSteps,
+    this.upperBound,
   })  : this._isExternallyControlled = false,
         this.goNext = false,
         this.goPrevious = false;
@@ -176,7 +177,7 @@ class IconStepper extends StatelessWidget {
             goPrevious: goPrevious,
             scrollingDisabled: scrollingDisabled,
             activeStep: activeStep,
-            totalSteps: totalSteps,
+            upperBound: upperBound,
           )
         : BaseStepper(
             children: _iconsWithSizeOverridden(),
@@ -201,7 +202,7 @@ class IconStepper extends StatelessWidget {
             padding: stepPadding,
             scrollingDisabled: scrollingDisabled,
             activeStep: activeStep,
-            totalSteps: totalSteps,
+            upperBound: upperBound,
           );
   }
 

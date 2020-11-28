@@ -7,7 +7,7 @@ import '../custom_paint/dotted_line.dart';
 typedef OnStepReached = void Function(int index);
 
 /// Callback fired to inform the user about the total number of steps available.
-typedef TotalSteps = void Function(int totalSteps);
+typedef Bound = void Function(int bound);
 
 class BaseStepper extends StatefulWidget {
   /// Each child defines a step. Hence, total number of children determines the total number of steps.
@@ -83,7 +83,7 @@ class BaseStepper extends StatefulWidget {
   final activeStep;
 
   /// This callback provides the total numbers of available steps.
-  final TotalSteps totalSteps;
+  final Bound upperBound;
 
   /// Used when the stepper is controlled externally using the `goNext` and `goPrevious` properties. In which case, two variables must be maintained in a StatefulWidget to set the values of `gotNext` and `goPrevious` in a call to `setState()`, and if the stepping is moving foward `gotNext` must be set to true and `goPrevious` must be set to `false`. If moving backward `goPrevious` must be set to `true` and `goNext` must be set to `false`.
   ///
@@ -118,7 +118,7 @@ class BaseStepper extends StatefulWidget {
         this.goPrevious = false,
     this.scrollingDisabled = false,
     this.activeStep = 0,
-    this.totalSteps,
+    this.upperBound,
   })  : this.enableNextPreviousButtons = false,
         this.enableStepTapping = false,
         this.onStepReached = null,
@@ -158,7 +158,7 @@ class BaseStepper extends StatefulWidget {
     this.activeStepBorderWidth = 0.5,
     this.scrollingDisabled = false,
     this.activeStep,
-    this.totalSteps,
+    this.upperBound,
   })  : this.goNext = false,
         this.goPrevious = false {
     _defaultAssertions();
@@ -212,8 +212,6 @@ class _BaseStepperState extends State<BaseStepper> {
     // Verify that the active step falls within a valid range.
     if (widget.activeStep >= 0 && widget.activeStep < widget.children.length) {
       _selectedIndex = widget.activeStep;
-    } else {
-      print('No more steps.');
     }
 
     super.didUpdateWidget(oldWidget);
@@ -242,8 +240,9 @@ class _BaseStepperState extends State<BaseStepper> {
   @override
   Widget build(BuildContext context) {
     // Returns total number of available steps.
-    if (widget.totalSteps != null) {
-      widget.totalSteps(widget.children.length - 1);
+    // Todo: if statement needs to go after implementing Darts' Null Safety or in version 0.1.3
+    if (widget.upperBound != null) {
+      widget.upperBound(widget.children.length - 1);
     }
 
     // Controls scrolling behavior.

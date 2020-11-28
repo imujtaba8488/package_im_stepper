@@ -50,7 +50,7 @@ class DotStepper extends StatefulWidget {
   /// Provides the lowerBound value.
   final Bound lowerBound;
 
-  /// Provides the upperBound value.
+  /// Callback, provides the upperBound value.
   final Bound upperBound;
 
   /// The effect to apply to the indicator.

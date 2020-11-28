@@ -12,12 +12,11 @@ class IconStepperDemo extends StatefulWidget {
 }
 
 class _IconStepperDemo extends State<IconStepperDemo> {
-  // THE FOLLOWING THREE VARIABLES ARE REQUIRED TO CONTROL THE STEPPER.
-  // Controls the currently active step. Can be set to any valid value i.e., a value that ranges from lowerBound to upperBound. Note: Steps are counted from 1 and NOT from 0.
-  int activeStep = 1; // Initial step set to 5.
+  // THE FOLLOWING TWO VARIABLES ARE REQUIRED TO CONTROL THE STEPPER.
+  // Controls the currently active step. Can be set to any valid value i.e., a value that ranges from 0 to upperBound.
+  int activeStep = 0; // Initial step set to 5.
 
-  // Must be used to control the lower and upper bound of the activeStep variable. Please see next and previous buttons below the build() method!
-  int lowerBound = 0;
+  // Must be used to control the upper bound of the activeStep variable. Please see next button below the build() method!
   int upperBound = 0;
 
   @override
@@ -32,29 +31,39 @@ class _IconStepperDemo extends State<IconStepperDemo> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              Row(
-                children: [
-                  previousButton(),
-                  Expanded(
-                    child: DotStepper(
-                      dotCount: 5,
-
-                      /// REQUIRED PROPERTIES.
-                      activeStep: activeStep,
-                      lowerBound: (bound) => lowerBound = bound,
-                      upperBound: (bound) => upperBound = bound,
-                    ),
-                  ),
-                  nextButton(),
+              IconStepper(
+                icons: [
+                  Icon(Icons.supervised_user_circle),
+                  Icon(Icons.flag),
+                  Icon(Icons.access_alarm),
+                  Icon(Icons.supervised_user_circle),
+                  Icon(Icons.flag),
+                  Icon(Icons.access_alarm),
+                  Icon(Icons.supervised_user_circle),
                 ],
+                activeStep: activeStep,
+                upperBound: (bound) => upperBound = bound,
+                onStepReached: (index) {
+                  setState(() {
+                    activeStep = index;
+                  });
+                },
               ),
+              header(),
               Expanded(
                 child: FittedBox(
                   child: Center(
                     child: Text('$activeStep'),
                   ),
                 ),
-              )
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  previousButton(),
+                  nextButton(),
+                ],
+              ),
             ],
           ),
         ),
@@ -81,8 +90,8 @@ class _IconStepperDemo extends State<IconStepperDemo> {
   Widget previousButton() {
     return ElevatedButton(
       onPressed: () {
-        // Decrement activeStep, when the previous button is tapped. However, check for lower bound.
-        if (activeStep > lowerBound) {
+        // Decrement activeStep, when the previous button is tapped. However, check for lower bound i.e., must be greater than 0.
+        if (activeStep > 0) {
           setState(() {
             activeStep--;
           });
@@ -90,5 +99,55 @@ class _IconStepperDemo extends State<IconStepperDemo> {
       },
       child: Text('Prev'),
     );
+  }
+
+  /// Returns the header wrapping the header text.
+  Widget header() {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.orange,
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Row(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              headerText(),
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Returns the header text.
+  String headerText() {
+    switch (activeStep) {
+      case 1:
+        return 'Preface';
+
+      case 2:
+        return 'Table of Contents';
+
+      case 3:
+        return 'About the Author';
+
+      case 4:
+        return 'Publisher Information';
+
+      case 5:
+        return 'Reviews';
+
+      case 6:
+        return 'Chapters #1';
+
+      default:
+        return 'Introduction';
+    }
   }
 }
