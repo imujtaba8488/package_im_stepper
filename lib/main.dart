@@ -51,7 +51,7 @@ class _IconStepperDemo extends State<IconStepperDemo> {
                 // bound receives value from upperBound.
                 upperBound: (bound) => upperBound = bound,
 
-                // This ensures step-tapping updates the activeStep. 
+                // This ensures step-tapping updates the activeStep.
                 onStepReached: (index) {
                   setState(() {
                     activeStep = index;
