@@ -25,31 +25,40 @@ class _IconStepperDemo extends State<IconStepperDemo> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text('DotStepper Example'),
+          title: Text('IconStepper Example'),
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              IconStepper(
-                icons: [
-                  Icon(Icons.supervised_user_circle),
-                  Icon(Icons.flag),
-                  Icon(Icons.access_alarm),
-                  Icon(Icons.supervised_user_circle),
-                  Icon(Icons.flag),
-                  Icon(Icons.access_alarm),
-                  Icon(Icons.supervised_user_circle),
+              NumberStepper(
+                numbers: [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
                 ],
+                activeStepBorderColor: Colors.amber,
+                activeStepBorderPadding: 3,
+                activeStepBorderWidth: 3,
+                enableNextPreviousButtons: false,
+
+                // activeStep property set to activeStep variable defined above.
                 activeStep: activeStep,
+
+                // bound receives value from upperBound.
                 upperBound: (bound) => upperBound = bound,
+
+                // This ensures step-tapping updates the activeStep. 
                 onStepReached: (index) {
                   setState(() {
                     activeStep = index;
                   });
                 },
               ),
-              header(),
+              // header(),
               Expanded(
                 child: FittedBox(
                   child: Center(
@@ -125,7 +134,7 @@ class _IconStepperDemo extends State<IconStepperDemo> {
     );
   }
 
-  // Returns the header text.
+  // Returns the header text based on the activeStep.
   String headerText() {
     switch (activeStep) {
       case 1:
