@@ -206,7 +206,7 @@ class _IconStepperDemo extends State<IconStepperDemo> {
 
 ## ImageStepper
 
-Simple to use image stepper widget, wherein each image defines a step. Hence, the total number of images defines the total number of steps. It is used exactly the same way as the IconStepper, the only difference is that it accepts images instead of icons, as:
+Simple to use image stepper widget, wherein each image defines a step. Hence, the total number of images defines the total number of steps. It is used the same way as the IconStepper; the only difference is that it accepts images instead of icons, as:
 
 ```Dart
 ImageStepper(
@@ -220,7 +220,7 @@ ImageStepper(
 
 ## NumberStepper
 
-A simple to use number stepper widget, wherein each number defines a step. Hence, the total count of numbers defines the total number of steps. It is used exactly the same way as the IconStepper, the only difference is that it accepts numbers, i.e., 1, 2, 3, etc., instead of icons, as:
+A simple to use number stepper widget, wherein each number defines a step. Hence, the total count of numbers defines the total number of steps. It is used the same way as the IconStepper; the only difference is that it accepts numbers, i.e., 1, 2, 3, etc., instead of icons, as:
 
 ```Dart
 ImageStepper(
