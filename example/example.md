@@ -428,13 +428,13 @@ class _IconStepperDemo extends State<IconStepperDemo> {
 
 [DotStepper](#todo)
 
-In the above `DotStepper`, we have a total of __5__ steps (represented by the 5 dots). The next and previous buttons are used to control stepping forward and backwards, respectively. The content of each step can be fully customized and in this example, just displays the index of the `activeStep`.
+In the above `DotStepper,` we have a total of __5__ steps (represented by the 5 dots). The next and previous buttons are used to control stepping forward and backward, respectively. Each step's content can be fully customized, and in this example, it just displays the index of the `activeStep`.
 
 ### Code Explanation
 
-In the following code snippet, we must define three variables, namely; `activeStep`, `lowerBound`, and `upperBound` to control the stepper. The `activeStep` is assigned to the required `activeStep` property of the stepper. The `lowerBound` and the `upperBound` _variables_ __receive__ their values from the `lowerBound`, and `upperBound` required _functions_ of the stepper.
+In the following code snippet, we must define three variables: `activeStep`, `lowerBound`, and `upperBound` to control the stepper. The `activeStep` is assigned to the required `activeStep` property of the stepper. The `lowerBound` and the `upperBound` _variables_ __receive__ their values from the `lowerBound,` and `upperBound` required _functions_ of the stepper.
 
-Following the `build()` method we define the next and previous buttons which control the stepper. The next and previous buttons increment and decrement the `activeStep` variable, respectively. However, the incrementing and decrementing is constrained by the upperBound and lowerBound variables, which is a must for the stepper to function properly.
+Following the `build()` method, we define the next and previous buttons which control the stepper. The next and previous buttons increment and decrement the `activeStep` variable, respectively. However, the incrementing and decrementing is constrained by the `upperBound` and `lowerBound` variables, which is a __must__ for the stepper to function properly.
 
 ### Things to remember
 
