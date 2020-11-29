@@ -14,13 +14,13 @@ Simple to use icon stepper widget, wherein each icon defines a step. Hence, the 
 
 ![IconStepper](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/examples/icon_stepper.gif)
 
-### Three ways to control the steppers:-
+### Three ways to control the steppers, using:-
 
-- Using build-in next / previous buttons.
+- build-in next / previous buttons.
 
-- Using external next / previous buttons or events.
+- external next / previous buttons or events.
 
-- Using tapping.
+- step-tapping.
 
 In the above `IconStepper,` we have a total of __7__ steps (represented by 7 icons) separated by dotted lines. The built-in next and previous buttons, the buttons along the bottom, and tapping an individual step, all control the stepping in this specific example. Each step's content i.e. header, and the page content, as well as the dotted line separator, next and previous buttons, etc., are fully all customizable.
 
@@ -59,7 +59,7 @@ class IconStepperDemo extends StatefulWidget {
 class _IconStepperDemo extends State<IconStepperDemo> {
   // THE FOLLOWING TWO VARIABLES ARE REQUIRED TO CONTROL THE STEPPER.
   // Controls the currently active step. Can be set to any valid value i.e., a value that ranges from 0 to upperBound.
-  int activeStep = 0; // Initial step set to 5.
+  int activeStep = 5; // Initial step set to 5.
 
   // Must be used to control the upper bound of the activeStep variable. Please see next button below the build() method!
   int upperBound = 0;
