@@ -18,7 +18,7 @@ Here's a collection of articles, examples, posts, etc., about im_stepper. If you
 
 Here's a list of some important changes in version: 0.1.2+7. For a complete list of changes see changelog [here](https://pub.dev/packages/im_stepper/changelog).
 
-* __IMPORTANT MESSAGE:__ `goNext`, `goPrevious`, and `Foo.externallyControlled` properties and constructors have been deprecated and will be removed from Icon, Image, Number, and Dot Steppers in version __0.1.3__. The `dotReachedIndex` property in `DotStepper` has also been deprecated and will be removed in version __0.1.3__. Please consider updating your code! see examples __[here](https://pub.dev/packages/im_stepper/example)__.
+* __IMPORTANT MESSAGE:__ `goNext`, `goPrevious`, and `Foo.externallyControlled` properties and constructors have been _deprecated_ and will be removed from Icon, Image, Number, and Dot Steppers in version __0.1.3__. The `dotReachedIndex` property in `DotStepper` has also been _deprecated_ and will be removed in version __0.1.3__. Please consider updating your code! see examples __[here](https://pub.dev/packages/im_stepper/example)__.
 
 * Introducing the `activeStep` property, a __simpler__ way to control the steppers either from built-in buttons, by tapping, or from external buttons with the ability to set initial step or jump to any step.
 
@@ -46,7 +46,7 @@ The stepper widgets help you to show or collect information from users using org
 
 * [Feedback](#feedback)
 
-* [Follow Me](#follow-me)
+* [Connect with me](#connect-with-me)
 
 * [Please Support](#please-support)
 
@@ -121,9 +121,9 @@ A family of fully customizable, beautiful page indicator widgets with awesome bu
 
 * Please file an issue __[here](https://github.com/imujtaba8488/package_im_stepper/issues).__
 
-* For more information please send me an email or follow me below.
+* For more information please send me an email or connect with me.
 
-## Follow me
+## Connect with me
 
 [![GitHub](https://github.com/imujtaba8488/showcase/blob/master/icons/github_64px%20b:w.png)](https://github.com/imujtaba8488) [![Twitter](https://github.com/imujtaba8488/showcase/blob/master/icons/twitter_64px%20b:w.png)](https://twitter.com/imujtaba8488)  [![LinkedIn](https://github.com/imujtaba8488/showcase/blob/master/icons/linkedin_64px%20b:w.png)](https://www.linkedin.com/in/imujtaba8488/)  [![Medium](https://github.com/imujtaba8488/showcase/blob/master/icons/medium_64px%20b:w.png)](https://imujtaba8488.medium.com)  [![Instagram](https://github.com/imujtaba8488/showcase/blob/master/icons/insta_64px%20b:w.png)](https://www.instagram.com/imujtaba8488/)  [![Facebook](https://github.com/imujtaba8488/showcase/blob/master/icons/fb_64px%20b:w.png)](https://www.facebook.com/imujtaba8488/)
 
