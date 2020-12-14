@@ -27,7 +27,7 @@ class _IconStepperDemo extends State<IconStepperDemo> {
         appBar: AppBar(
           title: Text('DotStepper Example'),
         ),
-        body: DotStepper()
+        body: DotStepper(),
       ),
     );
   }
