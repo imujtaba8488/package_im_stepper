@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:im_stepper/src/dot_stepper/dot_offset.dart';
+import 'package:im_stepper/src/dot_stepper/shape_painter.dart';
+import 'package:im_stepper/stepper.dart';
 
 class FixedDotPainter extends CustomPainter {
   FixedDotPainter({this.dotRadius, this.dotCount, this.dotOffsets});
@@ -11,21 +13,13 @@ class FixedDotPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     for (int index = 0; index < dotCount; index++) {
-      
-      
-
-      print('left: ${dotOffsets[index].left.dx}');
-      print('Right: ${dotOffsets[index].right.dx}');
-
-      canvas.drawRect(
-        Rect.fromLTRB(
-          dotOffsets[index].left.dx,
-          dotOffsets[index].top.dy,
-          dotOffsets[index].right.dx,
-          dotOffsets[index].bottom.dy,
-        ),
-        Paint()..color = Colors.grey,
+      ShapePainter shapePainter = ShapePainter(
+        canvas: canvas,
+        dotRadius: dotRadius,
+        dotOffset: dotOffsets[index],
       );
+
+      shapePainter.draw(Shape.circle);
     }
   }
 

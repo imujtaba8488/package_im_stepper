@@ -3,10 +3,10 @@ import 'package:im_stepper/src/dot_stepper/dot_offset.dart';
 import 'package:im_stepper/stepper.dart';
 
 class ShapePainter {
-  ShapePainter(this.canvas, this.offset, this.dotRadius);
+  ShapePainter({this.canvas, this.dotOffset, this.dotRadius});
 
   Canvas canvas;
-  DotOffset offset;
+  DotOffset dotOffset;
   double dotRadius;
 
   void draw(Shape shape) {
@@ -18,7 +18,7 @@ class ShapePainter {
 
   void _drawCircle() {
     canvas.drawCircle(
-      offset.center,
+      dotOffset.center,
       dotRadius,
       Paint()..color = Colors.grey,
     );
