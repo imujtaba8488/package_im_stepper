@@ -1,6 +1,10 @@
+library dot_stepper;
+
 import 'package:flutter/material.dart';
 import 'package:im_stepper/src/dot_stepper/dot_offset.dart';
 import 'package:im_stepper/src/dot_stepper/fixed_dot_painter.dart';
+
+part 'enums.dart';
 
 class DotStepper extends StatefulWidget {
   DotStepper({this.dotCount = 5, this.dotRadius = 24, this.spacing = 15});
