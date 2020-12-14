@@ -67,8 +67,8 @@ class _DotStepperState extends State<DotStepper>
     return dotOffsets;
   }
 
-  double get axisLength => (diameter * widget.dotCount) + effectiveSpacing;
-  double get effectiveSpacing => widget.spacing * (widget.dotCount - 1);
+  double get axisLength => (diameter * widget.dotCount) + totalEffectiveSpacing;
+  double get totalEffectiveSpacing => widget.spacing * (widget.dotCount - 1);
   double get diameter => widget.dotRadius * 2;
 
   @override
