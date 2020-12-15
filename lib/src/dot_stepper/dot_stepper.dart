@@ -3,7 +3,9 @@ library dot_stepper;
 import 'package:flutter/material.dart';
 import 'package:im_stepper/src/dot_stepper/dot_offset.dart';
 import 'package:im_stepper/src/dot_stepper/fixed_dot_painter.dart';
-import 'package:im_stepper/src/dot_stepper/shift_indicator.dart';
+
+import 'shift_indicator.dart';
+import 'slide_indicator.dart';
 
 part 'enums.dart';
 
@@ -58,7 +60,7 @@ class _DotStepperState extends State<DotStepper>
 
     fixedDotBrush = Paint()..color = Colors.grey;
     lineConnectorBrush = Paint()..color = Colors.blueGrey;
-    indicatorBrush = Paint()..color = Colors.deepOrange;
+    indicatorBrush = Paint()..color = Colors.black;
 
     super.initState();
   }
@@ -83,13 +85,14 @@ class _DotStepperState extends State<DotStepper>
           ),
         ),
         CustomPaint(
-          painter: ShiftIndicator(
+          painter: SlideIndicator(
             activeDotIndexOffset: buildDotOffsets[activeDotIndex],
             brush: indicatorBrush,
             direction: widget.direction,
             dotRadius: widget.dotRadius,
             oldDotIndexOffset: buildDotOffsets[oldDotIndex],
             shape: widget.shape,
+            animationController: animationController,
           ),
         )
       ],
@@ -123,6 +126,9 @@ class _DotStepperState extends State<DotStepper>
   void didUpdateWidget(covariant DotStepper oldWidget) {
     oldDotIndex = oldWidget.activeStep;
     activeDotIndex = widget.activeStep;
+
+    animationController.reset();
+    animationController.forward();
 
     super.didUpdateWidget(oldWidget);
   }

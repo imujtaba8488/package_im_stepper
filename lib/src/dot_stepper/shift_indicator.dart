@@ -27,7 +27,7 @@ class ShiftIndicator extends CustomPainter {
       brush: brush,
       canvas: canvas,
       direction: direction,
-      dotOffset: activeDotIndexOffset,
+      center: activeDotIndexOffset.center,
       dotRadius: dotRadius,
     );
 

@@ -5,17 +5,19 @@ import 'package:im_stepper/stepper.dart';
 class ShapePainter {
   ShapePainter({
     this.canvas,
-    this.dotOffset,
+    this.center,
     this.dotRadius,
     this.direction,
     this.brush,
-  });
+  }): dotOffset = DotOffset(center, dotRadius);
 
   Canvas canvas;
-  DotOffset dotOffset;
+  Offset center;
   double dotRadius;
   Axis direction;
   Paint brush;
+
+  final DotOffset dotOffset;
 
   void draw(Shape shape) {
     switch (shape) {
@@ -46,7 +48,7 @@ class ShapePainter {
 
   void _drawCircle() {
     canvas.drawCircle(
-      dotOffset.center,
+      center,
       dotRadius,
       brush,
     );
@@ -73,9 +75,7 @@ class ShapePainter {
         direction == Axis.horizontal
             ? dotOffset.left.dx
             : dotOffset.left.dx + padding,
-        direction == Axis.horizontal
-            ? dotOffset.top.dy + padding
-            : dotOffset.top.dy,
+        direction == Axis.horizontal ? dotOffset.top.dy + padding : dotOffset.top.dy,
         direction == Axis.horizontal
             ? dotOffset.right.dx
             : dotOffset.right.dx - padding,
@@ -96,9 +96,7 @@ class ShapePainter {
         direction == Axis.horizontal
             ? dotOffset.left.dx
             : dotOffset.left.dx + padding,
-        direction == Axis.horizontal
-            ? dotOffset.top.dy + padding
-            : dotOffset.top.dy,
+        direction == Axis.horizontal ? dotOffset.top.dy + padding : dotOffset.top.dy,
         direction == Axis.horizontal
             ? dotOffset.right.dx
             : dotOffset.right.dx - padding,
@@ -133,9 +131,7 @@ class ShapePainter {
         direction == Axis.horizontal
             ? dotOffset.left.dx
             : dotOffset.left.dx + padding,
-        direction == Axis.horizontal
-            ? dotOffset.top.dy + padding
-            : dotOffset.top.dy,
+        direction == Axis.horizontal ? dotOffset.top.dy + padding : dotOffset.top.dy,
         direction == Axis.horizontal
             ? dotOffset.right.dx
             : dotOffset.right.dx - padding,

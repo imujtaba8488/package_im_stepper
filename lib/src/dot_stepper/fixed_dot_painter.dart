@@ -28,7 +28,7 @@ class FixedDotPainter extends CustomPainter {
       ShapePainter shapePainter = ShapePainter(
         canvas: canvas,
         dotRadius: dotRadius,
-        dotOffset: dotOffsets[index],
+        center: dotOffsets[index].center,
         direction: direction,
         brush: brush,
       );

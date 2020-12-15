@@ -4,8 +4,8 @@ import 'dot_offset.dart';
 import 'dot_stepper.dart';
 import 'shape_painter.dart';
 
-class SlidePainter extends CustomPainter {
-  SlidePainter({
+class SlideIndicator extends CustomPainter {
+  SlideIndicator({
     this.dotRadius,
     this.activeDotIndexOffset,
     this.oldDotIndexOffset,
@@ -29,12 +29,24 @@ class SlidePainter extends CustomPainter {
       brush: brush,
       canvas: canvas,
       direction: direction,
-      dotOffset: activeDotIndexOffset,
+      center: Offset(
+        direction == Axis.horizontal ? forward.value : dotRadius,
+        direction == Axis.horizontal ? dotRadius : forward.value,
+      ),
       dotRadius: dotRadius,
     );
 
     shapePainter.draw(shape);
   }
+
+  Animation get forward => Tween(
+        begin: direction == Axis.horizontal
+            ? oldDotIndexOffset.center.dx
+            : oldDotIndexOffset.center.dy,
+        end: direction == Axis.horizontal
+            ? activeDotIndexOffset.center.dx
+            : activeDotIndexOffset.center.dy,
+      ).animate(animationController);
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
