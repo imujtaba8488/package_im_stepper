@@ -14,6 +14,7 @@ class SlideIndicator extends IndicatorPainter {
       brush: brush,
       direction: direction,
       dotRadius: dotRadius,
+      cornerRadius: dotRadius,
     );
 
     shapePainter.draw(shape);

@@ -33,9 +33,9 @@ class _IconStepperDemo extends State<IconStepperDemo> {
                 dotCount: 3,
                 dotRadius: 28,
                 activeStep: activeStep,
-                shape: Shape.circle,
+                shape: Shape.stadium,
                 spacing: 30,
-                indicator: Indicator.jump,
+                indicator: Indicator.slide,
               ),
               Expanded(
                 child: Row(
