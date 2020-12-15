@@ -3,16 +3,28 @@ import 'package:im_stepper/src/dot_stepper/dot_offset.dart';
 import 'package:im_stepper/stepper.dart';
 
 class ShapePainter {
-  ShapePainter({this.canvas, this.dotOffset, this.dotRadius});
+  ShapePainter({
+    this.canvas,
+    this.dotOffset,
+    this.dotRadius,
+    this.direction,
+    this.brush,
+  });
 
   Canvas canvas;
   DotOffset dotOffset;
   double dotRadius;
+  Axis direction;
+  Paint brush;
 
   void draw(Shape shape) {
     switch (shape) {
       case Shape.square:
         _drawSquare();
+        break;
+
+      case Shape.rectangle:
+        _drawRectangle();
         break;
 
       case Shape.stadium:
@@ -21,6 +33,10 @@ class ShapePainter {
 
       case Shape.squircle:
         _drawSquircle();
+        break;
+
+      case Shape.dash:
+        _drawDash();
         break;
 
       default:
@@ -44,20 +60,54 @@ class ShapePainter {
         dotOffset.right.dx,
         dotOffset.bottom.dy,
       ),
-      Paint()..color = Colors.grey,
+      brush,
+    );
+  }
+
+  void _drawRectangle() {
+    // The amount of padding required to achieve the dash shape.
+    final double padding = dotRadius / 2;
+
+    canvas.drawRect(
+      Rect.fromLTRB(
+        direction == Axis.horizontal
+            ? dotOffset.left.dx
+            : dotOffset.left.dx + padding,
+        direction == Axis.horizontal
+            ? dotOffset.top.dy + padding
+            : dotOffset.top.dy,
+        direction == Axis.horizontal
+            ? dotOffset.right.dx
+            : dotOffset.right.dx - padding,
+        direction == Axis.horizontal
+            ? dotOffset.bottom.dy - padding
+            : dotOffset.bottom.dy,
+      ),
+      brush,
     );
   }
 
   void _drawStadium() {
+    // The amount of padding required to achieve the stadium shape.
+    final double padding = dotRadius / 2;
+
     canvas.drawRRect(
       RRect.fromLTRBR(
-        dotOffset.left.dx,
-        dotOffset.top.dy + dotRadius / 2,
-        dotOffset.right.dx,
-        dotOffset.bottom.dy - dotRadius / 2,
+        direction == Axis.horizontal
+            ? dotOffset.left.dx
+            : dotOffset.left.dx + padding,
+        direction == Axis.horizontal
+            ? dotOffset.top.dy + padding
+            : dotOffset.top.dy,
+        direction == Axis.horizontal
+            ? dotOffset.right.dx
+            : dotOffset.right.dx - padding,
+        direction == Axis.horizontal
+            ? dotOffset.bottom.dy - padding
+            : dotOffset.bottom.dy,
         Radius.circular(dotRadius),
       ),
-      Paint()..color = Colors.grey,
+      brush,
     );
   }
 
@@ -70,7 +120,30 @@ class ShapePainter {
         dotOffset.bottom.dy,
         Radius.circular(dotRadius / 2),
       ),
-      Paint()..color = Colors.grey,
+      brush,
+    );
+  }
+
+  void _drawDash() {
+    // The amount of padding required to achieve the dash shape.
+    final double padding = dotRadius / 1.2;
+
+    canvas.drawRect(
+      Rect.fromLTRB(
+        direction == Axis.horizontal
+            ? dotOffset.left.dx
+            : dotOffset.left.dx + padding,
+        direction == Axis.horizontal
+            ? dotOffset.top.dy + padding
+            : dotOffset.top.dy,
+        direction == Axis.horizontal
+            ? dotOffset.right.dx
+            : dotOffset.right.dx - padding,
+        direction == Axis.horizontal
+            ? dotOffset.bottom.dy - padding
+            : dotOffset.bottom.dy,
+      ),
+      brush,
     );
   }
 }

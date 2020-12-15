@@ -4,11 +4,19 @@ import 'package:im_stepper/src/dot_stepper/shape_painter.dart';
 import 'package:im_stepper/stepper.dart';
 
 class FixedDotPainter extends CustomPainter {
-  FixedDotPainter({this.dotRadius, this.dotCount, this.dotOffsets});
+  FixedDotPainter({
+    this.dotRadius,
+    this.dotCount,
+    this.dotOffsets,
+    this.direction,
+    this.shape,
+  });
 
   final int dotCount;
   final double dotRadius;
   final List<DotOffset> dotOffsets;
+  final Axis direction;
+  final Shape shape;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -17,9 +25,10 @@ class FixedDotPainter extends CustomPainter {
         canvas: canvas,
         dotRadius: dotRadius,
         dotOffset: dotOffsets[index],
+        direction: direction,
       );
 
-      shapePainter.draw(Shape.squircle);
+      shapePainter.draw(shape);
     }
   }
 

@@ -30,6 +30,9 @@ class _IconStepperDemo extends State<IconStepperDemo> {
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: DotStepper(
+            // direction: Axis.vertical,
+            dotRadius: 24,
+            shape: Shape.circle,
           ),
         ),
       ),

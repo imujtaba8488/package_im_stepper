@@ -7,11 +7,19 @@ import 'package:im_stepper/src/dot_stepper/fixed_dot_painter.dart';
 part 'enums.dart';
 
 class DotStepper extends StatefulWidget {
-  DotStepper({this.dotCount = 5, this.dotRadius = 40, this.spacing = 15});
+  DotStepper({
+    this.dotCount = 5,
+    this.dotRadius = 40,
+    this.spacing = 15,
+    this.direction = Axis.horizontal,
+    this.shape = Shape.circle,
+  });
 
   final int dotCount;
   final double dotRadius;
   final double spacing;
+  final Axis direction;
+  final Shape shape;
 
   @override
   _DotStepperState createState() => _DotStepperState();
@@ -42,10 +50,12 @@ class _DotStepperState extends State<DotStepper>
             dotCount: widget.dotCount,
             dotRadius: widget.dotRadius,
             dotOffsets: buildDotOffsets,
+            direction: widget.direction,
+            shape: widget.shape,
           ),
           size: Size(
-            axisLength,
-            diameter,
+            widget.direction == Axis.horizontal ? axisLength : diameter,
+            widget.direction == Axis.horizontal ? diameter : axisLength,
           ),
         )
       ],
@@ -61,8 +71,8 @@ class _DotStepperState extends State<DotStepper>
 
     for (int index = 0; index < widget.dotCount; index++) {
       center = center.translate(
-        diameter + widget.spacing,
-        0.0,
+        widget.direction == Axis.horizontal ? diameter + widget.spacing : 0.0,
+        widget.direction == Axis.horizontal ? 0.0 : diameter + widget.spacing,
       );
 
       dotOffsets.add(DotOffset(center, widget.dotRadius));
