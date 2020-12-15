@@ -6,13 +6,13 @@ class DotOffset {
   Offset center;
   double dotRadius;
 
-  Offset get left => Offset(center.dx - dotRadius, dotRadius);
+  double get left => center.dx - dotRadius;
 
-  Offset get top => Offset(dotRadius, center.dy - dotRadius);
+  double get top => center.dy - dotRadius;
 
-  Offset get right => Offset(center.dx + dotRadius, dotRadius);
+  double get right => center.dx + dotRadius;
 
-  Offset get bottom => Offset(dotRadius, center.dy + dotRadius);
+  double get bottom => center.dy + dotRadius;
 
   @override
   String toString() => '${center.dx}, ${center.dy}';

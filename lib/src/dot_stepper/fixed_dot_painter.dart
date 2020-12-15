@@ -3,6 +3,8 @@ import 'package:im_stepper/src/dot_stepper/dot_offset.dart';
 import 'package:im_stepper/src/dot_stepper/shape_painter.dart';
 import 'package:im_stepper/stepper.dart';
 
+import 'shape_painter.dart';
+
 class FixedDotPainter extends CustomPainter {
   FixedDotPainter({
     this.dotRadius,
@@ -28,7 +30,10 @@ class FixedDotPainter extends CustomPainter {
       ShapePainter shapePainter = ShapePainter(
         canvas: canvas,
         dotRadius: dotRadius,
-        center: dotOffsets[index].center,
+        left: dotOffsets[index].left,
+        top: dotOffsets[index].top,
+        right: dotOffsets[index].right,
+        bottom: dotOffsets[index].bottom,
         direction: direction,
         brush: brush,
       );
@@ -43,11 +48,11 @@ class FixedDotPainter extends CustomPainter {
     for (int index = 0; index < dotCount - 1; index++) {
       canvas.drawLine(
         direction == Axis.horizontal
-            ? Offset(dotOffsets[index].right.dx, dotRadius)
-            : Offset(dotRadius, dotOffsets[index].bottom.dy),
+            ? Offset(dotOffsets[index].right, dotRadius)
+            : Offset(dotRadius, dotOffsets[index].bottom),
         direction == Axis.horizontal
-            ? Offset(dotOffsets[index + 1].left.dx, dotRadius)
-            : Offset(dotRadius, dotOffsets[index + 1].top.dy),
+            ? Offset(dotOffsets[index + 1].left, dotRadius)
+            : Offset(dotRadius, dotOffsets[index + 1].top),
         lineConnectorBrush,
       );
     }

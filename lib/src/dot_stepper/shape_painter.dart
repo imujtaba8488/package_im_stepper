@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:im_stepper/src/dot_stepper/dot_offset.dart';
 import 'package:im_stepper/stepper.dart';
 
 class ShapePainter {
   ShapePainter({
     this.canvas,
-    this.center,
+    this.left,
+    this.top,
+    this.right,
+    this.bottom,
     this.dotRadius,
     this.direction,
     this.brush,
-  }): dotOffset = DotOffset(center, dotRadius);
+  });
 
   Canvas canvas;
-  Offset center;
+  double left;
+  double top;
+  double right;
+  double bottom;
   double dotRadius;
   Axis direction;
   Paint brush;
-
-  final DotOffset dotOffset;
 
   void draw(Shape shape) {
     switch (shape) {
@@ -47,20 +50,30 @@ class ShapePainter {
   }
 
   void _drawCircle() {
-    canvas.drawCircle(
-      center,
-      dotRadius,
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(
+        Rect.fromLTRB(
+          left,
+          top,
+          right,
+          bottom,
+        ),
+        Radius.circular(dotRadius),
+      ),
       brush,
     );
   }
 
   void _drawSquare() {
-    canvas.drawRect(
-      Rect.fromLTRB(
-        dotOffset.left.dx,
-        dotOffset.top.dy,
-        dotOffset.right.dx,
-        dotOffset.bottom.dy,
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(
+        Rect.fromLTRB(
+          left,
+          top,
+          right,
+          bottom,
+        ),
+        Radius.circular(0.0),
       ),
       brush,
     );
@@ -68,20 +81,14 @@ class ShapePainter {
 
   void _drawRectangle() {
     // The amount of padding required to achieve the dash shape.
-    final double padding = dotRadius / 2;
+    final double padding = dotRadius / 3;
 
     canvas.drawRect(
       Rect.fromLTRB(
-        direction == Axis.horizontal
-            ? dotOffset.left.dx
-            : dotOffset.left.dx + padding,
-        direction == Axis.horizontal ? dotOffset.top.dy + padding : dotOffset.top.dy,
-        direction == Axis.horizontal
-            ? dotOffset.right.dx
-            : dotOffset.right.dx - padding,
-        direction == Axis.horizontal
-            ? dotOffset.bottom.dy - padding
-            : dotOffset.bottom.dy,
+        direction == Axis.horizontal ? left : left + padding,
+        direction == Axis.horizontal ? top + padding : top,
+        direction == Axis.horizontal ? right : right - padding,
+        direction == Axis.horizontal ? bottom - padding : bottom,
       ),
       brush,
     );
@@ -93,16 +100,10 @@ class ShapePainter {
 
     canvas.drawRRect(
       RRect.fromLTRBR(
-        direction == Axis.horizontal
-            ? dotOffset.left.dx
-            : dotOffset.left.dx + padding,
-        direction == Axis.horizontal ? dotOffset.top.dy + padding : dotOffset.top.dy,
-        direction == Axis.horizontal
-            ? dotOffset.right.dx
-            : dotOffset.right.dx - padding,
-        direction == Axis.horizontal
-            ? dotOffset.bottom.dy - padding
-            : dotOffset.bottom.dy,
+        direction == Axis.horizontal ? left : left + padding,
+        direction == Axis.horizontal ? top + padding : top,
+        direction == Axis.horizontal ? right : right - padding,
+        direction == Axis.horizontal ? bottom - padding : bottom,
         Radius.circular(dotRadius),
       ),
       brush,
@@ -112,10 +113,10 @@ class ShapePainter {
   void _drawSquircle() {
     canvas.drawRRect(
       RRect.fromLTRBR(
-        dotOffset.left.dx,
-        dotOffset.top.dy,
-        dotOffset.right.dx,
-        dotOffset.bottom.dy,
+        left,
+        top,
+        right,
+        bottom,
         Radius.circular(dotRadius / 2),
       ),
       brush,
@@ -128,16 +129,10 @@ class ShapePainter {
 
     canvas.drawRect(
       Rect.fromLTRB(
-        direction == Axis.horizontal
-            ? dotOffset.left.dx
-            : dotOffset.left.dx + padding,
-        direction == Axis.horizontal ? dotOffset.top.dy + padding : dotOffset.top.dy,
-        direction == Axis.horizontal
-            ? dotOffset.right.dx
-            : dotOffset.right.dx - padding,
-        direction == Axis.horizontal
-            ? dotOffset.bottom.dy - padding
-            : dotOffset.bottom.dy,
+        direction == Axis.horizontal ? left : left + padding,
+        direction == Axis.horizontal ? top + padding : top,
+        direction == Axis.horizontal ? right : right - padding,
+        direction == Axis.horizontal ? bottom - padding : bottom,
       ),
       brush,
     );

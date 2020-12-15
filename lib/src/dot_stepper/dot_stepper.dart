@@ -3,7 +3,9 @@ library dot_stepper;
 import 'package:flutter/material.dart';
 import 'package:im_stepper/src/dot_stepper/dot_offset.dart';
 import 'package:im_stepper/src/dot_stepper/fixed_dot_painter.dart';
-import 'package:im_stepper/src/dot_stepper/jump_indicator.dart';
+import 'package:im_stepper/src/dot_stepper/indicators/worm_indicator.dart';
+
+import 'indicator_painter.dart';
 
 part 'enums.dart';
 
@@ -15,6 +17,7 @@ class DotStepper extends StatefulWidget {
     this.direction = Axis.horizontal,
     this.shape = Shape.circle,
     this.activeStep = 0,
+    this.indicator = Indicator.shift,
   }) {
     assert(
       activeStep >= 0 && activeStep < dotCount,
@@ -28,6 +31,7 @@ class DotStepper extends StatefulWidget {
   final Axis direction;
   final Shape shape;
   final int activeStep;
+  final Indicator indicator;
 
   @override
   _DotStepperState createState() => _DotStepperState();
@@ -39,6 +43,7 @@ class _DotStepperState extends State<DotStepper>
 
   int activeDotIndex;
   int oldDotIndex;
+  bool isSteppingForward;
 
   Paint fixedDotBrush;
   Paint lineConnectorBrush;
@@ -55,6 +60,7 @@ class _DotStepperState extends State<DotStepper>
 
     activeDotIndex = widget.activeStep;
     oldDotIndex = 0;
+    isSteppingForward = false;
 
     fixedDotBrush = Paint()..color = Colors.grey;
     lineConnectorBrush = Paint()..color = Colors.blueGrey;
@@ -83,16 +89,17 @@ class _DotStepperState extends State<DotStepper>
           ),
         ),
         CustomPaint(
-          painter: JumpIndicator(
-            activeDotIndexOffset: buildDotOffsets[activeDotIndex],
-            brush: indicatorBrush,
-            direction: widget.direction,
-            dotRadius: widget.dotRadius,
-            oldDotIndexOffset: buildDotOffsets[oldDotIndex],
-            shape: widget.shape,
-            animationController: animationController,
-          ),
-        )
+          painter: applyIndicator
+            ..dotRadius = widget.dotRadius
+            ..activeDotOffset = buildDotOffsets[activeDotIndex]
+            ..oldDotOffset = buildDotOffsets[oldDotIndex]
+            ..direction = widget.direction
+            ..shape = widget.shape
+            ..brush = indicatorBrush
+            ..animationController = animationController
+            ..indicator = widget.indicator
+            ..isSteppingForward = isSteppingForward,
+        ),
       ],
     );
   }
@@ -120,6 +127,25 @@ class _DotStepperState extends State<DotStepper>
   double get totalSpacing => widget.spacing * (widget.dotCount - 1);
   double get diameter => widget.dotRadius * 2;
 
+  IndicatorPainter get applyIndicator {
+    switch (widget.indicator) {
+      // case Indicator.slide:
+      //   return SlideIndicator();
+
+      // case Indicator.jump:
+      //   return JumpIndicator();
+
+      // case Indicator.trail:
+      //   return TrailIndicator();
+
+      case Indicator.worm:
+        return WormIndicator();
+
+      default:
+        return WormIndicator();
+    }
+  }
+
   @override
   void didUpdateWidget(covariant DotStepper oldWidget) {
     oldDotIndex = oldWidget.activeStep;
@@ -127,6 +153,8 @@ class _DotStepperState extends State<DotStepper>
 
     animationController.reset();
     animationController.forward();
+
+    isSteppingForward = widget.activeStep > oldWidget.activeStep;
 
     super.didUpdateWidget(oldWidget);
   }

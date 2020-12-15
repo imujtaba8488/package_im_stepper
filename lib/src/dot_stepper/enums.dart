@@ -17,6 +17,8 @@ enum Indicator {
   shift,
   slide,
   worm,
+  jump,
+  trail,
 }
 
 enum IndicatorType {
