@@ -18,24 +18,4 @@ class SlideIndicator extends IndicatorPainter {
 
     shapePainter.draw(shape);
   }
-
-  Animation get slideLeft => Tween(
-        begin: oldDotOffset.left,
-        end: activeDotOffset.left,
-      ).animate(animationController);
-
-  Animation get slideTop => Tween(
-        begin: oldDotOffset.top,
-        end: activeDotOffset.top,
-      ).animate(animationController);
-
-  Animation get slideRight => Tween(
-        begin: oldDotOffset.right,
-        end: activeDotOffset.right,
-      ).animate(animationController);
-
-  Animation get slideBottom => Tween(
-        begin: oldDotOffset.bottom,
-        end: activeDotOffset.bottom,
-      ).animate(animationController);
 }

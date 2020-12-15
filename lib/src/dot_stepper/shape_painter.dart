@@ -13,6 +13,7 @@ class ShapePainter {
     this.brush,
     this.inflate = 0.0,
     this.deflate = 0.0,
+    this.translate = 0.0,
     this.cornerRadius = 0.0,
   });
 
@@ -26,6 +27,7 @@ class ShapePainter {
   Paint brush;
   double inflate;
   double deflate;
+  double translate;
   double cornerRadius;
 
   void draw(Shape shape) {
@@ -63,7 +65,7 @@ class ShapePainter {
           top,
           right,
           bottom,
-        ).inflate(inflate).deflate(0.0),
+        ).inflate(inflate).deflate(0.0).translate(translate, translate),
         Radius.circular(cornerRadius),
       ),
       brush,
@@ -77,7 +79,7 @@ class ShapePainter {
         top,
         right,
         bottom,
-      ).inflate(inflate).deflate(deflate),
+      ).inflate(inflate).deflate(deflate).translate(translate, translate),
       brush,
     );
   }
@@ -92,7 +94,7 @@ class ShapePainter {
         direction == Axis.horizontal ? top + padding : top,
         direction == Axis.horizontal ? right : right - padding,
         direction == Axis.horizontal ? bottom - padding : bottom,
-      ).inflate(inflate).deflate(deflate),
+      ).inflate(inflate).deflate(deflate).translate(translate, translate),
       brush,
     );
   }
@@ -108,7 +110,7 @@ class ShapePainter {
         direction == Axis.horizontal ? right : right - padding,
         direction == Axis.horizontal ? bottom - padding : bottom,
         Radius.circular(cornerRadius),
-      ).inflate(inflate).deflate(deflate),
+      ).inflate(inflate).deflate(deflate).shift(Offset(translate, translate)),
       brush,
     );
   }
@@ -121,7 +123,7 @@ class ShapePainter {
         right,
         bottom,
         Radius.circular(dotRadius / 2),
-      ).inflate(inflate).deflate(deflate),
+      ).inflate(inflate).deflate(deflate).shift(Offset(translate, translate)),
       brush,
     );
   }
@@ -136,7 +138,7 @@ class ShapePainter {
         direction == Axis.horizontal ? top + padding : top,
         direction == Axis.horizontal ? right : right - padding,
         direction == Axis.horizontal ? bottom - padding : bottom,
-      ).inflate(inflate).deflate(deflate),
+      ).inflate(inflate).deflate(deflate).translate(translate, translate),
       brush,
     );
   }
