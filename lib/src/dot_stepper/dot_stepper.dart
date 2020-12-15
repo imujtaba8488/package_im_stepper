@@ -3,6 +3,7 @@ library dot_stepper;
 import 'package:flutter/material.dart';
 import 'package:im_stepper/src/dot_stepper/dot_offset.dart';
 import 'package:im_stepper/src/dot_stepper/fixed_dot_painter.dart';
+import 'package:im_stepper/src/dot_stepper/shift_indicator.dart';
 
 part 'enums.dart';
 
@@ -14,7 +15,12 @@ class DotStepper extends StatefulWidget {
     this.direction = Axis.horizontal,
     this.shape = Shape.circle,
     this.activeStep = 0,
-  });
+  }) {
+    assert(
+      activeStep >= 0 && activeStep < dotCount,
+      'activeStep must be greater than or equal to 0 and less than dotCount',
+    );
+  }
 
   final int dotCount;
   final double dotRadius;
@@ -36,6 +42,7 @@ class _DotStepperState extends State<DotStepper>
 
   Paint fixedDotBrush;
   Paint lineConnectorBrush;
+  Paint indicatorBrush;
 
   @override
   void initState() {
@@ -51,6 +58,7 @@ class _DotStepperState extends State<DotStepper>
 
     fixedDotBrush = Paint()..color = Colors.grey;
     lineConnectorBrush = Paint()..color = Colors.blueGrey;
+    indicatorBrush = Paint()..color = Colors.deepOrange;
 
     super.initState();
   }
@@ -72,6 +80,16 @@ class _DotStepperState extends State<DotStepper>
           size: Size(
             widget.direction == Axis.horizontal ? axisLength : diameter,
             widget.direction == Axis.horizontal ? diameter : axisLength,
+          ),
+        ),
+        CustomPaint(
+          painter: ShiftIndicator(
+            activeDotIndexOffset: buildDotOffsets[activeDotIndex],
+            brush: indicatorBrush,
+            direction: widget.direction,
+            dotRadius: widget.dotRadius,
+            oldDotIndexOffset: buildDotOffsets[oldDotIndex],
+            shape: widget.shape,
           ),
         )
       ],
@@ -104,6 +122,7 @@ class _DotStepperState extends State<DotStepper>
   @override
   void didUpdateWidget(covariant DotStepper oldWidget) {
     oldDotIndex = oldWidget.activeStep;
+    activeDotIndex = widget.activeStep;
 
     super.didUpdateWidget(oldWidget);
   }
