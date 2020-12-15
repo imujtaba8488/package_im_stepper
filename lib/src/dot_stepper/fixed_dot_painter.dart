@@ -19,7 +19,7 @@ class FixedDotPainter extends CustomPainter {
         dotOffset: dotOffsets[index],
       );
 
-      shapePainter.draw(Shape.circle);
+      shapePainter.draw(Shape.squircle);
     }
   }
 

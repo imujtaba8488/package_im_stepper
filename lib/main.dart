@@ -27,7 +27,11 @@ class _IconStepperDemo extends State<IconStepperDemo> {
         appBar: AppBar(
           title: Text('DotStepper Example'),
         ),
-        body: DotStepper(),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: DotStepper(
+          ),
+        ),
       ),
     );
   }

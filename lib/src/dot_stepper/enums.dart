@@ -4,8 +4,8 @@ enum Shape {
   circle,
   square,
   rectangle,
-  rounded_rectangle,
-  rounded_square,
+  stadium,
+  squircle,
   dash,
 }
 
