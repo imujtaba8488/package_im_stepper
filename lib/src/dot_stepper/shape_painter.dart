@@ -3,32 +3,32 @@ import 'package:im_stepper/stepper.dart';
 
 class ShapePainter {
   ShapePainter({
-    this.canvas,
-    this.left,
-    this.top,
-    this.right,
-    this.bottom,
-    this.dotRadius,
-    this.direction,
-    this.brush,
+    @required this.canvas,
+    @required this.left,
+    @required this.top,
+    @required this.right,
+    @required this.bottom,
+    @required this.dotRadius,
+    @required this.direction,
+    @required this.brush,
     this.inflate = 0.0,
     this.deflate = 0.0,
     this.translate = 0.0,
     this.cornerRadius = 0.0,
   });
 
-  Canvas canvas;
-  double left;
-  double top;
-  double right;
-  double bottom;
-  double dotRadius;
-  Axis direction;
-  Paint brush;
-  double inflate;
-  double deflate;
-  double translate;
-  double cornerRadius;
+  final Canvas canvas;
+  final double left;
+  final double top;
+  final double right;
+  final double bottom;
+  final double dotRadius;
+  final Axis direction;
+  final Paint brush;
+  final double inflate;
+  final double deflate;
+  final double translate;
+  final double cornerRadius;
 
   void draw(Shape shape) {
     switch (shape) {
