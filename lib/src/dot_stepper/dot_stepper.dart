@@ -6,6 +6,7 @@ import 'package:im_stepper/src/dot_stepper/fixed_dot_painter.dart';
 import 'package:im_stepper/src/dot_stepper/indicators/worm_indicator.dart';
 
 import 'indicator_painter.dart';
+import 'indicators/jump_indicator.dart';
 import 'indicators/slide_indicator.dart';
 
 part 'enums.dart';
@@ -133,8 +134,8 @@ class _DotStepperState extends State<DotStepper>
       case Indicator.slide:
         return SlideIndicator();
 
-      // case Indicator.jump:
-      //   return JumpIndicator();
+      case Indicator.jump:
+        return JumpIndicator();
 
       // case Indicator.trail:
       //   return TrailIndicator();

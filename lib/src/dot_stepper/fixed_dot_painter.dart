@@ -36,6 +36,7 @@ class FixedDotPainter extends CustomPainter {
         bottom: dotOffsets[index].bottom,
         direction: direction,
         brush: brush,
+        cornerRadius: dotRadius,
       );
 
       shapePainter.draw(shape);

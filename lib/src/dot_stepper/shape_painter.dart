@@ -11,6 +11,9 @@ class ShapePainter {
     this.dotRadius,
     this.direction,
     this.brush,
+    this.inflate = 0.0,
+    this.deflate = 0.0,
+    this.cornerRadius = 0.0,
   });
 
   Canvas canvas;
@@ -21,6 +24,9 @@ class ShapePainter {
   double dotRadius;
   Axis direction;
   Paint brush;
+  double inflate;
+  double deflate;
+  double cornerRadius;
 
   void draw(Shape shape) {
     switch (shape) {
@@ -57,24 +63,21 @@ class ShapePainter {
           top,
           right,
           bottom,
-        ),
-        Radius.circular(dotRadius),
+        ).inflate(inflate).deflate(0.0),
+        Radius.circular(cornerRadius),
       ),
       brush,
     );
   }
 
   void _drawSquare() {
-    canvas.drawRRect(
-      RRect.fromRectAndRadius(
-        Rect.fromLTRB(
-          left,
-          top,
-          right,
-          bottom,
-        ),
-        Radius.circular(0.0),
-      ),
+    canvas.drawRect(
+      Rect.fromLTRB(
+        left,
+        top,
+        right,
+        bottom,
+      ).inflate(inflate).deflate(deflate),
       brush,
     );
   }
@@ -89,7 +92,7 @@ class ShapePainter {
         direction == Axis.horizontal ? top + padding : top,
         direction == Axis.horizontal ? right : right - padding,
         direction == Axis.horizontal ? bottom - padding : bottom,
-      ),
+      ).inflate(inflate).deflate(deflate),
       brush,
     );
   }
@@ -104,8 +107,8 @@ class ShapePainter {
         direction == Axis.horizontal ? top + padding : top,
         direction == Axis.horizontal ? right : right - padding,
         direction == Axis.horizontal ? bottom - padding : bottom,
-        Radius.circular(dotRadius),
-      ),
+        Radius.circular(cornerRadius),
+      ).inflate(inflate).deflate(deflate),
       brush,
     );
   }
@@ -118,7 +121,7 @@ class ShapePainter {
         right,
         bottom,
         Radius.circular(dotRadius / 2),
-      ),
+      ).inflate(inflate).deflate(deflate),
       brush,
     );
   }
@@ -133,7 +136,7 @@ class ShapePainter {
         direction == Axis.horizontal ? top + padding : top,
         direction == Axis.horizontal ? right : right - padding,
         direction == Axis.horizontal ? bottom - padding : bottom,
-      ),
+      ).inflate(inflate).deflate(deflate),
       brush,
     );
   }
