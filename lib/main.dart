@@ -35,7 +35,7 @@ class _IconStepperDemo extends State<IconStepperDemo> {
                 activeStep: activeStep,
                 shape: Shape.squircle,
                 spacing: 100,
-                indicator: Indicator.worm,
+                indicator: Indicator.slide,
               ),
               Expanded(
                 child: Row(

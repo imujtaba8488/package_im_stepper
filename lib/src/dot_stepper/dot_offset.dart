@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 
 class DotOffset {
-  DotOffset(this.center, this.dotRadius);
+  DotOffset(this._center, this.dotRadius);
 
-  Offset center;
+  Offset _center;
   double dotRadius;
 
-  double get left => center.dx - dotRadius;
+  double get left => _center.dx - dotRadius;
 
-  double get top => center.dy - dotRadius;
+  double get top => _center.dy - dotRadius;
 
-  double get right => center.dx + dotRadius;
+  double get right => _center.dx + dotRadius;
 
-  double get bottom => center.dy + dotRadius;
+  double get bottom => _center.dy + dotRadius;
 
-  @override
-  String toString() => '${center.dx}, ${center.dy}';
+  double get center => dotRadius;
 }
