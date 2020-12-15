@@ -3,9 +3,7 @@ library dot_stepper;
 import 'package:flutter/material.dart';
 import 'package:im_stepper/src/dot_stepper/dot_offset.dart';
 import 'package:im_stepper/src/dot_stepper/fixed_dot_painter.dart';
-
-import 'shift_indicator.dart';
-import 'slide_indicator.dart';
+import 'package:im_stepper/src/dot_stepper/jump_indicator.dart';
 
 part 'enums.dart';
 
@@ -85,7 +83,7 @@ class _DotStepperState extends State<DotStepper>
           ),
         ),
         CustomPaint(
-          painter: SlideIndicator(
+          painter: JumpIndicator(
             activeDotIndexOffset: buildDotOffsets[activeDotIndex],
             brush: indicatorBrush,
             direction: widget.direction,
