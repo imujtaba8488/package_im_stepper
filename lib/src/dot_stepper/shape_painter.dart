@@ -48,7 +48,7 @@ class ShapePainter {
     canvas.drawCircle(
       dotOffset.center,
       dotRadius,
-      Paint()..color = Colors.grey,
+      brush,
     );
   }
 

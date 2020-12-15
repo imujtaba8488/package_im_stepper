@@ -13,6 +13,7 @@ class DotStepper extends StatefulWidget {
     this.spacing = 15,
     this.direction = Axis.horizontal,
     this.shape = Shape.circle,
+    this.activeStep = 0,
   });
 
   final int dotCount;
@@ -20,6 +21,7 @@ class DotStepper extends StatefulWidget {
   final double spacing;
   final Axis direction;
   final Shape shape;
+  final int activeStep;
 
   @override
   _DotStepperState createState() => _DotStepperState();
@@ -29,6 +31,12 @@ class _DotStepperState extends State<DotStepper>
     with SingleTickerProviderStateMixin {
   AnimationController animationController;
 
+  int activeDotIndex;
+  int oldDotIndex;
+
+  Paint fixedDotBrush;
+  Paint lineConnectorBrush;
+
   @override
   void initState() {
     animationController = AnimationController(
@@ -37,6 +45,12 @@ class _DotStepperState extends State<DotStepper>
     )..addListener(() {
         setState(() {});
       });
+
+    activeDotIndex = widget.activeStep;
+    oldDotIndex = 0;
+
+    fixedDotBrush = Paint()..color = Colors.grey;
+    lineConnectorBrush = Paint()..color = Colors.blueGrey;
 
     super.initState();
   }
@@ -52,6 +66,8 @@ class _DotStepperState extends State<DotStepper>
             dotOffsets: buildDotOffsets,
             direction: widget.direction,
             shape: widget.shape,
+            brush: fixedDotBrush,
+            lineConnectorBrush: lineConnectorBrush,
           ),
           size: Size(
             widget.direction == Axis.horizontal ? axisLength : diameter,
@@ -84,6 +100,13 @@ class _DotStepperState extends State<DotStepper>
   double get axisLength => (diameter * widget.dotCount) + totalSpacing;
   double get totalSpacing => widget.spacing * (widget.dotCount - 1);
   double get diameter => widget.dotRadius * 2;
+
+  @override
+  void didUpdateWidget(covariant DotStepper oldWidget) {
+    oldDotIndex = oldWidget.activeStep;
+
+    super.didUpdateWidget(oldWidget);
+  }
 
   @override
   void dispose() {
