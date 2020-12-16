@@ -86,7 +86,10 @@ class ShapePainter {
         top,
         right,
         bottom,
-      ).inflate(inflate).deflate(deflate).translate(translate, translate),
+      ).inflate(inflate).deflate(deflate).translate(
+            direction == Axis.horizontal ? translate : 0.0,
+            direction == Axis.horizontal ? 0.0 : translate,
+          ),
       brush,
     );
   }
@@ -101,7 +104,10 @@ class ShapePainter {
         direction == Axis.horizontal ? top + padding : top,
         direction == Axis.horizontal ? right : right - padding,
         direction == Axis.horizontal ? bottom - padding : bottom,
-      ).inflate(inflate).deflate(deflate).translate(translate, translate),
+      ).inflate(inflate).deflate(deflate).translate(
+            direction == Axis.horizontal ? translate : 0.0,
+            direction == Axis.horizontal ? 0.0 : translate,
+          ),
       brush,
     );
   }
@@ -118,7 +124,10 @@ class ShapePainter {
         direction == Axis.horizontal ? right : right - padding,
         direction == Axis.horizontal ? bottom - padding : bottom,
         Radius.circular(cornerRadius),
-      ).inflate(inflate).deflate(deflate).shift(Offset(translate, translate)),
+      ).inflate(inflate).deflate(deflate).shift(Offset(
+            direction == Axis.horizontal ? translate : 0.0,
+            direction == Axis.horizontal ? 0.0 : translate,
+          )),
       brush,
     );
   }
@@ -133,7 +142,10 @@ class ShapePainter {
         bottom,
         Radius.circular(dotRadius / 2),
       ).inflate(inflate).deflate(deflate).shift(
-            Offset(translate, translate),
+            Offset(
+              direction == Axis.horizontal ? translate : 0.0,
+              direction == Axis.horizontal ? 0.0 : translate,
+            ),
           ),
       brush,
     );
@@ -149,7 +161,10 @@ class ShapePainter {
         direction == Axis.horizontal ? top + padding : top,
         direction == Axis.horizontal ? right : right - padding,
         direction == Axis.horizontal ? bottom - padding : bottom,
-      ).inflate(inflate).deflate(deflate).translate(translate, translate),
+      ).inflate(inflate).deflate(deflate).translate(
+            direction == Axis.horizontal ? translate : 0.0,
+            direction == Axis.horizontal ? 0.0 : translate,
+          ),
       brush,
     );
   }
@@ -163,7 +178,10 @@ class ShapePainter {
           direction == Axis.horizontal ? top : top + padding,
           direction == Axis.horizontal ? right - padding : right,
           direction == Axis.horizontal ? bottom : bottom - padding,
-        ).inflate(inflate).deflate(0.0).translate(translate, translate),
+        ).inflate(inflate).deflate(0.0).translate(
+              direction == Axis.horizontal ? translate : 0.0,
+              direction == Axis.horizontal ? 0.0 : translate,
+            ),
         Radius.circular(cornerRadius),
       ),
       brush,
