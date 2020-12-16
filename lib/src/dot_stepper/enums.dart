@@ -1,5 +1,6 @@
 part of dot_stepper;
 
+/// Controls the shape of the fixed-dot as well as the indicator.
 enum Shape {
   circle,
   square,
@@ -16,6 +17,7 @@ enum Shape {
   parallel,
 }
 
+/// Controls the type of indicator to use.
 enum Indicator {
   shift,
   slide,
@@ -24,7 +26,7 @@ enum Indicator {
   trail,
 }
 
-enum IndicatorType {
+enum IndicatorDecoration {
   filled,
   outlined,
   squashed,

@@ -129,7 +129,7 @@ class ShapePainter {
         right,
         bottom,
         Radius.circular(dotRadius / 2),
-      ).inflate(inflate).deflate(deflate).shift(Offset(translate, translate)),
+      ).inflate(inflate).deflate(deflate).shift(Offset(translate, translate),),
       brush,
     );
   }
