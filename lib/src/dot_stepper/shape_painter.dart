@@ -69,7 +69,10 @@ class ShapePainter {
           top,
           right,
           bottom,
-        ).inflate(inflate).deflate(0.0).translate(translate, translate),
+        ).inflate(inflate).deflate(0.0).translate(
+              direction == Axis.horizontal ? translate : 0.0,
+              direction == Axis.horizontal ? 0.0 : translate,
+            ),
         Radius.circular(cornerRadius),
       ),
       brush,
@@ -129,7 +132,9 @@ class ShapePainter {
         right,
         bottom,
         Radius.circular(dotRadius / 2),
-      ).inflate(inflate).deflate(deflate).shift(Offset(translate, translate),),
+      ).inflate(inflate).deflate(deflate).shift(
+            Offset(translate, translate),
+          ),
       brush,
     );
   }

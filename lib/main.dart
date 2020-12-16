@@ -29,11 +29,11 @@ class _IconStepperDemo extends State<IconStepperDemo> {
           child: Column(
             children: [
               DotStepper(
-                // direction: Axis.vertical,
+                direction: Axis.vertical,
                 dotCount: 3,
                 dotRadius: 50,
                 activeStep: activeStep,
-                shape: Shape.parallel,
+                shape: Shape.circle,
                 spacing: 20,
                 indicator: Indicator.slide,
               ),

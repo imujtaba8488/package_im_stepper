@@ -6,15 +6,16 @@ class SlideIndicator extends IndicatorPainter {
   @override
   void draw(Canvas canvas) {
     ShapePainter shapePainter = ShapePainter(
-      left: slideLeft.value,
-      top: slideTop.value,
-      right: slideRight.value,
-      bottom: slideBottom.value,
+      left: oldDotOffset.left,
+      top: oldDotOffset.top,
+      right: oldDotOffset.right,
+      bottom: oldDotOffset.bottom,
       canvas: canvas,
       brush: brush,
       direction: direction,
       dotRadius: dotRadius,
       cornerRadius: dotRadius,
+      translate: slide.value,
     );
 
     shapePainter.draw(shape);

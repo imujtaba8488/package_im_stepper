@@ -22,6 +22,13 @@ abstract class IndicatorPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 
+  Animation get slide => Tween(
+        begin: 0.0,
+        end: direction == Axis.horizontal
+            ? activeDotOffset.left - oldDotOffset.left
+            : activeDotOffset.top - oldDotOffset.top,
+      ).animate(animationController);
+
   Animation get slideLeft => Tween(
         begin: oldDotOffset.left,
         end: activeDotOffset.left,
