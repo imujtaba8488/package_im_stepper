@@ -51,7 +51,7 @@ class ShapePainter {
         _drawSquircle();
         break;
       case Shape.pipe:
-        _drawDash();
+        _drawPipe();
         break;
       default:
         _drawCircle();
@@ -153,7 +153,7 @@ class ShapePainter {
     );
   }
 
-  void _drawDash() {
+  void _drawPipe() {
     double squeezeFactor = dotRadius / 1.2;
 
     canvas.drawRRect(
