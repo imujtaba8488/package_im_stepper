@@ -12,9 +12,6 @@ enum Shape {
   /// A squircle is a shape that is intermediate between a square and a circle. See [here](https://en.wikipedia.org/wiki/Squircle) for more information.
   squircle,
   dash,
-
-  /// Draws rounded cap lines that are side by side.
-  parallel,
 }
 
 /// Controls the type of indicator to use.

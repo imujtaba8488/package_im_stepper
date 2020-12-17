@@ -9,6 +9,7 @@ class WormIndicator extends IndicatorPainter {
       canvas,
       brush,
       direction,
+      dotRadius,
       direction == Axis.horizontal ? hLeft : vLeft,
       direction == Axis.horizontal ? hTop : vTop,
       direction == Axis.horizontal ? hRight : vRight,

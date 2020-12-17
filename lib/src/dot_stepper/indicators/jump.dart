@@ -10,11 +10,13 @@ class JumpIndicator extends IndicatorPainter {
       canvas,
       brush,
       direction,
+      dotRadius,
       oldDotOffset.left,
       oldDotOffset.top,
       oldDotOffset.right,
       oldDotOffset.bottom,
-      xTranslate: slide.value,
+      xTranslate: direction == Axis.horizontal ? slide.value : 0.0,
+      yTranslate: direction == Axis.vertical ? slide.value : 0.0,
       inflationFactor: jumpDown.value,
     );
 

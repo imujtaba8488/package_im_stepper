@@ -29,6 +29,7 @@ class FixedDotPainter extends CustomPainter {
         canvas,
         brush,
         direction,
+        dotRadius,
         dotOffsets[index].left,
         dotOffsets[index].top,
         dotOffsets[index].right,

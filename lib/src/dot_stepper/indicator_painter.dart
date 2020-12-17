@@ -24,7 +24,9 @@ abstract class IndicatorPainter extends CustomPainter {
 
   Animation get slide => Tween(
         begin: 0.0,
-        end: xDistanceBetweenOldAndActiveDot,
+        end: direction == Axis.horizontal
+            ? xDistanceBetweenOldAndActiveDot
+            : yDistanceBetweenOldAndActiveDot,
       ).animate(animationController);
 
   double get xDistanceBetweenOldAndActiveDot =>

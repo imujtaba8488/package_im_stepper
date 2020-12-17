@@ -31,13 +31,12 @@ class _IconStepperDemo extends State<IconStepperDemo> {
             children: [
               DotStepper(
                 // direction: Axis.vertical,
-                dotCount: 3,
+                dotCount: 5,
                 dotRadius: 20,
                 activeStep: activeStep,
-                shape: Shape.circle,
+                shape: Shape.dash,
                 spacing: 20,
-
-                indicator: Indicator.jump,
+                indicator: Indicator.worm,
               ),
               Expanded(
                 child: Row(
