@@ -11,7 +11,7 @@ enum Shape {
 
   /// A squircle is a shape that is intermediate between a square and a circle. See [here](https://en.wikipedia.org/wiki/Squircle) for more information.
   squircle,
-  dash,
+  pipe,
 }
 
 /// Controls the type of indicator to use.
@@ -24,10 +24,4 @@ enum Indicator {
   magnify,
   bullet,
   ball_roll,
-}
-
-enum IndicatorDecoration {
-  filled,
-  outlined,
-  squashed,
 }

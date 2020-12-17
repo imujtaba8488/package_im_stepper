@@ -1,6 +1,7 @@
 library dot_stepper;
 
 import 'package:flutter/material.dart';
+import 'package:im_stepper/src/dot_stepper/decorations.dart';
 import 'package:im_stepper/src/dot_stepper/dot_offset.dart';
 import 'package:im_stepper/src/dot_stepper/fixed_dot_painter.dart';
 import 'package:im_stepper/src/dot_stepper/indicators/slide_indicator.dart';
@@ -20,6 +21,9 @@ class DotStepper extends StatefulWidget {
     this.shape = Shape.circle,
     this.activeStep = 0,
     this.indicator = Indicator.shift,
+    this.fixedDotDecoration = const FixedDotDecoration(),
+    this.indicatorDecoration = const IndicatorDecoration(),
+    this.lineConnectorDecoration = const LineConnectorDecoration(),
   }) {
     assert(
       activeStep >= 0 && activeStep < dotCount,
@@ -34,6 +38,9 @@ class DotStepper extends StatefulWidget {
   final Shape shape;
   final int activeStep;
   final Indicator indicator;
+  final FixedDotDecoration fixedDotDecoration;
+  final IndicatorDecoration indicatorDecoration;
+  final LineConnectorDecoration lineConnectorDecoration;
 
   @override
   _DotStepperState createState() => _DotStepperState();
@@ -64,9 +71,19 @@ class _DotStepperState extends State<DotStepper>
     oldDotIndex = 0;
     isSteppingForward = false;
 
-    fixedDotBrush = Paint()..color = Colors.grey;
-    lineConnectorBrush = Paint()..color = Colors.blueGrey;
-    indicatorBrush = Paint()..color = Colors.black;
+    fixedDotBrush = Paint()
+      ..color = widget.fixedDotDecoration.color
+      ..style = widget.fixedDotDecoration.style
+      ..strokeWidth = widget.fixedDotDecoration.strokeWidth;
+
+    lineConnectorBrush = Paint()
+      ..color = widget.lineConnectorDecoration.color
+      ..strokeWidth = widget.lineConnectorDecoration.weight;
+
+    indicatorBrush = Paint()
+      ..color = widget.indicatorDecoration.color
+      ..style = widget.indicatorDecoration.style
+      ..strokeWidth = widget.indicatorDecoration.strokeWidth;
 
     super.initState();
   }

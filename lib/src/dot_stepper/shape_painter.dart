@@ -50,7 +50,7 @@ class ShapePainter {
       case Shape.squircle:
         _drawSquircle();
         break;
-      case Shape.dash:
+      case Shape.pipe:
         _drawDash();
         break;
       default:

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:im_stepper/src/dot_stepper/decorations.dart';
 
 import 'stepper.dart';
 
@@ -28,16 +29,30 @@ class _IconStepperDemo extends State<IconStepperDemo> {
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
-            // crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               DotStepper(
-                // direction: Axis.vertical,
+                direction: Axis.vertical,
                 dotCount: dotCount,
-                dotRadius: 30,
+                dotRadius: 24,
                 activeStep: activeStep,
-                shape: Shape.circle,
-                spacing: 25,
+                shape: Shape.pipe,
+                spacing: 30,
                 indicator: Indicator.worm,
+                fixedDotDecoration: FixedDotDecoration(
+                  color: Colors.red,
+                  style: PaintingStyle.stroke,
+                  strokeWidth: 1,
+                ),
+                indicatorDecoration: IndicatorDecoration(
+                  style: PaintingStyle.stroke,
+                  strokeWidth: 3,
+                  color: Colors.black,
+                ),
+                lineConnectorDecoration: LineConnectorDecoration(
+                  color: Colors.red,
+                  // weight: 5,
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(18.0),
