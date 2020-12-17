@@ -15,6 +15,7 @@ class _IconStepperDemo extends State<IconStepperDemo> {
   // THE FOLLOWING TWO VARIABLES ARE REQUIRED TO CONTROL THE STEPPER.
   // Controls the currently active step. Can be set to any valid value i.e., a value that ranges from 0 to upperBound.
   int activeStep = 0; // Initial step set to 5.
+  int dotCount = 5;
 
   @override
   Widget build(BuildContext context) {
@@ -30,32 +31,24 @@ class _IconStepperDemo extends State<IconStepperDemo> {
             // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               DotStepper(
-                direction: Axis.vertical,
-                dotCount: 5,
-                dotRadius: 20,
+                // direction: Axis.vertical,
+                dotCount: dotCount,
+                dotRadius: 30,
                 activeStep: activeStep,
-                shape: Shape.dash,
-                spacing: 20,
+                shape: Shape.circle,
+                spacing: 25,
                 indicator: Indicator.worm,
               ),
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    step1(),
-                    step2(),
-                    step3(),
-                  ],
-                ),
+              Padding(
+                padding: const EdgeInsets.all(18.0),
+                child: steps(),
               ),
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    previousButton(),
-                    nextButton(),
-                  ],
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  previousButton(),
+                  nextButton(),
+                ],
               )
             ],
           ),
@@ -64,36 +57,19 @@ class _IconStepperDemo extends State<IconStepperDemo> {
     );
   }
 
-  Widget step1() {
-    return ElevatedButton(
-      child: Text('1'),
-      onPressed: () {
-        setState(() {
-          activeStep = 0;
-        });
-      },
-    );
-  }
-
-  Widget step2() {
-    return ElevatedButton(
-      child: Text('2'),
-      onPressed: () {
-        setState(() {
-          activeStep = 1;
-        });
-      },
-    );
-  }
-
-  Widget step3() {
-    return ElevatedButton(
-      child: Text('3'),
-      onPressed: () {
-        setState(() {
-          activeStep = 2;
-        });
-      },
+  Row steps() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: List.generate(dotCount, (index) {
+        return ElevatedButton(
+          child: Text('${index + 1}'),
+          onPressed: () {
+            setState(() {
+              activeStep = index;
+            });
+          },
+        );
+      }),
     );
   }
 
@@ -101,9 +77,11 @@ class _IconStepperDemo extends State<IconStepperDemo> {
     return ElevatedButton(
       child: Text('Next'),
       onPressed: () {
-        setState(() {
-          activeStep++;
-        });
+        if (activeStep < dotCount - 1) {
+          setState(() {
+            activeStep++;
+          });
+        }
       },
     );
   }
@@ -112,9 +90,11 @@ class _IconStepperDemo extends State<IconStepperDemo> {
     return ElevatedButton(
       child: Text('Prev'),
       onPressed: () {
-        setState(() {
-          activeStep--;
-        });
+        if (activeStep > 0) {
+          setState(() {
+            activeStep--;
+          });
+        }
       },
     );
   }
