@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import 'dot_stepper.dart';
@@ -52,6 +54,15 @@ class ShapePainter {
         break;
       case Shape.pipe:
         _drawPipe();
+        break;
+      case Shape.pipe2:
+        _drawPillar();
+        break;
+      case Shape.unnamed:
+        _drawUnknown();
+        break;
+      case Shape.unnamed2:
+        _drawUnnamed2();
         break;
       default:
         _drawCircle();
@@ -169,6 +180,112 @@ class ShapePainter {
             .deflate(deflationFactor),
         Radius.circular(minCornerRadius),
       ),
+      brush,
+    );
+  }
+
+  void _drawPillar() {
+    double squeezeFactor = dotRadius / 1.2;
+
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(
+        Rect.fromLTRB(
+          direction == Axis.horizontal ? left + squeezeFactor : left,
+          direction == Axis.vertical ? top + squeezeFactor : top,
+          direction == Axis.horizontal ? right - squeezeFactor : right,
+          direction == Axis.vertical ? bottom - squeezeFactor : bottom,
+        )
+            .translate(xTranslate, yTranslate)
+            .inflate(inflationFactor)
+            .deflate(deflationFactor),
+        Radius.circular(maxCornerRadius),
+      ),
+      brush,
+    );
+  }
+
+  void _drawUnknown() {
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(
+        Rect.fromLTRB(
+          left,
+          top,
+          right,
+          bottom,
+        )
+            .translate(xTranslate, yTranslate)
+            .inflate(inflationFactor)
+            .deflate(deflationFactor),
+        Radius.circular(dotRadius / 2),
+      ),
+      brush,
+    );
+
+    canvas.drawOval(
+      Rect.fromLTRB(
+        left,
+        top,
+        right,
+        bottom,
+      ).deflate(dotRadius / 3).translate(xTranslate, yTranslate),
+      Paint()..color = Colors.white,
+    );
+
+    canvas.drawOval(
+      Rect.fromLTRB(
+        left,
+        top,
+        right,
+        bottom,
+      ).deflate(dotRadius / 2).translate(xTranslate, yTranslate),
+      brush,
+    );
+  }
+
+  void _drawUnnamed2() {
+    canvas.drawRRect(
+      RRect.fromRectAndRadius(
+        Rect.fromLTRB(
+          left,
+          top,
+          right,
+          bottom,
+        )
+            .translate(xTranslate, yTranslate)
+            .inflate(inflationFactor)
+            .deflate(deflationFactor),
+        Radius.circular(dotRadius / 2),
+      ),
+      brush,
+    );
+
+    canvas.drawOval(
+      Rect.fromLTRB(
+        left - dotRadius / 2,
+        top - dotRadius / 2,
+        right - dotRadius / 2,
+        bottom - dotRadius / 2,
+      ).deflate(dotRadius / 1.2).translate(xTranslate, yTranslate),
+      brush,
+    );
+
+    canvas.drawOval(
+      Rect.fromLTRB(
+        left - dotRadius / 2,
+        top + dotRadius / 3,
+        right - dotRadius / 2,
+        bottom - dotRadius / 3,
+      ).deflate(dotRadius / 1.2).translate(xTranslate, yTranslate),
+      brush,
+    );
+
+    canvas.drawOval(
+      Rect.fromLTRB(
+        left - dotRadius / 2,
+        top + dotRadius / 1.1,
+        right - dotRadius / 2,
+        bottom + dotRadius / 5,
+      ).deflate(dotRadius / 1.2).translate(xTranslate, yTranslate),
       brush,
     );
   }
