@@ -3,13 +3,10 @@ library dot_stepper;
 import 'package:flutter/material.dart';
 import 'package:im_stepper/src/dot_stepper/dot_offset.dart';
 import 'package:im_stepper/src/dot_stepper/fixed_dot_painter.dart';
-import 'package:im_stepper/src/dot_stepper/indicators/magnify_indicator.dart';
-import 'package:im_stepper/src/dot_stepper/indicators/shift_indicator.dart';
-import 'package:im_stepper/src/dot_stepper/indicators/worm_indicator.dart';
+import 'package:im_stepper/src/dot_stepper/indicators/slide.dart';
 
 import 'indicator_painter.dart';
-import 'indicators/jump_indicator.dart';
-import 'indicators/slide_indicator.dart';
+import 'indicators/jump.dart';
 
 part 'enums.dart';
 
@@ -17,7 +14,7 @@ class DotStepper extends StatefulWidget {
   DotStepper({
     this.dotCount = 5,
     this.dotRadius = 40,
-    this.spacing = 15,
+    this.spacing = 0.0,
     this.direction = Axis.horizontal,
     this.shape = Shape.circle,
     this.activeStep = 0,
@@ -116,10 +113,7 @@ class _DotStepperState extends State<DotStepper>
     dotOffsets.add(DotOffset(center, widget.dotRadius));
 
     for (int index = 0; index < widget.dotCount; index++) {
-      center = center.translate(
-        widget.direction == Axis.horizontal ? diameter + widget.spacing : 0.0,
-        widget.direction == Axis.horizontal ? 0.0 : diameter + widget.spacing,
-      );
+      center = center.translate(diameter + widget.spacing, 0.0);
 
       dotOffsets.add(DotOffset(center, widget.dotRadius));
     }
@@ -133,23 +127,29 @@ class _DotStepperState extends State<DotStepper>
 
   IndicatorPainter get applyIndicator {
     switch (widget.indicator) {
-      case Indicator.slide:
-        return SlideIndicator();
+      // case Indicator.slide:
+      //   return SlideIndicator();
 
       case Indicator.jump:
         return JumpIndicator();
 
-      case Indicator.magnify:
-        return MagnifyIndicator();
+      // case Indicator.magnify:
+      //   return MagnifyIndicator();
 
-      // case Indicator.trail:
-      //   return TrailIndicator();
+      // case Indicator.ball_roll:
+      //   return BallRollIndicator();
 
-      case Indicator.worm:
-        return WormIndicator();
+      // // case Indicator.trail:
+      // //   return TrailIndicator();
+
+      // case Indicator.worm:
+      //   return WormIndicator();
+
+      // default:
+      //   return WormIndicator();
 
       default:
-        return ShiftIndicator();
+        return Slide();
     }
   }
 

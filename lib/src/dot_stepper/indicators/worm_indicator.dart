@@ -6,15 +6,13 @@ class WormIndicator extends IndicatorPainter {
   @override
   void draw(Canvas canvas) {
     ShapePainter shapePainter = ShapePainter(
-      left: direction == Axis.horizontal ? hLeft : vLeft,
-      top: direction == Axis.horizontal ? hTop : vTop,
-      right: direction == Axis.horizontal ? hRight : vRight,
-      bottom: direction == Axis.horizontal ? hBottom : vBottom,
-      canvas: canvas,
-      brush: brush,
-      direction: direction,
-      dotRadius: dotRadius,
-      cornerRadius: dotRadius,
+      canvas,
+      brush,
+      direction,
+      direction == Axis.horizontal ? hLeft : vLeft,
+      direction == Axis.horizontal ? hTop : vTop,
+      direction == Axis.horizontal ? hRight : vRight,
+      direction == Axis.horizontal ? hBottom : vBottom,
     );
 
     shapePainter.draw(shape);
@@ -37,6 +35,10 @@ class WormIndicator extends IndicatorPainter {
 
   double get vBottom =>
       isSteppingForward ? activeDotOffset.bottom : vStretch.value;
+
+  Animation get hStretch2 =>
+      Tween(begin: oldDotOffset.left, end: activeDotOffset.left)
+          .animate(animationController);
 
   Animation get hStretch => Tween(
         begin: isSteppingForward ? oldDotOffset.left : oldDotOffset.right,

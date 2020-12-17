@@ -26,7 +26,7 @@ enum Indicator {
   trail,
   magnify,
   bullet,
-  
+  ball_roll,
 }
 
 enum IndicatorDecoration {

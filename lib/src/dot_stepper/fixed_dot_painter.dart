@@ -3,8 +3,6 @@ import 'package:im_stepper/src/dot_stepper/dot_offset.dart';
 import 'package:im_stepper/src/dot_stepper/shape_painter.dart';
 import 'package:im_stepper/stepper.dart';
 
-import 'shape_painter.dart';
-
 class FixedDotPainter extends CustomPainter {
   FixedDotPainter({
     this.dotRadius,
@@ -28,15 +26,13 @@ class FixedDotPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     for (int index = 0; index < dotCount; index++) {
       ShapePainter shapePainter = ShapePainter(
-        canvas: canvas,
-        dotRadius: dotRadius,
-        left: dotOffsets[index].left,
-        top: dotOffsets[index].top,
-        right: dotOffsets[index].right,
-        bottom: dotOffsets[index].bottom,
-        direction: direction,
-        brush: brush,
-        cornerRadius: dotRadius,
+        canvas,
+        brush,
+        direction,
+        dotOffsets[index].left,
+        dotOffsets[index].top,
+        dotOffsets[index].right,
+        dotOffsets[index].bottom,
       );
 
       shapePainter.draw(shape);

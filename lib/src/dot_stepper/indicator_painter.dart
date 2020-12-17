@@ -24,28 +24,12 @@ abstract class IndicatorPainter extends CustomPainter {
 
   Animation get slide => Tween(
         begin: 0.0,
-        end: direction == Axis.horizontal
-            ? activeDotOffset.left - oldDotOffset.left
-            : activeDotOffset.top - oldDotOffset.top,
+        end: xDistanceBetweenOldAndActiveDot,
       ).animate(animationController);
 
-  Animation get slideLeft => Tween(
-        begin: oldDotOffset.left,
-        end: activeDotOffset.left,
-      ).animate(animationController);
+  double get xDistanceBetweenOldAndActiveDot =>
+      activeDotOffset.left - oldDotOffset.left;
 
-  Animation get slideTop => Tween(
-        begin: oldDotOffset.top,
-        end: activeDotOffset.top,
-      ).animate(animationController);
-
-  Animation get slideRight => Tween(
-        begin: oldDotOffset.right,
-        end: activeDotOffset.right,
-      ).animate(animationController);
-
-  Animation get slideBottom => Tween(
-        begin: oldDotOffset.bottom,
-        end: activeDotOffset.bottom,
-      ).animate(animationController);
+  double get yDistanceBetweenOldAndActiveDot =>
+      activeDotOffset.top - oldDotOffset.top;
 }

@@ -27,15 +27,17 @@ class _IconStepperDemo extends State<IconStepperDemo> {
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
+            // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               DotStepper(
                 // direction: Axis.vertical,
                 dotCount: 3,
-                dotRadius: 5,
+                dotRadius: 20,
                 activeStep: activeStep,
-                shape: Shape.stadium,
-                spacing: 50,
-                indicator: Indicator.magnify,
+                shape: Shape.circle,
+                spacing: 20,
+
+                indicator: Indicator.jump,
               ),
               Expanded(
                 child: Row(

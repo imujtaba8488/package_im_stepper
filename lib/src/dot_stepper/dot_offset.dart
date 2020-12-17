@@ -14,5 +14,5 @@ class DotOffset {
 
   double get bottom => _center.dy + _dotRadius;
 
-  double get center => _dotRadius;
+  double get center => _center.dx;
 }
