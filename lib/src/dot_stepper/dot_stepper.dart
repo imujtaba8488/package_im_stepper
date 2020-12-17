@@ -3,6 +3,7 @@ library dot_stepper;
 import 'package:flutter/material.dart';
 import 'package:im_stepper/src/dot_stepper/dot_offset.dart';
 import 'package:im_stepper/src/dot_stepper/fixed_dot_painter.dart';
+import 'package:im_stepper/src/dot_stepper/indicators/shift_indicator.dart';
 import 'package:im_stepper/src/dot_stepper/indicators/worm_indicator.dart';
 
 import 'indicator_painter.dart';
@@ -144,7 +145,7 @@ class _DotStepperState extends State<DotStepper>
         return WormIndicator();
 
       default:
-        return WormIndicator();
+        return ShiftIndicator();
     }
   }
 

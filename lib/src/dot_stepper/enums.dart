@@ -24,6 +24,9 @@ enum Indicator {
   worm,
   jump,
   trail,
+  magnify,
+  bullet,
+  
 }
 
 enum IndicatorDecoration {
