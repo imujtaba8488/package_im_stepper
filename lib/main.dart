@@ -30,7 +30,7 @@ class _IconStepperDemo extends State<IconStepperDemo> {
             // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               DotStepper(
-                // direction: Axis.vertical,
+                direction: Axis.vertical,
                 dotCount: 5,
                 dotRadius: 20,
                 activeStep: activeStep,

@@ -3,10 +3,10 @@ library dot_stepper;
 import 'package:flutter/material.dart';
 import 'package:im_stepper/src/dot_stepper/dot_offset.dart';
 import 'package:im_stepper/src/dot_stepper/fixed_dot_painter.dart';
-import 'package:im_stepper/src/dot_stepper/indicators/slide.dart';
+import 'package:im_stepper/src/dot_stepper/indicators/slide_indicator.dart';
 
 import 'indicator_painter.dart';
-import 'indicators/jump.dart';
+import 'indicators/jump_indicator.dart';
 import 'indicators/worm_indicator.dart';
 
 part 'enums.dart';
