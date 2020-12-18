@@ -30,8 +30,7 @@ enum Indicator {
   slide,
   worm,
   jump,
-  trail,
   magnify,
+  thump,
   bullet,
-  ball_roll,
 }

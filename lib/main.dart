@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'src/dot_stepper/decorations.dart';
 import 'stepper.dart';
 
 void main() {
@@ -16,7 +15,7 @@ class _IconStepperDemo extends State<IconStepperDemo> {
   // THE FOLLOWING TWO VARIABLES ARE REQUIRED TO CONTROL THE STEPPER.
   // Controls the currently active step. Can be set to any valid value i.e., a value that ranges from 0 to upperBound.
   int activeStep = 0; // Initial step set to 5.
-  int dotCount = 5;
+  int dotCount = 8;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +37,7 @@ class _IconStepperDemo extends State<IconStepperDemo> {
                 activeStep: activeStep,
                 shape: Shape.circle,
                 spacing: 30,
-                indicator: Indicator.magnify,
+                indicator: Indicator.thump,
                 onDotTapped: (tappedDotIndex) {
                   setState(() {
                     activeStep = tappedDotIndex;
