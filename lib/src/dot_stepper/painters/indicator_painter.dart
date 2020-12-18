@@ -2,18 +2,18 @@ library indicators;
 
 import 'package:flutter/material.dart';
 
-import 'dot_offset.dart';
-import 'enums.dart';
+import '../core/dot_offset.dart';
+import '../core/enums.dart';
 import 'shape_painter.dart';
 
-part 'indicators/blink_indicator.dart';
-part 'indicators/jump_indicator.dart';
-part 'indicators/magnify_indicator.dart';
-part 'indicators/shift_indicator.dart';
-part 'indicators/shink_indicator.dart';
-part 'indicators/slide_indicator.dart';
-part 'indicators/thump_indicator.dart';
-part 'indicators/worm_indicator.dart';
+part '../indicators/blink_indicator.dart';
+part '../indicators/jump_indicator.dart';
+part '../indicators/magnify_indicator.dart';
+part '../indicators/shift_indicator.dart';
+part '../indicators/shink_indicator.dart';
+part '../indicators/slide_indicator.dart';
+part '../indicators/thump_indicator.dart';
+part '../indicators/worm_indicator.dart';
 
 abstract class IndicatorPainter extends CustomPainter {
   double dotRadius;

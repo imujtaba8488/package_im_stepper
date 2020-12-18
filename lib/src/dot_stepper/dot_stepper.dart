@@ -2,11 +2,16 @@ library dot_stepper;
 
 import 'package:flutter/material.dart';
 
-import 'decorations.dart';
-import 'dot_offset.dart';
-import 'enums.dart';
-import 'fixed_dot_painter.dart';
-import 'indicator_painter.dart';
+import 'core/decorations.dart';
+import 'core/dot_offset.dart';
+import 'core/enums.dart';
+import 'painters/fixed_dot_painter.dart';
+import 'painters/indicator_painter.dart';
+
+// Must be exported to be available for the users.
+
+export 'core/decorations.dart';
+export 'core/enums.dart';
 
 /// Callback fired when a dot is tapped.
 typedef OnDotTapped = void Function(int tappedDotIndex);

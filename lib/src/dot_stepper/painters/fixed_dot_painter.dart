@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'dot_offset.dart';
-import 'enums.dart';
+import '../core/dot_offset.dart';
+import '../core/enums.dart';
 import 'shape_painter.dart';
 
 /// Callback that provides the index of the dot that was tapped.

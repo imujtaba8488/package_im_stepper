@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'enums.dart';
+import '../core/enums.dart';
 
 class ShapePainter {
   /// The canvas to use for painting.
