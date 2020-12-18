@@ -119,20 +119,7 @@ class _DotStepperState extends State<DotStepper>
     _oldDotIndex = 0;
     _isSteppingForward = false;
 
-    // init brushes with their respective decorations.
-    _fixedDotBrush = Paint()
-      ..color = widget.fixedDotDecoration.color
-      ..style = widget.fixedDotDecoration.style
-      ..strokeWidth = widget.fixedDotDecoration.strokeWidth;
-
-    _lineConnectorBrush = Paint()
-      ..color = widget.lineConnectorDecoration.color
-      ..strokeWidth = widget.lineConnectorDecoration.weight;
-
-    _indicatorBrush = Paint()
-      ..color = widget.indicatorDecoration.color
-      ..style = widget.indicatorDecoration.style
-      ..strokeWidth = widget.indicatorDecoration.strokeWidth;
+    _initBrushes();
 
     super.initState();
   }
@@ -268,10 +255,27 @@ class _DotStepperState extends State<DotStepper>
     }
   }
 
+  _initBrushes() {
+    _fixedDotBrush = Paint()
+      ..color = widget.fixedDotDecoration.color
+      ..style = widget.fixedDotDecoration.style
+      ..strokeWidth = widget.fixedDotDecoration.strokeWidth;
+
+    _lineConnectorBrush = Paint()
+      ..color = widget.lineConnectorDecoration.color
+      ..strokeWidth = widget.lineConnectorDecoration.strokeWidth;
+
+    _indicatorBrush = Paint()
+      ..color = widget.indicatorDecoration.color
+      ..style = widget.indicatorDecoration.style
+      ..strokeWidth = widget.indicatorDecoration.strokeWidth;
+  }
+
   @override
   void didUpdateWidget(covariant DotStepper oldWidget) {
     // Update old and active dot indices.
     _oldDotIndex = oldWidget.activeStep;
+    _initBrushes();
 
     // activeDot was updated by an event other than a tap, hence `eventIsTap` is `false`.
     _updateConfiguration(activeDotIndex: _activeDotIndex, eventIsTap: false);

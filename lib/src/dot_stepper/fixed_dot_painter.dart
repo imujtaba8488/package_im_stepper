@@ -70,15 +70,18 @@ class FixedDotPainter extends CustomPainter {
 
   /// Draw the line connectors.
   void _drawLineConnectors(Canvas canvas) {
+    // The factor by which to adjust the offsets in order to compensate for the strokeWidth of the fixedDot.
+    double strokeAdjustment = (brush.strokeWidth / 2);
+
     // (index < dotCount -1) because omit the line connector after the last dot.
     for (int index = 0; index < dotCount - 1; index++) {
       canvas.drawLine(
         direction == Axis.horizontal
-            ? Offset(dotOffsets[index].right, dotRadius)
-            : Offset(dotRadius, dotOffsets[index].bottom),
+            ? Offset(dotOffsets[index].right + strokeAdjustment, dotRadius)
+            : Offset(dotRadius, dotOffsets[index].bottom + strokeAdjustment),
         direction == Axis.horizontal
-            ? Offset(dotOffsets[index + 1].left, dotRadius)
-            : Offset(dotRadius, dotOffsets[index + 1].top),
+            ? Offset(dotOffsets[index + 1].left - strokeAdjustment, dotRadius)
+            : Offset(dotRadius, dotOffsets[index + 1].top - strokeAdjustment),
         lineConnectorBrush,
       );
     }

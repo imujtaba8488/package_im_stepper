@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class LineConnectorDecoration {
   final Color color;
-  final double weight;
+  final double strokeWidth;
 
   const LineConnectorDecoration({
     this.color = Colors.blueGrey,
-    this.weight = 1.0,
+    this.strokeWidth = 1.0,
   });
 }
 

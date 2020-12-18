@@ -32,12 +32,12 @@ class _IconStepperDemo extends State<IconStepperDemo> {
             // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               DotStepper(
-                // direction: Axis.vertical,
+                direction: Axis.vertical,
                 dotCount: dotCount,
-                dotRadius: 12,
+                dotRadius: 24,
                 activeStep: activeStep,
                 shape: Shape.stadium,
-                spacing: 30,
+                spacing: 80,
                 indicator: Indicator.worm,
                 onDotTapped: (tappedDotIndex) {
                   setState(() {
@@ -45,18 +45,18 @@ class _IconStepperDemo extends State<IconStepperDemo> {
                   });
                 },
                 fixedDotDecoration: FixedDotDecoration(
-                  color: Colors.red,
+                  color: Colors.orange,
                   style: PaintingStyle.stroke,
-                  strokeWidth: 1,
+                  strokeWidth: 9,
                 ),
                 indicatorDecoration: IndicatorDecoration(
-                  // style: PaintingStyle.stroke,
+                  style: PaintingStyle.stroke,
                   strokeWidth: 3,
                   color: Colors.black,
                 ),
                 lineConnectorDecoration: LineConnectorDecoration(
                   color: Colors.red,
-                  // weight: 5,
+                  strokeWidth: 3,
                 ),
               ),
               Padding(
