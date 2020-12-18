@@ -1,5 +1,15 @@
 # ChangeLog
 
+## 0.1.2+9
+
+### Saturday, 18th December, 2020
+
+* __BreakingChanges:__ DotStepper has been revamped to include many new exciting features. However, some of the following breaking changes happened along the way:-
+
+** IndicatorType renamed to Indicator.
+
+** test
+
 ## 0.1.2+8
 
 ### Saturday, 28th November, 2020

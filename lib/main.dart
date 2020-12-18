@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'stepper.dart';
 
-void main() {
-  runApp(DotStepperDemo());
-}
+void main() => runApp(DotStepperDemo());
 
 class DotStepperDemo extends StatefulWidget {
   @override
