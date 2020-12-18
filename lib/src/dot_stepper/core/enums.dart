@@ -15,8 +15,6 @@ enum Shape {
 
   /// Vertical round edged pipes.
   pipe2,
-  unnamed,
-  unnamed2,
 
   // Circle with a hole in the middle.
   ring,

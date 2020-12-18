@@ -80,11 +80,6 @@ class ShapePainter {
       case Shape.pipe2:
         _drawPillar();
         break;
-      case Shape.unnamed:
-        _drawUnknown();
-        break;
-      case Shape.unnamed2:
-        _drawUnnamed2();
         break;
       default:
         _drawCircle();
@@ -222,102 +217,6 @@ class ShapePainter {
             .deflate(deflationFactor),
         Radius.circular(_maxCornerRadius),
       ),
-      brush,
-    );
-  }
-
-  void _drawUnknown() {
-    canvas.drawRRect(
-      RRect.fromRectAndRadius(
-        Rect.fromLTRB(
-          left,
-          top,
-          right,
-          bottom,
-        )
-            .translate(xTranslationFactor, yTranslationFactor)
-            .inflate(inflationFactor)
-            .deflate(deflationFactor),
-        Radius.circular(dotRadius / 2),
-      ),
-      brush,
-    );
-
-    canvas.drawOval(
-      Rect.fromLTRB(
-        left,
-        top,
-        right,
-        bottom,
-      )
-          .deflate(dotRadius / 3)
-          .translate(xTranslationFactor, yTranslationFactor),
-      Paint()..color = Colors.white,
-    );
-
-    canvas.drawOval(
-      Rect.fromLTRB(
-        left,
-        top,
-        right,
-        bottom,
-      )
-          .deflate(dotRadius / 2)
-          .translate(xTranslationFactor, yTranslationFactor),
-      brush,
-    );
-  }
-
-  void _drawUnnamed2() {
-    canvas.drawRRect(
-      RRect.fromRectAndRadius(
-        Rect.fromLTRB(
-          left,
-          top,
-          right,
-          bottom,
-        )
-            .translate(xTranslationFactor, yTranslationFactor)
-            .inflate(inflationFactor)
-            .deflate(deflationFactor),
-        Radius.circular(dotRadius / 2),
-      ),
-      brush,
-    );
-
-    canvas.drawOval(
-      Rect.fromLTRB(
-        left - dotRadius / 2,
-        top - dotRadius / 2,
-        right - dotRadius / 2,
-        bottom - dotRadius / 2,
-      )
-          .deflate(dotRadius / 1.2)
-          .translate(xTranslationFactor, yTranslationFactor),
-      brush,
-    );
-
-    canvas.drawOval(
-      Rect.fromLTRB(
-        left - dotRadius / 2,
-        top + dotRadius / 3,
-        right - dotRadius / 2,
-        bottom - dotRadius / 3,
-      )
-          .deflate(dotRadius / 1.2)
-          .translate(xTranslationFactor, yTranslationFactor),
-      brush,
-    );
-
-    canvas.drawOval(
-      Rect.fromLTRB(
-        left - dotRadius / 2,
-        top + dotRadius / 1.1,
-        right - dotRadius / 2,
-        bottom + dotRadius / 5,
-      )
-          .deflate(dotRadius / 1.2)
-          .translate(xTranslationFactor, yTranslationFactor),
       brush,
     );
   }
