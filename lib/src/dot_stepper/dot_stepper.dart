@@ -55,12 +55,12 @@ class DotStepper extends StatefulWidget {
   final OnDotTapped onDotTapped;
 
   DotStepper({
+    @required this.activeStep,
     this.dotCount = 2,
     this.dotRadius = 24,
     this.spacing = 0.0,
     this.direction = Axis.horizontal,
     this.shape = Shape.circle,
-    this.activeStep = 0,
     this.indicator = Indicator.shift,
     this.fixedDotDecoration = const FixedDotDecoration(),
     this.indicatorDecoration = const IndicatorDecoration(),
