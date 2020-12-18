@@ -10,27 +10,21 @@
 
 * Indicator effect such as `bullet`, `trail`, `jump_form_above`, and `jump_from_below` have been removed and new modern effects have been introduced.
 
-* Following properties have either been removed or renamed to make controlling the stepper extremely easier in three different ways:-
+* Following properties have either been removed, moved or renamed to make controlling and customizing the `DotStepper` a breeze:-
   
-  * __`goNext`__ not required anymore.
-
-  * __`goPrevious`__ not required anymore.
-
-  * __`upperBound`__ not required anymore.
-
-  * __`lowerBound`__ not require anymore.
-
-  * __`dotReachedIndex`__ renamed to 
-
-  * dotColor
-
-  * indicatorColor
-
-  * fillStep
-
-  * activeStep
-
-  * indicatorEffect
+| __Property__      | __Removed__ | __Renamed__   | __Moved__   |
+|-------------------|-------------|---------------|-------------|
+| `goNext`          | Yes         | \-            | \-          |
+| `goPrevious`      | Yes         | \-            | \-          |
+| `upperBound`      | Yes         | \-            | \-          |
+| `lowerBound`      | Yes         | \-            | \-          |
+| `dotReachedIndex` | \-          | `onDotTapped` | \-          |
+| `dotColor`        | \-          | \-            | Decorations |
+| `indicatorColor`  | \-          | \-            | Decorations |
+| `fillStep`        | \-          | \-            | Decorations |
+| `indicatorEffect` | \-          | `Indicator`   | \-          |
+| `indicatorType`   | Yes         | \-            | \-          |
+| `dotShape`        | \-          | `shape`       | \-          |
 
 ## 0.1.2+8
 
