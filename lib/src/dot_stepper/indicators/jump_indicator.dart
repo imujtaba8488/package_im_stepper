@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:im_stepper/src/dot_stepper/shape_painter.dart';
-
-import '../indicator_painter.dart';
+part of indicators;
 
 class JumpIndicator extends IndicatorPainter {
   @override

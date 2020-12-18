@@ -1,7 +1,4 @@
-import 'dart:ui';
-
-import 'package:im_stepper/src/dot_stepper/indicator_painter.dart';
-import 'package:im_stepper/src/dot_stepper/shape_painter.dart';
+part of indicators;
 
 class ShiftIndicator extends IndicatorPainter {
   @override

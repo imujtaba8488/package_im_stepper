@@ -1,21 +1,12 @@
 library dot_stepper;
 
 import 'package:flutter/material.dart';
-import 'package:im_stepper/src/dot_stepper/decorations.dart';
-import 'package:im_stepper/src/dot_stepper/dot_offset.dart';
-import 'package:im_stepper/src/dot_stepper/fixed_dot_painter.dart';
-import 'package:im_stepper/src/dot_stepper/indicators/blink_indicator.dart';
-import 'package:im_stepper/src/dot_stepper/indicators/shink_indicator.dart';
-import 'package:im_stepper/src/dot_stepper/indicators/thump_indicator.dart';
-import 'package:im_stepper/src/dot_stepper/indicators/magnify_indicator.dart';
-import 'package:im_stepper/src/dot_stepper/indicators/shift_indicator.dart';
-import 'package:im_stepper/src/dot_stepper/indicators/slide_indicator.dart';
 
+import 'decorations.dart';
+import 'dot_offset.dart';
+import 'enums.dart';
+import 'fixed_dot_painter.dart';
 import 'indicator_painter.dart';
-import 'indicators/jump_indicator.dart';
-import 'indicators/worm_indicator.dart';
-
-part 'enums.dart';
 
 /// Callback fired when a dot is tapped.
 typedef OnDotTapped = void Function(int tappedDotIndex);

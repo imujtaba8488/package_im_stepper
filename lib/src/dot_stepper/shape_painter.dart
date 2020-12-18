@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'dot_stepper.dart';
+import 'enums.dart';
 
 class ShapePainter {
   /// The canvas to use for painting.

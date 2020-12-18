@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'src/dot_stepper/decorations.dart';
+import 'src/dot_stepper/enums.dart';
 import 'stepper.dart';
 
 void main() {

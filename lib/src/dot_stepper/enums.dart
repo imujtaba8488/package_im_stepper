@@ -1,5 +1,3 @@
-part of dot_stepper;
-
 /// Controls the shape of the fixed-dot as well as the indicator.
 enum Shape {
   circle,

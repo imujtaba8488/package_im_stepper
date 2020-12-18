@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:im_stepper/src/dot_stepper/dot_offset.dart';
-import 'package:im_stepper/src/dot_stepper/shape_painter.dart';
-import 'package:im_stepper/stepper.dart';
+
+import 'dot_offset.dart';
+import 'enums.dart';
+import 'shape_painter.dart';
 
 /// Callback that provides the index of the dot that was tapped.
 typedef TappedAt = void Function(int index);
