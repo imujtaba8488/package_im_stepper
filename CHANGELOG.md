@@ -1,16 +1,14 @@
 # ChangeLog
 
-## 0.1.2+9
+## 0.1.2+9 [DotStepper Revamped]
 
 ### Saturday, 18th December, 2020
 
-`DotStepper` has been revamped to include many new exciting features. However, some of the following __breaking changes__ happened along the way:-
+The `DotStepper` has been revamped to include many new exciting features, such as setting spacing, showing line connectors between dots, new indicator effects, new shapes, etc. However, some of the following breaking changes happened along the way:-
 
-* `IndicatorType` renamed to `Indicator`.
+* __Breaking Change:__ Indicator effect such as `bullet`, `trail`, `jump_form_above`, and `jump_from_below` have been removed and new modern effects have been introduced.
 
-* Indicator effect such as `bullet`, `trail`, `jump_form_above`, and `jump_from_below` have been removed and new modern effects have been introduced.
-
-* Following properties have either been removed, moved or renamed to make controlling and customizing the `DotStepper` a breeze:-
+* __Breaking Change:__ Following properties have either been removed, moved or renamed to make controlling and customizing the `DotStepper` a breeze:-
   
 | __Property__      | __Removed__ | __Renamed__   | __Moved__   |
 |-------------------|-------------|---------------|-------------|
@@ -25,6 +23,17 @@
 | `indicatorEffect` | \-          | `Indicator`   | \-          |
 | `indicatorType`   | Yes         | \-            | \-          |
 | `dotShape`        | \-          | `shape`       | \-          |
+
+* Following new properties have been introduced:-
+
+| **Property**              | **Description**                                  |
+|---------------------------|--------------------------------------------------|
+| `spacing`                 | Sets the spacing between dots                    |
+| `lineConnectorsEnabled`   | Enables or disables line connectors between dots |
+| `tappingEnabled`          | Enables or disables tapping on dots              |
+| `fixedDotDecoration`      | Decorates fixedDots                              |
+| `indicatorDecoration`     | Decorates the indicator                          |
+| `lineConnectorDecoration` | Decorates the lineConnectors between dots        |
 
 ## 0.1.2+8
 
