@@ -28,7 +28,6 @@ class _IconStepperDemo extends State<IconStepperDemo> {
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
-            // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               DotStepper(
                 // direction: Axis.vertical,
