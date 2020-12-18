@@ -91,15 +91,15 @@ class FixedDotPainter extends CustomPainter {
 
     for (int index = 0; index < dotOffsets.length; index++) {
       if (direction == Axis.horizontal) {
-        if (position.dx >= dotOffsets[index].left.dx &&
-            position.dx <= dotOffsets[index].right.dx) {
+        if (position.dx >= dotOffsets[index].left &&
+            position.dx <= dotOffsets[index].right) {
           // A match was found, hence send the index of the dot that was tapped.
           tappedAt(index);
           break;
         }
       } else if (direction == Axis.vertical) {
-        if (position.dy >= dotOffsets[index].top.dy &&
-            position.dy <= dotOffsets[index].bottom.dy) {
+        if (position.dy >= dotOffsets[index].top &&
+            position.dy <= dotOffsets[index].bottom) {
           // A match was found, hence send the index of the dot that was tapped.
           tappedAt(index);
           break;

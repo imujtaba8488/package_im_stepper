@@ -150,7 +150,7 @@ class _DotStepperState extends State<DotStepper>
             shape: widget.shape,
             brush: _fixedDotBrush,
             lineConnectorBrush: _lineConnectorBrush,
-            tappedAt: (index) => _onTappedAt,
+            tappedAt: _onTappedAt,
           ),
           size: Size(
             widget.direction == Axis.horizontal ? _axisLength : _diameter,

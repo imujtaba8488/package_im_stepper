@@ -38,7 +38,12 @@ class _IconStepperDemo extends State<IconStepperDemo> {
                 activeStep: activeStep,
                 shape: Shape.stadium,
                 spacing: 30,
-                indicator: Indicator.jump,
+                indicator: Indicator.worm,
+                onDotTapped: (tappedDotIndex) {
+                  setState(() {
+                    activeStep = tappedDotIndex;
+                  });
+                },
                 fixedDotDecoration: FixedDotDecoration(
                   color: Colors.red,
                   style: PaintingStyle.stroke,
