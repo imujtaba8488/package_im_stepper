@@ -13,20 +13,39 @@ import 'indicators/worm_indicator.dart';
 part 'enums.dart';
 
 class DotStepper extends StatefulWidget {
+  /// The total number of dots. Each dot represents a step.
   final int dotCount;
+
+  /// The radius of a dot.
   final double dotRadius;
+
+  /// The spacing between the dots.
   final double spacing;
+
+  /// The direction in which to display the dots on the screen, i.e., horizontally or vertically.
   final Axis direction;
+
+  /// The shape of the dots and the indicator.
   final Shape shape;
+
+  /// The currently active dot, hence the step.
   final int activeStep;
+
+  /// The indicator to use.
   final Indicator indicator;
+
+  /// The decoration to use for the fixed dots.
   final FixedDotDecoration fixedDotDecoration;
+
+  /// The decoration to use for the indicator.
   final IndicatorDecoration indicatorDecoration;
+
+  /// The decoration to use for the line connectors.
   final LineConnectorDecoration lineConnectorDecoration;
 
   DotStepper({
     this.dotCount = 2,
-    this.dotRadius = 40,
+    this.dotRadius = 24,
     this.spacing = 0.0,
     this.direction = Axis.horizontal,
     this.shape = Shape.circle,
@@ -37,6 +56,8 @@ class DotStepper extends StatefulWidget {
     this.lineConnectorDecoration = const LineConnectorDecoration(),
   }) {
     assert(dotCount >= 2, 'It does not make sense to have less than 2 dots.');
+
+    assert(dotRadius >= 6.0, 'The minimum value allowed for dot radius is 6.0');
 
     assert(spacing >= 0.0, 'spacing must be greater than or equal to 0.0');
 
@@ -52,6 +73,7 @@ class DotStepper extends StatefulWidget {
 
 class _DotStepperState extends State<DotStepper>
     with SingleTickerProviderStateMixin {
+  /// The controller which handles the animations.
   AnimationController animationController;
 
   /// The dot that is currently active.
@@ -85,6 +107,7 @@ class _DotStepperState extends State<DotStepper>
     _oldDotIndex = 0;
     _isSteppingForward = false;
 
+    // init brushes which their respective decorations.
     _fixedDotBrush = Paint()
       ..color = widget.fixedDotDecoration.color
       ..style = widget.fixedDotDecoration.style
