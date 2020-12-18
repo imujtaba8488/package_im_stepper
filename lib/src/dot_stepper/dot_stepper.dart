@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:im_stepper/src/dot_stepper/decorations.dart';
 import 'package:im_stepper/src/dot_stepper/dot_offset.dart';
 import 'package:im_stepper/src/dot_stepper/fixed_dot_painter.dart';
+import 'package:im_stepper/src/dot_stepper/indicators/shink_indicator.dart';
 import 'package:im_stepper/src/dot_stepper/indicators/thump_indicator.dart';
 import 'package:im_stepper/src/dot_stepper/indicators/magnify_indicator.dart';
 import 'package:im_stepper/src/dot_stepper/indicators/shift_indicator.dart';
@@ -242,6 +243,8 @@ class _DotStepperState extends State<DotStepper>
         return MagnifyIndicator();
       case Indicator.thump:
         return ThumpIndicator();
+      case Indicator.shrink:
+        return ShinkIndicator();
       default:
         return ShiftIndicator();
     }

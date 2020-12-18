@@ -32,5 +32,5 @@ enum Indicator {
   jump,
   magnify,
   thump,
-  bullet,
+  shrink,
 }
