@@ -34,9 +34,9 @@ class _IconStepperDemo extends State<IconStepperDemo> {
               DotStepper(
                 // direction: Axis.vertical,
                 dotCount: dotCount,
-                dotRadius: 10,
+                dotRadius: 12,
                 activeStep: activeStep,
-                shape: Shape.unnamed,
+                shape: Shape.stadium,
                 spacing: 30,
                 indicator: Indicator.jump,
                 fixedDotDecoration: FixedDotDecoration(
@@ -45,7 +45,7 @@ class _IconStepperDemo extends State<IconStepperDemo> {
                   strokeWidth: 1,
                 ),
                 indicatorDecoration: IndicatorDecoration(
-                  style: PaintingStyle.stroke,
+                  // style: PaintingStyle.stroke,
                   strokeWidth: 3,
                   color: Colors.black,
                 ),

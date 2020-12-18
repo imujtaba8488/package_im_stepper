@@ -14,8 +14,8 @@ class Slide extends IndicatorPainter {
         oldDotOffset.top,
         oldDotOffset.right,
         oldDotOffset.bottom,
-        xTranslate: direction == Axis.horizontal ? slide.value : 0.0,
-        yTranslate: direction == Axis.vertical ? slide.value : 0.0);
+        xTranslationFactor: direction == Axis.horizontal ? slide.value : 0.0,
+        yTranslationFactor: direction == Axis.vertical ? slide.value : 0.0);
 
     shapePainter.draw(shape);
   }

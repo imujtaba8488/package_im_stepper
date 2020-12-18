@@ -1,27 +1,49 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 
 import 'dot_stepper.dart';
 
 class ShapePainter {
+  /// The canvas to use for painting.
   final Canvas canvas;
+
+  /// The Paint object to use for painting.
   final Paint brush;
+
+  /// The stepping direction.
   final Axis direction;
+
+  /// The radius of the dot.
   final double dotRadius;
+
+  /// The left offset of the dot.
   final double left;
+
+  /// The top offset of the dot.
   final double top;
+
+  /// The right offset of the dot.
   final double right;
+
+  /// The bottom offset of the dot.
   final double bottom;
 
-  final double xTranslate;
-  final double yTranslate;
+  /// The factor by which to translate the dot along the x-axis.
+  final double xTranslationFactor;
 
+  /// The factor by which to translate the dot along the y-axis.
+  final double yTranslationFactor;
+
+  /// The factor by which to inflate the dot.
   final double inflationFactor;
+
+  /// The factor by which to deflate the dot.
   final double deflationFactor;
 
-  final double maxCornerRadius = 500000;
-  final double minCornerRadius = 0.0;
+  /// The maximum corner radius.
+  final double _maxCornerRadius = 500000;
+
+  /// The minimum corner radius.
+  final double _minCornerRadius = 0.0;
 
   ShapePainter(
     this.canvas,
@@ -32,8 +54,8 @@ class ShapePainter {
     this.top,
     this.right,
     this.bottom, {
-    this.xTranslate = 0.0,
-    this.yTranslate = 0.0,
+    this.xTranslationFactor = 0.0,
+    this.yTranslationFactor = 0.0,
     this.inflationFactor = 0.0,
     this.deflationFactor = 0.0,
   });
@@ -79,10 +101,10 @@ class ShapePainter {
           right,
           bottom,
         )
-            .translate(xTranslate, yTranslate)
+            .translate(xTranslationFactor, yTranslationFactor)
             .inflate(inflationFactor)
             .deflate(deflationFactor),
-        Radius.circular(maxCornerRadius),
+        Radius.circular(_maxCornerRadius),
       ),
       brush,
     );
@@ -97,10 +119,10 @@ class ShapePainter {
           right,
           bottom,
         )
-            .translate(xTranslate, yTranslate)
+            .translate(xTranslationFactor, yTranslationFactor)
             .inflate(inflationFactor)
             .deflate(deflationFactor),
-        Radius.circular(minCornerRadius),
+        Radius.circular(_minCornerRadius),
       ),
       brush,
     );
@@ -117,10 +139,10 @@ class ShapePainter {
           direction == Axis.vertical ? right - squeezeFactor : right,
           direction == Axis.horizontal ? bottom - squeezeFactor : bottom,
         )
-            .translate(xTranslate, yTranslate)
+            .translate(xTranslationFactor, yTranslationFactor)
             .inflate(inflationFactor)
             .deflate(deflationFactor),
-        Radius.circular(minCornerRadius),
+        Radius.circular(_minCornerRadius),
       ),
       brush,
     );
@@ -137,10 +159,10 @@ class ShapePainter {
           direction == Axis.vertical ? right - squeezeFactor : right,
           direction == Axis.horizontal ? bottom - squeezeFactor : bottom,
         )
-            .translate(xTranslate, yTranslate)
+            .translate(xTranslationFactor, yTranslationFactor)
             .inflate(inflationFactor)
             .deflate(deflationFactor),
-        Radius.circular(maxCornerRadius),
+        Radius.circular(_maxCornerRadius),
       ),
       brush,
     );
@@ -155,7 +177,7 @@ class ShapePainter {
           right,
           bottom,
         )
-            .translate(xTranslate, yTranslate)
+            .translate(xTranslationFactor, yTranslationFactor)
             .inflate(inflationFactor)
             .deflate(deflationFactor),
         Radius.circular(dotRadius / 1.7),
@@ -175,10 +197,10 @@ class ShapePainter {
           direction == Axis.vertical ? right - squeezeFactor : right,
           direction == Axis.horizontal ? bottom - squeezeFactor : bottom,
         )
-            .translate(xTranslate, yTranslate)
+            .translate(xTranslationFactor, yTranslationFactor)
             .inflate(inflationFactor)
             .deflate(deflationFactor),
-        Radius.circular(minCornerRadius),
+        Radius.circular(_minCornerRadius),
       ),
       brush,
     );
@@ -195,10 +217,10 @@ class ShapePainter {
           direction == Axis.horizontal ? right - squeezeFactor : right,
           direction == Axis.vertical ? bottom - squeezeFactor : bottom,
         )
-            .translate(xTranslate, yTranslate)
+            .translate(xTranslationFactor, yTranslationFactor)
             .inflate(inflationFactor)
             .deflate(deflationFactor),
-        Radius.circular(maxCornerRadius),
+        Radius.circular(_maxCornerRadius),
       ),
       brush,
     );
@@ -213,7 +235,7 @@ class ShapePainter {
           right,
           bottom,
         )
-            .translate(xTranslate, yTranslate)
+            .translate(xTranslationFactor, yTranslationFactor)
             .inflate(inflationFactor)
             .deflate(deflationFactor),
         Radius.circular(dotRadius / 2),
@@ -227,7 +249,9 @@ class ShapePainter {
         top,
         right,
         bottom,
-      ).deflate(dotRadius / 3).translate(xTranslate, yTranslate),
+      )
+          .deflate(dotRadius / 3)
+          .translate(xTranslationFactor, yTranslationFactor),
       Paint()..color = Colors.white,
     );
 
@@ -237,7 +261,9 @@ class ShapePainter {
         top,
         right,
         bottom,
-      ).deflate(dotRadius / 2).translate(xTranslate, yTranslate),
+      )
+          .deflate(dotRadius / 2)
+          .translate(xTranslationFactor, yTranslationFactor),
       brush,
     );
   }
@@ -251,7 +277,7 @@ class ShapePainter {
           right,
           bottom,
         )
-            .translate(xTranslate, yTranslate)
+            .translate(xTranslationFactor, yTranslationFactor)
             .inflate(inflationFactor)
             .deflate(deflationFactor),
         Radius.circular(dotRadius / 2),
@@ -265,7 +291,9 @@ class ShapePainter {
         top - dotRadius / 2,
         right - dotRadius / 2,
         bottom - dotRadius / 2,
-      ).deflate(dotRadius / 1.2).translate(xTranslate, yTranslate),
+      )
+          .deflate(dotRadius / 1.2)
+          .translate(xTranslationFactor, yTranslationFactor),
       brush,
     );
 
@@ -275,7 +303,9 @@ class ShapePainter {
         top + dotRadius / 3,
         right - dotRadius / 2,
         bottom - dotRadius / 3,
-      ).deflate(dotRadius / 1.2).translate(xTranslate, yTranslate),
+      )
+          .deflate(dotRadius / 1.2)
+          .translate(xTranslationFactor, yTranslationFactor),
       brush,
     );
 
@@ -285,7 +315,9 @@ class ShapePainter {
         top + dotRadius / 1.1,
         right - dotRadius / 2,
         bottom + dotRadius / 5,
-      ).deflate(dotRadius / 1.2).translate(xTranslate, yTranslate),
+      )
+          .deflate(dotRadius / 1.2)
+          .translate(xTranslationFactor, yTranslationFactor),
       brush,
     );
   }
