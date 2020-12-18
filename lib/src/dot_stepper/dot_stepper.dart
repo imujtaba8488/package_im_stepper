@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:im_stepper/src/dot_stepper/decorations.dart';
 import 'package:im_stepper/src/dot_stepper/dot_offset.dart';
 import 'package:im_stepper/src/dot_stepper/fixed_dot_painter.dart';
+import 'package:im_stepper/src/dot_stepper/indicators/shift_indicator.dart';
 import 'package:im_stepper/src/dot_stepper/indicators/slide_indicator.dart';
 
 import 'indicator_painter.dart';
@@ -229,20 +230,11 @@ class _DotStepperState extends State<DotStepper>
   /// Returns a built-in `Indicator` based on the value of the `indicator`.
   IndicatorPainter get _applyIndicator {
     switch (widget.indicator) {
-      // case Indicator.slide:
-      //   return SlideIndicator();
+      case Indicator.slide:
+        return SlideIndicator();
 
       case Indicator.jump:
         return JumpIndicator();
-
-      // case Indicator.magnify:
-      //   return MagnifyIndicator();
-
-      // case Indicator.ball_roll:
-      //   return BallRollIndicator();
-
-      // // case Indicator.trail:
-      // //   return TrailIndicator();
 
       case Indicator.worm:
         return WormIndicator();
@@ -251,7 +243,7 @@ class _DotStepperState extends State<DotStepper>
       //   return WormIndicator();
 
       default:
-        return Slide();
+        return ShiftIndicator();
     }
   }
 
