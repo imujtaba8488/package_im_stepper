@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:im_stepper/src/dot_stepper/indicator_painter.dart';
 import 'package:im_stepper/src/dot_stepper/shape_painter.dart';
 
-class ShinkIndicator extends IndicatorPainter {
+class BlinkIndicator extends IndicatorPainter {
   @override
   void draw(Canvas canvas) {
     ShapePainter shapePainter = ShapePainter(
@@ -37,10 +37,10 @@ class ShinkIndicator extends IndicatorPainter {
   Animation get _inflate {
     return Tween(
       begin: 0.0,
-      end: -dotRadius / 2,
+      end: -dotRadius * 2,
     ).animate(
       CurvedAnimation(
-        curve: Interval(0.5, 1.0),
+        curve: Interval(0.4, 1.0),
         parent: animationController,
       ),
     );

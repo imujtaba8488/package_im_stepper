@@ -38,7 +38,7 @@ class _IconStepperDemo extends State<IconStepperDemo> {
                 activeStep: activeStep,
                 shape: Shape.circle,
                 spacing: 30,
-                indicator: Indicator.shrink,
+                indicator: Indicator.blink,
                 onDotTapped: (tappedDotIndex) {
                   setState(() {
                     activeStep = tappedDotIndex;

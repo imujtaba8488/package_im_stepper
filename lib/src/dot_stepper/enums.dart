@@ -33,4 +33,5 @@ enum Indicator {
   magnify,
   thump,
   shrink,
+  blink,
 }
