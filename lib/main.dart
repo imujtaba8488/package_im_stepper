@@ -36,28 +36,28 @@ class _IconStepperDemo extends State<IconStepperDemo> {
                 dotCount: dotCount,
                 dotRadius: 24,
                 activeStep: activeStep,
-                shape: Shape.squircle,
+                shape: Shape.circle,
                 spacing: 30,
-                indicator: Indicator.shift,
+                indicator: Indicator.magnify,
                 onDotTapped: (tappedDotIndex) {
                   setState(() {
                     activeStep = tappedDotIndex;
                   });
                 },
-                fixedDotDecoration: FixedDotDecoration(
-                  color: Colors.red,
-                  style: PaintingStyle.stroke,
-                  strokeWidth: 3,
-                ),
-                indicatorDecoration: IndicatorDecoration(
-                  style: PaintingStyle.stroke,
-                  strokeWidth: 8,
-                  color: Colors.orange,
-                ),
-                lineConnectorDecoration: LineConnectorDecoration(
-                  color: Colors.red,
-                  strokeWidth: 3,
-                ),
+                // fixedDotDecoration: FixedDotDecoration(
+                //   color: Colors.red,
+                //   style: PaintingStyle.stroke,
+                //   strokeWidth: 3,
+                // ),
+                // indicatorDecoration: IndicatorDecoration(
+                //   style: PaintingStyle.stroke,
+                //   strokeWidth: 8,
+                //   color: Colors.orange,
+                // ),
+                // lineConnectorDecoration: LineConnectorDecoration(
+                //   color: Colors.red,
+                //   strokeWidth: 3,
+                // ),
               ),
               Padding(
                 padding: const EdgeInsets.all(18.0),
