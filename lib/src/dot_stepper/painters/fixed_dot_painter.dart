@@ -7,6 +7,7 @@ import 'shape_painter.dart';
 /// Callback that provides the index of the dot that was tapped.
 typedef TappedAt = void Function(int index);
 
+/// Configures and draws the fixed dots as well as the line connectors.
 class FixedDotPainter extends CustomPainter {
   FixedDotPainter({
     this.dotRadius = 24.0,

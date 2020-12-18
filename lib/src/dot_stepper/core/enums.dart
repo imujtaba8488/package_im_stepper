@@ -13,7 +13,7 @@ enum Shape {
   /// Horizontal butt edged pipes.
   pipe,
 
-  /// Vertical round edged pipes.
+  /// Vertical round edged pipes, if the direction is `Axis.horizontal` and horizontal round edged pies, if the direction is `Axis.vertical`.
   pipe2,
 
   // Circle with a hole in the middle.
@@ -22,12 +22,27 @@ enum Shape {
 
 /// Controls the type of indicator to use.
 enum Indicator {
+  /// Indicator moves to active dot.
   shift,
+
+  /// Indictor slides to active dot.
   slide,
+
+  /// Indicator moves to the active dot with a worm effect.
   worm,
+
+  /// Indicator moeves to the active dot with a jump effect.
   jump,
+
+  /// Indicator moves to next dot, then magnifies.
   magnify,
+
+  /// Indicator moves to the next dot and appears as a thump.
   thump,
+
+  /// Indicator slides to the next dot and then shrinks.
   shrink,
+
+  /// Indicator slides to the next dot and then blinks once.
   blink,
 }

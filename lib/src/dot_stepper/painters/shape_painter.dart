@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../core/enums.dart';
 
+/// Responsible for painting various shapes.
 class ShapePainter {
   /// The canvas to use for painting.
   final Canvas canvas;
