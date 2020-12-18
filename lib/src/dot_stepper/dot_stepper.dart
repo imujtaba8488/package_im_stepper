@@ -12,6 +12,9 @@ import 'indicators/worm_indicator.dart';
 
 part 'enums.dart';
 
+/// Callback fired when a dot is tapped.
+typedef OnDotTapped = void Function(int tappedDotIndex);
+
 class DotStepper extends StatefulWidget {
   /// The total number of dots. Each dot represents a step.
   final int dotCount;
@@ -43,6 +46,13 @@ class DotStepper extends StatefulWidget {
   /// The decoration to use for the line connectors.
   final LineConnectorDecoration lineConnectorDecoration;
 
+  /// Enable or disable tapping on dots.
+  final bool tappingEnabled;
+
+  /// Callback fired when a dot is tapped. \
+  /// __Note:__ You must update the `activeDot` in your `StatefulWidget` to `tappedDotIndex` provided by this callback inside a `setState()` method, for tapping to function flawlessly.
+  final OnDotTapped onDotTapped;
+
   DotStepper({
     this.dotCount = 2,
     this.dotRadius = 24,
@@ -54,6 +64,8 @@ class DotStepper extends StatefulWidget {
     this.fixedDotDecoration = const FixedDotDecoration(),
     this.indicatorDecoration = const IndicatorDecoration(),
     this.lineConnectorDecoration = const LineConnectorDecoration(),
+    this.tappingEnabled = true,
+    this.onDotTapped,
   }) {
     assert(dotCount >= 2, 'It does not make sense to have less than 2 dots.');
 
@@ -74,7 +86,7 @@ class DotStepper extends StatefulWidget {
 class _DotStepperState extends State<DotStepper>
     with SingleTickerProviderStateMixin {
   /// The controller which handles the animations.
-  AnimationController animationController;
+  AnimationController _animationController;
 
   /// The dot that is currently active.
   int _activeDotIndex;
@@ -96,7 +108,7 @@ class _DotStepperState extends State<DotStepper>
 
   @override
   void initState() {
-    animationController = AnimationController(
+    _animationController = AnimationController(
       duration: Duration(milliseconds: 400),
       vsync: this,
     )..addListener(() {
@@ -107,7 +119,7 @@ class _DotStepperState extends State<DotStepper>
     _oldDotIndex = 0;
     _isSteppingForward = false;
 
-    // init brushes which their respective decorations.
+    // init brushes with their respective decorations.
     _fixedDotBrush = Paint()
       ..color = widget.fixedDotDecoration.color
       ..style = widget.fixedDotDecoration.style
@@ -138,6 +150,7 @@ class _DotStepperState extends State<DotStepper>
             shape: widget.shape,
             brush: _fixedDotBrush,
             lineConnectorBrush: _lineConnectorBrush,
+            tappedAt: (index) => _onTappedAt,
           ),
           size: Size(
             widget.direction == Axis.horizontal ? _axisLength : _diameter,
@@ -152,7 +165,7 @@ class _DotStepperState extends State<DotStepper>
             ..direction = widget.direction
             ..shape = widget.shape
             ..brush = _indicatorBrush
-            ..animationController = animationController
+            ..animationController = _animationController
             ..indicator = widget.indicator
             ..isSteppingForward = _isSteppingForward,
         ),
@@ -184,11 +197,47 @@ class _DotStepperState extends State<DotStepper>
   /// Returns the width or height depending on the direction i.e., horizontally or vertically, that is required to accomodate the total number of dots.
   double get _axisLength => (_diameter * widget.dotCount) + _totalSpacing;
 
-  /// Returnst the total amount spacing between the dots. The spacing after the last dot is omitted.
+  /// Returns the total amount spacing between the dots. The spacing after the last dot is omitted.
   double get _totalSpacing => widget.spacing * (widget.dotCount - 1);
 
   /// Returns the diameter of a dot.
   double get _diameter => widget.dotRadius * 2;
+
+  /// Updates the stepper configuration. The [activeDotIndex] is the index of the current activeDot and [eventIsTap] specifies whether it was updated by a tap or by any other event.
+  void _updateConfiguration({
+    @required activeDotIndex,
+    @required bool eventIsTap,
+  }) {
+    // Reset and run animation controller.
+    _animationController.reset();
+    _animationController.forward();
+
+    // Based on the event that updated the activeDot, set it to the corresponding value.
+    eventIsTap
+        ? _activeDotIndex = activeDotIndex
+        : _activeDotIndex = widget.activeStep;
+
+    // If activeDot is greater than the old dot that was active, the stepping is moving forward, else it's moving backward.
+    _isSteppingForward = _activeDotIndex > _oldDotIndex;
+  }
+
+  /// Fired when a fixed dot is tapped.
+  void _onTappedAt(int tappedDotIndex) {
+    // Ensure tapping is enabled.
+    if (widget.tappingEnabled) {
+      _activeDotIndex = tappedDotIndex;
+      _oldDotIndex = tappedDotIndex;
+
+      // activeDot was updated by a tap, hence eventIsTap is true.
+      _updateConfiguration(
+        activeDotIndex: tappedDotIndex,
+        eventIsTap: true,
+      );
+
+      // Ensure onDotTapped is not null.
+      if (widget.onDotTapped != null) widget.onDotTapped(tappedDotIndex);
+    }
+  }
 
   /// Returns a built-in `Indicator` based on the value of the `indicator`.
   IndicatorPainter get _applyIndicator {
@@ -223,20 +272,16 @@ class _DotStepperState extends State<DotStepper>
   void didUpdateWidget(covariant DotStepper oldWidget) {
     // Update old and active dot indices.
     _oldDotIndex = oldWidget.activeStep;
-    _activeDotIndex = widget.activeStep;
 
-    // Reset and run animations.
-    animationController.reset();
-    animationController.forward();
-
-    _isSteppingForward = widget.activeStep > oldWidget.activeStep;
+    // activeDot was updated by an event other than a tap, hence `eventIsTap` is `false`.
+    _updateConfiguration(activeDotIndex: _activeDotIndex, eventIsTap: false);
 
     super.didUpdateWidget(oldWidget);
   }
 
   @override
   void dispose() {
-    animationController.dispose();
+    _animationController.dispose();
     super.dispose();
   }
 }
