@@ -4,11 +4,33 @@
 
 ### Saturday, 18th December, 2020
 
-* __BreakingChanges:__ DotStepper has been revamped to include many new exciting features. However, some of the following breaking changes happened along the way:-
+`DotStepper` has been revamped to include many new exciting features. However, some of the following __breaking changes__ happened along the way:-
 
-** IndicatorType renamed to Indicator.
+* `IndicatorType` renamed to `Indicator`.
 
-** test
+* Indicator effect such as `bullet`, `trail`, `jump_form_above`, and `jump_from_below` have been removed and new modern effects have been introduced.
+
+* Following properties have either been removed or renamed to make controlling the stepper extremely easier in three different ways:-
+  
+  * __`goNext`__ not required anymore.
+
+  * __`goPrevious`__ not required anymore.
+
+  * __`upperBound`__ not required anymore.
+
+  * __`lowerBound`__ not require anymore.
+
+  * __`dotReachedIndex`__ renamed to 
+
+  * dotColor
+
+  * indicatorColor
+
+  * fillStep
+
+  * activeStep
+
+  * indicatorEffect
 
 ## 0.1.2+8
 
