@@ -16,8 +16,6 @@ Here's a list of some important changes in version: __0.1.2+9__. For a complete 
 
   * `DotStepper` has been revamped to support controlling the stepper in multiple ways. New features such as line-connectors, spacing between dots, modern indicator effects, new dot shapes, etc., have been added. However, certain __breaking changes__ happened along the way. Please consider updating your code! see examples __[here](https://pub.dev/packages/im_stepper/example)__.
 
-* Introducing the `activeStep` property, a __simpler__ way to control the steppers either from built-in buttons, by tapping, or from external buttons with the ability to set initial step or jump to any step.
-
 ## About
 
 A growing collection of stepper and page indicator widgets.
@@ -56,9 +54,9 @@ The stepper widgets help you to show or collect information from users using org
 
 * __Controlling Steppers:__ All steppers are controlled using the `activeStep` property. You can control a stepper by:-
 
-  * using the built-in next and previous buttons.
+  * using the built-in next and previous buttons. __Note:__ DotStepper does not have built-in next and previous buttons.
 
-  * tapping individual steps in case of Icon, Image, and Number steppers. Please note that the tapping behavior doesn't apply to the `DotStepper`.
+  * tapping individual steps.
 
   * using external buttons or events.
 
@@ -88,30 +86,30 @@ A simple to use number stepper widget, wherein each number defines a step. Hence
 
 A family of fully customizable, beautiful page indicator widgets with awesome built-in animations. Each dot in a DotStepper represents a step. [See Example](https://pub.dev/packages/im_stepper/example).
 
-> Important Note: __`activeStep` must start from 1 and not from 0.__
-
 ## Shapes
 
  **Shapes**        | **Demo**
 -------------------|------------
- Circle            |![Circle](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/dot_stepper/shapes/circle.png)
- Square            |![Square](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/dot_stepper/shapes/square.png)
- Rounded Rectangle |![RR](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/dot_stepper/shapes/rounded_rectangle.png)
- Dash              |![Dash](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/dot_stepper/shapes/dash.png)
+ Circle            |![Circle]()
+ Square            |![Square]()
+ Rectangle         |![Rect]()
+ Squircle          |![Squircle]()
+ Stadium           |![Stadium]()
+ Pipe              |![Pipe]()
+ Pipe2             |![Pipe2]()
 
 ## Effects
 
  **Effect**      | **Demo**
 -----------------|----------------
- Trail           |![Trail](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/dot_stepper/effects/trail.gif)
- Slide           |![Slide](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/dot_stepper/effects/slide.gif)
- Magnify         |![Magnify](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/dot_stepper/effects/magnify.gif)
- Worm            |![Worm](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/dot_stepper/effects/worm.gif)
- Flat            |![Flat](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/dot_stepper/effects/flat.gif)
- Bullet          |![Bullet](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/dot_stepper/effects/bullet.gif)
- Jump            |![Jump](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/dot_stepper/effects/jump.gif)
- Jump From Above |![jfa](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/dot_stepper/effects/jump_from_above.gif)
- Jump From Below |![jfb](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/dot_stepper/effects/jump_from_below.gif)
+ Blink           |![Blink]()
+ Jump            |![Jump]()
+ Magnify         |![Magnify]()
+ Shift           |![Shift]()
+ Shrink          |![Shrink]()
+ Slide           |![Slide]()
+ Thump           |![Thump]()
+ Worm            |![Worm]()
 
 ## Publications
 
