@@ -99,7 +99,9 @@ class _DotStepperState extends State<DotStepper>
   bool _isSteppingForward;
 
   /// The `Paint` object used for drawing the fixed dots.
-  Paint _fixedDotBrush;
+  Paint _fixedDotStrokeBrush;
+
+  Paint _fixedDotFillBrush;
 
   /// The `Paint` object used for drawing the line connectors.
   Paint _lineConnectorBrush;
@@ -136,7 +138,8 @@ class _DotStepperState extends State<DotStepper>
             dotOffsets: _buildDotOffsets,
             direction: widget.direction,
             shape: widget.shape,
-            brush: _fixedDotBrush,
+            fillBrush: _fixedDotFillBrush,
+            strokeBrush: _fixedDotStrokeBrush,
             lineConnectorBrush: _lineConnectorBrush,
             tappedAt: _onTappedAt,
           ),
@@ -249,10 +252,18 @@ class _DotStepperState extends State<DotStepper>
     }
   }
 
+  /// Initializes the brushes.
   _initBrushes() {
-    _fixedDotBrush = Paint()
+    _fixedDotFillBrush = Paint()
       ..color = widget.fixedDotDecoration.color
-      ..style = widget.fixedDotDecoration.style
+      ..style = PaintingStyle.fill;
+
+    // Show stroke only when the strokeWidth is greater than 0.
+    _fixedDotStrokeBrush = Paint()
+      ..color = widget.fixedDotDecoration.strokeWidth > 0.0
+          ? widget.fixedDotDecoration.strokeColor
+          : _fixedDotFillBrush.color
+      ..style = PaintingStyle.stroke
       ..strokeWidth = widget.fixedDotDecoration.strokeWidth;
 
     _lineConnectorBrush = Paint()

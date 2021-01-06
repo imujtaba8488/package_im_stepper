@@ -16,7 +16,8 @@ class FixedDotPainter extends CustomPainter {
     this.shape = Shape.circle,
     this.lineConnectorsEnabled = true,
     @required this.dotOffsets,
-    @required this.brush,
+    @required this.strokeBrush,
+    @required this.fillBrush,
     @required this.lineConnectorBrush,
     @required this.tappedAt,
   });
@@ -36,8 +37,11 @@ class FixedDotPainter extends CustomPainter {
   /// The shape of the fixed dots.
   final Shape shape;
 
-  /// The `Paint` object used for drawing the fixed dots.
-  final Paint brush;
+  /// The `Paint` object used for drawing the border of the fixed dot.
+  final Paint strokeBrush;
+
+  /// The Paint object used for drawing the dot.
+  final Paint fillBrush;
 
   /// The `Paint` object used for drawing the line connectors.
   final Paint lineConnectorBrush;
@@ -51,10 +55,10 @@ class FixedDotPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     for (int index = 0; index < dotCount; index++) {
-      // Create an instance of the `ShapePainter`, supply the required properties and use its draw method to draw the shape based on the `shape` property provide.
-      ShapePainter shapePainter = ShapePainter(
+      // Create dot painter.
+      ShapePainter fillPainter = ShapePainter(
         canvas,
-        brush,
+        fillBrush,
         direction,
         dotRadius,
         dotOffsets[index].left,
@@ -63,7 +67,21 @@ class FixedDotPainter extends CustomPainter {
         dotOffsets[index].bottom,
       );
 
-      shapePainter.draw(shape);
+      // Create border painter.
+      ShapePainter borderPainter = ShapePainter(
+        canvas,
+        strokeBrush,
+        direction,
+        dotRadius,
+        dotOffsets[index].left,
+        dotOffsets[index].top,
+        dotOffsets[index].right,
+        dotOffsets[index].bottom,
+      );
+
+      // Draw the dot and it's border.
+      fillPainter.draw(shape);
+      borderPainter.draw(shape);
     }
 
     // Mind the if statement!
@@ -73,7 +91,7 @@ class FixedDotPainter extends CustomPainter {
   /// Draw the line connectors.
   void _drawLineConnectors(Canvas canvas) {
     // The factor by which to adjust the offsets in order to compensate for the strokeWidth of the fixedDot.
-    double strokeAdjustment = (brush.strokeWidth / 2);
+    double strokeAdjustment = (strokeBrush.strokeWidth / 2);
 
     // (index < dotCount -1) because omit the line connector after the last dot.
     for (int index = 0; index < dotCount - 1; index++) {

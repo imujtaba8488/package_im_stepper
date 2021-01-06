@@ -35,8 +35,8 @@ class _DotStepperDemo extends State<DotStepperDemo> {
 
                 /// THIS MUST BE SET. SEE HOW IT IS CHANGED IN NEXT/PREVIOUS BUTTONS AND JUMP BUTTONS.
                 activeStep: activeStep,
-                shape: Shape.circle,
-                spacing: 100,
+                shape: Shape.squircle,
+                spacing: 25,
                 indicator: Indicator.blink,
 
                 /// TAPPING WILL NOT FUNCTION PROPERLY WITHOUT THIS PIECE OF CODE.
@@ -48,9 +48,9 @@ class _DotStepperDemo extends State<DotStepperDemo> {
 
                 // DOT-STEPPER DECORATIONS
                 fixedDotDecoration: FixedDotDecoration(
-                  color: Colors.red,
-                  style: PaintingStyle.stroke,
-                  strokeWidth: 3,
+                  color: Colors.black,
+                  strokeWidth: 5,
+                  strokeColor: Colors.grey,
                 ),
                 // indicatorDecoration: IndicatorDecoration(
                 //   style: PaintingStyle.stroke,

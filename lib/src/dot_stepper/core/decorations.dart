@@ -16,19 +16,18 @@ class LineConnectorDecoration {
 
 /// Defines the decoration for the fixed dots.
 class FixedDotDecoration {
-  /// Fill or stroke color.
+  /// Fill color.
   final Color color;
-
-  /// The style of the fixed dot, either fill or stroke.
-  final PaintingStyle style;
 
   /// The width of the stroke, if style is `PaintingStyle.stroke`
   final double strokeWidth;
 
+  final Color strokeColor;
+
   const FixedDotDecoration({
     this.color = Colors.grey,
-    this.style = PaintingStyle.fill,
     this.strokeWidth = 0.0,
+    this.strokeColor = Colors.grey,
   });
 }
 
