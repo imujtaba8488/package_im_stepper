@@ -6,23 +6,17 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/imujtaba8488/package_im_stepper)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/imujtaba8488/package_im_stepper)
 
-## Publications
-
-Here's a collection of articles, examples, posts, etc., about im_stepper. If you find another one please let me know.
-
-* Medium Article with `IconStepper` Example: [Beautiful Page Indicators and Steppers with the im_stepper package](https://imujtaba8488.medium.com/beautiful-page-indicators-and-steppers-with-the-im-stepper-package-8c091cf5364e). __Note:__ A new way of controlling the steppers has been introduced in version 0.1.2+8. The article will be updated shorty. For now, please see examples.
-
-* Interested in reading a book or watching a video on effectively using the im_stepper package in your Flutter Apps? __[Vote here!](https://forms.gle/rQqpARMTAcCCNE9V8)__
-
 ## Recent Changes
 
-Here's a list of some important changes in version: 0.1.2+7. For a complete list of changes see changelog [here](https://pub.dev/packages/im_stepper/changelog).
+Here's a list of some important changes in version: __0.1.2+9__. For a complete list of changes see changelog [here](https://pub.dev/packages/im_stepper/changelog).
 
-* __IMPORTANT MESSAGE:__ `goNext`, `goPrevious`, and `Foo.externallyControlled` properties and constructors have been _deprecated_ and will be removed from Icon, Image, Number, and Dot Steppers in version __0.1.3__. The `dotReachedIndex` property in `DotStepper` has also been _deprecated_ and will be removed in version __0.1.3__. Please consider updating your code! see examples __[here](https://pub.dev/packages/im_stepper/example)__.
+* __IMPORTANT MESSAGE:__
+
+  * `goNext`, `goPrevious`, and `Foo.externallyControlled` properties and constructors have been _deprecated_ and will be removed from Icon, Image, Number, and Dot Steppers in version __0.1.3__.
+
+  * `DotStepper` has been revamped to support controlling the stepper in multiple ways. New features such as line-connectors, spacing between dots, modern indicator effects, new dot shapes, etc., have been added. However, certain __breaking changes__ happened along the way. Please consider updating your code! see examples __[here](https://pub.dev/packages/im_stepper/example)__.
 
 * Introducing the `activeStep` property, a __simpler__ way to control the steppers either from built-in buttons, by tapping, or from external buttons with the ability to set initial step or jump to any step.
-
-* __Message for the existing users:__ Do you prefer the new method or the older way to control the steppers? Please vote __[here](https://forms.gle/zsr7NBviR6bqaGRi6)!__ This message will be removed in version 0.1.3.
 
 ## About
 
@@ -43,6 +37,8 @@ The stepper widgets help you to show or collect information from users using org
 * [DotStepper](#dotstepper)
 
 * [NumberStepper](#numberstepper)
+
+* [Publications](#publications)
 
 * [Feedback](#feedback)
 
@@ -116,6 +112,14 @@ A family of fully customizable, beautiful page indicator widgets with awesome bu
  Jump            |![Jump](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/dot_stepper/effects/jump.gif)
  Jump From Above |![jfa](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/dot_stepper/effects/jump_from_above.gif)
  Jump From Below |![jfb](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/dot_stepper/effects/jump_from_below.gif)
+
+## Publications
+
+Here's a collection of articles, examples, posts, etc., about im_stepper. If you find another one please let me know.
+
+* Medium Article with `IconStepper` Example: [Beautiful Page Indicators and Steppers with the im_stepper package](https://imujtaba8488.medium.com/beautiful-page-indicators-and-steppers-with-the-im-stepper-package-8c091cf5364e). __Note:__ A new way of controlling the steppers has been introduced in version 0.1.2+8. The article will be updated shorty. For now, please see examples.
+
+* Interested in reading a book or watching a video on effectively using the im_stepper package in your Flutter Apps? __[Vote here!](https://forms.gle/rQqpARMTAcCCNE9V8)__
 
 ## Feedback
 

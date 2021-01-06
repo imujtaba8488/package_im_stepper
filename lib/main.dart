@@ -31,13 +31,13 @@ class _DotStepperDemo extends State<DotStepperDemo> {
               DotStepper(
                 // direction: Axis.vertical,
                 dotCount: dotCount,
-                dotRadius: 24,
+                dotRadius: 12,
 
                 /// THIS MUST BE SET. SEE HOW IT IS CHANGED IN NEXT/PREVIOUS BUTTONS AND JUMP BUTTONS.
                 activeStep: activeStep,
-                shape: Shape.circle,
-                spacing: 25,
-                indicator: Indicator.blink,
+                shape: Shape.stadium,
+                spacing: 10,
+                indicator: Indicator.shift,
 
                 /// TAPPING WILL NOT FUNCTION PROPERLY WITHOUT THIS PIECE OF CODE.
                 onDotTapped: (tappedDotIndex) {
@@ -53,7 +53,7 @@ class _DotStepperDemo extends State<DotStepperDemo> {
                 indicatorDecoration: IndicatorDecoration(
                   // style: PaintingStyle.stroke,
                   // strokeWidth: 8,
-                  color: Colors.amber,
+                  color: Colors.deepPurple,
                 ),
                 lineConnectorDecoration: LineConnectorDecoration(
                   color: Colors.red,
