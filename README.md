@@ -72,13 +72,13 @@ Simple to use icon stepper widget, wherein each icon defines a step. Hence, the 
 
 ## ImageStepper
 
-Simple to use image stepper widget, wherein each image defines a step. Hence, the total number of images defines the total number of steps. [See Example](https://pub.dev/packages/im_stepper/example).
+Simple to use image stepper widget, wherein each image defines a step. Hence, the total number of images represents the total number of steps. [See Example](https://pub.dev/packages/im_stepper/example).
 
 ![ImageStepper](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/landing/image_stepper.gif)
 
 ## NumberStepper
 
-A simple to use number stepper widget, wherein each number defines a step. Hence, the total count of numbers defines the total number of steps. [See Example](https://pub.dev/packages/im_stepper/example).
+A simple to use number stepper widget, wherein each number defines a step. Hence, the total count of numbers represents the total number of steps. [See Example](https://pub.dev/packages/im_stepper/example).
 
 ![ImageStepper](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/landing/number_stepper.gif)
 
