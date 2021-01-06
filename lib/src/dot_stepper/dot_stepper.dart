@@ -50,6 +50,8 @@ class DotStepper extends StatefulWidget {
   /// Enable or disable tapping on dots.
   final bool tappingEnabled;
 
+  final bool lineConnectorsEnabled;
+
   /// Callback fired when a dot is tapped. \
   /// __Note:__ You must update the `activeDot` in your `StatefulWidget` to `tappedDotIndex` provided by this callback inside a `setState()` method, for tapping to function flawlessly.
   final OnDotTapped onDotTapped;
@@ -66,6 +68,7 @@ class DotStepper extends StatefulWidget {
     this.indicatorDecoration = const IndicatorDecoration(),
     this.lineConnectorDecoration = const LineConnectorDecoration(),
     this.tappingEnabled = true,
+    this.lineConnectorsEnabled = false,
     this.onDotTapped,
   }) {
     assert(dotCount >= 2, 'It does not make sense to have less than 2 dots.');
@@ -141,6 +144,7 @@ class _DotStepperState extends State<DotStepper>
             fillBrush: _fixedDotFillBrush,
             strokeBrush: _fixedDotStrokeBrush,
             lineConnectorBrush: _lineConnectorBrush,
+            lineConnectorsEnabled: widget.lineConnectorsEnabled,
             tappedAt: _onTappedAt,
           ),
           size: Size(
