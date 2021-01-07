@@ -22,6 +22,7 @@ class FixedDotDecoration {
   /// The width of the stroke, if style is `PaintingStyle.stroke`
   final double strokeWidth;
 
+  /// The color of the stroke.
   final Color strokeColor;
 
   const FixedDotDecoration({

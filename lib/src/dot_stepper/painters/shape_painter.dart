@@ -61,6 +61,7 @@ class ShapePainter {
     this.deflationFactor = 0.0,
   });
 
+  /// Draw shape based on the given shape.
   void draw(Shape shape) {
     switch (shape) {
       case Shape.square:
@@ -79,7 +80,7 @@ class ShapePainter {
         _drawPipe();
         break;
       case Shape.pipe2:
-        _drawPillar();
+        _drawPipe2();
         break;
         break;
       default:
@@ -88,6 +89,7 @@ class ShapePainter {
     }
   }
 
+  /// Draws a circle.
   void _drawCircle() {
     canvas.drawRRect(
       RRect.fromRectAndRadius(
@@ -106,6 +108,7 @@ class ShapePainter {
     );
   }
 
+  /// Draws a square.
   void _drawSquare() {
     canvas.drawRRect(
       RRect.fromRectAndRadius(
@@ -124,6 +127,7 @@ class ShapePainter {
     );
   }
 
+  /// Draws a rectangle.
   void _drawRectangle() {
     double squeezeFactor = dotRadius / 3;
 
@@ -144,6 +148,7 @@ class ShapePainter {
     );
   }
 
+  /// Draws a stadium shape.
   void _drawStadium() {
     double squeezeFactor = dotRadius / 3;
 
@@ -164,6 +169,7 @@ class ShapePainter {
     );
   }
 
+  /// Draws a squircle shape.
   void _drawSquircle() {
     canvas.drawRRect(
       RRect.fromRectAndRadius(
@@ -182,6 +188,7 @@ class ShapePainter {
     );
   }
 
+  /// Draws a pipe shape.
   void _drawPipe() {
     double squeezeFactor = dotRadius / 1.2;
 
@@ -202,7 +209,8 @@ class ShapePainter {
     );
   }
 
-  void _drawPillar() {
+  /// Draws the pipe2 shape.
+  void _drawPipe2() {
     double squeezeFactor = dotRadius / 1.2;
 
     canvas.drawRRect(

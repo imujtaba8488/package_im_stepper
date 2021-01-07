@@ -31,7 +31,7 @@ enum Indicator {
   /// Indicator moves to the active dot with a worm effect.
   worm,
 
-  /// Indicator moeves to the active dot with a jump effect.
+  /// Indicator moves to the active dot with a jump effect.
   jump,
 
   /// Indicator moves to next dot, then magnifies.

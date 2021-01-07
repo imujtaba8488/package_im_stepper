@@ -50,6 +50,7 @@ class DotStepper extends StatefulWidget {
   /// Enable or disable tapping on dots.
   final bool tappingEnabled;
 
+  /// Enable or disable the line-connectors.
   final bool lineConnectorsEnabled;
 
   /// Callback fired when a dot is tapped. \
