@@ -10,11 +10,11 @@
 
 Here's a list of some important changes in version: __0.1.2+9__. For a complete list of changes see changelog [here](https://pub.dev/packages/im_stepper/changelog).
 
-* __NEW FUNCTIONALITY AND BREAKING CHANGES:__
+* `DotStepper` has been completely revamped to support controlling the stepper in multiple ways. New features such as line-connectors, spacing between dots, modern indicator effects, new dot shapes, etc. have been added. However, certain __breaking changes__ happened along the way. 
 
-  * `DotStepper` has been completely revamped to support controlling the stepper in multiple ways. New features such as line-connectors, spacing between dots, modern indicator effects, new dot shapes, etc. have been added. However, certain __breaking changes__ happened along the way. 
+* __DotStepper Breaking Changes:__
 
-  * `activeStep` now starts from 0 and NOT from 1. Maximum `activeStep` is therefore now `dotCount` minus 1.
+  * `activeStep` now starts from 0 and NOT from 1. Maximum `activeStep` is therefore now `dotCount` - 1.
   
   * `lowerBound` and `upperBound` have been removed.
 
