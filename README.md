@@ -12,7 +12,7 @@ Here's a list of some important changes in version: __0.1.2+9__. For a complete 
 
 * `DotStepper` has been completely revamped to support controlling the stepper in multiple ways. New features such as line-connectors, spacing between dots, modern indicator effects, new dot shapes, etc. have been added. However, certain __breaking changes__ happened along the way. 
 
-* `DotStepper` Breaking Changes:
+* `DotStepper` __Breaking Changes__:
 
   * `activeStep` now starts from 0 and NOT from 1. Maximum `activeStep` is therefore now `dotCount` - 1.
   
