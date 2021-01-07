@@ -8,6 +8,8 @@
 
 - [DotStepper](#dotstepper)
 
+- [DotStepper Customizations](dotstepper-customizations)
+
 ## IconStepper
 
 Simple to use icon stepper widget, wherein each icon defines a step. Hence, the total number of icons represents the total number of available steps. The example below builds the following `IconStepper`:
@@ -243,17 +245,19 @@ In the above `DotStepper,` we have a total of __5__ steps (represented by the 5 
 
 ### Code Explanation
 
-In the following code snippet, we must define three variables: `activeStep`, `lowerBound`, and `upperBound` to control the stepper. The `activeStep` is assigned to the `activeStep` property of the stepper. The `lowerBound` and the `upperBound` _variables_ __receive__ their values from the `lowerBound,` and `upperBound` _functions_ of the stepper.
+In the following code snippet, we must define the `activeStep` variable to control the stepper. The `activeStep` is assigned to the `activeStep` property of the stepper.
 
 Following the `build()` method, we define the next and previous buttons which control the stepper. The next and previous buttons increment and decrement the `activeStep` variable, respectively. However, the incrementing and decrementing is constrained by the `upperBound` and `lowerBound` variables, which is a __must__ for the stepper to function properly.
 
 ### Things to remember
 
-- You can set the initial step to any valid value, i.e., values must range from lowerBound to upperBound.
+- You can set the initial step to any valid value, i.e., values must range from 0 to `dotCount` - 1.
 
-- The `activeStep` must start from 1 and NOT from 0.
+- The `activeStep` MUST start from __0__ and MUST be less than __`dotCount` - 1__.
 
 - `activeStep` can also be used to jump around different steps.
+
+- For tapping to work, ensure tapping is enabled and `activeStep` is set to `tappedDotIndex` in a `setState()` method within the `onDotTapped` callback.
 
 ### Code
 
@@ -262,9 +266,7 @@ import 'package:flutter/material.dart';
 
 import 'stepper.dart';
 
-void main() {
-  runApp(DotStepperDemo());
-}
+void main() => runApp(DotStepperDemo());
 
 class DotStepperDemo extends StatefulWidget {
   @override
@@ -272,13 +274,11 @@ class DotStepperDemo extends StatefulWidget {
 }
 
 class _DotStepperDemo extends State<DotStepperDemo> {
-  // THE FOLLOWING THREE VARIABLES ARE REQUIRED TO CONTROL THE STEPPER.
-  // Controls the currently active step. Can be set to any valid value i.e., a value that ranges from lowerBound to upperBound. Note: Steps are counted from 1 and NOT from 0.
-  int activeStep = 5; // Initial step set to 5.
+  // REQUIRED: USED TO CONTROL THE STEPPER.
+  int activeStep = 0; // Initial step set to 0.
 
-  // Must be used to control the lower and upper bound of the activeStep variable. Please see next and previous buttons below the build() method!
-  int lowerBound = 0;
-  int upperBound = 0;
+  // OPTIONAL: can be set directly.
+  int dotCount = 5;
 
   @override
   Widget build(BuildContext context) {
@@ -292,28 +292,47 @@ class _DotStepperDemo extends State<DotStepperDemo> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              Row(
-                children: [
-                  previousButton(),
-                  Expanded(
-                    child: DotStepper(
-                      dotCount: 5,
+              DotStepper(
+                // direction: Axis.vertical,
+                dotCount: dotCount,
+                dotRadius: 12,
 
-                      /// MUST BE SET.
-                      activeStep: activeStep,
-                      lowerBound: (bound) => lowerBound = bound,
-                      upperBound: (bound) => upperBound = bound,
-                    ),
-                  ),
-                  nextButton(),
-                ],
-              ),
-              Expanded(
-                child: FittedBox(
-                  child: Center(
-                    child: Text('$activeStep'),
-                  ),
+                /// THIS MUST BE SET. SEE HOW IT IS CHANGED IN NEXT/PREVIOUS BUTTONS AND JUMP BUTTONS.
+                activeStep: activeStep,
+                shape: Shape.stadium,
+                spacing: 10,
+                indicator: Indicator.shift,
+
+                /// TAPPING WILL NOT FUNCTION PROPERLY WITHOUT THIS PIECE OF CODE.
+                onDotTapped: (tappedDotIndex) {
+                  setState(() {
+                    activeStep = tappedDotIndex;
+                  });
+                },
+
+                // DOT-STEPPER DECORATIONS
+                fixedDotDecoration: FixedDotDecoration(
+                  color: Colors.red,
                 ),
+
+                indicatorDecoration: IndicatorDecoration(
+                  // style: PaintingStyle.stroke,
+                  // strokeWidth: 8,
+                  color: Colors.deepPurple,
+                ),
+                lineConnectorDecoration: LineConnectorDecoration(
+                  color: Colors.red,
+                  strokeWidth: 0,
+                ),
+              ),
+
+              /// Jump buttons.
+              Padding(padding: const EdgeInsets.all(18.0), child: steps()),
+
+              // Next and Previous buttons.
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [previousButton(), nextButton()],
               )
             ],
           ),
@@ -322,34 +341,88 @@ class _DotStepperDemo extends State<DotStepperDemo> {
     );
   }
 
-  /// Returns the next button.
+  /// Generates jump steps for dotCount number of steps, and returns them in a row.
+  Row steps() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: List.generate(dotCount, (index) {
+        return ElevatedButton(
+          child: Text('${index + 1}'),
+          onPressed: () {
+            setState(() {
+              activeStep = index;
+            });
+          },
+        );
+      }),
+    );
+  }
+
+  /// Returns the next button widget.
   Widget nextButton() {
     return ElevatedButton(
+      child: Text('Next'),
       onPressed: () {
-        // Increment activeStep, when the next button is tapped. However, check for upper bound.
-        if (activeStep < upperBound) {
+        /// ACTIVE STEP MUST BE CHECKED FOR (dotCount - 1) AND NOT FOR dotCount To PREVENT Overflow ERROR.
+        if (activeStep < dotCount - 1) {
           setState(() {
             activeStep++;
           });
         }
       },
-      child: Text('Next'),
     );
   }
 
-  /// Returns the previous button.
+  /// Returns the previous button widget.
   Widget previousButton() {
     return ElevatedButton(
+      child: Text('Prev'),
       onPressed: () {
-        // Decrement activeStep, when the previous button is tapped. However, check for lower bound.
-        if (activeStep > lowerBound) {
+        // activeStep MUST BE GREATER THAN 0 TO PREVENT OVERFLOW.
+        if (activeStep > 0) {
           setState(() {
             activeStep--;
           });
         }
       },
-      child: Text('Prev'),
     );
   }
 }
+```
+
+### DotStepper Customizations
+
+Following are some of the ways you can play with the DotStepper decorations to customize the DotStepper even further as per your requirements:-
+
+[Customization1]()
+
+```Dart
+// DOT-STEPPER DECORATIONS
+  fixedDotDecoration: FixedDotDecoration(
+    color: Colors.blueGrey,
+  ),
+  indicatorDecoration: IndicatorDecoration(
+    color: Colors.deepOrange,
+    style: PaintingStyle.stroke,
+    strokeWidth: 10
+  ),
+  lineConnectorDecoration: LineConnectorDecoration(
+    color: Colors.red,
+  ),
+```
+
+[Customization1]()
+
+```Dart
+  fixedDotDecoration: FixedDotDecoration(
+    color: Colors.orange[400],
+    strokeColor: Colors.green,
+    strokeWidth: 19,
+  ),
+  indicatorDecoration: IndicatorDecoration(
+    color: Colors.black,
+  ),
+  lineConnectorDecoration: LineConnectorDecoration(
+    color: Colors.red,
+  ),
 ```

@@ -22,22 +22,22 @@ class _DotStepperDemo extends State<DotStepperDemo> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text('DotStepper Example'),
+          title: Text('3 Ways to Control'),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
               DotStepper(
                 // direction: Axis.vertical,
                 dotCount: dotCount,
-                dotRadius: 12,
+                dotRadius: 20,
 
                 /// THIS MUST BE SET. SEE HOW IT IS CHANGED IN NEXT/PREVIOUS BUTTONS AND JUMP BUTTONS.
                 activeStep: activeStep,
-                shape: Shape.stadium,
-                spacing: 10,
-                indicator: Indicator.shift,
+                shape: Shape.circle,
+                spacing: 30,
+                indicator: Indicator.jump,
 
                 /// TAPPING WILL NOT FUNCTION PROPERLY WITHOUT THIS PIECE OF CODE.
                 onDotTapped: (tappedDotIndex) {
@@ -48,16 +48,14 @@ class _DotStepperDemo extends State<DotStepperDemo> {
 
                 // DOT-STEPPER DECORATIONS
                 fixedDotDecoration: FixedDotDecoration(
-                  color: Colors.red,
+                  // strokeColor: Colors.green,
+                  // strokeWidth: 19,
                 ),
                 indicatorDecoration: IndicatorDecoration(
-                  // style: PaintingStyle.stroke,
-                  // strokeWidth: 8,
-                  color: Colors.deepPurple,
+                  color: Colors.black,
                 ),
                 lineConnectorDecoration: LineConnectorDecoration(
                   color: Colors.red,
-                  strokeWidth: 0,
                 ),
               ),
 
