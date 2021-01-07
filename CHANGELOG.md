@@ -35,6 +35,14 @@ The DotStepper has been completely revamped to include several new exciting feat
 | `indicatorDecoration`     | Decorates the indicator                          |
 | `lineConnectorDecoration` | Decorates the lineConnectors between dots        |
 
+* LineConnectors have been added.
+
+* Spacing can now be set between teh dots.
+
+* Documentation improvements.
+
+* Many thanks to [Elliot](https://github.com/zelliot) for his continuous support.
+
 ## 0.1.2+8
 
 ### Saturday, 28th November, 2020

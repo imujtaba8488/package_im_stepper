@@ -8,14 +8,24 @@ import 'core/enums.dart';
 import 'painters/fixed_dot_painter.dart';
 import 'painters/indicator_painter.dart';
 
-// Must be exported to be available for the users.
-
+// Must be exported so that they are available to the users.
 export 'core/decorations.dart';
 export 'core/enums.dart';
 
 /// Callback fired when a dot is tapped.
 typedef OnDotTapped = void Function(int tappedDotIndex);
 
+/// A family of fully customizable, beautiful page indicator widgets with awesome built-in animations. Each dot in a DotStepper represents a step. 
+/// 
+/// The DotStepper can be controller in 2 ways: Using external buttons or by tapping individual dots. The tapping behavior can also be disabled. 
+/// 
+/// The DotStepper provides out-of-the-box indicators with modern beautiful transition effects. Further, the DotStepper supports different shapes such as, circle, rectangle, stadium, etc.
+/// 
+/// The DotStepper supports managing the radius of the dots, the spacing betweeen dots, enabling lineConnectors between dots, etc.
+/// 
+/// It can be customized using many ways, one such being the built-in decorations for fixedDots, indicators, line-connectors, etc.
+/// 
+/// For more information, [See Example](https://pub.dev/packages/im_stepper/example).
 class DotStepper extends StatefulWidget {
   /// The total number of dots. Each dot represents a step.
   final int dotCount;
@@ -102,9 +112,10 @@ class _DotStepperState extends State<DotStepper>
   /// Whether stepping is moving forward or backward.
   bool _isSteppingForward;
 
-  /// The `Paint` object used for drawing the fixed dots.
+  /// The `Paint` object used to draw the fixed dot border.
   Paint _fixedDotStrokeBrush;
 
+  /// The `Paint` object used to draw the fixed dot.
   Paint _fixedDotFillBrush;
 
   /// The `Paint` object used for drawing the line connectors.
@@ -287,7 +298,7 @@ class _DotStepperState extends State<DotStepper>
     _oldDotIndex = oldWidget.activeStep;
     _initBrushes();
 
-    // activeDot was updated by an event other than a tap, hence `eventIsTap` is `false`.
+    // activeDot was updated by an event other than a tap, hence eventIsTap is false.
     _updateConfiguration(activeDotIndex: _activeDotIndex, eventIsTap: false);
 
     super.didUpdateWidget(oldWidget);

@@ -10,11 +10,11 @@
 
 Here's a list of some important changes in version: __0.1.2+9__. For a complete list of changes see changelog [here](https://pub.dev/packages/im_stepper/changelog).
 
-* `DotStepper` has been completely revamped to support controlling the stepper in multiple ways. New features such as line-connectors, spacing between dots, modern indicator effects, new dot shapes, etc. have been added. However, certain __breaking changes__ happened along the way.
+* `DotStepper` has been completely revamped to support controlling the stepper in multiple ways. New features such as line-connectors, spacing between dots, modern indicator effects, new dot shapes, etc. have been added. However, following __breaking changes__ happened along the way.
 
 * `DotStepper` __Breaking Changes__:
 
-  * `activeStep` now starts from 0 and NOT from 1. Maximum `activeStep` is therefore now `dotCount` - 1.
+  * `activeStep` now starts from 0 and __NOT__ from 1. Maximum `activeStep` is therefore now `dotCount` - 1.
   
   * `lowerBound` and `upperBound` have been removed.
 
@@ -90,7 +90,7 @@ A simple to use number stepper widget, wherein each number defines a step. Hence
 
 ## DotStepper
 
-A family of fully customizable, beautiful page indicator widgets with awesome built-in animations. Each dot in a DotStepper represents a step. [See Example](https://pub.dev/packages/im_stepper/example).
+A family of fully customizable, beautiful page indicator widgets with awesome built-in animations. Each dot in a DotStepper represents a step. Supports resizing the dots, managing spacing between dots, enabling lineConnectors, customizing with decorations, etc. [See Example](https://pub.dev/packages/im_stepper/example).
 
 ## Shapes
 
