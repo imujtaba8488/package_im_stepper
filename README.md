@@ -12,7 +12,7 @@ Here's a list of some important changes in version: __0.1.2+9__. For a complete 
 
 * Introducing revamped DotStepper
 
-[Revamped DotStepper](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/dot_stepper/others/3ways_to_control.gif)
+![Revamped DotStepper](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/dot_stepper/others/3ways_to_control.gif)
 
 * `DotStepper` has been completely revamped to support controlling the stepper in multiple ways. New features such as line-connectors, spacing between dots, modern indicator effects, new dot shapes, etc. have been added. However, following __breaking changes__ happened along the way.
 
