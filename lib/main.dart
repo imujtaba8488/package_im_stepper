@@ -35,9 +35,9 @@ class _DotStepperDemo extends State<DotStepperDemo> {
 
                 /// THIS MUST BE SET. SEE HOW IT IS CHANGED IN NEXT/PREVIOUS BUTTONS AND JUMP BUTTONS.
                 activeStep: activeStep,
-                shape: Shape.circle,
+                shape: Shape.stadium,
                 spacing: 30,
-                indicator: Indicator.jump,
+                indicator: Indicator.blink,
 
                 /// TAPPING WILL NOT FUNCTION PROPERLY WITHOUT THIS PIECE OF CODE.
                 onDotTapped: (tappedDotIndex) {

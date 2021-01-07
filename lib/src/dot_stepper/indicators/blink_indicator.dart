@@ -34,8 +34,8 @@ class BlinkIndicator extends IndicatorPainter {
 
   Animation get _inflate {
     return Tween(
-      begin: 0.0,
-      end: -dotRadius * 2,
+      begin: -dotRadius * 2,
+      end: 0.0,
     ).animate(
       CurvedAnimation(
         curve: Interval(0.4, 1.0),
