@@ -15,16 +15,16 @@ export 'core/enums.dart';
 /// Callback fired when a dot is tapped.
 typedef OnDotTapped = void Function(int tappedDotIndex);
 
-/// A family of fully customizable, beautiful page indicator widgets with awesome built-in animations. Each dot in a DotStepper represents a step. 
-/// 
-/// The DotStepper can be controller in 2 ways: Using external buttons or by tapping individual dots. The tapping behavior can also be disabled. 
-/// 
+/// A family of fully customizable, beautiful page indicator widgets with awesome built-in animations. Each dot in a DotStepper represents a step.
+///
+/// The DotStepper can be controller in 2 ways: Using external buttons or by tapping individual dots. The tapping behavior can also be disabled.
+///
 /// The DotStepper provides out-of-the-box indicators with modern beautiful transition effects. Further, the DotStepper supports different shapes such as, circle, rectangle, stadium, etc.
-/// 
+///
 /// The DotStepper supports managing the radius of the dots, the spacing betweeen dots, enabling lineConnectors between dots, etc.
-/// 
+///
 /// It can be customized using many ways, one such being the built-in decorations for fixedDots, indicators, line-connectors, etc.
-/// 
+///
 /// For more information, [See Example](https://pub.dev/packages/im_stepper/example).
 class DotStepper extends StatefulWidget {
   /// The total number of dots. Each dot represents a step.

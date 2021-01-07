@@ -55,10 +55,8 @@ class _DotStepperDemo extends State<DotStepperDemo> {
                 // indicatorDecoration: IndicatorDecoration(
                 //   color: Colors.black,
                 // ),
-                lineConnectorDecoration: LineConnectorDecoration(
-                  color: Colors.grey,
-                  strokeWidth: 5
-                ),
+                lineConnectorDecoration:
+                    LineConnectorDecoration(color: Colors.grey, strokeWidth: 5),
               ),
 
               /// Jump buttons.
