@@ -10,6 +10,10 @@
 
 Here's a list of some important changes in version: __0.1.2+9__. For a complete list of changes see changelog [here](https://pub.dev/packages/im_stepper/changelog).
 
+* Introducing revamped DotStepper
+
+[Revamped DotStepper](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/dot_stepper/others/3ways_to_control.gif)
+
 * `DotStepper` has been completely revamped to support controlling the stepper in multiple ways. New features such as line-connectors, spacing between dots, modern indicator effects, new dot shapes, etc. have been added. However, following __breaking changes__ happened along the way.
 
 * `DotStepper` __Breaking Changes__:
@@ -96,26 +100,26 @@ A family of fully customizable, beautiful page indicator widgets with awesome bu
 
  **Shapes**        | **Demo**
 -------------------|------------
- Circle            |![Circle]()
- Square            |![Square]()
- Rectangle         |![Rect]()
- Squircle          |![Squircle]()
- Stadium           |![Stadium]()
- Pipe              |![Pipe]()
- Pipe2             |![Pipe2]()
+ Circle            |![Circle](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/dot_stepper/shapes/circle.png)
+ Square            |![Square](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/dot_stepper/shapes/square.png)
+ Rectangle         |![Rect](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/dot_stepper/shapes/rectangle.png)
+ Squircle          |![Squircle](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/dot_stepper/shapes/squircle.png)
+ Stadium           |![Stadium](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/dot_stepper/shapes/stadium.png)
+ Pipe              |![Pipe](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/dot_stepper/shapes/pipe.png)
+ Pipe2             |![Pipe2](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/dot_stepper/shapes/pipe2.png)
 
 ## Effects
 
  **Effect**      | **Demo**
 -----------------|----------------
- Blink           |![Blink]()
- Jump            |![Jump]()
- Magnify         |![Magnify]()
- Shift           |![Shift]()
- Shrink          |![Shrink]()
- Slide           |![Slide]()
- Thump           |![Thump]()
- Worm            |![Worm]()
+ Blink           |![Blink](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/dot_stepper/effects/blink.gif)
+ Jump            |![Jump](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/dot_stepper/effects/jump.gif)
+ Magnify         |![Magnify](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/dot_stepper/effects/magnify.gif)
+ Shift           |![Shift](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/dot_stepper/effects/shift.gif)
+ Shrink          |![Shrink](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/dot_stepper/effects/shrink.gif)
+ Slide           |![Slide](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/dot_stepper/effects/slide.gif)
+ Thump           |![Thump](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/dot_stepper/effects/thump.gif)
+ Worm            |![Worm](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/dot_stepper/effects/worm.gif)
 
 ## Publications
 

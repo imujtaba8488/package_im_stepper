@@ -8,7 +8,7 @@
 
 - [DotStepper](#dotstepper)
 
-- [DotStepper Customizations](dotstepper-customizations)
+- [DotStepper Customizations](#dotstepper-customizations)
 
 ## IconStepper
 
@@ -394,7 +394,7 @@ class _DotStepperDemo extends State<DotStepperDemo> {
 
 Following are some of the ways you can play with the DotStepper decorations to customize the DotStepper even further as per your requirements:-
 
-[Customization1]()
+[Customization1](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/dot_stepper/others/customization1.gif)
 
 ```Dart
 // DOT-STEPPER DECORATIONS
@@ -411,7 +411,7 @@ Following are some of the ways you can play with the DotStepper decorations to c
   ),
 ```
 
-[Customization1]()
+[Customization2](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/dot_stepper/others/customization2.gif)
 
 ```Dart
   fixedDotDecoration: FixedDotDecoration(
@@ -426,3 +426,5 @@ Following are some of the ways you can play with the DotStepper decorations to c
     color: Colors.red,
   ),
 ```
+
+[Back To Top](#examples---table-of-contents)

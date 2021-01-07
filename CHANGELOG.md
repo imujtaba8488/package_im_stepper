@@ -37,7 +37,7 @@ The DotStepper has been completely revamped to include several new exciting feat
 
 * LineConnectors have been added.
 
-* Spacing can now be set between teh dots.
+* Spacing can now be set between the dots @github issues [11](https://github.com/imujtaba8488/package_im_stepper/issues/11).
 
 * Documentation improvements.
 
