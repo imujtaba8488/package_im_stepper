@@ -2,22 +2,19 @@ import 'package:flutter/material.dart';
 
 import 'stepper.dart';
 
-void main() {
-  runApp(IconStepperDemo());
-}
+void main() => runApp(DotStepperDemo());
 
-class IconStepperDemo extends StatefulWidget {
+class DotStepperDemo extends StatefulWidget {
   @override
-  _IconStepperDemo createState() => _IconStepperDemo();
+  _DotStepperDemo createState() => _DotStepperDemo();
 }
 
-class _IconStepperDemo extends State<IconStepperDemo> {
-  // THE FOLLOWING TWO VARIABLES ARE REQUIRED TO CONTROL THE STEPPER.
-  // Controls the currently active step. Can be set to any valid value i.e., a value that ranges from 0 to upperBound.
+class _DotStepperDemo extends State<DotStepperDemo> {
+  // REQUIRED: USED TO CONTROL THE STEPPER.
   int activeStep = 0; // Initial step set to 5.
 
-  // Must be used to control the upper bound of the activeStep variable. Please see next button below the build() method!
-  int upperBound = 0;
+  // OPTIONAL: can be set directly.
+  int dotCount = 5;
 
   @override
   Widget build(BuildContext context) {
@@ -25,54 +22,51 @@ class _IconStepperDemo extends State<IconStepperDemo> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text('IconStepper Example'),
+          title: Text('3 Ways to Control'),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(32.0),
           child: Column(
             children: [
-              NumberStepper(
-                numbers: [
-                  1,
-                  2,
-                  3,
-                  4,
-                  5,
-                  6,
-                ],
-                activeStepBorderColor: Colors.amber,
-                activeStepBorderPadding: 3,
-                activeStepBorderWidth: 3,
-                enableNextPreviousButtons: false,
+              DotStepper(
+                // direction: Axis.vertical,
+                dotCount: dotCount,
+                dotRadius: 20,
+                // lineConnectorsEnabled: true,
 
-                // activeStep property set to activeStep variable defined above.
+                /// THIS MUST BE SET. SEE HOW IT IS CHANGED IN NEXT/PREVIOUS BUTTONS AND JUMP BUTTONS.
                 activeStep: activeStep,
+                shape: Shape.circle,
+                spacing: 30,
+                indicator: Indicator.worm,
 
-                // bound receives value from upperBound.
-                upperBound: (bound) => upperBound = bound,
-
-                // This ensures step-tapping updates the activeStep.
-                onStepReached: (index) {
+                /// TAPPING WILL NOT FUNCTION PROPERLY WITHOUT THIS PIECE OF CODE.
+                onDotTapped: (tappedDotIndex) {
                   setState(() {
-                    activeStep = index;
+                    activeStep = tappedDotIndex;
                   });
                 },
+
+                // DOT-STEPPER DECORATIONS
+                // fixedDotDecoration: FixedDotDecoration(
+                //   // strokeColor: Colors.green,
+                //   // strokeWidth: 19,
+                // ),
+                // indicatorDecoration: IndicatorDecoration(
+                //   color: Colors.black,
+                // ),
+                lineConnectorDecoration:
+                    LineConnectorDecoration(color: Colors.grey, strokeWidth: 5),
               ),
-              // header(),
-              Expanded(
-                child: FittedBox(
-                  child: Center(
-                    child: Text('$activeStep'),
-                  ),
-                ),
-              ),
+
+              /// Jump buttons.
+              Padding(padding: const EdgeInsets.all(18.0), child: steps()),
+
+              // Next and Previous buttons.
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  previousButton(),
-                  nextButton(),
-                ],
-              ),
+                children: [previousButton(), nextButton()],
+              )
             ],
           ),
         ),
@@ -80,83 +74,49 @@ class _IconStepperDemo extends State<IconStepperDemo> {
     );
   }
 
-  /// Returns the next button.
+  /// Generates jump steps for dotCount number of steps, and returns them in a row.
+  Row steps() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: List.generate(dotCount, (index) {
+        return ElevatedButton(
+          child: Text('${index + 1}'),
+          onPressed: () {
+            setState(() {
+              activeStep = index;
+            });
+          },
+        );
+      }),
+    );
+  }
+
+  /// Returns the next button widget.
   Widget nextButton() {
     return ElevatedButton(
+      child: Text('Next'),
       onPressed: () {
-        // Increment activeStep, when the next button is tapped. However, check for upper bound.
-        if (activeStep < upperBound) {
+        /// ACTIVE STEP MUST BE CHECKED FOR (dotCount - 1) AND NOT FOR dotCount TO PREVENT Overflow ERROR.
+        if (activeStep < dotCount - 1) {
           setState(() {
             activeStep++;
           });
         }
       },
-      child: Text('Next'),
     );
   }
 
-  /// Returns the previous button.
+  /// Returns the previous button widget.
   Widget previousButton() {
     return ElevatedButton(
+      child: Text('Prev'),
       onPressed: () {
-        // Decrement activeStep, when the previous button is tapped. However, check for lower bound i.e., must be greater than 0.
         if (activeStep > 0) {
           setState(() {
             activeStep--;
           });
         }
       },
-      child: Text('Prev'),
     );
-  }
-
-  /// Returns the header wrapping the header text.
-  Widget header() {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.orange,
-        borderRadius: BorderRadius.circular(5),
-      ),
-      child: Row(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              headerText(),
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 20,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  // Returns the header text based on the activeStep.
-  String headerText() {
-    switch (activeStep) {
-      case 1:
-        return 'Preface';
-
-      case 2:
-        return 'Table of Contents';
-
-      case 3:
-        return 'About the Author';
-
-      case 4:
-        return 'Publisher Information';
-
-      case 5:
-        return 'Reviews';
-
-      case 6:
-        return 'Chapters #1';
-
-      default:
-        return 'Introduction';
-    }
   }
 }

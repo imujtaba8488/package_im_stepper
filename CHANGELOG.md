@@ -1,5 +1,48 @@
 # ChangeLog
 
+## 0.1.2+9 [DotStepper Revamped]
+
+### Thursday, 8th January, 2021
+
+The DotStepper has been completely revamped to include several new exciting features, such as, setting spacing between dots (github issue), showing line connectors, etc. Modern indicator effects and shapes have also been added. However, some of the following breaking changes happened along the way:-
+
+* __Breaking Change:__ Indicator effect such as `bullet`, `trail`, `jump_form_above`, and `jump_from_below` have been removed and new modern effects have been introduced.
+
+* __Breaking Change:__ Following properties have either been removed, moved or renamed to make controlling and customizing the `DotStepper` a breeze:-
+  
+| __Property__      | __Removed__ | __Renamed__   | __Moved__   |
+|-------------------|-------------|---------------|-------------|
+| `goNext`          | Yes         | \-            | \-          |
+| `goPrevious`      | Yes         | \-            | \-          |
+| `upperBound`      | Yes         | \-            | \-          |
+| `lowerBound`      | Yes         | \-            | \-          |
+| `dotReachedIndex` | \-          | `onDotTapped` | \-          |
+| `dotColor`        | \-          | \-            | Decorations |
+| `indicatorColor`  | \-          | \-            | Decorations |
+| `fillStep`        | \-          | \-            | Decorations |
+| `indicatorEffect` | \-          | `Indicator`   | \-          |
+| `indicatorType`   | Yes         | \-            | \-          |
+| `dotShape`        | \-          | `shape`       | \-          |
+
+* Following new properties have been added:-
+
+| **Property**              | **Description**                                  |
+|---------------------------|--------------------------------------------------|
+| `spacing`                 | Sets the spacing between dots                    |
+| `lineConnectorsEnabled`   | Enables or disables line connectors between dots |
+| `tappingEnabled`          | Enables or disables tapping on dots              |
+| `fixedDotDecoration`      | Decorates fixedDots                              |
+| `indicatorDecoration`     | Decorates the indicator                          |
+| `lineConnectorDecoration` | Decorates the lineConnectors between dots        |
+
+* LineConnectors have been added.
+
+* Spacing can now be set between the dots @github issues [11](https://github.com/imujtaba8488/package_im_stepper/issues/11).
+
+* Documentation improvements.
+
+* Many thanks to [Elliot](https://github.com/zelliot) for his continuous support.
+
 ## 0.1.2+8
 
 ### Saturday, 28th November, 2020
