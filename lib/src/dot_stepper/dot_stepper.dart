@@ -192,7 +192,7 @@ class _DotStepperState extends State<DotStepper>
   /// Returns the width or height depending on the direction i.e., horizontally or vertically, that is required to accomodate the total number of dots.
   double get _axisLength => (_diameter * widget.dotCount) + _totalSpacing;
 
-  /// Returns the total amount spacing between the dots. The spacing after the last dot is omitted.
+  /// Returns the total amount of spacing between the dots. The spacing after the last dot is omitted.
   double get _totalSpacing => widget.spacing * (widget.dotCount - 1);
 
   /// Returns the diameter of a dot.

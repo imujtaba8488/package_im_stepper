@@ -10,11 +10,17 @@
 
 Here's a list of some important changes in version: __0.1.2+9__. For a complete list of changes see changelog [here](https://pub.dev/packages/im_stepper/changelog).
 
-* __IMPORTANT MESSAGE:__
+* `DotStepper` has been completely revamped to support controlling the stepper in multiple ways. New features such as line-connectors, spacing between dots, modern indicator effects, new dot shapes, etc. have been added. However, certain __breaking changes__ happened along the way.
 
-  * `goNext`, `goPrevious`, and `Foo.externallyControlled` properties and constructors have been _deprecated_ and will be removed from Icon, Image, Number, and Dot Steppers in version __0.1.3__.
+* `DotStepper` __Breaking Changes__:
 
-  * `DotStepper` has been revamped to support controlling the stepper in multiple ways. New features such as line-connectors, spacing between dots, modern indicator effects, new dot shapes, etc., have been added. However, certain __breaking changes__ happened along the way. Please consider updating your code! see examples __[here](https://pub.dev/packages/im_stepper/example)__.
+  * `activeStep` now starts from 0 and NOT from 1. Maximum `activeStep` is therefore now `dotCount` - 1.
+  
+  * `lowerBound` and `upperBound` have been removed.
+
+  * Please update your code! See examples __[here](https://pub.dev/packages/im_stepper/example)__.
+
+* __Future Breaking Changes__: `goNext`, `goPrevious`, and `Foo.externallyControlled` properties and constructors have been _deprecated_ and will be removed from Icon, Image, Number Steppers in version __0.1.3__.
 
 ## About
 

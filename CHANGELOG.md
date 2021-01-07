@@ -4,9 +4,7 @@
 
 ### Thursday, 8th January, 2021
 
-The DotStepper has been revamped to include several new exciting features, such as, setting spacing between dots (github issue), showing line connectors, etc. Modern indicator effects and shapes have also been added. However, some of the following breaking changes happened along the way.
-
-The `DotStepper` has been revamped to include many new exciting features, such as setting spaces, showing line connectors between dots, new indicator effects, new shapes, etc. However, some of the following breaking changes happened along the way:-
+The DotStepper has been completely revamped to include several new exciting features, such as, setting spacing between dots (github issue), showing line connectors, etc. Modern indicator effects and shapes have also been added. However, some of the following breaking changes happened along the way:-
 
 * __Breaking Change:__ Indicator effect such as `bullet`, `trail`, `jump_form_above`, and `jump_from_below` have been removed and new modern effects have been introduced.
 
@@ -26,7 +24,7 @@ The `DotStepper` has been revamped to include many new exciting features, such a
 | `indicatorType`   | Yes         | \-            | \-          |
 | `dotShape`        | \-          | `shape`       | \-          |
 
-* Following new properties have been introduced:-
+* Following new properties have been added:-
 
 | **Property**              | **Description**                                  |
 |---------------------------|--------------------------------------------------|
