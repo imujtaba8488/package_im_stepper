@@ -20,6 +20,7 @@ class BlinkIndicator extends IndicatorPainter {
     shapePainter.draw(shape);
   }
 
+  /// Slides the dot faster than the normal
   Animation get _slideFast => Tween(
         begin: 0.0,
         end: direction == Axis.horizontal
@@ -32,6 +33,7 @@ class BlinkIndicator extends IndicatorPainter {
         ),
       );
 
+  /// Inflates the dot from (-dotRadius * 2) to the actual size of the dot.
   Animation get _inflate {
     return Tween(
       begin: -dotRadius * 2,

@@ -8,43 +8,50 @@ class WormIndicator extends IndicatorPainter {
       brush,
       direction,
       dotRadius,
-      direction == Axis.horizontal ? hLeft : vLeft,
-      direction == Axis.horizontal ? hTop : vTop,
-      direction == Axis.horizontal ? hRight : vRight,
-      direction == Axis.horizontal ? hBottom : vBottom,
+      direction == Axis.horizontal ? _hLeft : _vLeft,
+      direction == Axis.horizontal ? _hTop : _vTop,
+      direction == Axis.horizontal ? _hRight : _vRight,
+      direction == Axis.horizontal ? _hBottom : _vBottom,
     );
 
     shapePainter.draw(shape);
   }
 
-  double get hLeft => isSteppingForward ? hStretch.value : activeDotOffset.left;
+  /// Returns the left offset value of the dot when direction is horizontal.
+  double get _hLeft =>
+      isSteppingForward ? _hStretch.value : activeDotOffset.left;
 
-  double get hTop => activeDotOffset.top;
+  /// Returns the top offset value of the dot when direction is horizontal.
+  double get _hTop => activeDotOffset.top;
 
-  double get hRight =>
-      isSteppingForward ? activeDotOffset.right : hStretch.value;
+  /// Returns the right offset value of the dot when direction is horizontal.
+  double get _hRight =>
+      isSteppingForward ? activeDotOffset.right : _hStretch.value;
 
-  double get hBottom => activeDotOffset.bottom;
+  /// Returns the bottom value of the dot when direction is horizontaln.
+  double get _hBottom => activeDotOffset.bottom;
 
-  double get vLeft => activeDotOffset.left;
+  /// Returns the left offset value of the dot when direction is vertical.
+  double get _vLeft => activeDotOffset.left;
 
-  double get vTop => isSteppingForward ? vStretch.value : activeDotOffset.top;
+  /// Returns the top offset value of the dot when direction is vertical.
+  double get _vTop => isSteppingForward ? _vStretch.value : activeDotOffset.top;
 
-  double get vRight => activeDotOffset.right;
+  /// Returns the right offset value of the dot when direction is vertical.
+  double get _vRight => activeDotOffset.right;
 
-  double get vBottom =>
-      isSteppingForward ? activeDotOffset.bottom : vStretch.value;
+  /// Returns the bottom offset value of the dot when direction is vertical.
+  double get _vBottom =>
+      isSteppingForward ? activeDotOffset.bottom : _vStretch.value;
 
-  Animation get hStretch2 =>
-      Tween(begin: oldDotOffset.left, end: activeDotOffset.left)
-          .animate(animationController);
-
-  Animation get hStretch => Tween(
+  /// Returns the animation which stretches the dot horizontally.
+  Animation get _hStretch => Tween(
         begin: isSteppingForward ? oldDotOffset.left : oldDotOffset.right,
         end: isSteppingForward ? activeDotOffset.left : activeDotOffset.right,
       ).animate(animationController);
 
-  Animation get vStretch => Tween(
+  /// Returns the animation with stretches the dot vertically.
+  Animation get _vStretch => Tween(
         begin: isSteppingForward ? oldDotOffset.top : oldDotOffset.bottom,
         end: isSteppingForward ? activeDotOffset.top : activeDotOffset.bottom,
       ).animate(animationController);

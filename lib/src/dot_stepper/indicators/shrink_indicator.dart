@@ -20,6 +20,7 @@ class ShinkIndicator extends IndicatorPainter {
     shapePainter.draw(shape);
   }
 
+  /// Slides the dot faster than the normal speed.
   Animation get _slideFast => Tween(
         begin: 0.0,
         end: direction == Axis.horizontal
@@ -32,6 +33,7 @@ class ShinkIndicator extends IndicatorPainter {
         ),
       );
 
+  /// Deflates the dot by a factor of (-dotRadius /2) from the normal dot size.
   Animation get _inflate {
     return Tween(
       begin: 0.0,

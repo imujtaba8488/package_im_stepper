@@ -18,6 +18,7 @@ class ThumpIndicator extends IndicatorPainter {
     shapePainter.draw(shape);
   }
 
+  /// Inflates the dot size and then pushes it back to the normal size.
   Animation get _inflate {
     return Tween(
       begin: -dotRadius * 5,

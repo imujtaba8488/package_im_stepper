@@ -20,6 +20,7 @@ class JumpIndicator extends IndicatorPainter {
     shapePainter.draw(shape);
   }
 
+  /// Jumps from the top to the actual size of the dot.
   Animation get jumpDown => Tween(
         begin: jumpUp.value,
         end: 0.0,
@@ -30,6 +31,7 @@ class JumpIndicator extends IndicatorPainter {
         ),
       );
 
+  /// Jumps from the actual size of hte dot to the top.
   Animation get jumpUp => Tween(
         begin: 0.0,
         end: dotRadius / 2,

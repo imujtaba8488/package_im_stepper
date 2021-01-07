@@ -10,7 +10,7 @@ part '../indicators/blink_indicator.dart';
 part '../indicators/jump_indicator.dart';
 part '../indicators/magnify_indicator.dart';
 part '../indicators/shift_indicator.dart';
-part '../indicators/shink_indicator.dart';
+part '../indicators/shrink_indicator.dart';
 part '../indicators/slide_indicator.dart';
 part '../indicators/thump_indicator.dart';
 part '../indicators/worm_indicator.dart';
