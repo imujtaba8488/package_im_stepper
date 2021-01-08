@@ -49,7 +49,8 @@ class BaseIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return OpacityAnimated(
-      animationDisabled: !isSelected,
+      // animationDisabled: !isSelected,
+      animationDisabled: true,
       child: Container(
         padding: isSelected ? EdgeInsets.all(margin) : EdgeInsets.zero,
         decoration: BoxDecoration(

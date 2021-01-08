@@ -278,7 +278,9 @@ class _BaseStepperState extends State<BaseStepper> {
     return SingleChildScrollView(
       scrollDirection: widget.direction,
       controller: _scrollController,
-      physics: widget.scrollingDisabled ? NeverScrollableScrollPhysics() : null,
+      physics: widget.scrollingDisabled
+          ? NeverScrollableScrollPhysics()
+          : ClampingScrollPhysics(),
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 8.0),
         padding: const EdgeInsets.all(8.0),

@@ -14,7 +14,7 @@ class _DotStepperDemo extends State<DotStepperDemo> {
   int activeStep = 0; // Initial step set to 5.
 
   // OPTIONAL: can be set directly.
-  int dotCount = 2;
+  int dotCount = 5;
 
   @override
   Widget build(BuildContext context) {
@@ -24,58 +24,19 @@ class _DotStepperDemo extends State<DotStepperDemo> {
         appBar: AppBar(
           title: Text('3 Ways to Control'),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(32.0),
-          child: Column(
-            children: [
-              DotStepper(
-                // direction: Axis.vertical,
-                dotCount: dotCount,
-                dotRadius: 35,
-                // lineConnectorsEnabled: true,
-
-                /// THIS MUST BE SET. SEE HOW IT IS CHANGED IN NEXT/PREVIOUS BUTTONS AND JUMP BUTTONS.
-                activeStep: activeStep,
-                shape: Shape.circle,
-                spacing: 50,
-                indicator: Indicator.shift,
-
-                /// TAPPING WILL NOT FUNCTION PROPERLY WITHOUT THIS PIECE OF CODE.
-                onDotTapped: (tappedDotIndex) {
-                  setState(() {
-                    activeStep = tappedDotIndex;
-                  });
-                },
-                lineConnectorsEnabled: true,
-
-                fixedDotDecoration: FixedDotDecoration(
-                  color: Colors.white,
-                  strokeWidth: 10,
-                  strokeColor: Colors.grey[300],
-                ),
-
-                indicatorDecoration: IndicatorDecoration(
-                  color: Colors.blue[50],
-                  strokeWidth: 10,
-                  strokeColor: const Color.fromRGBO(0, 170, 213, 1),
-                ),
-
-                lineConnectorDecoration: LineConnectorDecoration(
-                  strokeWidth: 5,
-                  color: Colors.grey[300],
-                ),
-              ),
-
-              /// Jump buttons.
-              Padding(padding: const EdgeInsets.all(18.0), child: steps()),
-
-              // Next and Previous buttons.
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [previousButton(), nextButton()],
-              )
-            ],
-          ),
+        body: Column(
+          children: [
+            NumberStepper(
+              numbers: [
+                1,
+                2,
+                3,
+                4,
+                5,
+              ],
+            ),
+            steps(),
+          ],
         ),
       ),
     );
