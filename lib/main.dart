@@ -14,7 +14,7 @@ class _DotStepperDemo extends State<DotStepperDemo> {
   int activeStep = 0; // Initial step set to 5.
 
   // OPTIONAL: can be set directly.
-  int dotCount = 5;
+  int dotCount = 3;
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +27,19 @@ class _DotStepperDemo extends State<DotStepperDemo> {
         body: Column(
           children: [
             NumberStepper(
+              scrollingDisabled: true,
+              activeStep: activeStep,
+              enableNextPreviousButtons: false,
               numbers: [
                 1,
                 2,
                 3,
-                4,
-                5,
               ],
+              onStepReached: (index) {
+                setState(() {
+                  activeStep = index;
+                });
+              },
             ),
             steps(),
           ],

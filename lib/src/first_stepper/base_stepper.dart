@@ -246,7 +246,8 @@ class _BaseStepperState extends State<BaseStepper> {
     }
 
     // Controls scrolling behavior.
-    WidgetsBinding.instance.addPostFrameCallback(_afterLayout);
+    if (!widget.scrollingDisabled)
+      WidgetsBinding.instance.addPostFrameCallback(_afterLayout);
 
     return widget.direction == Axis.horizontal
         ? Row(
