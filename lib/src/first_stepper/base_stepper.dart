@@ -241,9 +241,9 @@ class _BaseStepperState extends State<BaseStepper> {
   Widget build(BuildContext context) {
     // Returns total number of available steps.
     // Todo: if statement needs to go after implementing Darts' Null Safety or in version 0.1.3
-    if (widget.upperBound != null) {
+    if (widget.upperBound != null) 
       widget.upperBound(widget.children.length - 1);
-    }
+    
 
     // Controls scrolling behavior.
     if (!widget.scrollingDisabled)

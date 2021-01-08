@@ -104,7 +104,7 @@ class NumberStepper extends StatelessWidget {
     this.lineLength = 50.0,
     this.lineDotRadius = 1.0,
     this.stepRadius = 24.0,
-    this.stepReachedAnimationEffect = Curves.bounceOut,
+    this.stepReachedAnimationEffect = Curves.ease,
     this.stepReachedAnimationDuration = const Duration(seconds: 1),
     this.steppingEnabled = true,
     this.goNext,

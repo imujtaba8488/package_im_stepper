@@ -69,18 +69,22 @@ class _OpacityAnimatedState extends State<OpacityAnimated>
 
   @override
   void didUpdateWidget(OpacityAnimated oldWidget) {
+    // if (_animationController.isDismissed) {
+    //   if (oldWidget.duration != widget.duration)
+    //     _animationController.duration = widget.duration;
+
+    //   _animationController.forward();
+    // } else if (_animationController.isCompleted) {
+    //   if (oldWidget.duration != widget.duration)
+    //     _animationController.duration = widget.duration;
+
+    //   _animationController.reset();
+    //   _animationController.forward();
+    // }
+
+    _animationController.reset();
+      _animationController.forward();
+
     super.didUpdateWidget(oldWidget);
-    if (_animationController.isDismissed) {
-      if (oldWidget.duration != widget.duration)
-        _animationController.duration = widget.duration;
-
-      _animationController.forward();
-    } else if (_animationController.isCompleted) {
-      if (oldWidget.duration != widget.duration)
-        _animationController.duration = widget.duration;
-
-      _animationController.reset();
-      _animationController.forward();
-    }
   }
 }
