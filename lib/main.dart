@@ -14,7 +14,7 @@ class _DotStepperDemo extends State<DotStepperDemo> {
   int activeStep = 0; // Initial step set to 5.
 
   // OPTIONAL: can be set directly.
-  int dotCount = 5;
+  int dotCount = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -31,14 +31,14 @@ class _DotStepperDemo extends State<DotStepperDemo> {
               DotStepper(
                 // direction: Axis.vertical,
                 dotCount: dotCount,
-                dotRadius: 20,
+                dotRadius: 35,
                 // lineConnectorsEnabled: true,
 
                 /// THIS MUST BE SET. SEE HOW IT IS CHANGED IN NEXT/PREVIOUS BUTTONS AND JUMP BUTTONS.
                 activeStep: activeStep,
                 shape: Shape.circle,
-                spacing: 30,
-                indicator: Indicator.slide,
+                spacing: 50,
+                indicator: Indicator.shift,
 
                 /// TAPPING WILL NOT FUNCTION PROPERLY WITHOUT THIS PIECE OF CODE.
                 onDotTapped: (tappedDotIndex) {
@@ -55,7 +55,7 @@ class _DotStepperDemo extends State<DotStepperDemo> {
                 ),
 
                 indicatorDecoration: IndicatorDecoration(
-                  color: Colors.blue[100],
+                  color: Colors.blue[50],
                   strokeWidth: 10,
                   strokeColor: const Color.fromRGBO(0, 170, 213, 1),
                 ),
