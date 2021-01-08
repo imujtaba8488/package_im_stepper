@@ -38,7 +38,7 @@ class _DotStepperDemo extends State<DotStepperDemo> {
                 activeStep: activeStep,
                 shape: Shape.circle,
                 spacing: 30,
-                indicator: Indicator.worm,
+                indicator: Indicator.slide,
 
                 /// TAPPING WILL NOT FUNCTION PROPERLY WITHOUT THIS PIECE OF CODE.
                 onDotTapped: (tappedDotIndex) {
@@ -46,17 +46,24 @@ class _DotStepperDemo extends State<DotStepperDemo> {
                     activeStep = tappedDotIndex;
                   });
                 },
+                lineConnectorsEnabled: true,
 
-                // DOT-STEPPER DECORATIONS
-                // fixedDotDecoration: FixedDotDecoration(
-                //   // strokeColor: Colors.green,
-                //   // strokeWidth: 19,
-                // ),
-                // indicatorDecoration: IndicatorDecoration(
-                //   color: Colors.black,
-                // ),
-                lineConnectorDecoration:
-                    LineConnectorDecoration(color: Colors.grey, strokeWidth: 5),
+                fixedDotDecoration: FixedDotDecoration(
+                  color: Colors.white,
+                  strokeWidth: 10,
+                  strokeColor: Colors.grey[300],
+                ),
+
+                indicatorDecoration: IndicatorDecoration(
+                  color: Colors.blue[100],
+                  strokeWidth: 10,
+                  strokeColor: const Color.fromRGBO(0, 170, 213, 1),
+                ),
+
+                lineConnectorDecoration: LineConnectorDecoration(
+                  strokeWidth: 5,
+                  color: Colors.grey[300],
+                ),
               ),
 
               /// Jump buttons.

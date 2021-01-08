@@ -124,6 +124,8 @@ class _DotStepperState extends State<DotStepper>
   /// The `Paint` object used for drawing the `Indicator`.
   Paint _indicatorBrush;
 
+  Paint _borderBrush;
+
   @override
   void initState() {
     _animationController = AnimationController(
@@ -172,6 +174,7 @@ class _DotStepperState extends State<DotStepper>
             ..direction = widget.direction
             ..shape = widget.shape
             ..brush = _indicatorBrush
+            ..borderBrush = _borderBrush
             ..animationController = _animationController
             ..indicator = widget.indicator
             ..isSteppingForward = _isSteppingForward,
@@ -288,7 +291,12 @@ class _DotStepperState extends State<DotStepper>
 
     _indicatorBrush = Paint()
       ..color = widget.indicatorDecoration.color
-      ..style = widget.indicatorDecoration.style
+      ..style = PaintingStyle.fill
+      ..strokeWidth = widget.indicatorDecoration.strokeWidth;
+
+    _borderBrush = Paint()
+      ..color = widget.indicatorDecoration.strokeColor
+      ..style = PaintingStyle.stroke
       ..strokeWidth = widget.indicatorDecoration.strokeWidth;
   }
 

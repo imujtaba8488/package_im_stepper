@@ -37,15 +37,14 @@ class IndicatorDecoration {
   /// Fill or stroke color.
   final Color color;
 
-  /// The style of the fixed dot, either fill or stroke.
-  final PaintingStyle style;
+  final Color strokeColor;
 
   /// The width of the stroke, if style is `PaintingStyle.stroke`
   final double strokeWidth;
 
   const IndicatorDecoration({
     this.color = Colors.deepPurple,
-    this.style = PaintingStyle.fill,
+    this.strokeColor = Colors.deepPurple,
     this.strokeWidth = 1,
   });
 }

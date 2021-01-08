@@ -34,6 +34,8 @@ abstract class IndicatorPainter extends CustomPainter {
   /// The Paint() object to use for drawing the indicator.
   Paint brush;
 
+  Paint borderBrush;
+
   /// The animation controller to control the indicator animations.
   AnimationController animationController;
 

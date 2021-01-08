@@ -3,7 +3,7 @@ part of indicators;
 class ShiftIndicator extends IndicatorPainter {
   @override
   void draw(Canvas canvas) {
-    ShapePainter shapePainter = ShapePainter(
+    ShapePainter fillPainter = ShapePainter(
       canvas,
       brush,
       direction,
@@ -14,6 +14,18 @@ class ShiftIndicator extends IndicatorPainter {
       activeDotOffset.bottom,
     );
 
-    shapePainter.draw(shape);
+    ShapePainter borderPainter = ShapePainter(
+      canvas,
+      borderBrush,
+      direction,
+      dotRadius,
+      activeDotOffset.left,
+      activeDotOffset.top,
+      activeDotOffset.right,
+      activeDotOffset.bottom,
+    );
+
+    fillPainter.draw(shape);
+    borderPainter.draw(shape);
   }
 }
