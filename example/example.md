@@ -225,7 +225,7 @@ ImageStepper(
 A simple to use number stepper widget, wherein each number defines a step. Hence, the total count of numbers defines the total number of steps. It is used the same way as the IconStepper; the only difference is that it accepts numbers, i.e., 1, 2, 3, etc., instead of icons, as:
 
 ```Dart
-ImageStepper(
+NumberStepper(
     numbers:[
         1,
         2,
