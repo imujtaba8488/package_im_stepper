@@ -83,7 +83,7 @@ class _OpacityAnimatedState extends State<OpacityAnimated>
     // }
 
     _animationController.reset();
-      _animationController.forward();
+    _animationController.forward();
 
     super.didUpdateWidget(oldWidget);
   }

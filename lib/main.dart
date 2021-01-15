@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'stepper.dart';
 
-void main() => runApp(DotStepperDemo());
+void main() => runApp(
+      MaterialApp(
+        home: DotStepperDemo(),
+      ),
+    );
 
 class DotStepperDemo extends StatefulWidget {
   @override
@@ -18,37 +22,37 @@ class _DotStepperDemo extends State<DotStepperDemo> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('3 Ways to Control'),
-        ),
-        body: Column(
-          children: [
-            NumberStepper(
-              // direction: Axis.vertical,
-              scrollingDisabled: true,
-              activeStep: activeStep,
-              enableNextPreviousButtons: false,
-              stepRadius: 20,
-              numbers: [
-                1,
-                2,
-                3,
-                4,
-                5,
-              ],
-              onStepReached: (index) {
-                setState(() {
-                  activeStep = index;
-                  print('index: $index');
-                });
-              },
-            ),
-            steps(),
-          ],
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('3 Ways to Control'),
+      ),
+      body: Column(
+        children: [
+          NumberStepper(
+            // direction: Axis.vertical,
+            scrollingDisabled: true,
+            activeStep: activeStep,
+            enableNextPreviousButtons: false,
+            stepRadius:
+                MediaQuery.of(context).orientation == Orientation.landscape
+                    ? 40
+                    : 24,
+            numbers: [
+              1,
+              2,
+              3,
+              4,
+              5,
+            ],
+            onStepReached: (index) {
+              setState(() {
+                activeStep = index;
+                print('index: $index');
+              });
+            },
+          ),
+          steps(),
+        ],
       ),
     );
   }
