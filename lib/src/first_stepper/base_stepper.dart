@@ -11,10 +11,10 @@ class BaseStepper extends StatefulWidget {
   final List<Widget> children;
 
   /// Whether to enable or disable the next and previous buttons.
-  final bool enableNextPreviousButtons;
+  final bool nextPreviousButtonsDisabled;
 
   /// Whether to allow tapping a step to move to that step or not.
-  final bool enableStepTapping;
+  final bool stepTappingEnabled;
 
   /// Icon to be used for the previous button.
   final Icon previousButtonIcon;
@@ -79,8 +79,8 @@ class BaseStepper extends StatefulWidget {
   /// Creates a basic stepper.
   BaseStepper({
     this.children,
-    this.enableNextPreviousButtons = true,
-    this.enableStepTapping = true,
+    this.nextPreviousButtonsDisabled = true,
+    this.stepTappingEnabled = true,
     this.previousButtonIcon,
     this.nextButtonIcon,
     this.onStepReached,
@@ -172,24 +172,24 @@ class _BaseStepperState extends State<BaseStepper> {
     return widget.direction == Axis.horizontal
         ? Row(
             children: <Widget>[
-              widget.enableNextPreviousButtons
+              widget.nextPreviousButtonsDisabled
                   ? _previousButton()
                   : Container(),
               Expanded(
                 child: _stepperBuilder(),
               ),
-              widget.enableNextPreviousButtons ? _nextButton() : Container(),
+              widget.nextPreviousButtonsDisabled ? _nextButton() : Container(),
             ],
           )
         : Column(
             children: <Widget>[
-              widget.enableNextPreviousButtons
+              widget.nextPreviousButtonsDisabled
                   ? _previousButton()
                   : Container(),
               Expanded(
                 child: _stepperBuilder(),
               ),
-              widget.enableNextPreviousButtons ? _nextButton() : Container(),
+              widget.nextPreviousButtonsDisabled ? _nextButton() : Container(),
             ],
           );
   }
@@ -242,7 +242,7 @@ class _BaseStepperState extends State<BaseStepper> {
     return BaseIndicator(
       child: widget.children[index],
       isSelected: _selectedIndex == index,
-      onPressed: widget.enableStepTapping
+      onPressed: widget.stepTappingEnabled
           ? () {
               if (widget.steppingEnabled) {
                 setState(() {

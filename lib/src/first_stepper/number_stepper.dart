@@ -103,8 +103,8 @@ class NumberStepper extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseStepper(
       children: _numbersWrappedInText(),
-      enableNextPreviousButtons: enableNextPreviousButtons,
-      enableStepTapping: enableStepTapping,
+      nextPreviousButtonsDisabled: enableNextPreviousButtons,
+      stepTappingEnabled: enableStepTapping,
       previousButtonIcon: previousButtonIcon,
       nextButtonIcon: nextButtonIcon,
       onStepReached: onStepReached,

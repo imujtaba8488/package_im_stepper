@@ -99,8 +99,8 @@ class ImageStepper extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseStepper(
       children: _imagesWrappedInCircleAvatar(),
-      enableNextPreviousButtons: enableNextPreviousButtons,
-      enableStepTapping: enableStepTapping,
+      nextPreviousButtonsDisabled: enableNextPreviousButtons,
+      stepTappingEnabled: enableStepTapping,
       previousButtonIcon: previousButtonIcon,
       nextButtonIcon: nextButtonIcon,
       onStepReached: onStepReached,

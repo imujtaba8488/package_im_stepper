@@ -100,8 +100,8 @@ class IconStepper extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseStepper(
       children: _iconsWithSizeOverridden(),
-      enableNextPreviousButtons: enableNextPreviousButtons,
-      enableStepTapping: enableStepTapping,
+      nextPreviousButtonsDisabled: enableNextPreviousButtons,
+      stepTappingEnabled: enableStepTapping,
       previousButtonIcon: previousButtonIcon,
       nextButtonIcon: nextButtonIcon,
       onStepReached: onStepReached,
