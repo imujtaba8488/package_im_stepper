@@ -1,5 +1,23 @@
 # ChangeLog
 
+## 0.1.2+10 [Blinking Issue / Alignment Property]
+
+### Wednesday, 3rd February, 2021
+
+* __Breaking Changes Icon/Image/Number Steppers__: `goNext`, `goPrevious`, and `Foo.externallyControlled` properties and constructors have removed from Icon, Image, Number Steppers.
+
+  * Renamed `enableNextPreviousButtons` to `nextPreviousButtonsDisabled`.
+
+  * Renamed `enabledStepTapping` to `stepTappingDisabled`.
+
+* Fixed the blinking_bug [github #15](https://github.com/imujtaba8488/package_im_stepper/issues/15)
+
+* Added the `alignment` property to align the Image/Icon/Number Steppers. [github #16](https://github.com/imujtaba8488/package_im_stepper/issues/15)
+
+* Refactored.
+
+* Documentation improvements.
+
 ## 0.1.2+9 [DotStepper Revamped]
 
 ### Thursday, 8th January, 2021
