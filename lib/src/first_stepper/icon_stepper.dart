@@ -70,6 +70,9 @@ class IconStepper extends StatelessWidget {
   /// The currently active step.
   final int activeStep;
 
+  /// Specifies the alignment of IconStepper widget.
+  final AlignmentGeometry alignment;
+
   /// Creates an IconStepper widget.
   IconStepper({
     this.icons,
@@ -94,6 +97,7 @@ class IconStepper extends StatelessWidget {
     this.steppingEnabled = true,
     this.scrollingDisabled = false,
     this.activeStep = 0,
+    this.alignment = Alignment.center,
   });
 
   @override
@@ -121,6 +125,7 @@ class IconStepper extends StatelessWidget {
       padding: stepPadding,
       scrollingDisabled: scrollingDisabled,
       activeStep: activeStep,
+      alignment: alignment ?? Alignment.center,
     );
   }
 

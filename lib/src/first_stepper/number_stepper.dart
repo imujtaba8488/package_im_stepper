@@ -72,6 +72,9 @@ class NumberStepper extends StatelessWidget {
   /// The currently active step.
   final int activeStep;
 
+  /// Specifies the alignment of the NumberStepper.
+  final AlignmentGeometry alignment;
+
   /// Creates a NumberStepper widget.
   NumberStepper({
     this.numbers,
@@ -97,6 +100,7 @@ class NumberStepper extends StatelessWidget {
     this.steppingEnabled = true,
     this.scrollingDisabled = false,
     this.activeStep = 0,
+    this.alignment = Alignment.center,
   });
 
   @override
@@ -124,6 +128,7 @@ class NumberStepper extends StatelessWidget {
       padding: stepPadding,
       scrollingDisabled: scrollingDisabled,
       activeStep: activeStep,
+      alignment: alignment ?? Alignment.center,
     );
   }
 

@@ -69,6 +69,9 @@ class ImageStepper extends StatelessWidget {
   /// The currently active step.
   final int activeStep;
 
+  /// Specifies the alignment of the ImageStepper
+  final AlignmentGeometry alignment;
+
   /// Creates an ImageStepper widget.
   ImageStepper({
     this.images,
@@ -93,6 +96,7 @@ class ImageStepper extends StatelessWidget {
     this.steppingEnabled = true,
     this.scrollingDisabled = false,
     this.activeStep,
+    this.alignment = Alignment.center,
   });
 
   @override
@@ -120,6 +124,7 @@ class ImageStepper extends StatelessWidget {
       padding: stepPadding,
       scrollingDisabled: scrollingDisabled,
       activeStep: activeStep,
+      alignment: alignment ?? Alignment.center,
     );
   }
 
