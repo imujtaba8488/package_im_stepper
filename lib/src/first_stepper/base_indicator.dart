@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'opacity_animated.dart';
-
 class BaseIndicator extends StatelessWidget {
   /// Whether this indicator is selected or not.
   final bool isSelected;
@@ -66,9 +64,8 @@ class BaseIndicator extends StatelessWidget {
           width: radius * 2,
           padding: EdgeInsets.all(padding),
           decoration: BoxDecoration(
-            color: isSelected
-                ? activeColor ?? Colors.green
-                : color ?? Colors.grey,
+            color:
+                isSelected ? activeColor ?? Colors.green : color ?? Colors.grey,
             shape: BoxShape.circle,
           ),
           child: Center(

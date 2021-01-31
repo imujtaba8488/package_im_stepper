@@ -34,10 +34,7 @@ class _DotStepperDemo extends State<DotStepperDemo> {
             scrollingDisabled: true,
             activeStep: activeStep,
             enableNextPreviousButtons: false,
-            stepRadius:
-                MediaQuery.of(context).orientation == Orientation.landscape
-                    ? 40
-                    : 24,
+            stepRadius: 24,
             numbers: [
               1,
               2,

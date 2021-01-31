@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 
-import 'base_indicator.dart';
 import '../custom_paint/dotted_line.dart';
+import 'base_indicator.dart';
 
 /// Callback is fired when a step is reached.
 typedef OnStepReached = void Function(int index);
-
-/// Callback fired to inform the user about the total number of steps available.
-typedef Bound = void Function(int bound);
 
 class BaseStepper extends StatefulWidget {
   /// Each child defines a step. Hence, total number of children determines the total number of steps.
@@ -70,71 +67,16 @@ class BaseStepper extends StatefulWidget {
   /// The width of the active step border.
   final double activeStepBorderWidth;
 
-  /// Whether to go to the next step or not.
-  final bool goNext;
-
-  /// Whether to go to the previous step or not.
-  final bool goPrevious;
-
   /// Whether to disable scrolling or not.
   final scrollingDisabled;
 
   /// The step that is currently active.
   final activeStep;
 
-  /// This callback provides the total numbers of available steps.
-  final Bound upperBound;
+  /// Specifies the alignment of the stepper.
+  final AlignmentGeometry alignment;
 
-  /// Used when the stepper is controlled externally using the `goNext` and `goPrevious` properties. In which case, two variables must be maintained in a StatefulWidget to set the values of `gotNext` and `goPrevious` in a call to `setState()`, and if the stepping is moving foward `gotNext` must be set to true and `goPrevious` must be set to `false`. If moving backward `goPrevious` must be set to `true` and `goNext` must be set to `false`.
-  ///
-  /// For more information, see example [here](https://pub.dev/packages/im_stepper/example).
-  ///
-  @Deprecated(
-    'Scheduled to be removed in version 0.1.3. Please consider using the activeStep instead. For more information, see examples on https://pub.dev/packages/im_stepper/example',
-  )
-  BaseStepper.externallyControlled({
-    this.children,
-    this.direction = Axis.horizontal,
-    this.stepColor,
-    this.activeStepColor,
-    this.activeStepBorderColor,
-    this.lineColor,
-    this.lineLength = 50.0,
-    this.lineDotRadius = 1.0,
-    this.stepRadius = 24.0,
-    this.stepReachedAnimationEffect = Curves.bounceOut,
-    this.stepReachedAnimationDuration = const Duration(seconds: 1),
-    this.steppingEnabled = true,
-    this.padding = 5.0,
-    this.margin = 1.0,
-    this.activeStepBorderWidth = 0.5,
-    @Deprecated(
-      'Scheduled to be removed in version 0.1.3. Please consider using the activeStep instead. For more information, see examples on https://pub.dev/packages/im_stepper/example',
-    )
-        this.goNext = false,
-    @Deprecated(
-      'Scheduled to be removed in version 0.1.3. Please consider using the activeStep instead. For more information, see examples on https://pub.dev/packages/im_stepper/example',
-    )
-        this.goPrevious = false,
-    this.scrollingDisabled = false,
-    this.activeStep = 0,
-    this.upperBound,
-  })  : this.enableNextPreviousButtons = false,
-        this.enableStepTapping = false,
-        this.onStepReached = null,
-        this.nextButtonIcon = null,
-        this.previousButtonIcon = null {
-    _defaultAssertions();
-
-    assert(
-      goNext == true && goPrevious == false ||
-          goPrevious == true && goNext == false ||
-          goNext == false && goPrevious == false,
-      'Both goNext and goPrevious cannot be true at the same time',
-    );
-  }
-
-  /// Used to create a Stepper. //! update documentation later.
+  /// Creates a basic stepper.
   BaseStepper({
     this.children,
     this.enableNextPreviousButtons = true,
@@ -158,15 +100,8 @@ class BaseStepper extends StatefulWidget {
     this.activeStepBorderWidth = 0.5,
     this.scrollingDisabled = false,
     this.activeStep,
-    this.upperBound,
-  })  : this.goNext = false,
-        this.goPrevious = false {
-    _defaultAssertions();
-  }
-
-  /// What must be valid in any case at the time of creating a BaseStepper.
-  // ! This shall be moved inside the default constructor after version 0.1.3.
-  void _defaultAssertions() {
+    this.alignment = Alignment.center,
+  }) {
     assert(
       lineDotRadius <= 10 && lineDotRadius > 0,
       'lineDotRadius must be less than or equal to 10 and greater than 0',
@@ -200,15 +135,6 @@ class _BaseStepperState extends State<BaseStepper> {
 
   @override
   void didUpdateWidget(BaseStepper oldWidget) {
-    //! This must be removed in the version 0.1.3.
-    if (widget.goNext || widget.goPrevious) {
-      if (widget.goNext) {
-        _goToNextStep();
-      } else if (widget.goPrevious) {
-        _goToPreviousStep();
-      }
-    }
-
     // Verify that the active step falls within a valid range.
     if (widget.activeStep >= 0 && widget.activeStep < widget.children.length) {
       _selectedIndex = widget.activeStep;
@@ -239,11 +165,6 @@ class _BaseStepperState extends State<BaseStepper> {
 
   @override
   Widget build(BuildContext context) {
-    // Returns total number of available steps.
-    // Todo: if statement needs to go after implementing Darts' Null Safety or in version 0.1.3
-    if (widget.upperBound != null)
-      widget.upperBound(widget.children.length - 1);
-
     // Controls scrolling behavior.
     if (!widget.scrollingDisabled)
       WidgetsBinding.instance.addPostFrameCallback(_afterLayout);
@@ -276,7 +197,7 @@ class _BaseStepperState extends State<BaseStepper> {
   /// Builds the stepper.
   Widget _stepperBuilder() {
     return Align(
-      alignment: Alignment.centerRight,
+      alignment: widget.alignment ?? Alignment.center,
       child: SingleChildScrollView(
         scrollDirection: widget.direction,
         controller: _scrollController,

@@ -66,60 +66,13 @@ class NumberStepper extends StatelessWidget {
   /// Whether the stepping is enabled or disabled.
   final bool steppingEnabled;
 
-  /// Whether to go to the next step or not.
-  final bool goNext;
-
-  /// Whether to go the next step or not.
-  final bool goPrevious;
-
   /// Whether the scrolling is disabled or not.
   final bool scrollingDisabled;
 
   /// The currently active step.
   final int activeStep;
 
-  /// Callback, provides the upper bound value.
-  final Bound upperBound;
-
-  /// Controls which `BaseStepper` constructor to call.
-  final bool _isExternallyControlled;
-
-  /// Used when the stepper is controlled externally using the `goNext` and `goPrevious` properties. In which case, two variables must be maintained in a StatefulWidget to set the values of `gotNext` and `goPrevious` in a call to `setState()`, and if the stepping is moving foward `gotNext` must be set to true and `goPrevious` must be set to `false`. If moving backward `goPrevious` must be set to `true` and `goNext` must be set to `false`.
-  ///
-  /// For more information, see example [here](https://pub.dev/packages/im_stepper/example).
-  @Deprecated(
-    'Scheduled to be removed in version 0.1.3. Please consider using the activeStep instead. For more information, see examples on https://pub.dev/packages/im_stepper/example',
-  )
-  NumberStepper.externallyControlled({
-    this.numbers,
-    this.direction = Axis.horizontal,
-    this.numberStyle = const TextStyle(color: Colors.black),
-    this.stepColor,
-    this.stepPadding = 1.0,
-    this.activeStepColor,
-    this.activeStepBorderColor,
-    this.activeStepBorderWidth = 0.5,
-    this.activeStepBorderPadding = 5.0,
-    this.lineColor,
-    this.lineLength = 50.0,
-    this.lineDotRadius = 1.0,
-    this.stepRadius = 24.0,
-    this.stepReachedAnimationEffect = Curves.ease,
-    this.stepReachedAnimationDuration = const Duration(seconds: 1),
-    this.steppingEnabled = true,
-    this.goNext,
-    this.goPrevious,
-    this.scrollingDisabled = false,
-    this.activeStep = 0,
-    this.upperBound,
-  })  : this.enableNextPreviousButtons = false,
-        this.enableStepTapping = false,
-        this.previousButtonIcon = null,
-        this.nextButtonIcon = null,
-        this.onStepReached = null,
-        this._isExternallyControlled = true;
-
-  /// Used when the stepping is controller either by using the built-in next/previous buttons or by tapping. If stepping needs to be controlled externally then using the `BaseStepper.externallyControlled` constructor is a more optimized approach.
+  /// Creates a NumberStepper widget.
   NumberStepper({
     this.numbers,
     this.enableNextPreviousButtons = true,
@@ -144,61 +97,34 @@ class NumberStepper extends StatelessWidget {
     this.steppingEnabled = true,
     this.scrollingDisabled = false,
     this.activeStep = 0,
-    this.upperBound,
-  })  : _isExternallyControlled = false,
-        this.goNext = false,
-        this.goPrevious = false;
+  });
 
   @override
   Widget build(BuildContext context) {
-    return _isExternallyControlled
-        ? BaseStepper.externallyControlled(
-            children: _numbersWrappedInText(),
-            direction: direction,
-            stepColor: stepColor,
-            activeStepColor: activeStepColor,
-            activeStepBorderColor: activeStepBorderColor,
-            activeStepBorderWidth: activeStepBorderWidth,
-            lineColor: lineColor,
-            lineLength: lineLength,
-            lineDotRadius: lineDotRadius,
-            stepRadius: stepRadius,
-            stepReachedAnimationEffect: stepReachedAnimationEffect,
-            stepReachedAnimationDuration: stepReachedAnimationDuration,
-            steppingEnabled: steppingEnabled,
-            margin: activeStepBorderPadding,
-            padding: stepPadding,
-            scrollingDisabled: scrollingDisabled,
-            goNext: goNext,
-            goPrevious: goPrevious,
-            activeStep: activeStep,
-            upperBound: upperBound,
-          )
-        : BaseStepper(
-            children: _numbersWrappedInText(),
-            enableNextPreviousButtons: enableNextPreviousButtons,
-            enableStepTapping: enableStepTapping,
-            previousButtonIcon: previousButtonIcon,
-            nextButtonIcon: nextButtonIcon,
-            onStepReached: onStepReached,
-            direction: direction,
-            stepColor: stepColor,
-            activeStepColor: activeStepColor,
-            activeStepBorderColor: activeStepBorderColor,
-            activeStepBorderWidth: activeStepBorderWidth,
-            lineColor: lineColor,
-            lineLength: lineLength,
-            lineDotRadius: lineDotRadius,
-            stepRadius: stepRadius,
-            stepReachedAnimationEffect: stepReachedAnimationEffect,
-            stepReachedAnimationDuration: stepReachedAnimationDuration,
-            steppingEnabled: steppingEnabled,
-            margin: activeStepBorderPadding,
-            padding: stepPadding,
-            scrollingDisabled: scrollingDisabled,
-            activeStep: activeStep,
-            upperBound: upperBound,
-          );
+    return BaseStepper(
+      children: _numbersWrappedInText(),
+      enableNextPreviousButtons: enableNextPreviousButtons,
+      enableStepTapping: enableStepTapping,
+      previousButtonIcon: previousButtonIcon,
+      nextButtonIcon: nextButtonIcon,
+      onStepReached: onStepReached,
+      direction: direction,
+      stepColor: stepColor,
+      activeStepColor: activeStepColor,
+      activeStepBorderColor: activeStepBorderColor,
+      activeStepBorderWidth: activeStepBorderWidth,
+      lineColor: lineColor,
+      lineLength: lineLength,
+      lineDotRadius: lineDotRadius,
+      stepRadius: stepRadius,
+      stepReachedAnimationEffect: stepReachedAnimationEffect,
+      stepReachedAnimationDuration: stepReachedAnimationDuration,
+      steppingEnabled: steppingEnabled,
+      margin: activeStepBorderPadding,
+      padding: stepPadding,
+      scrollingDisabled: scrollingDisabled,
+      activeStep: activeStep,
+    );
   }
 
   /// Wraps the integer numbers in Text widget. User style is also applied except the `fontSize` which is calculated automatically.
