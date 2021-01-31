@@ -2,14 +2,14 @@ library dot_stepper;
 
 import 'package:flutter/material.dart';
 
-import 'core/decorations.dart';
+import '../core/decorations.dart';
 import 'core/dot_offset.dart';
 import 'core/enums.dart';
 import 'painters/fixed_dot_painter.dart';
 import 'painters/indicator_painter.dart';
 
 // Must be exported so that they are available to the users.
-export 'core/decorations.dart';
+export '../core/decorations.dart';
 export 'core/enums.dart';
 
 /// Callback fired when a dot is tapped.
