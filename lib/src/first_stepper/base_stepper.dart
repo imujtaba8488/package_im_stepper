@@ -241,9 +241,8 @@ class _BaseStepperState extends State<BaseStepper> {
   Widget build(BuildContext context) {
     // Returns total number of available steps.
     // Todo: if statement needs to go after implementing Darts' Null Safety or in version 0.1.3
-    if (widget.upperBound != null) 
+    if (widget.upperBound != null)
       widget.upperBound(widget.children.length - 1);
-    
 
     // Controls scrolling behavior.
     if (!widget.scrollingDisabled)
@@ -276,18 +275,21 @@ class _BaseStepperState extends State<BaseStepper> {
 
   /// Builds the stepper.
   Widget _stepperBuilder() {
-    return SingleChildScrollView(
-      scrollDirection: widget.direction,
-      controller: _scrollController,
-      physics: widget.scrollingDisabled
-          ? NeverScrollableScrollPhysics()
-          : ClampingScrollPhysics(),
-      child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 8.0),
-        padding: const EdgeInsets.all(8.0),
-        child: widget.direction == Axis.horizontal
-            ? Row(children: _buildSteps())
-            : Column(children: _buildSteps()),
+    return Align(
+      alignment: Alignment.centerRight,
+      child: SingleChildScrollView(
+        scrollDirection: widget.direction,
+        controller: _scrollController,
+        physics: widget.scrollingDisabled
+            ? NeverScrollableScrollPhysics()
+            : ClampingScrollPhysics(),
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 8.0),
+          padding: const EdgeInsets.all(8.0),
+          child: widget.direction == Axis.horizontal
+              ? Row(children: _buildSteps())
+              : Column(children: _buildSteps()),
+        ),
       ),
     );
   }

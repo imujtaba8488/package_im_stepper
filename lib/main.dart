@@ -27,6 +27,7 @@ class _DotStepperDemo extends State<DotStepperDemo> {
         title: Text('3 Ways to Control'),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           NumberStepper(
             // direction: Axis.vertical,
@@ -41,8 +42,6 @@ class _DotStepperDemo extends State<DotStepperDemo> {
               1,
               2,
               3,
-              4,
-              5,
             ],
             onStepReached: (index) {
               setState(() {
