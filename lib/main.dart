@@ -35,6 +35,7 @@ class _DotStepperDemo extends State<DotStepperDemo> {
             activeStep: activeStep,
             enableNextPreviousButtons: false,
             stepRadius: 24,
+            alignment: Alignment.center,
             numbers: [
               1,
               2,

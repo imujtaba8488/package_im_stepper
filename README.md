@@ -8,23 +8,17 @@
 
 ## Recent Changes
 
-Here's a list of some important changes in version: __0.1.2+9__. For a complete list of changes see changelog [here](https://pub.dev/packages/im_stepper/changelog).
+Here's a list of some important changes in version: __0.1.2+10__. For a complete list of changes see changelog [here](https://pub.dev/packages/im_stepper/changelog).
 
-* Introducing revamped DotStepper
+* __Breaking Changes Icon/Image/Number Steppers__: `goNext`, `goPrevious`, and `Foo.externallyControlled` properties and constructors have removed from Icon, Image, Number Steppers.
 
-![Revamped DotStepper](https://github.com/imujtaba8488/showcase/blob/master/im_stepper/dot_stepper/others/3ways_to_control.gif)
+  * Renamed `enableNextPreviousButtons` to `nextPreviousButtonsDisabled`.
 
-* `DotStepper` has been completely revamped to support controlling the stepper in multiple ways. New features such as line-connectors, spacing between dots, modern indicator effects, new dot shapes, etc. have been added. However, following __breaking changes__ happened along the way.
+  * Renamed `enabledStepTapping` to `stepTappingDisabled`.
 
-* `DotStepper` __Breaking Changes__:
+* Fixed the blinking_bug [github #15](https://github.com/imujtaba8488/package_im_stepper/issues/15)
 
-  * `activeStep` now starts from 0 and __NOT__ from 1. Maximum `activeStep` is therefore now `dotCount` - 1.
-  
-  * `lowerBound` and `upperBound` have been removed.
-
-  * Please update your code! See examples __[here](https://pub.dev/packages/im_stepper/example)__.
-
-* __Future Breaking Changes__: `goNext`, `goPrevious`, and `Foo.externallyControlled` properties and constructors have been _deprecated_ and will be removed from Icon, Image, Number Steppers in version __0.1.3__.
+* Added the `alignment` property to align the Image/Icon/Number Steppers. [github #16](https://github.com/imujtaba8488/package_im_stepper/issues/15)
 
 ## About
 
