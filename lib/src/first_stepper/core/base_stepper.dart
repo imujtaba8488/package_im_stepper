@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../custom_paint/dotted_line.dart';
+import '../../core/dotted_line.dart';
 import 'base_indicator.dart';
 
 /// Callback is fired when a step is reached.
