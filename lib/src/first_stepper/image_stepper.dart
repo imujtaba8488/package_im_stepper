@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'base_stepper.dart';
+import 'core/base_stepper.dart';
 
 class ImageStepper extends StatelessWidget {
   /// Each image defines a step. Hence, total number of images determines the total number of steps.
@@ -100,7 +100,7 @@ class ImageStepper extends StatelessWidget {
     return BaseStepper(
       children: _imagesWrappedInCircleAvatar(),
       nextPreviousButtonsDisabled: enableNextPreviousButtons,
-      stepTappingEnabled: enableStepTapping,
+      stepTappingDisabled: enableStepTapping,
       previousButtonIcon: previousButtonIcon,
       nextButtonIcon: nextButtonIcon,
       onStepReached: onStepReached,

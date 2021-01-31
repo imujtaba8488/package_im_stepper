@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../custom_paint/dotted_line.dart';
+import '../../custom_paint/dotted_line.dart';
 import 'base_indicator.dart';
 
 /// Callback is fired when a step is reached.
@@ -14,7 +14,7 @@ class BaseStepper extends StatefulWidget {
   final bool nextPreviousButtonsDisabled;
 
   /// Whether to allow tapping a step to move to that step or not.
-  final bool stepTappingEnabled;
+  final bool stepTappingDisabled;
 
   /// Icon to be used for the previous button.
   final Icon previousButtonIcon;
@@ -80,7 +80,7 @@ class BaseStepper extends StatefulWidget {
   BaseStepper({
     this.children,
     this.nextPreviousButtonsDisabled = true,
-    this.stepTappingEnabled = true,
+    this.stepTappingDisabled = true,
     this.previousButtonIcon,
     this.nextButtonIcon,
     this.onStepReached,
@@ -242,7 +242,7 @@ class _BaseStepperState extends State<BaseStepper> {
     return BaseIndicator(
       child: widget.children[index],
       isSelected: _selectedIndex == index,
-      onPressed: widget.stepTappingEnabled
+      onPressed: widget.stepTappingDisabled
           ? () {
               if (widget.steppingEnabled) {
                 setState(() {
