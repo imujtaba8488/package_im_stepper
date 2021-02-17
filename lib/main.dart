@@ -2,101 +2,153 @@ import 'package:flutter/material.dart';
 
 import 'stepper.dart';
 
-void main() => runApp(
-      MaterialApp(
-        home: DotStepperDemo(),
-      ),
-    );
-
-class DotStepperDemo extends StatefulWidget {
-  @override
-  _DotStepperDemo createState() => _DotStepperDemo();
+void main() {
+  runApp(IconStepperDemo());
 }
 
-class _DotStepperDemo extends State<DotStepperDemo> {
-  // REQUIRED: USED TO CONTROL THE STEPPER.
-  int activeStep = 0; // Initial step set to 5.
+class IconStepperDemo extends StatefulWidget {
+  @override
+  _IconStepperDemo createState() => _IconStepperDemo();
+}
 
-  // OPTIONAL: can be set directly.
-  int dotCount = 5;
+class _IconStepperDemo extends State<IconStepperDemo> {
+  // THE FOLLOWING TWO VARIABLES ARE REQUIRED TO CONTROL THE STEPPER.
+  int activeStep = 5; // Initial step set to 5.
+
+  int upperBound = 6; // upperBound MUST BE total number of icons minus 1.
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('3 Ways to Control'),
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          NumberStepper(
-            // direction: Axis.vertical,
-            scrollingDisabled: true,
-            activeStep: activeStep,
-            enableNextPreviousButtons: false,
-            stepRadius: 24,
-            alignment: Alignment.center,
-            numbers: [
-              1,
-              2,
-              3,
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('IconStepper Example'),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              IconStepper(
+                icons: [
+                  Icon(Icons.supervised_user_circle),
+                  Icon(Icons.flag),
+                  Icon(Icons.access_alarm),
+                  Icon(Icons.supervised_user_circle),
+                  Icon(Icons.flag),
+                  Icon(Icons.access_alarm),
+                  Icon(Icons.supervised_user_circle),
+                ],
+
+                // activeStep property set to activeStep variable defined above.
+                activeStep: activeStep,
+
+                // This ensures step-tapping updates the activeStep. 
+                onStepReached: (index) {
+                  setState(() {
+                    activeStep = index;
+                  });
+                },
+              ),
+              header(),
+              Expanded(
+                child: FittedBox(
+                  child: Center(
+                    child: Text('$activeStep'),
+                  ),
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  previousButton(),
+                  nextButton(),
+                ],
+              ),
             ],
-            onStepReached: (index) {
-              setState(() {
-                activeStep = index;
-                print('index: $index');
-              });
-            },
           ),
-          steps(),
-        ],
+        ),
       ),
     );
   }
 
-  /// Generates jump steps for dotCount number of steps, and returns them in a row.
-  Row steps() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: List.generate(dotCount, (index) {
-        return ElevatedButton(
-          child: Text('${index + 1}'),
-          onPressed: () {
-            setState(() {
-              activeStep = index;
-            });
-          },
-        );
-      }),
-    );
-  }
-
-  /// Returns the next button widget.
+  /// Returns the next button.
   Widget nextButton() {
     return ElevatedButton(
-      child: Text('Next'),
       onPressed: () {
-        /// ACTIVE STEP MUST BE CHECKED FOR (dotCount - 1) AND NOT FOR dotCount TO PREVENT Overflow ERROR.
-        if (activeStep < dotCount - 1) {
+        // Increment activeStep, when the next button is tapped. However, check for upper bound.
+        if (activeStep < upperBound) {
           setState(() {
             activeStep++;
           });
         }
       },
+      child: Text('Next'),
     );
   }
 
-  /// Returns the previous button widget.
+  /// Returns the previous button.
   Widget previousButton() {
     return ElevatedButton(
-      child: Text('Prev'),
       onPressed: () {
+        // Decrement activeStep, when the previous button is tapped. However, check for lower bound i.e., must be greater than 0.
         if (activeStep > 0) {
           setState(() {
             activeStep--;
           });
         }
       },
+      child: Text('Prev'),
     );
+  }
+
+  /// Returns the header wrapping the header text.
+  Widget header() {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.orange,
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Row(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              headerText(),
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Returns the header text based on the activeStep.
+  String headerText() {
+    switch (activeStep) {
+      case 1:
+        return 'Preface';
+
+      case 2:
+        return 'Table of Contents';
+
+      case 3:
+        return 'About the Author';
+
+      case 4:
+        return 'Publisher Information';
+
+      case 5:
+        return 'Reviews';
+
+      case 6:
+        return 'Chapters #1';
+
+      default:
+        return 'Introduction';
+    }
   }
 }

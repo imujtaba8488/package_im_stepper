@@ -60,11 +60,9 @@ class IconStepperDemo extends StatefulWidget {
 
 class _IconStepperDemo extends State<IconStepperDemo> {
   // THE FOLLOWING TWO VARIABLES ARE REQUIRED TO CONTROL THE STEPPER.
-  // Controls the currently active step. Can be set to any valid value i.e., a value that ranges from 0 to upperBound.
   int activeStep = 5; // Initial step set to 5.
 
-  // Must be used to control the upper bound of the activeStep variable. Please see next button below the build() method!
-  int upperBound = 0;
+  int upperBound = 6; // upperBound MUST BE total number of icons minus 1.
 
   @override
   Widget build(BuildContext context) {
@@ -91,9 +89,6 @@ class _IconStepperDemo extends State<IconStepperDemo> {
 
                 // activeStep property set to activeStep variable defined above.
                 activeStep: activeStep,
-
-                // bound receives value from upperBound.
-                upperBound: (bound) => upperBound = bound,
 
                 // This ensures step-tapping updates the activeStep. 
                 onStepReached: (index) {
