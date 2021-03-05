@@ -4,7 +4,7 @@ import 'core/base_stepper.dart';
 
 class NumberStepper extends StatelessWidget {
   /// Each number defines a step. Hence, total count of numbers determines the total number of steps.
-  final List<int> numbers;
+  final List<int>? numbers;
 
   /// Whether to enable or disable the next and previous buttons.
   final bool enableNextPreviousButtons;
@@ -13,13 +13,13 @@ class NumberStepper extends StatelessWidget {
   final bool enableStepTapping;
 
   /// Icon to be used for the previous button.
-  final Icon previousButtonIcon;
+  final Icon? previousButtonIcon;
 
   /// Icon to be used for the next button.
-  final Icon nextButtonIcon;
+  final Icon? nextButtonIcon;
 
   /// Determines what should happen when a step is reached. This callback provides the __index__ of the step that was reached.
-  final OnStepReached onStepReached;
+  final OnStepReached? onStepReached;
 
   /// Whether to show the steps horizontally or vertically. __Note: Ensure horizontal stepper goes inside a column and vertical goes inside a row.__
   final Axis direction;
@@ -28,16 +28,16 @@ class NumberStepper extends StatelessWidget {
   final TextStyle numberStyle;
 
   /// The color of the step when it is not reached.
-  final Color stepColor;
+  final Color? stepColor;
 
   /// The amount of padding inside a step.
   final double stepPadding;
 
   /// The color of a step when it is reached.
-  final Color activeStepColor;
+  final Color? activeStepColor;
 
   /// The border color of a step when it is reached.
-  final Color activeStepBorderColor;
+  final Color? activeStepBorderColor;
 
   /// The border width of the active step.
   final double activeStepBorderWidth;
@@ -46,7 +46,7 @@ class NumberStepper extends StatelessWidget {
   final double activeStepBorderPadding;
 
   /// The color of the line that separates the steps.
-  final Color lineColor;
+  final Color? lineColor;
 
   /// The length of the line that separates the steps.
   final double lineLength;
@@ -134,10 +134,10 @@ class NumberStepper extends StatelessWidget {
 
   /// Wraps the integer numbers in Text widget. User style is also applied except the `fontSize` which is calculated automatically.
   List<Widget> _numbersWrappedInText() {
-    return List.generate(numbers.length, (index) {
+    return List.generate(numbers!.length, (index) {
       return FittedBox(
         child: Text(
-          '${numbers[index]}',
+          '${numbers![index]}',
           style: numberStyle.copyWith(fontSize: stepRadius / 1.1),
         ),
       );

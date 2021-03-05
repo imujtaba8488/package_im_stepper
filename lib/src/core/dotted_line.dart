@@ -47,7 +47,7 @@ class _DottedLinePainter extends CustomPainter {
   final double length;
   final double dotRadius;
   final double spacing;
-  final Paint brush;
+  final Paint? brush;
   final Axis axis;
 
   _DottedLinePainter({
@@ -78,7 +78,7 @@ class _DottedLinePainter extends CustomPainter {
           axis == Axis.horizontal ? 0.0 : start,
         ),
         dotRadius,
-        brush,
+        brush!,
       );
     }
   }

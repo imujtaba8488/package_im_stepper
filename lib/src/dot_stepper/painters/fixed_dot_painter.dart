@@ -15,11 +15,11 @@ class FixedDotPainter extends CustomPainter {
     this.direction = Axis.horizontal,
     this.shape = Shape.circle,
     this.lineConnectorsEnabled = true,
-    @required this.dotOffsets,
-    @required this.strokeBrush,
-    @required this.fillBrush,
-    @required this.lineConnectorBrush,
-    @required this.tappedAt,
+    required this.dotOffsets,
+    required this.strokeBrush,
+    required this.fillBrush,
+    required this.lineConnectorBrush,
+    required this.tappedAt,
   });
 
   /// The total number of dots to paint.
@@ -38,13 +38,13 @@ class FixedDotPainter extends CustomPainter {
   final Shape shape;
 
   /// The `Paint` object used for drawing the border of the fixed dot.
-  final Paint strokeBrush;
+  final Paint? strokeBrush;
 
   /// The Paint object used for drawing the dot.
-  final Paint fillBrush;
+  final Paint? fillBrush;
 
   /// The `Paint` object used for drawing the line connectors.
-  final Paint lineConnectorBrush;
+  final Paint? lineConnectorBrush;
 
   /// Callback which provides the index of the dot that was tapped.
   final TappedAt tappedAt;
@@ -91,7 +91,7 @@ class FixedDotPainter extends CustomPainter {
   /// Draw the line connectors.
   void _drawLineConnectors(Canvas canvas) {
     // The factor by which to adjust the offsets in order to compensate for the strokeWidth of the fixedDot.
-    double strokeAdjustment = (strokeBrush.strokeWidth / 2);
+    double strokeAdjustment = (strokeBrush!.strokeWidth / 2);
 
     // (index < dotCount -1) because omit the line connector after the last dot.
     for (int index = 0; index < dotCount - 1; index++) {
@@ -102,14 +102,14 @@ class FixedDotPainter extends CustomPainter {
         direction == Axis.horizontal
             ? Offset(dotOffsets[index + 1].left - strokeAdjustment, dotRadius)
             : Offset(dotRadius, dotOffsets[index + 1].top - strokeAdjustment),
-        lineConnectorBrush,
+        lineConnectorBrush!,
       );
     }
   }
 
   /// Used to control tapping on dots.
   @override
-  bool hitTest(Offset position) {
+  bool? hitTest(Offset position) {
     // Compare the position (where a hit was received) to find out if it matches with any of the dot offsets.
 
     for (int index = 0; index < dotOffsets.length; index++) {

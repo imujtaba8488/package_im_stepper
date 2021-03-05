@@ -5,7 +5,7 @@ import 'core/base_stepper.dart';
 /// In general, the stepper widgets help you to show or collect information from users using organized steps. The IconStepper is a simple to use icon stepper widget, wherein each icon defines a step. Hence, the total number of icons represents the total number of available steps.
 class IconStepper extends StatelessWidget {
   /// Each icon defines a step. Hence, total number of icons determines the total number of steps.
-  final List<Icon> icons;
+  final List<Icon>? icons;
 
   /// Whether to enable or disable the next and previous buttons.
   final bool enableNextPreviousButtons;
@@ -14,28 +14,28 @@ class IconStepper extends StatelessWidget {
   final bool enableStepTapping;
 
   /// Icon to be used for the previous button.
-  final Icon previousButtonIcon;
+  final Icon? previousButtonIcon;
 
   /// Icon to be used for the next button.
-  final Icon nextButtonIcon;
+  final Icon? nextButtonIcon;
 
   /// Determines what should happen when a step is reached. This callback provides the __index__ of the step that was reached.
-  final OnStepReached onStepReached;
+  final OnStepReached? onStepReached;
 
   /// Whether to show the steps horizontally or vertically. __Note: Ensure horizontal stepper goes inside a column and vertical goes inside a row.__
   final Axis direction;
 
   /// The color of the step when it is not reached.
-  final Color stepColor;
+  final Color? stepColor;
 
   /// The amount of padding inside a step.
   final double stepPadding;
 
   /// The color of a step when it is reached.
-  final Color activeStepColor;
+  final Color? activeStepColor;
 
   /// The border color of a step when it is reached.
-  final Color activeStepBorderColor;
+  final Color? activeStepBorderColor;
 
   /// The border width of the active step.
   final double activeStepBorderWidth;
@@ -44,7 +44,7 @@ class IconStepper extends StatelessWidget {
   final double activeStepBorderPadding;
 
   /// The color of the line that separates the steps.
-  final Color lineColor;
+  final Color? lineColor;
 
   /// The length of the line that separates the steps.
   final double lineLength;
@@ -131,10 +131,10 @@ class IconStepper extends StatelessWidget {
 
   // Overrides the size of the icons to almost fit the step.
   List<Icon> _iconsWithSizeOverridden() {
-    return List.generate(icons.length, (index) {
+    return List.generate(icons!.length, (index) {
       return Icon(
-        icons[index].icon,
-        color: icons[index].color,
+        icons![index].icon,
+        color: icons![index].color,
         size: stepRadius * 1.2,
       );
     });

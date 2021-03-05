@@ -21,8 +21,8 @@ class MagnifyIndicator extends IndicatorPainter {
   /// Inflates the dot from (-dotRadius) to (dotRadius / 4).
   Animation get _inflate {
     return Tween(
-      begin: -dotRadius,
-      end: dotRadius / 4,
-    ).animate(animationController);
+      begin: -dotRadius!,
+      end: dotRadius! / 4,
+    ).animate(animationController!);
   }
 }

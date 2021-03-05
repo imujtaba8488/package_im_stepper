@@ -5,19 +5,19 @@ class BaseIndicator extends StatelessWidget {
   final bool isSelected;
 
   /// The child to be placed within the indicator.
-  final Widget child;
+  final Widget? child;
 
   /// Action to be taken when this indictor is pressed.
-  final Function onPressed;
+  final Function? onPressed;
 
   /// Color of this indicator when it is not selected.
-  final Color color;
+  final Color? color;
 
   /// Color of this indicator when it is selected.
-  final Color activeColor;
+  final Color? activeColor;
 
   /// Border color of this indicator when it is selected.
-  final Color activeBorderColor;
+  final Color? activeBorderColor;
 
   /// The border width of this indicator when it is selected.
   final activeBorderWidth;
@@ -58,7 +58,7 @@ class BaseIndicator extends StatelessWidget {
         shape: BoxShape.circle,
       ),
       child: InkWell(
-        onTap: onPressed,
+        onTap: onPressed as void Function()?,
         child: Container(
           height: radius * 2,
           width: radius * 2,

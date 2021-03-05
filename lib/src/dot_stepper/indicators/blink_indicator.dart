@@ -29,19 +29,19 @@ class BlinkIndicator extends IndicatorPainter {
       ).animate(
         CurvedAnimation(
           curve: Interval(0.0, 0.3),
-          parent: animationController,
+          parent: animationController!,
         ),
       );
 
   /// Inflates the dot from (-dotRadius * 2) to the actual size of the dot.
   Animation get _inflate {
     return Tween(
-      begin: -dotRadius * 2,
+      begin: -dotRadius! * 2,
       end: 0.0,
     ).animate(
       CurvedAnimation(
         curve: Interval(0.4, 1.0),
-        parent: animationController,
+        parent: animationController!,
       ),
     );
   }

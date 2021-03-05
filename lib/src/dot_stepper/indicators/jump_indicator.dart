@@ -26,7 +26,7 @@ class JumpIndicator extends IndicatorPainter {
         end: 0.0,
       ).animate(
         CurvedAnimation(
-          parent: animationController,
+          parent: animationController!,
           curve: Interval(0.5, 1.0),
         ),
       );
@@ -34,10 +34,10 @@ class JumpIndicator extends IndicatorPainter {
   /// Jumps from the actual size of hte dot to the top.
   Animation get jumpUp => Tween(
         begin: 0.0,
-        end: dotRadius / 2,
+        end: dotRadius! / 2,
       ).animate(
         CurvedAnimation(
-          parent: animationController,
+          parent: animationController!,
           curve: Interval(0.0, 0.5),
         ),
       );

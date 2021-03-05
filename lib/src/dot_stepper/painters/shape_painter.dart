@@ -8,13 +8,13 @@ class ShapePainter {
   final Canvas canvas;
 
   /// The Paint object to use for painting.
-  final Paint brush;
+  final Paint? brush;
 
   /// The stepping direction.
-  final Axis direction;
+  final Axis? direction;
 
   /// The radius of the dot.
-  final double dotRadius;
+  final double? dotRadius;
 
   /// The left offset of the dot.
   final double left;
@@ -62,7 +62,7 @@ class ShapePainter {
   });
 
   /// Draw shape based on the given shape.
-  void draw(Shape shape) {
+  void draw(Shape? shape) {
     switch (shape) {
       case Shape.square:
         _drawSquare();
@@ -104,7 +104,7 @@ class ShapePainter {
             .deflate(deflationFactor),
         Radius.circular(_maxCornerRadius),
       ),
-      brush,
+      brush!,
     );
   }
 
@@ -123,13 +123,13 @@ class ShapePainter {
             .deflate(deflationFactor),
         Radius.circular(_minCornerRadius),
       ),
-      brush,
+      brush!,
     );
   }
 
   /// Draws a rectangle.
   void _drawRectangle() {
-    double squeezeFactor = dotRadius / 3;
+    double squeezeFactor = dotRadius! / 3;
 
     canvas.drawRRect(
       RRect.fromRectAndRadius(
@@ -144,13 +144,13 @@ class ShapePainter {
             .deflate(deflationFactor),
         Radius.circular(_minCornerRadius),
       ),
-      brush,
+      brush!,
     );
   }
 
   /// Draws a stadium shape.
   void _drawStadium() {
-    double squeezeFactor = dotRadius / 3;
+    double squeezeFactor = dotRadius! / 3;
 
     canvas.drawRRect(
       RRect.fromRectAndRadius(
@@ -165,7 +165,7 @@ class ShapePainter {
             .deflate(deflationFactor),
         Radius.circular(_maxCornerRadius),
       ),
-      brush,
+      brush!,
     );
   }
 
@@ -182,15 +182,15 @@ class ShapePainter {
             .translate(xTranslationFactor, yTranslationFactor)
             .inflate(inflationFactor)
             .deflate(deflationFactor),
-        Radius.circular(dotRadius / 1.7),
+        Radius.circular(dotRadius! / 1.7),
       ),
-      brush,
+      brush!,
     );
   }
 
   /// Draws a pipe shape.
   void _drawPipe() {
-    double squeezeFactor = dotRadius / 1.2;
+    double squeezeFactor = dotRadius! / 1.2;
 
     canvas.drawRRect(
       RRect.fromRectAndRadius(
@@ -205,13 +205,13 @@ class ShapePainter {
             .deflate(deflationFactor),
         Radius.circular(_minCornerRadius),
       ),
-      brush,
+      brush!,
     );
   }
 
   /// Draws the pipe2 shape.
   void _drawPipe2() {
-    double squeezeFactor = dotRadius / 1.2;
+    double squeezeFactor = dotRadius! / 1.2;
 
     canvas.drawRRect(
       RRect.fromRectAndRadius(
@@ -226,7 +226,7 @@ class ShapePainter {
             .deflate(deflationFactor),
         Radius.circular(_maxCornerRadius),
       ),
-      brush,
+      brush!,
     );
   }
 }

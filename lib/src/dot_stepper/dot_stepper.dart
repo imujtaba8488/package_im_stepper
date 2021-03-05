@@ -65,10 +65,10 @@ class DotStepper extends StatefulWidget {
 
   /// Callback fired when a dot is tapped. \
   /// __Note:__ You must update the `activeDot` in your `StatefulWidget` to `tappedDotIndex` provided by this callback inside a `setState()` method, for tapping to function flawlessly.
-  final OnDotTapped onDotTapped;
+  final OnDotTapped? onDotTapped;
 
   DotStepper({
-    @required this.activeStep,
+    required this.activeStep,
     this.dotCount = 2,
     this.dotRadius = 24,
     this.spacing = 0.0,
@@ -101,30 +101,30 @@ class DotStepper extends StatefulWidget {
 class _DotStepperState extends State<DotStepper>
     with SingleTickerProviderStateMixin {
   /// The controller which handles the animations.
-  AnimationController _animationController;
+  AnimationController? _animationController;
 
   /// The dot that is currently active.
-  int _activeDotIndex;
+  int? _activeDotIndex;
 
   /// The dot that was active before the currently active dot.
-  int _oldDotIndex;
+  late int _oldDotIndex;
 
   /// Whether stepping is moving forward or backward.
-  bool _isSteppingForward;
+  bool? _isSteppingForward;
 
   /// The `Paint` object used to draw the fixed dot border.
-  Paint _fixedDotStrokeBrush;
+  Paint? _fixedDotStrokeBrush;
 
   /// The `Paint` object used to draw the fixed dot.
-  Paint _fixedDotFillBrush;
+  Paint? _fixedDotFillBrush;
 
   /// The `Paint` object used for drawing the line connectors.
-  Paint _lineConnectorBrush;
+  Paint? _lineConnectorBrush;
 
   /// The `Paint` object used for drawing the `Indicator`.
-  Paint _indicatorBrush;
+  Paint? _indicatorBrush;
 
-  Paint _borderBrush;
+  Paint? _borderBrush;
 
   @override
   void initState() {
@@ -169,7 +169,7 @@ class _DotStepperState extends State<DotStepper>
         CustomPaint(
           painter: _applyIndicator
             ..dotRadius = widget.dotRadius
-            ..activeDotOffset = _buildDotOffsets[_activeDotIndex]
+            ..activeDotOffset = _buildDotOffsets[_activeDotIndex!]
             ..oldDotOffset = _buildDotOffsets[_oldDotIndex]
             ..direction = widget.direction
             ..shape = widget.shape
@@ -215,12 +215,12 @@ class _DotStepperState extends State<DotStepper>
 
   /// Updates the stepper configuration. The [activeDotIndex] is the index of the current activeDot and [eventIsTap] specifies whether it was updated by a tap or by any other event.
   void _updateConfiguration({
-    @required activeDotIndex,
-    @required bool eventIsTap,
+    required activeDotIndex,
+    required bool eventIsTap,
   }) {
     // Reset and run animation controller.
-    _animationController.reset();
-    _animationController.forward();
+    _animationController!.reset();
+    _animationController!.forward();
 
     // Based on the event that updated the activeDot, set it to the corresponding value.
     eventIsTap
@@ -228,7 +228,7 @@ class _DotStepperState extends State<DotStepper>
         : _activeDotIndex = widget.activeStep;
 
     // If activeDot is greater than the old dot that was active, the stepping is moving forward, else it's moving backward.
-    _isSteppingForward = _activeDotIndex > _oldDotIndex;
+    _isSteppingForward = _activeDotIndex! > _oldDotIndex;
   }
 
   /// Fired when a fixed dot is tapped.
@@ -245,7 +245,7 @@ class _DotStepperState extends State<DotStepper>
       );
 
       // Ensure onDotTapped is not null.
-      if (widget.onDotTapped != null) widget.onDotTapped(tappedDotIndex);
+      if (widget.onDotTapped != null) widget.onDotTapped!(tappedDotIndex);
     }
   }
 
@@ -281,7 +281,7 @@ class _DotStepperState extends State<DotStepper>
     _fixedDotStrokeBrush = Paint()
       ..color = widget.fixedDotDecoration.strokeWidth > 0.0
           ? widget.fixedDotDecoration.strokeColor
-          : _fixedDotFillBrush.color
+          : _fixedDotFillBrush!.color
       ..style = PaintingStyle.stroke
       ..strokeWidth = widget.fixedDotDecoration.strokeWidth;
 
@@ -314,7 +314,7 @@ class _DotStepperState extends State<DotStepper>
 
   @override
   void dispose() {
-    _animationController.dispose();
+    _animationController!.dispose();
     super.dispose();
   }
 }
