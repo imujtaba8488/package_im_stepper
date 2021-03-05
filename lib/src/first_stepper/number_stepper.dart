@@ -128,7 +128,7 @@ class NumberStepper extends StatelessWidget {
       padding: stepPadding,
       scrollingDisabled: scrollingDisabled,
       activeStep: activeStep,
-      alignment: alignment ?? Alignment.center,
+      alignment: alignment,
     );
   }
 

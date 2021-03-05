@@ -82,7 +82,6 @@ class ShapePainter {
       case Shape.pipe2:
         _drawPipe2();
         break;
-        break;
       default:
         _drawCircle();
         break;

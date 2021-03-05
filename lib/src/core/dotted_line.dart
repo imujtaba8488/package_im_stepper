@@ -32,7 +32,7 @@ class DottedLine extends StatelessWidget {
       height: axis == Axis.vertical ? length : 0.0,
       child: CustomPaint(
         painter: _DottedLinePainter(
-          brush: Paint()..color = color ?? Colors.grey,
+          brush: Paint()..color = color,
           length: length,
           dotRadius: dotRadius,
           spacing: spacing,
