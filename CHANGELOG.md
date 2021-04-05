@@ -1,10 +1,10 @@
 # ChangeLog
 
-## 1.0.0 [Null safety]
+## 0.1.3 [Null safety]
 
 ### Friday, 5th March, 2021
 
-* Added null safety support.
+* Added null safety support @thank you [Renan Luiz Arceno](https://github.com/renanarceno)
 
 ## 0.1.2+10 [Blinking Issue / Alignment Property]
 
