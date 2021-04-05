@@ -4,7 +4,7 @@ import 'core/base_stepper.dart';
 
 class ImageStepper extends StatelessWidget {
   /// Each image defines a step. Hence, total number of images determines the total number of steps.
-  final List<ImageProvider<dynamic>> images;
+  final List<ImageProvider<dynamic>>? images;
 
   /// Whether to enable or disable the next and previous buttons.
   final bool enableNextPreviousButtons;
@@ -13,28 +13,28 @@ class ImageStepper extends StatelessWidget {
   final bool enableStepTapping;
 
   /// Icon to be used for the previous button.
-  final Icon previousButtonIcon;
+  final Icon? previousButtonIcon;
 
   /// Icon to be used for the next button.
-  final Icon nextButtonIcon;
+  final Icon? nextButtonIcon;
 
   /// Determines what should happen when a step is reached. This callback provides the __index__ of the step that was reached.
-  final OnStepReached onStepReached;
+  final OnStepReached? onStepReached;
 
   /// Whether to show the steps horizontally or vertically. __Note: Ensure horizontal stepper goes inside a column and vertical goes inside a row.__
   final Axis direction;
 
   /// The color of the step when it is not reached.
-  final Color stepColor;
+  final Color? stepColor;
 
   /// The amount of padding inside a step.
   final double stepPadding;
 
   /// The color of a step when it is reached.
-  final Color activeStepColor;
+  final Color? activeStepColor;
 
   /// The border color of a step when it is reached.
-  final Color activeStepBorderColor;
+  final Color? activeStepBorderColor;
 
   /// The border width of the active step.
   final double activeStepBorderWidth;
@@ -43,7 +43,7 @@ class ImageStepper extends StatelessWidget {
   final double activeStepBorderPadding;
 
   /// The color of the line that separates the steps.
-  final Color lineColor;
+  final Color? lineColor;
 
   /// The length of the line that separates the steps.
   final double lineLength;
@@ -95,7 +95,7 @@ class ImageStepper extends StatelessWidget {
     this.stepReachedAnimationDuration = const Duration(seconds: 1),
     this.steppingEnabled = true,
     this.scrollingDisabled = false,
-    this.activeStep,
+    this.activeStep = 0,
     this.alignment = Alignment.center,
   });
 
@@ -124,16 +124,16 @@ class ImageStepper extends StatelessWidget {
       padding: stepPadding,
       scrollingDisabled: scrollingDisabled,
       activeStep: activeStep,
-      alignment: alignment ?? Alignment.center,
+      alignment: alignment,
     );
   }
 
   /// Wraps the images within a CircleAvatar for displaying images in a circle.
   List<CircleAvatar> _imagesWrappedInCircleAvatar() {
-    return List.generate(images.length, (index) {
+    return List.generate(images!.length, (index) {
       return CircleAvatar(
         radius: stepRadius,
-        backgroundImage: images[index],
+        backgroundImage: images![index] as ImageProvider<Object>?,
       );
     });
   }

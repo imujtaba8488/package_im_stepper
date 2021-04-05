@@ -29,7 +29,7 @@ class ShinkIndicator extends IndicatorPainter {
       ).animate(
         CurvedAnimation(
           curve: Interval(0.0, 0.3),
-          parent: animationController,
+          parent: animationController!,
         ),
       );
 
@@ -37,11 +37,11 @@ class ShinkIndicator extends IndicatorPainter {
   Animation get _inflate {
     return Tween(
       begin: 0.0,
-      end: -dotRadius / 2,
+      end: -dotRadius! / 2,
     ).animate(
       CurvedAnimation(
         curve: Interval(0.5, 1.0),
-        parent: animationController,
+        parent: animationController!,
       ),
     );
   }

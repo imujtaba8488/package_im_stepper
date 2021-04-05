@@ -17,33 +17,33 @@ part '../indicators/worm_indicator.dart';
 
 abstract class IndicatorPainter extends CustomPainter {
   /// The radius of the indicator.
-  double dotRadius;
+  double? dotRadius;
 
   /// The offset of the activeDot.
-  DotOffset activeDotOffset;
+  late DotOffset activeDotOffset;
 
   /// The offset of the dot that was selected before the activeDot.
-  DotOffset oldDotOffset;
+  late DotOffset oldDotOffset;
 
   /// The stepping direction.
-  Axis direction;
+  Axis? direction;
 
   /// The shape of the indicator.
-  Shape shape;
+  Shape? shape;
 
   /// The Paint() object to use for drawing the indicator.
-  Paint brush;
+  Paint? brush;
 
-  Paint borderBrush;
+  Paint? borderBrush;
 
   /// The animation controller to control the indicator animations.
-  AnimationController animationController;
+  AnimationController? animationController;
 
   /// The type of the indicator to use.
-  Indicator indicator;
+  Indicator? indicator;
 
   /// Whether the stepping is moving forward or backward.
-  bool isSteppingForward;
+  bool? isSteppingForward;
 
   /// Call `draw()` when `paint()` is called by the Flutter engine.
   @override
@@ -61,7 +61,7 @@ abstract class IndicatorPainter extends CustomPainter {
         end: direction == Axis.horizontal
             ? xDistanceBetweenOldAndActiveDot
             : yDistanceBetweenOldAndActiveDot,
-      ).animate(animationController);
+      ).animate(animationController!);
 
   /// Returns the distance between the old and activeDot when direction is horizontal.
   double get xDistanceBetweenOldAndActiveDot =>

@@ -1,5 +1,11 @@
 # ChangeLog
 
+## 1.0.0 [Null safety]
+
+### Friday, 5th March, 2021
+
+* Added null safety support.
+
 ## 0.1.2+10 [Blinking Issue / Alignment Property]
 
 ### Wednesday, 3rd February, 2021

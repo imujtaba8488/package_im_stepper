@@ -1,12 +1,12 @@
 name: im_stepper
 description: A growing collection of beautiful, easy to use, stepper and page indicator widgets.
-version: 0.1.2+10
+version: 1.0.0
 homepage: https://github.com/imujtaba8488
 repository: https://github.com/imujtaba8488/package_im_stepper.git
 issue_tracker: https://github.com/imujtaba8488/package_im_stepper/issues
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: '>=2.12.0 <3.0.0'
 
 dependencies:
   flutter:
