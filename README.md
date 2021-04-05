@@ -8,17 +8,9 @@
 
 ## Recent Changes
 
-Here's a list of some important changes in version: __0.1.2+10__. For a complete list of changes see changelog [here](https://pub.dev/packages/im_stepper/changelog).
+Here's a list of some important changes in version: __0.1.3__. For a complete list of changes see changelog [here](https://pub.dev/packages/im_stepper/changelog).
 
-* __Breaking Changes Icon/Image/Number Steppers__: `goNext`, `goPrevious`, and `Foo.externallyControlled` properties and constructors have removed from Icon, Image, Number Steppers.
-
-  * Renamed `enableNextPreviousButtons` to `nextPreviousButtonsDisabled`.
-
-  * Renamed `enabledStepTapping` to `stepTappingDisabled`.
-
-* Fixed the blinking_bug [github #15](https://github.com/imujtaba8488/package_im_stepper/issues/15)
-
-* Added the `alignment` property to align the Image/Icon/Number Steppers. [github #16](https://github.com/imujtaba8488/package_im_stepper/issues/15)
+  * migrated to null safety. thanks to [Renan Luiz Arceno](https://github.com/renanarceno)
 
 ## About
 
