@@ -158,6 +158,7 @@ class _DotStepperState extends State<DotStepper>
             fillBrush: _fixedDotFillBrush,
             strokeBrush: _fixedDotStrokeBrush,
             lineConnectorBrush: _lineConnectorBrush,
+            linePadding: widget.lineConnectorDecoration.linePadding,
             lineConnectorsEnabled: widget.lineConnectorsEnabled,
             tappedAt: _onTappedAt,
           ),
