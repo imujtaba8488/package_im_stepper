@@ -15,6 +15,7 @@ class FixedDotPainter extends CustomPainter {
     this.direction = Axis.horizontal,
     this.shape = Shape.circle,
     this.lineConnectorsEnabled = true,
+    this.linePadding = 0.0,
     required this.dotOffsets,
     required this.strokeBrush,
     required this.fillBrush,
@@ -51,6 +52,9 @@ class FixedDotPainter extends CustomPainter {
 
   /// Whether to enable or disable line connectors between dots.
   final bool lineConnectorsEnabled;
+
+  /// linePadding
+  final double linePadding;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -97,11 +101,16 @@ class FixedDotPainter extends CustomPainter {
     for (int index = 0; index < dotCount - 1; index++) {
       canvas.drawLine(
         direction == Axis.horizontal
-            ? Offset(dotOffsets[index].right + strokeAdjustment, dotRadius)
-            : Offset(dotRadius, dotOffsets[index].bottom + strokeAdjustment),
+            ? Offset(dotOffsets[index].right + strokeAdjustment + linePadding,
+                dotRadius)
+            : Offset(dotRadius,
+                dotOffsets[index].bottom + strokeAdjustment + linePadding),
         direction == Axis.horizontal
-            ? Offset(dotOffsets[index + 1].left - strokeAdjustment, dotRadius)
-            : Offset(dotRadius, dotOffsets[index + 1].top - strokeAdjustment),
+            ? Offset(
+                dotOffsets[index + 1].left - strokeAdjustment - linePadding,
+                dotRadius)
+            : Offset(dotRadius,
+                dotOffsets[index + 1].top - strokeAdjustment - linePadding),
         lineConnectorBrush!,
       );
     }

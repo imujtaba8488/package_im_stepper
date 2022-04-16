@@ -8,9 +8,12 @@ class LineConnectorDecoration {
   /// The width of the stroke.
   final double strokeWidth;
 
+  final double linePadding;
+
   const LineConnectorDecoration({
     this.color = Colors.blueGrey,
     this.strokeWidth = 1.0,
+    this.linePadding = 0.0,
   });
 }
 
