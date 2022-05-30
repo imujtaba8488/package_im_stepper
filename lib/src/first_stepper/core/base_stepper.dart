@@ -166,7 +166,7 @@ class _BaseStepperState extends State<BaseStepper> {
   @override
   Widget build(BuildContext context) {
     // Controls scrolling behavior.
-    if (!widget.scrollingDisabled) WidgetsBinding.instance.addPostFrameCallback(_afterLayout);
+    if (!widget.scrollingDisabled) WidgetsBinding.instance?.addPostFrameCallback(_afterLayout);
 
     return widget.direction == Axis.horizontal
         ? Row(
