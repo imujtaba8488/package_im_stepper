@@ -1,7 +1,7 @@
 # ChangeLog
 
 ## 1.0.0 [Flutter 3.0]
-### Saturday, 3rd June, 2022
+### Friday, 3rd June, 2022
 
 * Update to Flutter 3.0
 * Fix android 2 embedding issue
