@@ -8,9 +8,12 @@
 
 ## Recent Changes
 
-Here's a list of some important changes in version: __0.1.3__. For a complete list of changes see changelog [here](https://pub.dev/packages/im_stepper/changelog).
+Here's a list of some important changes in version: __1.0.0__. For a complete list of changes see changelog [here](https://pub.dev/packages/im_stepper/changelog).
 
-  * migrated to null safety. thanks to [Renan Luiz Arceno](https://github.com/renanarceno)
+* Update to Flutter 3.0
+* Fix android 2 embedding issue
+* Fix lint warnings -- Thank you [TheMeanCanEHdian](https://github.com/TheMeanCanEHdian) 
+* Add line padding -- Thank you [Mateusz](@https://github.com/matheowis)
 
 ## About
 
