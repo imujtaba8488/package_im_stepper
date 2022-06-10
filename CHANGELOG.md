@@ -2,8 +2,7 @@
 
 ## 1.0.1+1 [Flutter 3.0]
 ### Friday, 9th June, 2022
-* Minor fixes
-
+* Minor fixes and improvements
 ## 1.0.0 [Flutter 3.0]
 ### Friday, 3rd June, 2022
 
