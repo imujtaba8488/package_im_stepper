@@ -7,6 +7,49 @@ import 'base_indicator.dart';
 typedef OnStepReached = void Function(int index);
 
 class BaseStepper extends StatefulWidget {
+  /// Creates a basic stepper.
+  BaseStepper({
+    Key? key,
+    this.children,
+    this.nextPreviousButtonsDisabled = true,
+    this.stepTappingDisabled = true,
+    this.previousButtonIcon,
+    this.nextButtonIcon,
+    this.onStepReached,
+    this.direction = Axis.horizontal,
+    this.stepColor,
+    this.activeStepColor,
+    this.activeStepBorderColor,
+    this.lineColor,
+    this.lineLength = 50.0,
+    this.lineDotRadius = 1.0,
+    this.stepRadius = 24.0,
+    this.stepReachedAnimationEffect = Curves.bounceOut,
+    this.stepReachedAnimationDuration = const Duration(seconds: 1),
+    this.steppingEnabled = true,
+    this.padding = 5.0,
+    this.margin = 1.0,
+    this.activeStepBorderWidth = 0.5,
+    this.scrollingDisabled = false,
+    this.activeStep = 0,
+    this.alignment,
+  }) : super(key: key) {
+    assert(
+      lineDotRadius <= 10 && lineDotRadius > 0,
+      'lineDotRadius must be less than or equal to 10 and greater than 0',
+    );
+
+    assert(
+      stepRadius > 0,
+      'iconIndicatorRadius must be greater than 0',
+    );
+
+    assert(
+      activeStep >= 0 && activeStep <= children!.length,
+      'Error: Active Step out of range',
+    );
+  }
+
   /// Each child defines a step. Hence, total number of children determines the total number of steps.
   final List<Widget>? children;
 
@@ -68,7 +111,7 @@ class BaseStepper extends StatefulWidget {
   final double activeStepBorderWidth;
 
   /// Whether to disable scrolling or not.
-  final scrollingDisabled;
+  final bool scrollingDisabled;
 
   /// The step that is currently active.
   final int activeStep;
@@ -76,71 +119,29 @@ class BaseStepper extends StatefulWidget {
   /// Specifies the alignment of the stepper.
   final AlignmentGeometry? alignment;
 
-  /// Creates a basic stepper.
-  BaseStepper({
-    this.children,
-    this.nextPreviousButtonsDisabled = true,
-    this.stepTappingDisabled = true,
-    this.previousButtonIcon,
-    this.nextButtonIcon,
-    this.onStepReached,
-    this.direction = Axis.horizontal,
-    this.stepColor,
-    this.activeStepColor,
-    this.activeStepBorderColor,
-    this.lineColor,
-    this.lineLength = 50.0,
-    this.lineDotRadius = 1.0,
-    this.stepRadius = 24.0,
-    this.stepReachedAnimationEffect = Curves.bounceOut,
-    this.stepReachedAnimationDuration = const Duration(seconds: 1),
-    this.steppingEnabled = true,
-    this.padding = 5.0,
-    this.margin = 1.0,
-    this.activeStepBorderWidth = 0.5,
-    this.scrollingDisabled = false,
-    this.activeStep = 0,
-    this.alignment,
-  }) {
-    assert(
-      lineDotRadius <= 10 && lineDotRadius > 0,
-      'lineDotRadius must be less than or equal to 10 and greater than 0',
-    );
-
-    assert(
-      stepRadius > 0,
-      'iconIndicatorRadius must be greater than 0',
-    );
-
-    assert(
-      activeStep >= 0 && activeStep <= children!.length,
-      'Error: Active Step out of range',
-    );
-  }
-
   @override
-  _BaseStepperState createState() => _BaseStepperState();
+  BaseStepperState createState() => BaseStepperState();
 }
 
-class _BaseStepperState extends State<BaseStepper> {
+class BaseStepperState extends State<BaseStepper> {
   ScrollController? _scrollController;
   late int _selectedIndex;
 
   @override
   void initState() {
     _selectedIndex = widget.activeStep;
-    this._scrollController = ScrollController();
+    _scrollController = ScrollController();
     super.initState();
   }
 
   @override
   void didUpdateWidget(BaseStepper oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
     // Verify that the active step falls within a valid range.
     if (widget.activeStep >= 0 && widget.activeStep < widget.children!.length) {
       _selectedIndex = widget.activeStep;
     }
-
-    super.didUpdateWidget(oldWidget);
   }
 
   @override
@@ -166,12 +167,16 @@ class _BaseStepperState extends State<BaseStepper> {
   @override
   Widget build(BuildContext context) {
     // Controls scrolling behavior.
-    if (!widget.scrollingDisabled) WidgetsBinding.instance.addPostFrameCallback(_afterLayout);
+    if (!widget.scrollingDisabled) {
+      WidgetsBinding.instance.addPostFrameCallback(_afterLayout);
+    }
 
     return widget.direction == Axis.horizontal
         ? Row(
             children: <Widget>[
-              widget.nextPreviousButtonsDisabled ? _previousButton() : Container(),
+              widget.nextPreviousButtonsDisabled
+                  ? _previousButton()
+                  : Container(),
               Expanded(
                 child: _stepperBuilder(),
               ),
@@ -180,7 +185,9 @@ class _BaseStepperState extends State<BaseStepper> {
           )
         : Column(
             children: <Widget>[
-              widget.nextPreviousButtonsDisabled ? _previousButton() : Container(),
+              widget.nextPreviousButtonsDisabled
+                  ? _previousButton()
+                  : Container(),
               Expanded(
                 child: _stepperBuilder(),
               ),
@@ -196,11 +203,15 @@ class _BaseStepperState extends State<BaseStepper> {
       child: SingleChildScrollView(
         scrollDirection: widget.direction,
         controller: _scrollController,
-        physics: widget.scrollingDisabled ? NeverScrollableScrollPhysics() : ClampingScrollPhysics(),
+        physics: widget.scrollingDisabled
+            ? const NeverScrollableScrollPhysics()
+            : const ClampingScrollPhysics(),
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 8.0),
           padding: const EdgeInsets.all(8.0),
-          child: widget.direction == Axis.horizontal ? Row(children: _buildSteps()) : Column(children: _buildSteps()),
+          child: widget.direction == Axis.horizontal
+              ? Row(children: _buildSteps())
+              : Column(children: _buildSteps()),
         ),
       ),
     );
@@ -231,7 +242,6 @@ class _BaseStepperState extends State<BaseStepper> {
   /// A customized IconStep.
   Widget _customizedIndicator(int index) {
     return BaseIndicator(
-      child: widget.children![index],
       isSelected: _selectedIndex == index,
       onPressed: widget.stepTappingDisabled
           ? () {
@@ -253,6 +263,7 @@ class _BaseStepperState extends State<BaseStepper> {
       padding: widget.padding,
       margin: widget.margin,
       activeBorderWidth: widget.activeStepBorderWidth,
+      child: widget.children![index],
     );
   }
 
@@ -277,7 +288,9 @@ class _BaseStepperState extends State<BaseStepper> {
         visualDensity: VisualDensity.compact,
         icon: widget.previousButtonIcon ??
             Icon(
-              widget.direction == Axis.horizontal ? Icons.arrow_left : Icons.arrow_drop_up,
+              widget.direction == Axis.horizontal
+                  ? Icons.arrow_left
+                  : Icons.arrow_drop_up,
             ),
         onPressed: _goToPreviousStep,
       ),
@@ -292,7 +305,9 @@ class _BaseStepperState extends State<BaseStepper> {
         visualDensity: VisualDensity.compact,
         icon: widget.nextButtonIcon ??
             Icon(
-              widget.direction == Axis.horizontal ? Icons.arrow_right : Icons.arrow_drop_down,
+              widget.direction == Axis.horizontal
+                  ? Icons.arrow_right
+                  : Icons.arrow_drop_down,
             ),
         onPressed: _goToNextStep,
       ),
@@ -301,7 +316,8 @@ class _BaseStepperState extends State<BaseStepper> {
 
   /// Contains the logic for going to the next step.
   void _goToNextStep() {
-    if (_selectedIndex < widget.children!.length - 1 && widget.steppingEnabled) {
+    if (_selectedIndex < widget.children!.length - 1 &&
+        widget.steppingEnabled) {
       setState(() {
         _selectedIndex++;
 

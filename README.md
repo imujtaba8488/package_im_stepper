@@ -13,7 +13,7 @@ Here's a list of some important changes in version: __1.0.0__. For a complete li
 * Update to Flutter 3.0
 * Fix android 2 embedding issue
 * Fix lint warnings -- Thank you [TheMeanCanEHdian](https://github.com/TheMeanCanEHdian) 
-* Add line padding -- Thank you [Mateusz](@https://github.com/matheowis)
+* Add line padding -- Thank you [Mateusz](https://github.com/matheowis)
 * Update README -- Thank you [TimothyNgoi](https://github.com/TimothyNgoi98)
 
 ## About

@@ -1,7 +1,7 @@
 name: im_stepper
 description: A growing collection of beautiful, easy to use, stepper and page
   indicator widgets.
-version: 1.0.0
+version: 1.0.1+1
 homepage: https://github.com/imujtaba8488
 repository: https://github.com/imujtaba8488/package_im_stepper.git
 issue_tracker: https://github.com/imujtaba8488/package_im_stepper/issues

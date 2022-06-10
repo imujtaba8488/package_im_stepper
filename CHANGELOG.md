@@ -1,5 +1,9 @@
 # ChangeLog
 
+## 1.0.1+1 [Flutter 3.0]
+### Friday, 9th June, 2022
+* Minor fixes
+
 ## 1.0.0 [Flutter 3.0]
 ### Friday, 3rd June, 2022
 
@@ -7,7 +11,7 @@
 * Fix android 2 embedding issue
 * Fix Warning: Operand of null-aware operation '?.' has type 'WidgetsBinding' which excludes null-- Thank you [Redeemer Pace](https://github.com/red-game-dev)
 * Fix lint warnings -- Thank you [TheMeanCanEHdian](https://github.com/TheMeanCanEHdian) 
-* Add line padding -- Thank you [Mateusz](@https://github.com/matheowis)
+* Add line padding -- Thank you [Mateusz](https://github.com/matheowis)
 
 ## 0.1.3 [Null safety]
 
