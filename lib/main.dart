@@ -13,7 +13,7 @@ class IconStepperDemo extends StatefulWidget {
 
 class _IconStepperDemo extends State<IconStepperDemo> {
   // THE FOLLOWING TWO VARIABLES ARE REQUIRED TO CONTROL THE STEPPER.
-  int activeStep = 5; // Initial step set to 5.
+  int activeStep = 0; // Initial step set to 5.
 
   int upperBound = 6; // upperBound MUST BE total number of icons minus 1.
 
@@ -56,10 +56,10 @@ class _IconStepperDemo extends State<IconStepperDemo> {
             children: [
               IconStepper(
                 completedTasks: completedTasks,
-                completedStepColor: finished,
+                stepCompletedColor: finished,
                 stepperAnimateInMiddle: true,
                 icons: allIcons,
-                completeStatusMap: completeStatusMap,
+                stepsCompletedStatusMap: completeStatusMap,
                 activeStepColor: active,
                 activeStepBorderColor: active,
                 // activeStep property set to activeStep variable defined above.

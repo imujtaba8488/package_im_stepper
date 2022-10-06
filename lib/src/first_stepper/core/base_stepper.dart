@@ -10,9 +10,9 @@ class BaseStepper extends StatefulWidget {
   /// Creates a basic stepper.
   BaseStepper({
     Key? key,
-    this.completedTasks,
+    this.completedSteps,
     this.stepperAnimateInMiddle,
-    this.completeStepColor,
+    this.stepCompetedColor,
     this.children,
     this.nextPreviousButtonsDisabled = true,
     this.stepTappingDisabled = true,
@@ -55,7 +55,7 @@ class BaseStepper extends StatefulWidget {
 
 
   // completed Map
-  final Map<String,int>? completedTasks;
+  final Map<String,int>? completedSteps;
   //Animate Selected Stepper in middle
   final bool? stepperAnimateInMiddle;
 
@@ -81,7 +81,7 @@ class BaseStepper extends StatefulWidget {
   final Axis direction;
 
   //Completed Step color
-  final Color? completeStepColor;
+  final Color? stepCompetedColor;
 
   /// The color of the step when it is not reached.
   final Color? stepColor;
@@ -255,7 +255,7 @@ class BaseStepperState extends State<BaseStepper> {
   /// A customized IconStep.
   Widget _customizedIndicator(int index) {
     return BaseIndicator(
-      isCompleted: widget.completedTasks![index.toString()] == 0 ? false : true,
+      isStepCompleted: widget.completedSteps![index.toString()] == 0 ? false : true,
       isSelected: _selectedIndex == index,
       onPressed: widget.stepTappingDisabled
           ? () {

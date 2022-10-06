@@ -56,7 +56,7 @@ class IconStepper extends StatelessWidget {
   final double stepRadius;
 
   //if Complete function call
-  final Function? completeStatusMap;
+  final Function? stepsCompletedStatusMap;
 
   /// The animation effect to show when a step is reached.
   final Curve stepReachedAnimationEffect;
@@ -77,7 +77,7 @@ class IconStepper extends StatelessWidget {
   final AlignmentGeometry alignment;
 
   //completed Stepper color
-  final Color? completedStepColor;
+  final Color? stepCompletedColor;
 
   //Animate Selected Stepper in middle
   final bool? stepperAnimateInMiddle;
@@ -92,8 +92,8 @@ class IconStepper extends StatelessWidget {
   IconStepper({
     this.completedTasks,
     this.stepperAnimateInMiddle,
-    this.completeStatusMap,
-    this.completedStepColor,
+    this.stepsCompletedStatusMap,
+    this.stepCompletedColor,
     this.icons,
     this.enableNextPreviousButtons = true,
     this.enableStepTapping = true,
@@ -122,10 +122,10 @@ class IconStepper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseStepper(
-      completedTasks: completedTasks,
+      completedSteps: completedTasks,
       children: _iconsWithSizeOverridden(),
       stepperAnimateInMiddle: stepperAnimateInMiddle,
-      completeStepColor: completedStepColor,
+      stepCompetedColor: stepCompletedColor,
       nextPreviousButtonsDisabled: enableNextPreviousButtons,
       stepTappingDisabled: enableStepTapping,
       previousButtonIcon: previousButtonIcon,

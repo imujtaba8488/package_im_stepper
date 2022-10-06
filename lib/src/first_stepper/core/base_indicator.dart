@@ -34,10 +34,10 @@ class BaseIndicator extends StatelessWidget {
   /// Color of this indicator when it is completed.
   final Color? completedColor;
 
-  final bool? isCompleted;
+  final bool? isStepCompleted;
 
   BaseIndicator({
-    this.isCompleted,
+    this.isStepCompleted,
     this.completedColor,
     this.isSelected = false,
     this.child,
@@ -72,7 +72,7 @@ class BaseIndicator extends StatelessWidget {
           padding: EdgeInsets.all(padding),
           decoration: BoxDecoration(
             color:
-            isSelected ? activeColor ?? Colors.green :(isCompleted == true) ? completedColor ?? Colors.green : color ?? Colors.grey,
+            isSelected ? activeColor ?? Colors.green :(isStepCompleted == true) ? completedColor ?? Colors.green : color ?? Colors.grey,
             shape: BoxShape.circle,
           ),
           child: Center(
