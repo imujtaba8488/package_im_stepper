@@ -31,7 +31,14 @@ class BaseIndicator extends StatelessWidget {
   /// The amount of margin around each side of the indicator.
   final double margin;
 
+  /// Color of this indicator when it is completed.
+  final Color? completedColor;
+
+  final bool? isCompleted;
+
   BaseIndicator({
+    this.isCompleted,
+    this.completedColor,
     this.isSelected = false,
     this.child,
     this.onPressed,
@@ -65,7 +72,7 @@ class BaseIndicator extends StatelessWidget {
           padding: EdgeInsets.all(padding),
           decoration: BoxDecoration(
             color:
-                isSelected ? activeColor ?? Colors.green : color ?? Colors.grey,
+            isSelected ? activeColor ?? Colors.green :(isCompleted == true) ? completedColor ?? Colors.green : color ?? Colors.grey,
             shape: BoxShape.circle,
           ),
           child: Center(

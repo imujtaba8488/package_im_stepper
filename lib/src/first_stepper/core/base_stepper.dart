@@ -10,6 +10,9 @@ class BaseStepper extends StatefulWidget {
   /// Creates a basic stepper.
   BaseStepper({
     Key? key,
+    this.completedTasks,
+    this.stepperAnimateInMiddle,
+    this.completeStepColor,
     this.children,
     this.nextPreviousButtonsDisabled = true,
     this.stepTappingDisabled = true,
@@ -50,6 +53,12 @@ class BaseStepper extends StatefulWidget {
     );
   }
 
+
+  // completed Map
+  final Map<String,int>? completedTasks;
+  //Animate Selected Stepper in middle
+  final bool? stepperAnimateInMiddle;
+
   /// Each child defines a step. Hence, total number of children determines the total number of steps.
   final List<Widget>? children;
 
@@ -70,6 +79,9 @@ class BaseStepper extends StatefulWidget {
 
   /// Whether to show the steps horizontally or vertically. __Note: Ensure horizontal stepper goes inside a column and vertical goes inside a row.__
   final Axis direction;
+
+  //Completed Step color
+  final Color? completeStepColor;
 
   /// The color of the step when it is not reached.
   final Color? stepColor;
@@ -154,8 +166,9 @@ class BaseStepperState extends State<BaseStepper> {
   void _afterLayout(_) {
     // ! Provide detailed explanation.
     for (int i = 0; i < widget.children!.length; i++) {
+      print(widget.stepperAnimateInMiddle );
       _scrollController!.animateTo(
-        i * ((widget.stepRadius * 2) + widget.lineLength),
+        widget.stepperAnimateInMiddle == true? (i * ((widget.stepRadius * 2) + widget.lineLength)) - 98 : i * ((widget.stepRadius * 2) + widget.lineLength),
         duration: widget.stepReachedAnimationDuration,
         curve: widget.stepReachedAnimationEffect,
       );
@@ -242,6 +255,7 @@ class BaseStepperState extends State<BaseStepper> {
   /// A customized IconStep.
   Widget _customizedIndicator(int index) {
     return BaseIndicator(
+      isCompleted: widget.completedTasks![index.toString()] == 0 ? false : true,
       isSelected: _selectedIndex == index,
       onPressed: widget.stepTappingDisabled
           ? () {
