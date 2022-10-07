@@ -13,9 +13,34 @@ class IconStepperDemo extends StatefulWidget {
 
 class _IconStepperDemo extends State<IconStepperDemo> {
   // THE FOLLOWING TWO VARIABLES ARE REQUIRED TO CONTROL THE STEPPER.
-  int activeStep = 5; // Initial step set to 5.
+  int activeStep = 0; // Initial step set to 5.
 
   int upperBound = 6; // upperBound MUST BE total number of icons minus 1.
+
+  Color active = Colors.yellow;
+  Color finished = Colors.green;
+  Color remain = Colors.grey;
+
+  static Map<String,int> completedTasks = {};
+
+  List<Icon> allIcons = [
+    Icon(Icons.supervised_user_circle),
+    Icon(Icons.flag),
+    Icon(Icons.access_alarm),
+    Icon(Icons.add_alert),
+    Icon(Icons.gavel_outlined),
+    Icon(Icons.wallet),
+    Icon(Icons.movie),
+  ];
+
+
+  @override
+  void initState() {
+    super.initState();
+    for (int i = 0 ;i<allIcons.length;i++){
+      completedTasks[i.toString()] = 0;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,17 +55,15 @@ class _IconStepperDemo extends State<IconStepperDemo> {
           child: Column(
             children: [
               IconStepper(
-                icons: [
-                  Icon(Icons.supervised_user_circle),
-                  Icon(Icons.flag),
-                  Icon(Icons.access_alarm),
-                  Icon(Icons.supervised_user_circle),
-                  Icon(Icons.flag),
-                  Icon(Icons.access_alarm),
-                  Icon(Icons.supervised_user_circle),
-                ],
-
+                completedTasks: completedTasks,
+                stepCompletedColor: finished,
+                stepperAnimateInMiddle: true,
+                icons: allIcons,
+                stepsCompletedStatusMap: completeStatusMap,
+                activeStepColor: active,
+                activeStepBorderColor: active,
                 // activeStep property set to activeStep variable defined above.
+                stepColor: remain,
                 activeStep: activeStep,
 
                 // This ensures step-tapping updates the activeStep. 
@@ -72,10 +95,18 @@ class _IconStepperDemo extends State<IconStepperDemo> {
     );
   }
 
+  void completeStatusMap(int i){
+    setState((){
+      completedTasks[i.toString()] = 1;
+    });
+  }
+
   /// Returns the next button.
   Widget nextButton() {
     return ElevatedButton(
       onPressed: () {
+        // if completed then..
+        completeStatusMap(activeStep);
         // Increment activeStep, when the next button is tapped. However, check for upper bound.
         if (activeStep < upperBound) {
           setState(() {
