@@ -83,13 +83,23 @@ class IconStepper extends StatelessWidget {
   final bool? stepperAnimateInMiddle;
 
   // completed Map
-  final Map<String,int>? completedTasks;
+  final Map<String, int>? completedTasks;
 
+  //Enable Text
+  final bool enableText;
 
+  //Text Style
+  final TextStyle? textStyle;
 
+  //text for icons
+  final List<String>? texts;
+
+  //Space between Icon and Text
+  final double iconAndTextSpacing;
 
   /// Creates an IconStepper widget.
-  IconStepper({
+  const IconStepper({
+    super.key,
     this.completedTasks,
     this.stepperAnimateInMiddle,
     this.stepsCompletedStatusMap,
@@ -117,13 +127,16 @@ class IconStepper extends StatelessWidget {
     this.scrollingDisabled = false,
     this.activeStep = 0,
     this.alignment = Alignment.center,
+    this.enableText = false,
+    this.textStyle,
+    this.texts,
+    this.iconAndTextSpacing = 0,
   });
 
   @override
   Widget build(BuildContext context) {
     return BaseStepper(
       completedSteps: completedTasks,
-      children: _iconsWithSizeOverridden(),
       stepperAnimateInMiddle: stepperAnimateInMiddle,
       stepCompetedColor: stepCompletedColor,
       nextPreviousButtonsDisabled: enableNextPreviousButtons,
@@ -148,6 +161,11 @@ class IconStepper extends StatelessWidget {
       scrollingDisabled: scrollingDisabled,
       activeStep: activeStep,
       alignment: alignment,
+      enableText: enableText,
+      textStyle: textStyle,
+      texts: texts,
+      iconAndTextSpacing: iconAndTextSpacing,
+      children: _iconsWithSizeOverridden(),
     );
   }
 

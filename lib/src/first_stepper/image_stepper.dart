@@ -71,9 +71,21 @@ class ImageStepper extends StatelessWidget {
 
   /// Specifies the alignment of the ImageStepper
   final AlignmentGeometry alignment;
+  //Enable Text
+  final bool enableText;
+
+  //Text Style
+  final TextStyle? textStyle;
+
+  //text for icons
+  final List<String>? texts;
+
+  //Space between Icon and Text
+  final double iconAndTextSpacing;
 
   /// Creates an ImageStepper widget.
-  ImageStepper({
+  const ImageStepper({
+    super.key, 
     this.images,
     this.enableNextPreviousButtons = true,
     this.enableStepTapping = true,
@@ -97,12 +109,15 @@ class ImageStepper extends StatelessWidget {
     this.scrollingDisabled = false,
     this.activeStep = 0,
     this.alignment = Alignment.center,
+    this.enableText = false,
+    this.textStyle,
+    this.texts,
+    this.iconAndTextSpacing = 0.0,
   });
 
   @override
   Widget build(BuildContext context) {
     return BaseStepper(
-      children: _imagesWrappedInCircleAvatar(),
       nextPreviousButtonsDisabled: enableNextPreviousButtons,
       stepTappingDisabled: enableStepTapping,
       previousButtonIcon: previousButtonIcon,
@@ -125,6 +140,12 @@ class ImageStepper extends StatelessWidget {
       scrollingDisabled: scrollingDisabled,
       activeStep: activeStep,
       alignment: alignment,
+      enableText: enableText,
+      textStyle: textStyle,
+      texts: texts,
+      iconAndTextSpacing: iconAndTextSpacing,
+      children: _imagesWrappedInCircleAvatar(),
+      
     );
   }
 
