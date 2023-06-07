@@ -283,7 +283,7 @@ class BaseStepperState extends State<BaseStepper> {
   Widget _customizedIndicator(int index) {
     return BaseIndicator(
       isStepCompleted:
-          widget.completedSteps![index.toString()] == 0 ? false : true,
+          widget.completedSteps?[index.toString()] == 0 ? false : true,
       isSelected: _selectedIndex == index,
       onPressed: widget.stepTappingDisabled
           ? () {
