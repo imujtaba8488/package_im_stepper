@@ -36,7 +36,8 @@ class BaseIndicator extends StatelessWidget {
 
   final bool? isStepCompleted;
 
-  BaseIndicator({
+  const BaseIndicator({
+    super.key,
     this.isStepCompleted,
     this.completedColor,
     this.isSelected = false,
@@ -54,14 +55,14 @@ class BaseIndicator extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: isSelected ? EdgeInsets.all(margin) : EdgeInsets.zero,
+      padding: EdgeInsets.all(margin),
       decoration: BoxDecoration(
-        border: isSelected
-            ? Border.all(
-                color: activeBorderColor ?? Colors.blue,
-                width: activeBorderWidth,
-              )
-            : null,
+        border: Border.all(
+          color: isSelected
+              ? (activeBorderColor ?? Colors.blue)
+              : Colors.transparent,
+          width: activeBorderWidth,
+        ),
         shape: BoxShape.circle,
       ),
       child: InkWell(
@@ -71,8 +72,11 @@ class BaseIndicator extends StatelessWidget {
           width: radius * 2,
           padding: EdgeInsets.all(padding),
           decoration: BoxDecoration(
-            color:
-            isSelected ? activeColor ?? Colors.green :(isStepCompleted == true) ? completedColor ?? Colors.green : color ?? Colors.grey,
+            color: isSelected
+                ? activeColor ?? Colors.green
+                : (isStepCompleted == true)
+                    ? completedColor ?? Colors.green
+                    : color ?? Colors.grey,
             shape: BoxShape.circle,
           ),
           child: Center(

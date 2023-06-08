@@ -36,6 +36,10 @@ class BaseStepper extends StatefulWidget {
     this.scrollingDisabled = false,
     this.activeStep = 0,
     this.alignment,
+    this.enableText = false,
+    this.textStyle,
+    this.texts,
+    this.iconAndTextSpacing = 0,
   }) : super(key: key) {
     assert(
       lineDotRadius <= 10 && lineDotRadius > 0,
@@ -53,9 +57,8 @@ class BaseStepper extends StatefulWidget {
     );
   }
 
-
   // completed Map
-  final Map<String,int>? completedSteps;
+  final Map<String, int>? completedSteps;
   //Animate Selected Stepper in middle
   final bool? stepperAnimateInMiddle;
 
@@ -130,6 +133,17 @@ class BaseStepper extends StatefulWidget {
 
   /// Specifies the alignment of the stepper.
   final AlignmentGeometry? alignment;
+  //Enable Text
+  final bool enableText;
+
+  //Text Style
+  final TextStyle? textStyle;
+
+  //text for icons
+  final List<String>? texts;
+
+  //Space between Icon and Text
+  final double iconAndTextSpacing;
 
   @override
   BaseStepperState createState() => BaseStepperState();
@@ -166,9 +180,11 @@ class BaseStepperState extends State<BaseStepper> {
   void _afterLayout(_) {
     // ! Provide detailed explanation.
     for (int i = 0; i < widget.children!.length; i++) {
-      print(widget.stepperAnimateInMiddle );
+      print(widget.stepperAnimateInMiddle);
       _scrollController!.animateTo(
-        widget.stepperAnimateInMiddle == true? (i * ((widget.stepRadius * 2) + widget.lineLength)) - 98 : i * ((widget.stepRadius * 2) + widget.lineLength),
+        widget.stepperAnimateInMiddle == true
+            ? (i * ((widget.stepRadius * 2) + widget.lineLength)) - 98
+            : i * ((widget.stepRadius * 2) + widget.lineLength),
         duration: widget.stepReachedAnimationDuration,
         curve: widget.stepReachedAnimationEffect,
       );
@@ -238,7 +254,18 @@ class BaseStepperState extends State<BaseStepper> {
         return widget.direction == Axis.horizontal
             ? Row(
                 children: <Widget>[
-                  _customizedIndicator(index),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      _customizedIndicator(index),
+                      SizedBox(height: widget.iconAndTextSpacing),
+                      if (widget.enableText)
+                        Text(
+                          widget.texts![index],
+                          style: widget.textStyle,
+                        )
+                    ],
+                  ),
                   _customizedDottedLine(index, Axis.horizontal),
                 ],
               )
@@ -255,7 +282,8 @@ class BaseStepperState extends State<BaseStepper> {
   /// A customized IconStep.
   Widget _customizedIndicator(int index) {
     return BaseIndicator(
-      isStepCompleted: widget.completedSteps![index.toString()] == 0 ? false : true,
+      isStepCompleted:
+          widget.completedSteps?[index.toString()] == 0 ? false : true,
       isSelected: _selectedIndex == index,
       onPressed: widget.stepTappingDisabled
           ? () {
@@ -284,12 +312,20 @@ class BaseStepperState extends State<BaseStepper> {
   /// A customized DottedLine.
   Widget _customizedDottedLine(int index, Axis axis) {
     return index < widget.children!.length - 1
-        ? DottedLine(
-            length: widget.lineLength,
-            color: widget.lineColor ?? Colors.blue,
-            dotRadius: widget.lineDotRadius,
-            spacing: 5.0,
-            axis: axis,
+        ? Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              DottedLine(
+                length: widget.lineLength,
+                color: widget.lineColor ?? Colors.blue,
+                dotRadius: widget.lineDotRadius,
+                spacing: 5.0,
+                axis: axis,
+              ),
+              SizedBox(height: widget.iconAndTextSpacing),
+              //this is for dots alignment
+              const Text("")
+            ],
           )
         : Container();
   }
